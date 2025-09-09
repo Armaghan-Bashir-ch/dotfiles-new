@@ -1,1 +1,0 @@
-{"clg":{"prefix":"clg","body":"console.log($1)"}, "cle":{"prefix":"cle","body":"console.error($1)"}}
