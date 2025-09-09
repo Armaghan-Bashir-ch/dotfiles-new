@@ -95,7 +95,7 @@
     "custom/gpuinfo": {
         "exec": " ~/.config/hypr/scripts/gpuinfo.sh",
         "return-type": "json",
-        "format": " {}",
+        "format": "{}",
         "interval": 3, 
         "tooltip": true,
         "max-length": 1000
