@@ -1,7 +1,0 @@
-# Ignore personal/private files
-*.key
-*.secret
-*.pem
-*.env
-*.local
-
