@@ -1,0 +1,34 @@
+theme = tokyonight
+background-opacity = 0.10
+cursor-color = #F6F5F8 
+window-theme = dark
+font-family = JetBrainsMono Nerd Font
+font-thicken-strength = 200
+font-size = 15
+copy-on-select = true
+keybind = ctrl+v=paste_from_clipboard
+cursor-style-blink = true
+cursor-style = block
+mouse-hide-while-typing = true
+font-synthetic-style = bold
+keybind = alt+1=unbind
+keybind = alt+2=unbind
+keybind = alt+3=unbind
+keybind = alt+4=unbind
+keybind = alt+5=unbind
+keybind = alt+6=unbind
+keybind = alt+7=unbind
+keybind = alt+8=unbind
+keybind = alt+9=unbind
+keybind = alt+0=unbind
+keybind = ctrl+1=unbind
+keybind = ctrl+2=unbind
+keybind = ctrl+3=unbind
+keybind = ctrl+4=unbind
+keybind = ctrl+5=unbind
+keybind = ctrl+6=unbind
+keybind = ctrl+7=unbind
+keybind = ctrl+8=unbind
+keybind = ctrl+9=unbind
+keybind = ctrl+0=unbind
+

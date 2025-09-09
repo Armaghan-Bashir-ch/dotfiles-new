@@ -1,0 +1,54 @@
+.callout[data-callout="answer"] {
+  --callout-color: 56, 189, 248; /* sky blue */
+  --callout-icon: lucide-check-circle;
+}
+
+.callout[data-callout="advantage"] {
+  --callout-color: 34, 197, 94; /* green */
+  --callout-icon: lucide-thumbs-up;
+}
+
+.callout[data-callout="extra"] {
+  --callout-color: 249, 115, 22; /* orange */
+  --callout-icon: lucide-book;
+}
+
+.callout[data-callout="disadvantage"] {
+  --callout-color: 221, 58, 161; /* reddish-pink */
+  --callout-icon: lucide-thumbs-down;
+}
+
+.callout[data-callout="idea"] {
+  --callout-color: 250, 204, 21; /* yellow */
+  --callout-icon: lucide-brain;
+}
+
+.callout[data-callout="brainstorm"] {
+  --callout-color: 250, 204, 21; /* yellow */
+  --callout-icon: lucide-brain;
+}
+
+.callout[data-callout="task"] {
+  --callout-color: 6, 182, 212;
+  --callout-icon: lucide-square-check; /* checkbox icon */
+}
+
+.callout[data-callout="important"] {
+  --callout-color: 139, 92, 246;
+  --callout-icon: lucide-alert-triangle;
+}
+
+.callout[data-callout="definition"] {
+  --callout-color: 99, 102, 241; /* indigo */
+  --callout-icon: lucide-book-open;
+}
+
+.callout[data-callout="reference"] {
+  --callout-color: 20, 184, 166; /* teal */
+  --callout-icon: lucide-link;
+}
+
+.callout[data-callout="citation"] {
+  --callout-color: 107, 114, 128; /* gray */
+  --callout-icon: lucide-quote;
+}

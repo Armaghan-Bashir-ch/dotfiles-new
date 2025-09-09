@@ -1,0 +1,18 @@
+/* Match the note title */
+.workspace-leaf-content[data-path="dashboard.md"] .markdown-preview-view {
+  background-color: #282a36;
+  color: #f8f8f2;
+  height: 100%;
+  padding: 20px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Optional: Customize headers, links, etc. */
+.workspace-leaf-content[data-path="dashboard.md"] h1,
+.workspace-leaf-content[data-path="dashboard.md"] h2 {
+  color: #bd93f9;
+}
+
+.workspace-leaf-content[data-path="dashboard.md"] a {
+  color: #8be9fd;
+}

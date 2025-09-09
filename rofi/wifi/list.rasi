@@ -1,0 +1,109 @@
+/*****----- Configuration -----*****/
+configuration {
+	show-icons: 		false;
+}
+
+/*****----- Global Properties -----*****/
+* {
+    font:                        "JetBrains Mono Nerd Font 10";
+}
+
+@import "~/.config/rofi/launcher/themes/Decay-Green.rasi"
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    fullscreen:                  false;
+    width:                       400px;
+    x-offset:                    center;
+    y-offset:                    center;
+
+    /* properties for all widgets */
+    enabled:                     true;
+    border-radius:               6px;
+    cursor:                      "default";
+    background-color:            @main-bg;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     0px;
+    padding:                     10px 10px 0px 22px;
+    background-color:            transparent;
+    text-color:                  @main-fg;
+    orientation:                 horizontal;
+    children:                    [ "entry" ];
+}
+
+
+entry {
+    enabled:                     false;
+    expand:                      false;
+    width:                       350px;
+        padding:                     12px 8px;
+    border-radius:               6px;
+    margin:                      0px 0px 0px 6px;
+    background-color:            @main-br;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search for something";
+    placeholder-color:           inherit;
+}
+
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       7;
+    cycle:                       false;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    spacing:                     0px;
+    margin: 			         10px 20px 20px 20px;
+    border-radius: 		         6px;
+    background-color:            transparent;
+    text-color:                  @main-fg;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     0px;
+    padding:                     12px 8px;
+    border-radius:               6px;
+    background-color:            transparent;
+    text-color:                  @main-fg;
+    cursor:                      pointer;
+}
+element.selected  {
+    background-color:            @select-bg;
+    border-radius:               6px;
+    text-color:                  @main-fg;
+}
+element-icon {
+    size:                        0px;
+}
+element-text {
+    padding: 			               0px 16px;
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0;
+}
