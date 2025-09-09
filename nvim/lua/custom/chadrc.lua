@@ -1,0 +1,30 @@
+require "custom.init"
+
+---@type ChadrcConfig
+local M = {}
+
+M.plugins = "custom.plugins"
+M.mappings = require "custom.mappings"
+
+--TODO: IS this needed?
+
+M.ui = {
+    theme = "tokyonight",
+    transparency = true,
+
+    statusline = {
+        theme = "default",
+        separator_style = "arrow",
+        overriden_modules = nil,
+    },
+
+    --NOTE: Custamizes the statusline
+
+    tabufline = {
+        enabled = false, -- disable NvChad's bufferline
+    },
+
+    --NOTE: Hides the file tabs at the top
+}
+
+return M
