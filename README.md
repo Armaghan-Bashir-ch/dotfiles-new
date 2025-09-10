@@ -6,18 +6,18 @@
 > These Dotfiles, are just my files that I use for my daily workflow on Arch Linux Hyprland, they are absolutely **not meant to be a project**
 > But if you wish to use the entire dotfiles, then read the **entire** `README.md` carefully, and then make your move.
 > Arch Linux _and_ hyprland is required as well as many other applications, which include:
-
-- Hyprland
-- Waybar
-- Rofi-Wayland
-- Ghostty
-- Nvim
-- Obsidian
-- Cava
-- Package Managers, which include:
-  - Yay
-  - Pacman
-  - Peru
+>
+> - Hyprland
+> - Waybar
+> - Rofi-Wayland
+> - Ghostty
+> - Nvim
+> - Obsidian
+> - Cava
+> - Package Managers, which include:
+>   - Yay
+>   - Pacman
+>   - Peru
 
 > [!Caution]
 > All of the latest versions are required for this
