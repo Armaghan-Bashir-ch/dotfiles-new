@@ -15,6 +15,7 @@ alias vim='nvim'
 alias neofetch="$HOME/neofetch-solid-arch.sh"
 alias matrix='cmatrix -C red'
 alias cd="z"
+alias ls="ls -A"
 alias cdi="zi"
 alias top='btop'
 alias setcursor='hyprctl setcursor "Bibata-Modern-Ice" 20'
