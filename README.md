@@ -18,9 +18,7 @@
 >   - Yay
 >   - Pacman
 >   - Peru
-
-> [!Caution]
-> All of the latest versions are required for this
+>     All of the latest versions are required for this
 
 This _can_ work on other [Linux-distros](https://en.wikipedia.org/wiki/List_of_Linux_distributions) with Hyprland as GUI, but I have not tested it, and I will not, so do that on your own risk.
 
