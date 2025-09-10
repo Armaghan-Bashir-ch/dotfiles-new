@@ -105,6 +105,16 @@ bindkey '^f' zff-widget
 
 # Enabling fzf hitory widget with fzf
 
+
+export FZF_DEFAULT_OPTS="
+  --height=80%        \
+  --layout=reverse    \
+  --border            \
+  --margin=1,2        \
+  --padding=1,2       \
+  --info=inline       \
+"
+
 zle -N fzf-history-widget
 fzf-history-widget() {
   BUFFER=$(fc -rl 1 | fzf +s --tac | sed 's/^[0-9 \t]*//')

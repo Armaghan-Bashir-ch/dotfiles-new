@@ -17,7 +17,7 @@
 
 	"modules-left": ["custom/padd","custom/l_end","battery","backlight","pulseaudio","custom/r_end","custom/l_end","bluetooth","network","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","custom/todo","custom/r_end","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd","custom/l_end","custom/ghostty","custom/lockscreen","custom/wallchange","custom/r_end","custom/l_end","cpu","memory","custom/gpuinfo","custom/r_end","custom/padd"],
+	"modules-right": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd","custom/l_end","custom/ghostty","custom/lockscreen","custom/wallchange","custom/r_end","custom/l_end","cpu","memory","custom/tempinfo","custom/r_end","custom/padd"],
 
 //  INFO: To add a module to waybar, add its name to the "modules-left/modules-right/modules-center" //
   
@@ -92,8 +92,8 @@
         "tooltip-format": "󰾆 {percentage}%"
     },
 
-    "custom/gpuinfo": {
-        "exec": " ~/.config/hypr/scripts/gpuinfo.sh",
+    "custom/tempinfo": {
+        "exec": " ~/.config/hypr/scripts/tempinfo.sh",
         "return-type": "json",
         "format": "{}",
         "interval": 3, 
