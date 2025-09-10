@@ -1,2 +1,2 @@
-@import "themes/Gruvbox-Retro.rasi"
+@import "themes/Catppuccin-Mocha.rasi"
 @import "styles/Style-2.rasi"
