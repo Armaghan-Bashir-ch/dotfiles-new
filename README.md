@@ -75,9 +75,12 @@ Tmux (statusbar): [Itse4elhaam](https://github.com/itse4elhaam/dotfiles/tree/1fc
 | `CONTROL` + `SPACE`         | Launch Rofi (App launcher)            |
 | `SUPER` + `V`               | Launch Rofi (Clipboard)               |
 | `SUPER CONTROL ALT` + `W`   | Launch Rofi (WiFi)                    |
+| `SUPER CONTROL SHIFT` + `V` | Launch Rofi (Emoji Picker)            |
+| `SUPER` + `X`               | Launch Rofi (Powermenu)               |
+| `SUPER` + `/`               | Launch Rofi (Help menu)               |
+| `SUPER ALT` + `W`           | Launch Rofi (wallselect menu)         |
 | `SUPER` + `L`               | Lock screen (Hyprlock)                |
 | `SUPER` + `S`               | Screenshot (Hyprshot)                 |
-| `SUPER` + `X`               | Open Rofi (Powermenu)                 |
 | `SUPER CONTROL` + `R`       | Restore previous session              |
 | `SUPER` + `1-0`             | Switch to workspace 1–10              |
 | `SUPER SHIFT` + `1-10`      | Move window to workspace 1–10         |
@@ -87,12 +90,9 @@ Tmux (statusbar): [Itse4elhaam](https://github.com/itse4elhaam/dotfiles/tree/1fc
 | `SUPER` + `F`               | Toggle floating mode                  |
 | `SUPER` + `Mouse Left`      | Resize window                         |
 | `SUPER` + `Mouse Right`     | Move window                           |
-| `SUPER ALT` + `W`           | Launch Rofi (wallselect menu)         |
-| `SUPER` + `/`               | Launch Rofi (Help menu)               |
 | `SUPER ALT` + `C`           | Open color picker (Hyprpicker?)       |
 | `SUPER CONTROL` + `C`       | Open Calendar (Gnome-Calendar)        |
 | `SUPER` + `E`               | Open File manager (Dolphin)           |
-| `SUPER CONTROL SHIFT` + `V` | Launch Rofi (Emoji Picker)            |
 | `SUPER SHIFT` + `C`         | Open Calculator (Gnome-Calculator)    |
 | `SUPER SHIFT` + `,`         | Open Theme Manager (Kvantummanger)    |
 | `SUPER CONTROL ALT` + `C`   | Open Clock (TTY-Terminal Clock)       |
