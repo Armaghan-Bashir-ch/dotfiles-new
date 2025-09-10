@@ -1,11 +1,21 @@
+# ███████╗███████╗██╗  ██╗███████╗██╗     ██╗     
+# ╚══███╔╝██╔════╝██║  ██║██╔════╝██║     ██║     
+#   ███╔╝ ███████╗███████║█████╗  ██║     ██║     
+#  ███╔╝  ╚════██║██╔══██║██╔══╝  ██║     ██║     
+# ███████╗███████║██║  ██║███████╗███████╗███████╗
+# ╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
+
+#  NOTE:  Setting up Powerlevel10k to be the main prompt, and load up instantly when starting a new terminal/tmux session:
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 ZSH_THEME="powerlevel10k/powerlevel10k"
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 source ~/.pk10k.zsh
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# Alliases
+
+#  ALIASES:
+
 alias cls='clear'
 alias lgit='lazygit'
 alias wfetch='wakafetch'
@@ -19,27 +29,39 @@ alias ls="ls -A"
 alias cdi="zi"
 alias top='btop'
 alias setcursor='hyprctl setcursor "Bibata-Modern-Ice" 20'
-# Ctrl + Left/Right
+
+# Making CONTROL+RIGHT/LEFT ARROW keys work in terminal:
+
 bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-# Ctrl + Shift + Left/Right (optional - Zsh doesn't spport selection here)
+
+# Binding CONTROL+BACKSPACE to delete a single word inside of for example: ~/.config/hypr, if I press control+backspace it will delete "hypr" and not the entire thing:
+
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 bindkey '^H' backward-kill-word
 export GTK_THEME=TokyoNight-Dark-BL
+
+# Setting command history to be a big number:
+
 HISTSIZE=10000
 SAVEHIST=10000
+
+# Setting up Yazi config to be in the config file, and terminal to be ghostty and editor to be nvim
+
 export TERMINAL=ghostty
 export EDITOR=nvim
 export YAZI_CONFIG_HOME="$HOME/.config/yazi"
-# Load FZF bindings and completions
-# Created by `pipx` on 2025-07-16 07:50:33
+
+# Exporting the Path, and sourcing zsh syntax highlighting in the terminal:
+
 export PATH="$PATH:/home/armaghan/.local/bin"
+export PATH="$HOME/.cargo/bin:$PATH"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# or
-# source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
 echo -ne '\e[4 q'
+
+# Syntax highlighting with custom colors:
 
 ZSH_HIGHLIGHT_STYLES[comment]='fg=#565f89'                # Slate blue (soft comment)
 ZSH_HIGHLIGHT_STYLES[command]='fg=#7aa2f7,bold'          # Bright blue command
@@ -54,12 +76,17 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=#9ece6a,bold'             # Green paths, bold
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#f7768e,bold'    # Red errors
 ZSH_HIGHLIGHT_STYLES[default]='fg=#c0caf5'               # Default text (light grey)
 
+#  Enabling zff (alternative to fzf) on startup and using it:
+
 if [[ -f ~/zff/zff.sh ]]; then
   source ~/zff/zff.sh
 fi
 
-export PATH="$HOME/.cargo/bin:$PATH"
+# Enabling zoxide (One of if not THE greatest terminal tools of all time) and making it so that CONTROL+N brings up the zi    widget
+
 eval "$(zoxide init zsh)"
+zle -N cdi_widget
+bindkey '^N' cdi_widget
 
 # Binding ZFF
 
@@ -75,6 +102,9 @@ zff-widget() {
 zle -N zff-widget
 
 bindkey '^f' zff-widget
+
+# Enabling fzf hitory widget with fzf
+
 zle -N fzf-history-widget
 fzf-history-widget() {
   BUFFER=$(fc -rl 1 | fzf +s --tac | sed 's/^[0-9 \t]*//')
@@ -89,6 +119,3 @@ cdi_widget() {
   cdi  
   zle reset-prompt
 }
-
-zle -N cdi_widget
-bindkey '^N' cdi_widget
