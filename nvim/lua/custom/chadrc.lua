@@ -1,10 +1,10 @@
-require "custom.init"
+require("custom.init")
 
 ---@type ChadrcConfig
 local M = {}
 
 M.plugins = "custom.plugins"
-M.mappings = require "custom.mappings"
+M.mappings = require("custom.mappings")
 
 --TODO: IS this needed?
 
@@ -14,7 +14,7 @@ M.ui = {
 
     statusline = {
         theme = "default",
-        separator_style = "arrow",
+        separator_style = "round",
         overriden_modules = nil,
     },
 

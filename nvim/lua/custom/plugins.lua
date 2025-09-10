@@ -8,7 +8,7 @@ local plugins = {
         cmd = "Copilot",
         event = "InsertEnter",
         config = function()
-            require("copilot").setup {}
+            require("copilot").setup({})
         end,
     },
     {
@@ -16,7 +16,7 @@ local plugins = {
         lazy = false,
         enabled = false,
         config = function()
-            local dashboard = require "alpha.themes.dashboard"
+            local dashboard = require("alpha.themes.dashboard")
             dashboard.section.header.val = {
                 [[                                                                       ]],
                 [[                                                                     ]],
@@ -61,7 +61,7 @@ local plugins = {
         "nvim-telescope/telescope.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
-            require("telescope").setup {
+            require("telescope").setup({
                 defaults = {
                     layout_strategy = "vertical",
                     layout_config = {
@@ -70,8 +70,8 @@ local plugins = {
                     sorting_strategy = "ascending",
                     winblend = 0,
                 },
-            }
-            vim.cmd [[highlight TelescopeBorder guifg=#3b4261]]
+            })
+            vim.cmd([[highlight TelescopeBorder guifg=#3b4261]])
         end,
 
         --WARN: This makes it so that telescope is used for everything, like: themes, test searching, files, etc...
@@ -83,13 +83,13 @@ local plugins = {
         enabled = false,
         event = "VeryLazy",
         config = function()
-            require("reactive").setup {
+            require("reactive").setup({
                 builtin = {
                     cursorline = true,
                     cursor = true,
                     modemsg = true,
                 },
-            }
+            })
         end,
     },
     {
@@ -114,7 +114,7 @@ local plugins = {
         enabled = true,
         lazy = false,
         config = function()
-            require("eyeliner").setup {
+            require("eyeliner").setup({
                 -- show highlights only after keypress
                 highlight_on_key = true,
 
@@ -138,7 +138,7 @@ local plugins = {
                 -- add eyeliner to f/F/t/T keymaps;
                 -- see section on advanced configuration for more information
                 default_keymaps = true,
-            }
+            })
         end,
     },
     {
@@ -146,15 +146,15 @@ local plugins = {
         enabled = false,
         lazy = false,
         config = function()
-            require("tabout").setup {
-                tabkey = "<Tab>",     -- key to trigger tabout, set to an empty string to disable
+            require("tabout").setup({
+                tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
                 backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
-                act_as_tab = true,    -- shift content if tab out is not possible
+                act_as_tab = true, -- shift content if tab out is not possible
                 act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
                 default_tab = "<C-t>", -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
                 default_shift_tab = "<C-d>", -- reverse shift default action,
                 enable_backwards = true, -- well ...
-                completion = false,   -- if the tabkey is used in a completion pum
+                completion = false, -- if the tabkey is used in a completion pum
                 tabouts = {
                     { open = "'", close = "'" },
                     { open = '"', close = '"' },
@@ -165,12 +165,12 @@ local plugins = {
                 },
                 ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
                 exclude = {}, -- tabout will ignore these filetypes
-            }
+            })
         end,
         dependencies = { -- These are optional
             "nvim-treesitter/nvim-treesitter",
         },
-        opt = true,          -- Set this to true if the plugin is optional
+        opt = true,        -- Set this to true if the plugin is optional
         event = "InsertCharPre", -- Set the event to 'InsertCharPre' for better compatibility
         priority = 1000,
     },
@@ -217,7 +217,7 @@ local plugins = {
             "TmuxNavigatePrevious",
             "TmuxNavigatorProcessList",
         },
-        keys = load_mappings "vim_tmux_navigator",
+        keys = load_mappings("vim_tmux_navigator"),
     },
     {
         "chrisgrieser/nvim-various-textobjs",
@@ -232,7 +232,7 @@ local plugins = {
     {
         "edluffy/specs.nvim",
         config = function()
-            require("specs").setup {
+            require("specs").setup({
                 popup = {
                     delay_ms = 0,
                     inc_ms = 10,
@@ -242,7 +242,7 @@ local plugins = {
                     fader = require("specs").linear_fader,
                     resizer = require("specs").shrink_resizer,
                 },
-            }
+            })
         end,
     },
 
@@ -275,7 +275,7 @@ local plugins = {
 
             -- Main mode animation
             trailing_stiffness = 0.45, -- A bit of trailing effect
-            trailing_exponent = 2,    -- Curve favors the head
+            trailing_exponent = 2, -- Curve favors the head
             distance_stop_animating = 0.15, -- Stops early for crispness
 
             -- Insert mode animation
@@ -294,7 +294,7 @@ local plugins = {
 
     --NOTE: smear cursor is a very buggy kind of plugin, with a lot of bugs, this is a minimal setup that prevents those bugs
 
-    { "chrisgrieser/nvim-spider",   lazy = false,     keys = load_mappings "spider_motion" },
+    { "chrisgrieser/nvim-spider",   lazy = false,     keys = load_mappings("spider_motion") },
     {
         "chrisgrieser/nvim-puppeteer",
         lazy = false,
@@ -304,7 +304,7 @@ local plugins = {
         version = "*",
         lazy = false,
         config = function()
-            require("nvim-surround").setup {}
+            require("nvim-surround").setup({})
         end,
     },
     {
@@ -332,9 +332,9 @@ local plugins = {
         },
         dependencies = { "nvim-telescope/telescope.nvim" },
         config = function()
-            require("textcase").setup {}
+            require("textcase").setup({})
         end,
-        keys = load_mappings "text_case",
+        keys = load_mappings("text_case"),
     },
     {
         "echasnovski/mini.ai",
@@ -361,14 +361,14 @@ local plugins = {
     {
         "rmagatti/alternate-toggler",
         config = function()
-            require("alternate-toggler").setup {
+            require("alternate-toggler").setup({
                 alternates = {
                     ["=="] = "!=",
                     ["up"] = "down",
                     ["let"] = "const",
                     ["development"] = "production",
                 },
-            }
+            })
 
             vim.keymap.set(
                 "n",
@@ -381,7 +381,7 @@ local plugins = {
     {
         "gbprod/yanky.nvim",
         opts = {},
-        config = require "custom.configs.yanky",
+        config = require("custom.configs.yanky"),
     },
 
     -- lsp related
@@ -392,7 +392,7 @@ local plugins = {
             "BufNewFile",
         },
         config = function()
-            local lint = require "lint"
+            local lint = require("lint")
 
             lint.linters_by_ft = {
                 javascript = { "eslint_d" },
@@ -408,7 +408,7 @@ local plugins = {
             end, { desc = "lint file" })
         end,
     },
-    { "chrisgrieser/nvim-rulebook", cmd = "Rulebook", keys = load_mappings "rulebook" },
+    { "chrisgrieser/nvim-rulebook", cmd = "Rulebook", keys = load_mappings("rulebook") },
     {
         "MeanderingProgrammer/render-markdown.nvim",
         lazy = false,
@@ -434,7 +434,7 @@ local plugins = {
         enabled = false,
         opts = {},
         cmd = "Trouble",
-        keys = require "custom.configs.trouble",
+        keys = require("custom.configs.trouble"),
     },
     {
         "olrtg/nvim-emmet",
@@ -447,14 +447,14 @@ local plugins = {
         "nvim-treesitter/nvim-treesitter-context",
         lazy = true,
         event = { "BufReadPost", "BufNewFile" },
-        config = require "custom.configs.nvim-treesitter-context",
+        config = require("custom.configs.nvim-treesitter-context"),
     },
     {
         "JoosepAlviste/nvim-ts-context-commentstring",
         config = function()
-            require("ts_context_commentstring").setup {
+            require("ts_context_commentstring").setup({
                 enable_autocmd = false,
-            }
+            })
         end,
     },
 
@@ -479,15 +479,15 @@ local plugins = {
     },
     {
         "williamboman/mason.nvim",
-        opts = require "custom.configs.mason",
+        opts = require("custom.configs.mason"),
     },
     {
         "neovim/nvim-lspconfig",
         event = "User FilePost",
         dependencies = { "saghen/blink.cmp" },
         config = function()
-            require "plugins.configs.lspconfig"
-            require "custom.configs.lspconfig"
+            require("plugins.configs.lspconfig")
+            require("custom.configs.lspconfig")
         end,
     },
     {
@@ -495,7 +495,7 @@ local plugins = {
         "nvimtools/none-ls.nvim",
         event = "LspAttach",
         opts = function()
-            return require "custom.configs.null-ls"
+            return require("custom.configs.null-ls")
         end,
     },
     {
@@ -503,10 +503,10 @@ local plugins = {
         ft = "go",
         config = function(_, opts)
             require("gopher").setup(opts)
-            require("core.utils").load_mappings "gopher"
+            require("core.utils").load_mappings("gopher")
         end,
         build = function()
-            vim.cmd [[silent! GoInstallDeps]]
+            vim.cmd([[silent! GoInstallDeps]])
         end,
     },
     {
@@ -580,7 +580,7 @@ local plugins = {
     {
         "MunifTanjim/prettier.nvim",
         event = "LspAttach",
-        config = require "custom.configs.prettier",
+        config = require("custom.configs.prettier"),
     },
     {
         "jay-babu/mason-null-ls.nvim",
@@ -590,7 +590,7 @@ local plugins = {
             "nvimtools/none-ls.nvim",
         },
         config = function()
-            require "custom.configs.null-ls"
+            require("custom.configs.null-ls")
         end,
     },
     {
@@ -598,7 +598,7 @@ local plugins = {
         event = "InsertEnter",
         dependencies = { "rafamadriz/friendly-snippets", "fang2hou/blink-copilot", "archie-judd/blink-cmp-words" },
         version = "v0.*",
-        opts = require "custom.configs.blink",
+        opts = require("custom.configs.blink"),
         opts_extend = { "sources.default" },
     },
     {
@@ -611,7 +611,7 @@ local plugins = {
         "Goose97/timber.nvim",
         version = "*",
         event = "VeryLazy",
-        config = require "custom.configs.timber",
+        config = require("custom.configs.timber"),
     },
     {
         "jdrupal-dev/code-refactor.nvim",
@@ -619,19 +619,19 @@ local plugins = {
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         -- keys = load_mappings "code_refactor",
         config = function()
-            require("code-refactor").setup {}
+            require("code-refactor").setup({})
         end,
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         lazy = true,
-        config = require "custom.configs.textobjects",
+        config = require("custom.configs.textobjects"),
     },
     {
         "kevinhwang91/nvim-ufo",
         requires = "kevinhwang91/promise-async",
         lazy = false,
-        config = require "custom.configs.ufo",
+        config = require("custom.configs.ufo"),
     },
 
     -- pickers
@@ -646,13 +646,13 @@ local plugins = {
             "nvim-lua/plenary.nvim",
             "debugloop/telescope-undo.nvim",
         },
-        config = require "custom.configs.telescope",
+        config = require("custom.configs.telescope"),
     },
     {
         "axkirillov/easypick.nvim",
         requires = "nvim-telescope/telescope.nvim",
         cmd = "Easypick",
-        config = require "custom.configs.easypick",
+        config = require("custom.configs.easypick"),
     },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     {
@@ -672,14 +672,14 @@ local plugins = {
                 width = 50,
                 height = 10,
                 border = "rounded", -- options: "none", "single", "double", "rounded", "solid", "shadow"
-                row = 0.3,  -- float pos (0.0 = top, 1.0 = bottom)
-                col = 0.5,  -- float pos (0.0 = left, 1.0 = right)
+                row = 0.3, -- float pos (0.0 = top, 1.0 = bottom)
+                col = 0.5, -- float pos (0.0 = left, 1.0 = right)
             },
             settings = {
                 save_on_toggle = true,
             },
         },
-        keys = require "custom.configs.harpoon",
+        keys = require("custom.configs.harpoon"),
     },
 
     --TODO: Custamize the harpoon menu is possible
@@ -718,7 +718,7 @@ local plugins = {
         event = "BufEnter",
         dependencies = "nvim-telescope/telescope.nvim",
         opts = {
-            snippetDir = vim.fn.stdpath "config" .. "/snippets",
+            snippetDir = vim.fn.stdpath("config") .. "/snippets",
         },
         keys = {
             "<Leader>asa",
@@ -730,7 +730,7 @@ local plugins = {
                 return
             end
 
-            wk.add {
+            wk.add({
                 { "<leader>as", group = "Snippets", nowait = false, remap = false },
                 {
                     "<leader>asa",
@@ -746,9 +746,9 @@ local plugins = {
                     nowait = false,
                     remap = false,
                 },
-            }
+            })
 
-            wk.add {
+            wk.add({
                 {
                     "<leader>as",
                     group = "Snippets",
@@ -764,7 +764,7 @@ local plugins = {
                     nowait = false,
                     remap = false,
                 },
-            }
+            })
         end,
     },
     {
@@ -781,10 +781,10 @@ local plugins = {
                 outdated = "#fc514e", -- Text color for outdated package virtual text
             },
             icons = {
-                enable = true,       -- Whether to display icons
+                enable = true,    -- Whether to display icons
             },
-            autostart = true,        -- Whether to autostart when `package.json` is opened
-            hide_up_to_date = true,  -- It hides up to date versions when displaying virtual text
+            autostart = true,     -- Whether to autostart when `package.json` is opened
+            hide_up_to_date = true, -- It hides up to date versions when displaying virtual text
             hide_unstable_versions = true, -- It hides unstable versions from version list e.g next-11.1.3-canary3
 
             package_manager = "yarn",
@@ -812,7 +812,7 @@ local plugins = {
             { "<Leader>cv", "<CMD>TWValues<CR>", desc = "Tailwind CSS values" },
         },
         opts = {
-            border = "rounded",    -- Valid window border style,
+            border = "rounded", -- Valid window border style,
             show_unknown_classes = true, -- Shows the unknown classes popup
         },
     },
@@ -871,7 +871,7 @@ local plugins = {
     {
         "mikavilpas/yazi.nvim",
         cmd = "Yazi",
-        keys = load_mappings "yazi",
+        keys = load_mappings("yazi"),
         opts = {
             open_for_directories = false,
             keymaps = {
@@ -886,7 +886,7 @@ local plugins = {
         "atiladefreitas/dooing",
         event = "VeryLazy",
         config = function()
-            require("dooing").setup {}
+            require("dooing").setup({})
         end,
     },
     {
@@ -899,12 +899,12 @@ local plugins = {
             zen = {
                 enabled = true,
                 on_open = function(_)
-                    vim.fn.system "tmux set-option status off"
+                    vim.fn.system("tmux set-option status off")
                 end,
                 --- Callback when the window is closed.
                 ---@param win snacks.win
                 on_close = function(_)
-                    vim.fn.system "tmux set-option status on"
+                    vim.fn.system("tmux set-option status on")
                 end,
                 --- Options for the `Snacks.zen.zoom()`
                 ---@type snacks.zen.Config
@@ -928,12 +928,12 @@ local plugins = {
                     duration = { step = 12, total = 180 }, -- nice and smooth
                 },
                 animate_repeat = {
-                    delay = 10,               -- if next scroll happens within 80ms, use fast mode
+                    delay = 10,          -- if next scroll happens within 80ms, use fast mode
                     duration = { step = 1, total = 1 }, -- basically instant
                 },
             },
         },
-        keys = load_mappings "snacks",
+        keys = load_mappings("snacks"),
     },
     {
         "kndndrj/nvim-dbee",
@@ -989,7 +989,7 @@ local plugins = {
         "MagicDuck/grug-far.nvim",
         cmd = "GrugFar",
         config = function()
-            require("grug-far").setup {}
+            require("grug-far").setup({})
         end,
     },
     {
@@ -1004,9 +1004,9 @@ local plugins = {
         "rmagatti/auto-session",
         lazy = false,
         config = function()
-            require("auto-session").setup {
+            require("auto-session").setup({
                 pre_save_cmds = { "tabdo NvimTreeClose" },
-            }
+            })
         end,
     },
     {
@@ -1022,9 +1022,9 @@ local plugins = {
         -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
         lazy = false,
         config = function()
-            require("oil").setup {
+            require("oil").setup({
                 default_file_explorer = false,
-            }
+            })
         end,
     },
     {
@@ -1046,7 +1046,7 @@ local plugins = {
     { "kevinhwang91/promise-async", lazy = false },
     {
         "nvim-lua/plenary.nvim",
-        config = require "custom.configs.plenary",
+        config = require("custom.configs.plenary"),
     },
     { "wakatime/vim-wakatime",      lazy = false },
 
@@ -1066,7 +1066,7 @@ local plugins = {
         },
         config = function(_, opts)
             require("tokyonight").setup(opts) -- <- you were missing this
-            vim.cmd "colorscheme tokyonight"
+            vim.cmd("colorscheme tokyonight")
         end,
     },
 
@@ -1102,11 +1102,10 @@ local plugins = {
     {
         "folke/noice.nvim",
         event = "VeryLazy",
-        enabled = true,
+        enabled = false,
         dependencies = {
             "MunifTanjim/nui.nvim",
         },
-        opts = {},
     },
 
     --NOTE: Noice.nvim makes it so that, the statusline stays low on the screen, and also that it collides with the tmux                 status line
