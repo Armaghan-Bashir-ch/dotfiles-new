@@ -1,8 +1,6 @@
 /*****----- Configuration -----*****/
 configuration {
-    show-icons:                 true;
-    drun-display-format:        "{name}";
-        kb-row-up:       "k";
+    kb-row-up:       "k";
     kb-row-down:     "j";
     kb-row-left:     "h";
     kb-row-right:    "l";
