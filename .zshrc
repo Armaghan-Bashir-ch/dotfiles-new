@@ -18,7 +18,7 @@ source ~/.pk10k.zsh
 
 alias cls='clear'
 alias lgit='lazygit'
-alias wfetch='wakafetch'
+alias wfetch='wakafetch -d 7'
 alias lgit='lazygit'
 alias zen='zen-browser'
 alias vim='nvim'
@@ -56,6 +56,7 @@ export YAZI_CONFIG_HOME="$HOME/.config/yazi"
 # Exporting the Path, and sourcing zsh syntax highlighting in the terminal:
 
 export PATH="$PATH:/home/armaghan/.local/bin"
+export PATH="$PATH:/usr/local/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)

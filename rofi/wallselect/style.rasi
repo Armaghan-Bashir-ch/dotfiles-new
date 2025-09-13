@@ -4,6 +4,7 @@ configuration {
     kb-row-down:     "j";
     kb-row-left:     "h";
     kb-row-right:    "l";
+        case-sensitive:  false;
 }
 
 /*****----- Global Properties -----*****/
@@ -20,8 +21,8 @@ window {
     fullscreen:                  false;
     location:                    center;
     width:                       100%;
-    border-radius:               25px;
-    padding:                     10px;
+    border-radius:               35px;
+    padding:                     5px;
     background-color:            #000;
 }
 
@@ -81,7 +82,7 @@ element {
 }
 element normal.active,
 element selected.normal {
-    background-color: #101419;
+    background-color: #dd7878ff;
     border-radius:               8px;
 }
 

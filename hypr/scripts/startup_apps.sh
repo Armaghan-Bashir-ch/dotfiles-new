@@ -1,6 +1,6 @@
 #!/bin/bash
 
 zen-browser	
-ghostty 
+ghostty -e "tmux"
 spotify 
 sleep 1.5
