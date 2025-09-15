@@ -12,8 +12,6 @@ configuration {
     icon-theme:                  "Tela-circle-dracula";
 }
 
-@import "~/.config/rofi/launcher/themes/Catppuccin-Latte.rasi"
-
 // Main //
 window {
     height:                      590px;

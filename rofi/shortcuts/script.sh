@@ -13,9 +13,9 @@ choices=$(cat <<EOF
 󰘳 + E             ⟹ Open File Manager (Dolphin)
 󰘳 + X             ⟹ Open Power Menu
 󰘳 + 󱁐             ⟹ Rofi App Launcher
-󰘳 + 󰘵  + W        ⟹ Wallpaper Picker
 󰘳 + 󰘵  + 󱘖  + W   ⟹ Open Rofi (Wifi)
 󰘳 + 󰘵  + 󱘖  + C   ⟹ Open Terminal Clock
+󰘳 + 󰘵  + W        ⟹ Open Rofi (Wall select menu)
 󰘳 + 󱘖  + M        ⟹ Open Cava
 󰘳 + 󱘖  + C        ⟹ Open Calendar
 󰘳 + 󱘖  + C        ⟹ Open Calendar

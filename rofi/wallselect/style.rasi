@@ -4,7 +4,7 @@ configuration {
     kb-row-down:     "j";
     kb-row-left:     "h";
     kb-row-right:    "l";
-        case-sensitive:  false;
+    case-sensitive:  false;
 }
 
 /*****----- Global Properties -----*****/

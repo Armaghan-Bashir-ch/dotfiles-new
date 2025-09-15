@@ -1,5 +1,5 @@
 theme = tokyonight
-background-opacity = 0.10
+background-opacity = 0.0
 cursor-color = #F6F5F8 
 window-theme = dark
 font-family = JetBrainsMono Nerd Font
@@ -31,4 +31,3 @@ keybind = ctrl+7=unbind
 keybind = ctrl+8=unbind
 keybind = ctrl+9=unbind
 keybind = ctrl+0=unbind
-
