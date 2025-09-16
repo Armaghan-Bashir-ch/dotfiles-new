@@ -1,44 +1,44 @@
-/*****----- Configuration -----*****/
+// Config //
 configuration {
+    modi:                        "drun";
+    show-icons:                  true;
+    drun-display-format:         "{name}";
+    font:                        "JetBrainsMono Nerd Font 10";
     kb-row-up:       "k";
     kb-row-down:     "j";
     kb-row-left:     "h";
     kb-row-right:    "l";
-    case-sensitive:  false;
 }
 
-/*****----- Global Properties -----*****/
-* {
-    font:                        "JetBrains Mono Nerd Font 9";
-    background:                  #11111b;
-    background-alt:              #313244;
-    foreground:                  #eff1f5;
-    selected:                    #cba6f7;
-}
+@theme "~/.config/rofi/launcher/themes/Nordic-Blue.rasi"
 
-/*****----- Main Window -----*****/
+// Main //
 window {
+    enabled:                     true;
     fullscreen:                  false;
-    location:                    center;
     width:                       100%;
-    border-radius:               35px;
-    padding:                     5px;
-    background-color:            #000;
+    transparency:                "real";
+    cursor:                      "default";
+    spacing:                     0px;
+    padding:                     0px;
+    border:                      1px;
+    border-radius:               100px;
+    border-color:                transparent;
+    background-color:            #000000;
+}
+mainbox {
+    enabled:                     true;
+    children:                    [ "listview", "inputbar" ];
+    background-color:            @main-bg;
 }
 
-/*****----- Main Layout -----*****/
-mainbox {
-    border-radius:               6px;
-    spacing:                     0px;
-    orientation:                 vertical;
-    children:                    [ "listbox", "inputbar" ];
-}
 
 listbox {
     spacing:                     0px;
     orientation:                 vertical;
     children:                    [ "listview" ];
 }
+
 
 inputbar {
     enabled:                     false;
@@ -56,49 +56,58 @@ entry {
     text-color:                  @main-fg;
 }
 
-/*****----- Listview: Icon Grid -----*****/
+
+// Lists //
 listview {
     enabled:                     true;
-    spacing:                     1em;
-    padding:                     1em 2em 2.5em 2em;
-    columns:                     4;
+    columns:                     3;
     lines:                       1;
+    spacing:                     50px;
+    padding:                     50px 60px 50px 60px;
+    cycle:                       true;
     dynamic:                     false;
-    fixed-height:                false;
-    fixed-columns:               true;
+    scrollbar:                   false;
+    layout:                      vertical;
     reverse:                     true;
+    fixed-height:                true;
+    fixed-columns:               true;
     cursor:                      "default";
-    background-color: #000000; 
+    background-color:            @main-bg;
+    text-color:                  @main-fg;
 }
 
-/*****----- Element Styling (fixed-size previews) -----*****/
+
+// Elements //
 element {
-    padding:                     10px;
-    border-radius:               8px;
+    enabled:                     true;
+    orientation:                 horizontal;
+    spacing:                     center;
+    padding:                     center;
+    border-radius:               40px;
+    cursor:                      pointer;
     background-color:            transparent;
-    horizontal-align:            0.5;
-    orientation:                 vertical;
-    size:                        900px 650px;  
+    text-color:                  @main-fg;
 }
-element normal.active,
+@media(max-aspect-ratio: 1.8) {
+    element {
+        orientation:             vertical;
+    }
+}
 element selected.normal {
-    background-color: #dd7878ff;
-    border-radius:               8px;
+    background-color:            @select-bg;
+    text-color:                  @select-fg;
 }
-
-/* Wallpaper preview (scaled into the box) */
 element-icon {
-    size:                        900px 450px;
-    border-radius:               6px;
+    size:                        55%;
+    cursor:                      inherit;
+    border-radius:               1px;
     background-color:            transparent;
+    text-color:                  inherit;
+}
+element-text {
     vertical-align:              0.5;
     horizontal-align:            0.5;
-}
-
-/* Hide text */
-element-text {
-    text-color:                  transparent;
+    cursor:                      inherit;
     background-color:            transparent;
-    padding:                     0px;
-    font:                        "JetBrains Mono Nerd Font 0";
+    text-color:                  inherit;
 }

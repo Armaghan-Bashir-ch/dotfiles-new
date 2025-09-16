@@ -92,17 +92,23 @@ bindkey '^N' cdi_widget
 # Binding ZFF
 
 zff-widget() {
-  zff --ansi \
-      --border=rounded \
-      --height=80% \
-      --preview "$HOME/zff/zff-preview.sh {}" \
-      --preview-window=left,60%,wrap
+  local result
+  result=$(zff --ansi \
+               --border=rounded \
+               --height=80% \
+               --preview "$HOME/zff/zff-preview.sh {}" \
+               --preview-window=left,60%,wrap)
+
+  if [[ -n $result ]]; then
+    # Insert selection at cursor position
+    LBUFFER+="$result"
+  fi
+
   zle reset-prompt
 }
 
 zle -N zff-widget
-
-bindkey '^f' zff-widget
+bindkey '^F' zff-widget
 
 # Enabling fzf hitory widget with fzf
 

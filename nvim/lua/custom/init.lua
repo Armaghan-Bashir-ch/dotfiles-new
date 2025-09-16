@@ -13,7 +13,7 @@ vim.opt.cmdheight = 1
 vim.opt.wrap = true
 vim.g.lazyvim_prettier_needs_config = false
 vim.g.fancyScroll = true
-vim.api.nvim_set_hl(0, "Comment", { fg = "#a484e0", italic = true })
+vim.api.nvim_set_hl(0, "Comment", { fg = "#a484e0", italic = true }) -->  TODO: Why doesn't this work?
 vim.g.auto_ai = false
 vim.g.customBigFileOpt = true
 vim.o.swapfile = false
@@ -37,9 +37,9 @@ vim.api.nvim_create_augroup("PasteRemoveCarriageReturn", { clear = true })
 vim.g.maplocalleader = ","
 
 -- adds .env to sh group
-vim.cmd [[
+vim.cmd([[
   autocmd BufRead,BufNewFile *.env* set filetype=sh
-]]
+]])
 vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",
     callback = function()
@@ -47,16 +47,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end,
 })
 
-vim.cmd [[autocmd FileType * set formatoptions-=ro]]
+vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
 -- Remove carriage returns after pasting in normal mode
 vim.api.nvim_create_autocmd("VimEnter", {
     group = "PasteRemoveCarriageReturn",
     callback = function()
-        vim.cmd [[
+        vim.cmd([[
       nnoremap <silent> P :execute "normal! P" <bar> silent! %s/\r//g<CR>
       nnoremap <silent> p :execute "normal! p" <bar> silent! %s/\r//g<CR>
-    ]]
+    ]])
     end,
 })
 
@@ -65,20 +65,20 @@ vim.api.nvim_create_autocmd("VimEnter", {
 vim.api.nvim_create_autocmd("InsertLeave", {
     group = "PasteRemoveCarriageReturn",
     callback = function()
-        vim.cmd [[
+        vim.cmd([[
       silent! %s/\r//g
-    ]]
+    ]])
     end,
 })
 
 -- Define autocmd group
-vim.cmd [[
+vim.cmd([[
   augroup LineNumberToggle
     autocmd!
     autocmd InsertLeave * setlocal relativenumber
     autocmd InsertEnter * setlocal norelativenumber
   augroup END
-]]
+]])
 
 local highLightClr = "#3e4451"
 
@@ -94,12 +94,12 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 })
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
-vim.cmd [[
+vim.cmd([[
   augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=300})
   augroup END
-]]
+]])
 
 vim.api.nvim_create_augroup("Shape", { clear = true })
 vim.api.nvim_create_autocmd("VimLeave", {
@@ -127,11 +127,11 @@ vim.api.nvim_create_autocmd({ "VimEnter", "VimLeave" }, {
 -- this is for testing the lsp I made
 function TestLearningLsp()
     local basePath = "/home/elhaam/workspace/learning/go-lsp"
-    local client = vim.lsp.start_client {
+    local client = vim.lsp.start_client({
         name = "learninglsp",
         cmd = { basePath .. "/main" },
         on_attach = require("plugins.configs.lspconfig").on_attach,
-    }
+    })
 
     if not client then
         vim.notify("Failed to start LSP client: learninglsp", vim.log.levels.ERROR)
@@ -165,11 +165,11 @@ local eslint_active = false
 vim.api.nvim_create_user_command("ToggleESLint", function()
     eslint_active = not eslint_active
     if eslint_active then
-        vim.lsp.start_client { name = "eslint" }
-        print "ESLint enabled"
+        vim.lsp.start_client({ name = "eslint" })
+        print("ESLint enabled")
     else
         vim.lsp.stop_client(vim.lsp.get_active_clients({ name = "eslint" })[1].id)
-        print "ESLint disabled"
+        print("ESLint disabled")
     end
 end, {})
 
@@ -195,8 +195,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = "*",
     callback = function()
         local bufname = vim.api.nvim_buf_get_name(0)
-        if bufname:match "env" then
-            vim.lsp.stop_client(vim.lsp.get_clients { bufnr = 0 })
+        if bufname:match("env") then
+            vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = 0 }))
         end
     end,
 })
@@ -208,7 +208,7 @@ vim.api.nvim_create_autocmd("BufReadPre", {
     desc = "Disable features on big files",
     callback = function(args)
         local bufnr = args.buf
-        local size = vim.fn.getfsize(vim.fn.expand "%")
+        local size = vim.fn.getfsize(vim.fn.expand("%"))
         local max_filesize = 500 * 1024
 
         if size < max_filesize or not vim.g.customBigFileOpt then
@@ -218,7 +218,7 @@ vim.api.nvim_create_autocmd("BufReadPre", {
         vim.b[bufnr].bigfile_disable = true
 
         -- Set up Treesitter module disable
-        local module = require("nvim-treesitter.configs").get_module "indent"
+        local module = require("nvim-treesitter.configs").get_module("indent")
         module.disable = function(lang, bufnr)
             return vim.b[bufnr].bigfile_disable == true
         end
@@ -249,7 +249,7 @@ vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE" })
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
     callback = function(ev)
-        for _, client in pairs((vim.lsp.get_clients {})) do
+        for _, client in pairs((vim.lsp.get_clients({}))) do
             if client.name == "tailwindcss" then
                 client.server_capabilities.completionProvider.triggerCharacters =
                 { '"', "'", "`", ".", "(", "[", "!", "/", ":" }
