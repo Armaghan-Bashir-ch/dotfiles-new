@@ -10,7 +10,7 @@ configuration {
     kb-row-right:    "l";
 }
 
-@theme "~/.config/rofi/launcher/themes/Nordic-Blue.rasi"
+@theme "~/.config/rofi/launcher/themes/Rose-Pine.rasi"
 
 // Main //
 window {
@@ -98,16 +98,16 @@ element selected.normal {
     text-color:                  @select-fg;
 }
 element-icon {
-    size:                        55%;
+    size:                        65%;
     cursor:                      inherit;
-    border-radius:               1px;
+    border-radius:               0px;
     background-color:            transparent;
     text-color:                  inherit;
 }
 element-text {
-    vertical-align:              0.5;
-    horizontal-align:            0.5;
+    vertical-align:              100;
+    horizontal-align:            100;
     cursor:                      inherit;
     background-color:            transparent;
-    text-color:                  inherit;
+    text-color:                  @main-fg;
 }

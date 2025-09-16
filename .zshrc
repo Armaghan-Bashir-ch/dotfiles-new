@@ -17,6 +17,7 @@ source ~/.pk10k.zsh
 #  ALIASES:
 
 alias cls='clear'
+alias notify-send='dunstify -u critical -t 3000'
 alias lgit='lazygit'
 alias wfetch='wakafetch -d 7'
 alias lgit='lazygit'
