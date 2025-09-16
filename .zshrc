@@ -19,6 +19,7 @@ source ~/.pk10k.zsh
 alias cls='clear'
 alias notify-send='dunstify -u critical -t 3000'
 alias lgit='lazygit'
+alias git status='git status -u'
 alias wfetch='wakafetch -d 7'
 alias lgit='lazygit'
 alias zen='zen-browser'
