@@ -2,16 +2,17 @@
   background-image: none;
   font-size: 12px;
 }
+
 @define-color bar-bg rgba(0, 0, 0, 0);
 
-@define-color main-bg #9ca0b0;
-@define-color main-fg #4c4f69;
+@define-color main-bg #26233a;
+@define-color main-fg #ebbcba;
 
-@define-color wb-act-bg #5c5f77;
-@define-color wb-act-fg #dce0e8;
+@define-color wb-act-bg #31748f;
+@define-color wb-act-fg #9ccfd8;
 
-@define-color wb-hvr-bg #dc8a78;
-@define-color wb-hvr-fg #dce0e8;
+@define-color wb-hvr-bg #eb6f92;
+@define-color wb-hvr-fg #f6c177;
 
 window {
   background-color: transparent;
