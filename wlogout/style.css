@@ -2,7 +2,6 @@
   background-image: none;
   font-size: 12px;
 }
-
 @define-color bar-bg rgba(0, 0, 0, 0);
 
 @define-color main-bg #9ca0b0;

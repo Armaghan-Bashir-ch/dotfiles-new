@@ -1,8 +1,8 @@
 local opt = vim.opt
 
 -- opt.foldmethod = "expr"
--- opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- opt.foldlevelstart = 99
+-- opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 opt.relativenumber = true
 vim.opt.expandtab = true -- Convert tabs to spaces
