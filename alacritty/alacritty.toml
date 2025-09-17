@@ -1,3 +1,4 @@
+# Alacritty is not my main Terminal, I use ghostty, Alacritty is pretty shit, but I keep it as a backup terminal
 [font]
 size = 15.0
 normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
@@ -6,4 +7,4 @@ italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
 bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
 
         [window]
-opacity = 0.0 # Example: 90% opaque
+opacity = 0.0 
