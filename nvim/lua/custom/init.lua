@@ -4,13 +4,13 @@ local opt = vim.opt
 -- opt.foldlevelstart = 99
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-opt.relativenumber = true
-vim.opt.expandtab = true -- Convert tabs to spaces
-vim.opt.tabstop = 4      -- Number of spaces a tab represents
-vim.opt.shiftwidth = 4   -- Number of spaces for autoindent
-vim.opt.showtabline = 0
-vim.opt.cmdheight = 1
-vim.opt.wrap = true
+opt.relativenumber = true -- Adding Relative Line NUmbers to be turned on every single time on starup
+vim.opt.expandtab = true  -- Convert tabs to spaces
+vim.opt.tabstop = 4       -- Number of spaces a tab represents
+vim.opt.shiftwidth = 4    -- Number of spaces for autoindent
+vim.opt.showtabline = 0   -- Disables file tab names at the top, don't know the right name for it
+vim.opt.cmdheight = 1     -- Sets the Command Line height to be one line above the bottom edge
+vim.opt.wrap = false      -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
 vim.g.lazyvim_prettier_needs_config = false
 vim.g.fancyScroll = true
 vim.api.nvim_set_hl(0, "Comment", { fg = "#a484e0", italic = true }) -->  TODO: Why doesn't this work?
@@ -20,7 +20,7 @@ vim.o.swapfile = false
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.g.disableFormat = false
 -- Remove underline/line effect
-vim.opt.cursorline = false
+vim.opt.cursorline = false -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
 
 -- Just in case your theme enforces underline on CursorLine
 vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false })
@@ -126,7 +126,6 @@ vim.api.nvim_create_autocmd({ "VimEnter", "VimLeave" }, {
 
 -- this is for testing the lsp I made
 function TestLearningLsp()
-    local basePath = "/home/elhaam/workspace/learning/go-lsp"
     local client = vim.lsp.start_client({
         name = "learninglsp",
         cmd = { basePath .. "/main" },

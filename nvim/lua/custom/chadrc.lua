@@ -6,7 +6,7 @@ local M = {}
 M.plugins = "custom.plugins"
 M.mappings = require("custom.mappings")
 
---TODO: IS this needed?
+--TODO: Is this needed?
 
 M.ui = {
     theme = "tokyonight",
