@@ -1,32 +1,26 @@
 * {
   background-image: none;
-  font-size: 12px;
+  font-size: 12;
 }
 
-@define-color bar-bg rgba(0, 0, 0, 0);
-
-@define-color main-bg #26233a;
-@define-color main-fg #ebbcba;
-
-@define-color wb-act-bg #31748f;
-@define-color wb-act-fg #9ccfd8;
-
-@define-color wb-hvr-bg #eb6f92;
-@define-color wb-hvr-fg #f6c177;
+@import "/home/armaghan/.config/waybar/themes/Catppuccin-Latte.css";
 
 window {
   background-color: transparent;
 }
 
 button {
-  color: @main-fg;
-  background-color: @main-bg;
+  min-width: 175px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  color: #5a5d75;
+  background-color: #999dad;
   outline-style: none;
-  border: none;
-  border-width: 0px;
+  border: 2px;
+  border-width: 500px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 20%;
+  background-size: 30%;
   border-radius: 0px;
   box-shadow: none;
   text-shadow: none;
@@ -34,13 +28,13 @@ button {
 }
 
 button:focus {
-  background-color: @wb-act-bg;
+  background-color: #5a5d75;
   background-size: 30%;
 }
 
 button:hover {
-  background-color: @wb-hvr-bg;
-  background-size: 40%;
+  background-color: #d88876;
+  background-size: 25%;
   border-radius: 25px;
   animation: gradient_f 20s ease-in infinite;
   transition: all 0.3s cubic-bezier(0.55, 0, 0.28, 1.682);
@@ -58,17 +52,17 @@ button:hover#logout {
 
 button:hover#suspend {
   border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  margin: -10px -10px -10px -10px;
 }
 
 button:hover#shutdown {
   border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  margin: 10px 10px 10px 10px;
 }
 
 button:hover#hibernate {
   border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  margin: 10px 10px 10px 10px;
 }
 
 button:hover#reboot {
@@ -82,8 +76,8 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/lock.png"),
     url("/usr/local/share/wlogout/icons/lock.png")
   );
-  border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  border-radius: 25px 0px 0px 25px;
+  margin: 0px 0px 0px 0px;
 }
 
 #logout {
@@ -92,8 +86,8 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/logout.png"),
     url("/usr/local/share/wlogout/icons/logout.png")
   );
-  border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  border-radius: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 #suspend {
@@ -102,8 +96,8 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/suspend.png"),
     url("/usr/local/share/wlogout/icons/suspend.png")
   );
-  border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  border-radius: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 #shutdown {
@@ -112,8 +106,8 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/shutdown.png"),
     url("/usr/local/share/wlogout/icons/shutdown.png")
   );
-  border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  border-radius: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 #hibernate {
@@ -122,8 +116,8 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/hibernate.png"),
     url("/usr/local/share/wlogout/icons/hibernate.png")
   );
-  border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  border-radius: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 #reboot {
@@ -132,6 +126,6 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/reboot.png"),
     url("/usr/local/share/wlogout/icons/reboot.png")
   );
-  border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  border-radius: 0px 25px 25px 0px;
+  margin: 0px 0px 0px 0px;
 }
