@@ -1000,6 +1000,9 @@ local plugins = {
         lazy = false,
         enabled = true,
     },
+
+    -- This is a cool nvim banner for the default screen
+
     {
         "rmagatti/auto-session",
         lazy = false,
@@ -1058,7 +1061,7 @@ local plugins = {
         priority = 1000,
         opts = {
             style = "night", -- THIS IS WHAT FORCES THE 'night' variant
-            transparent = true, -- optional: use your compositor's background
+            transparent = true, --  This is not needed inside of ghostty and hyprland since the transparency is already enabled by default, but is important if your own some other OS
             styles = {
                 sidebars = "transparent",
                 floats = "transparent",
