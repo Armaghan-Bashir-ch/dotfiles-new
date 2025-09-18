@@ -11,6 +11,9 @@ cursor-style-blink = true
 cursor-style = block
 mouse-hide-while-typing = true
 font-synthetic-style = bold
+
+# Unbinding ALT+(1-9) so that I can use it in tmux to switch windows
+
 keybind = alt+1=unbind
 keybind = alt+2=unbind
 keybind = alt+3=unbind
