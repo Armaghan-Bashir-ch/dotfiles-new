@@ -63,7 +63,7 @@
 
 */
 
-@import "themes/Tokyo-Future.css";
+@import "themes/Catppuccin-Mocha.css";
 
 window#waybar {
   background: transparent;

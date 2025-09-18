@@ -42,32 +42,32 @@ button:hover {
 
 button:hover#lock {
   border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  margin: 0px 0px 0px 0px;
 }
 
 button:hover#logout {
-  border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  border-radius: 0px 25px 25px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 button:hover#suspend {
-  border-radius: 25px 25px 25px 25px;
-  margin: -10px -10px -10px -10px;
+  border-radius: 0px 25px 25px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 button:hover#shutdown {
-  border-radius: 25px 25px 25px 25px;
-  margin: 10px 10px 10px 10px;
+  border-radius: 0px 25px 25px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 button:hover#hibernate {
-  border-radius: 25px 25px 25px 25px;
-  margin: 10px 10px 10px 10px;
+  border-radius: 0px 25px 25px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 button:hover#reboot {
-  border-radius: 25px 25px 25px 25px;
-  margin: 5px 5px 5px 5px;
+  border-radius: 0px 25px 25px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 #lock {
