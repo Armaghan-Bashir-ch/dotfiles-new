@@ -52,7 +52,7 @@ entry {
     enabled:                     false;
     spacing:                     0px;
     padding:                     10px;
-    background-color:            @background-alt;            
+    background-color:            @main-bg;            
     text-color:                  @main-fg;
 }
 
@@ -80,23 +80,26 @@ listview {
 // Elements //
 element {
     enabled:                     true;
-    orientation:                 horizontal;
-    spacing:                     center;
-    padding:                     center;
-    border-radius:               40px;
+    orientation:                 vertical;       
+    spacing:                     0px;          
+    padding:                     10px;
+    border-radius:               100px;
     cursor:                      pointer;
     background-color:            transparent;
     text-color:                  @main-fg;
 }
+
 @media(max-aspect-ratio: 1.8) {
     element {
         orientation:             vertical;
     }
 }
+
 element selected.normal {
     background-color:            @select-bg;
     text-color:                  @select-fg;
 }
+
 element-icon {
     size:                        75%;
     cursor:                      inherit;
@@ -104,10 +107,13 @@ element-icon {
     background-color:            transparent;
     text-color:                  inherit;
 }
+
 element-text {
-    vertical-align:              100;
-    horizontal-align:            100;
+    vertical-align:              0.5;
+        font: "JetBrainsMono Nerd Font bold 10";
+    horizontal-align:            0.5;
     cursor:                      inherit;
     background-color:            transparent;
-    text-color:                  @main-fg;
+    text-color:                  inherit;
+        padding: 0px 0px 50px 0px;
 }
