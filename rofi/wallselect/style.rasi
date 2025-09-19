@@ -82,18 +82,13 @@ element {
     enabled:                     true;
     orientation:                 vertical;       
     spacing:                     0px;          
-    padding:                     10px;
+    padding:                     5px;
     border-radius:               100px;
     cursor:                      pointer;
-    background-color:            transparent;
+    background-color:            @main-bg;
     text-color:                  @main-fg;
 }
 
-@media(max-aspect-ratio: 1.8) {
-    element {
-        orientation:             vertical;
-    }
-}
 
 element selected.normal {
     background-color:            @select-bg;
@@ -103,17 +98,16 @@ element selected.normal {
 element-icon {
     size:                        75%;
     cursor:                      inherit;
-    border-radius:               0px;
     background-color:            transparent;
     text-color:                  inherit;
 }
 
 element-text {
     vertical-align:              0.5;
-        font: "JetBrainsMono Nerd Font bold 10";
+    font:                        "JetBrainsMono Nerd Font bold 10";
     horizontal-align:            0.5;
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
-        padding: 0px 0px 50px 0px;
+    padding:                     0px 0px 50px 0px;
 }
