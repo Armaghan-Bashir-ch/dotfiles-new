@@ -690,7 +690,7 @@ local plugins = {
     {
         "m4xshen/hardtime.nvim",
         lazy = false,
-        enabled = false,
+        enabled = true,
         dependencies = { "MunifTanjim/nui.nvim" },
         opts = {},
     },

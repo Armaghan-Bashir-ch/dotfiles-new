@@ -1,6 +1,6 @@
 theme = tokyonight
 background-opacity = 0.0
-cursor-color = #F6F5F8 
+cursor-color = #DDDCEE
 window-theme = dark
 font-family = JetBrainsMono Nerd Font
 font-thicken-strength = 200
