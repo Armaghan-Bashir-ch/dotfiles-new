@@ -74,7 +74,7 @@ local plugins = {
             vim.cmd([[highlight TelescopeBorder guifg=#3b4261]])
         end,
 
-        --WARN: This makes it so that telescope is used for everything, like: themes, test searching, files, etc...
+        --WARN: This makes it so that telescope is used for everything, like: themes, text searching, files, etc...
 
         --TODO: Custamize the telescope interface
     },

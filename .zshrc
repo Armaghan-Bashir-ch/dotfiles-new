@@ -125,8 +125,9 @@ export FZF_DEFAULT_OPTS="
 "
 
 zle -N fzf-history-widget
+
 fzf-history-widget() {
-  BUFFER=$(fc -rl 1 | fzf +s --tac | sed 's/^[0-9 \t]*//')
+  BUFFER=$(fc -rl 1 | fzf +s --tac --height 10% | sed 's/^[0-9 \t]*//')
   CURSOR=$#BUFFER
   zle redisplay
 }

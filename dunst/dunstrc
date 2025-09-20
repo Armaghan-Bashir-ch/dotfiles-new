@@ -27,7 +27,7 @@
     width = 300
 
     # The maximum height of a single notification, excluding the frame.
-    height = 300
+    height = 600
 
     # Position the notification in the top right corner
     origin = top-right
@@ -163,7 +163,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "󰟪 %a\n<b>󰋑 %s</b>\n%b"
+    format = "󰟪  %a\n<b>󰋑  %s</b>\n%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".

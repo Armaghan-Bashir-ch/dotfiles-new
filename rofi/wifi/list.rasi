@@ -8,7 +8,7 @@ configuration {
     font:                        "JetBrains Mono Nerd Font 10";
 }
 
-@import "~/.config/rofi/launcher/themes/Decay-Green.rasi"
+@import "~/.config/rofi/launcher/themes/Rose-Pine.rasi"
 
 /*****----- Main Window -----*****/
 window {
@@ -29,7 +29,7 @@ window {
 mainbox {
     enabled:                     true;
     spacing:                     0px;
-    background-color:            transparent;
+    background-color:            @main-bg;
     orientation:                 vertical;
     children:                    [ "inputbar", "listview" ];
 }
@@ -92,9 +92,9 @@ element {
     cursor:                      pointer;
 }
 element.selected  {
-    background-color:            @select-bg;
+    background-color:            #8E3596;
     border-radius:               6px;
-    text-color:                  @main-fg;
+    text-color:                  #ffffff;
 }
 element-icon {
     size:                        0px;

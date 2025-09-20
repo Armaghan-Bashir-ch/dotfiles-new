@@ -10,7 +10,7 @@ local keys = function()
         {
             "<leader>h",
             function()
-                local harpoon = require "harpoon"
+                local harpoon = require("harpoon")
                 harpoon.ui:toggle_quick_menu(harpoon:list())
             end,
             desc = "Harpoon Quick Menu",
@@ -18,7 +18,7 @@ local keys = function()
         {
             "<Leader>[",
             function()
-                local harpoon = require "harpoon"
+                local harpoon = require("harpoon")
                 harpoon:list():prev()
             end,
             desc = "Harpoon Prev",
@@ -26,7 +26,7 @@ local keys = function()
         {
             "<Leader>]",
             function()
-                local harpoon = require "harpoon"
+                local harpoon = require("harpoon")
                 harpoon:list():next()
             end,
             desc = "Harpoon Next",
