@@ -41,7 +41,7 @@ button:hover {
 }
 
 button:hover#lock {
-  border-radius: 0px;
+  border-radius: 25px 0px 0px 25px;
   margin: 0px 0px 0px 0px;
 }
 
@@ -66,7 +66,7 @@ button:hover#hibernate {
 }
 
 button:hover#reboot {
-  border-radius: 0px;
+  border-radius: 0px 25px 25px 0px;
   margin: 0px 0px 0px 0px;
 }
 
