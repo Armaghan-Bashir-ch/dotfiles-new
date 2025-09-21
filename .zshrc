@@ -38,7 +38,7 @@ bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Making it so that, alt+tab accepts the autosuggest
+# Making it so that, alt+tab accepts the autosuggest:
 
 bindkey '^[^I' autosuggest-accept
 
