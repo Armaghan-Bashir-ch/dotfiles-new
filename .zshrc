@@ -37,6 +37,9 @@ alias setcursor='hyprctl setcursor "Bibata-Modern-Ice" 20'
 bindkey "^[[1;5D" backward-word
 bindkey "^[[1;5C" forward-word
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Making it so that, alt+tab accepts the autosuggest
+
 bindkey '^[^I' autosuggest-accept
 
 # Binding CONTROL+BACKSPACE to delete a single word inside of for example: ~/.config/hypr, if I press control+backspace it will delete "hypr" and not the entire thing:
