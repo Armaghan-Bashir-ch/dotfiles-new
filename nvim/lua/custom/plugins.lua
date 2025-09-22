@@ -313,13 +313,6 @@ local plugins = {
         dependencies = { "nvim-lua/plenary.nvim" },
         config = true, -- use default setup
     },
-    opts = {
-        keywords = {
-            KEYBIND = { icon = " ", color = "hint" },
-            CONFIG = { icon = " ", color = "info" },
-            PLUGIN = { icon = "󰐱 ", color = "warning" },
-        },
-    },
 
     {
         "johmsalas/text-case.nvim",
@@ -845,7 +838,7 @@ local plugins = {
             workspaces = {
                 {
                     name = "personal",
-                    path = "/home/e4elhaam/vaults/obsidian-notes",
+                    path = "/home/armaghan/Obsidian Vault/",
                 },
             },
             templates = {
@@ -1081,8 +1074,8 @@ local plugins = {
             opts.top_down = false
             opts.stages = "fade_in_slide_out"
             opts.timeout = 2000
-            opts.max_width = 50
-            opts.max_height = 10
+            opts.max_width = 100
+            opts.max_height = 50
 
             -- Center messages on screen
             opts.on_open = function(win)
