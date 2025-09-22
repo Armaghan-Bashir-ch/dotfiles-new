@@ -94,9 +94,9 @@ zff-widget() {
   zle reset-prompt
 }
 zle -N zff-widget
+bindkey '^F' zff-widget
 
 # Bind Ctrl+F to the widget
-bindkey '^F' zff-widget
 
 # Zoxide menu
 
