@@ -20,7 +20,7 @@ local options = {
         layout_config = {
             horizontal = {
                 prompt_position = "bottom",
-                preview_width = 0.95,
+                preview_width = 5,
             },
             vertical = {
                 mirror = false,
