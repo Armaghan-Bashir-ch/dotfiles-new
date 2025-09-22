@@ -83,41 +83,26 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=#9ece6a,bold'             # Green paths, bold
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#f7768e,bold'    # Red errors
 ZSH_HIGHLIGHT_STYLES[default]='fg=#c0caf5'               # Default text (light grey)
 
-#  Enabling zff (alternative to fzf) on startup and using it:
+# ZFF:
 
 if [[ -f ~/zff/zff.sh ]]; then
   source ~/zff/zff.sh
 fi
-
-# Enabling zoxide (One of if not THE greatest terminal tools of all time) and making it so that CONTROL+N brings up the zi    widget
-
 eval "$(zoxide init zsh)"
-zle -N cdi_widget
-bindkey '^N' cdi_widget
-
-# Binding ZFF
-
 zff-widget() {
-  local result
-  result=$(zff --ansi \
-               --border=rounded \
-               --height=80% \
-               --preview "$HOME/zff/zff-preview.sh {}" \
-               --preview-window=left,60%,wrap)
-
-  if [[ -n $result ]]; then
-    # Insert selection at cursor position
-    LBUFFER+="$result"
-  fi
-
+  zff      # this will run your openFile logic
   zle reset-prompt
 }
-
 zle -N zff-widget
+
+# Bind Ctrl+F to the widget
 bindkey '^F' zff-widget
 
-# Enabling fzf hitory widget with fzf
+# Zoxide menu
 
+zle -N cdi_widget
+bindkey '^N' cdi_widget
+# Enabling fzf hitory widget with fzf
 
 export FZF_DEFAULT_OPTS="
   --height=80%        \
@@ -125,7 +110,6 @@ export FZF_DEFAULT_OPTS="
   --border            \
   --margin=1,2        \
   --padding=1,2       \
-  --info=inline       \
 "
 
 zle -N fzf-history-widget
