@@ -88,18 +88,18 @@ ZSH_HIGHLIGHT_STYLES[default]='fg=#c0caf5'               # Default text (light g
 if [[ -f ~/zff/zff.sh ]]; then
   source ~/zff/zff.sh
 fi
-eval "$(zoxide init zsh)"
-zff-widget() {
-  zff      # this will run your openFile logic
+ff-widget() {
+  zffi
   zle reset-prompt
 }
-zle -N zff-widget
-bindkey '^F' zff-widget
+zle -N zffi
+bindkey '^F' zffi # Ctrl + T
 
 # Bind Ctrl+F to the widget
 
 # Zoxide menu
 
+eval "$(zoxide init zsh)"
 zle -N cdi_widget
 bindkey '^N' cdi_widget
 # Enabling fzf hitory widget with fzf

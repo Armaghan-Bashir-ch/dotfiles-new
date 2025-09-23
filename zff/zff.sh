@@ -47,18 +47,11 @@ zff_fd_ignores=(
 
 # function to open the selected file
 openFile() {
-    local target="$1"
-    if [[ -d "$target" ]]; then
-        # use zoxide if present, otherwise cd
-        if command -v z &>/dev/null; then
-            z "$target" || return
-        else
-            cd "$target" || return
-        fi
-    else
-        # open directly in current terminal instead of spawning $TERMINAL
-        ${EDITOR:-nvim} "$target"
-    fi
+  if file --mime-type -b "$1" | grep -E -q 'text/|application/(json|javascript|xml|csv|x-yaml)|inode/x-empty';then
+    ${EDITOR:-nvim} "$1"
+  else
+    xdg-open "$1" &>/dev/null &
+  fi
 }
 
 # load user config
@@ -174,19 +167,13 @@ get_zoxide_files() {
 }
 
 # main function (opener)
-openFile() {
-    local target="$1"
-    if [[ -d "$target" ]]; then
-        # Jump into directory
-        if command -v z &>/dev/null; then
-            z "$target" || return
-        else
-            cd "$target" || return
-        fi
-    else
-        # Open in current terminal, no new terminal spawn
-        ${EDITOR:-nvim} "$target"
-    fi
+zff() {
+  local target_file
+  target_file=$(_zff_selector)
+  if [[ -n "$target_file" ]]; then
+    openFile "$target_file"
+  fi
+
 }
 
 # --- setup for the INSERTER ---
