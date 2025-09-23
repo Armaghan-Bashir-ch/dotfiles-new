@@ -16,18 +16,16 @@ local keys = function()
             desc = "Harpoon Quick Menu",
         },
         {
-            "<Leader>[",
+            "<M-[>",
             function()
-                local harpoon = require("harpoon")
-                harpoon:list():prev()
+                require("harpoon"):list():prev()
             end,
             desc = "Harpoon Prev",
         },
         {
-            "<Leader>]",
+            "<M-]>",
             function()
-                local harpoon = require("harpoon")
-                harpoon:list():next()
+                require("harpoon"):list():next()
             end,
             desc = "Harpoon Next",
         },

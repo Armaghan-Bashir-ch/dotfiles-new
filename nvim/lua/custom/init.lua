@@ -21,9 +21,7 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 vim.g.disableFormat = false
 vim.api.nvim_set_keymap("", ";", ";", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("", ",", ",", { noremap = true, silent = true })
--- Remove underline/line effect
 vim.opt.cursorline = false -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
-
 -- Just in case your theme enforces underline on CursorLine
 vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false })
 vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false })
