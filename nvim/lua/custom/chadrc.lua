@@ -8,6 +8,8 @@ M.mappings = require("custom.mappings")
 
 --TODO: Is this needed?
 
+--NOTE: Custamizes the statusline
+
 M.ui = {
     theme = "tokyonight",
     transparency = true,
@@ -17,8 +19,6 @@ M.ui = {
         separator_style = "round",
         overriden_modules = nil,
     },
-
-    --NOTE: Custamizes the statusline
 
     tabufline = {
         enabled = false, -- disable NvChad's tab thingi at the top

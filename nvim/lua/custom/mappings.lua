@@ -374,7 +374,7 @@ M.general = {
         ["<leader>ts"] = { "<cmd>set spell!<CR>", "Toggle spell check" },
 
         -- telescope remaps
-        ["<leader>gw"] = {
+        ["<M-g>"] = {
             function()
                 require("telescope.builtin").live_grep({
                     default_text = vim.fn.expand("<cword>"),

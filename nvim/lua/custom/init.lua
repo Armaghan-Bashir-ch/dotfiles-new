@@ -1,37 +1,34 @@
 local opt = vim.opt
 
+opt.relativenumber = true                             -- Adding Relative Line Numbers to be turned on every single time on starup
+vim.opt.expandtab = true                              -- Convert tabs to spaces
+vim.opt.tabstop = 4                                   -- Number of spaces a tab represents
+vim.opt.shiftwidth = 4                                -- Number of spaces for autoindent
+vim.opt.showtabline = 0                               -- Disables file tab names at the top, don't know the right name for it
+vim.opt.cmdheight = 1                                 -- Sets the Command Line height to be one line above the bottom edge
+vim.opt.wrap = false                                  -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
+vim.opt.cursorline = false                            -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
+vim.g.fancyScroll = true                              -- Disabling fancy scroll, fancy scroll is basically replacement of control+d/u but with the mice
+vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE" })    -- Needed for the lastest --version of nvim (0.11.4)
+vim.opt.statusline = "%#ModeBright# %{mode()}%=%f %y" -- Why doesn't this work?
+vim.opt.laststatus = 2                                -- always show statusline
+vim.g.nvchad_hot_reload = false                       -- Don't automatically reload the NvChad config. You'll have to restart Neovim to see your changes.
+vim.g.lazyvim_prettier_needs_config = false
+vim.g.auto_ai = false
+vim.g.customBigFileOpt = true
+vim.o.swapfile = false
+vim.g.disableFormat = false
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false })
+vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false })
 -- opt.foldmethod = "expr"
 -- opt.foldlevelstart = 99
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-opt.relativenumber = true  -- Adding Relative Line Numbers to be turned on every single time on starup
-vim.opt.expandtab = true   -- Convert tabs to spaces
-vim.opt.tabstop = 4        -- Number of spaces a tab represents
-vim.opt.shiftwidth = 4     -- Number of spaces for autoindent
-vim.opt.showtabline = 0    -- Disables file tab names at the top, don't know the right name for it
-vim.opt.cmdheight = 1      -- Sets the Command Line height to be one line above the bottom edge
-vim.opt.wrap = false       -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
-vim.opt.cursorline = false -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
-vim.g.fancyScroll = true   -- Disabling fancy scroll, fancy scroll is basically replacement of control+d/u but with the mice
-vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false })
-vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false })
-vim.g.lazyvim_prettier_needs_config = false
-vim.api.nvim_set_hl(0, "Comment", { fg = "#a484e0", italic = true }) -->  TODO: Why doesn't this work?
-vim.g.auto_ai = false
-vim.g.customBigFileOpt = true
-vim.o.swapfile = false
-vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-vim.g.disableFormat = false
-vim.api.nvim_set_keymap("", ";", ";", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("", ",", ",", { noremap = true, silent = true })
-
-vim.g.nvchad_hot_reload = false
-vim.opt.laststatus = 2 -- always show statusline
 vim.keymap.set("n", "<C-Tab>", function()
     require("harpoon"):list():next()
 end, { desc = "Next Harpoon file" })
 
-vim.opt.statusline = "%#ModeBright# %{mode()}%=%f %y"
 vim.api.nvim_create_augroup("PasteRemoveCarriageReturn", { clear = true })
 vim.g.maplocalleader = ","
 
@@ -118,12 +115,11 @@ vim.api.nvim_create_autocmd({ "VimEnter", "VimLeave" }, {
 })
 
 -- vim.api.nvim_create_autocmd("CmdlineEnter", {
---   callback = function()
---     vim.api.nvim_set_keymap("c", "<CR>", "<CR>", { noremap = true, silent = true })
---   end,
+--     callback = function()
+--         vim.api.nvim_set_keymap("c", "<CR>", "<CR>", { noremap = true, silent = true })
+--     end,
 -- })
 
--- this is for testing the lsp I made
 function TestLearningLsp()
     local client = vim.lsp.start_client({
         name = "learninglsp",
@@ -241,8 +237,6 @@ vim.api.nvim_create_autocmd("BufReadPre", {
         vim.opt_local.spell = false
     end,
 })
--- had to use this post nvim v11 upgrade because the buffer background colors were weird
-vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
