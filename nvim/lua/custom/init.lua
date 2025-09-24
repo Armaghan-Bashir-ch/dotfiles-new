@@ -4,15 +4,18 @@ local opt = vim.opt
 -- opt.foldlevelstart = 99
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-opt.relativenumber = true                                            -- Adding Relative Line Numbers to be turned on every single time on starup
-vim.opt.expandtab = true                                             -- Convert tabs to spaces
-vim.opt.tabstop = 4                                                  -- Number of spaces a tab represents
-vim.opt.shiftwidth = 4                                               -- Number of spaces for autoindent
-vim.opt.showtabline = 0                                              -- Disables file tab names at the top, don't know the right name for it
-vim.opt.cmdheight = 1                                                -- Sets the Command Line height to be one line above the bottom edge
-vim.opt.wrap = false                                                 -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
+opt.relativenumber = true  -- Adding Relative Line Numbers to be turned on every single time on starup
+vim.opt.expandtab = true   -- Convert tabs to spaces
+vim.opt.tabstop = 4        -- Number of spaces a tab represents
+vim.opt.shiftwidth = 4     -- Number of spaces for autoindent
+vim.opt.showtabline = 0    -- Disables file tab names at the top, don't know the right name for it
+vim.opt.cmdheight = 1      -- Sets the Command Line height to be one line above the bottom edge
+vim.opt.wrap = false       -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
+vim.opt.cursorline = false -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
+vim.g.fancyScroll = true   -- Disabling fancy scroll, fancy scroll is basically replacement of control+d/u but with the mice
+vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false })
+vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false })
 vim.g.lazyvim_prettier_needs_config = false
-vim.g.fancyScroll = true                                             -- Disabling fancy scroll, fancy scroll is basically replacement of control+d/u but with the mice
 vim.api.nvim_set_hl(0, "Comment", { fg = "#a484e0", italic = true }) -->  TODO: Why doesn't this work?
 vim.g.auto_ai = false
 vim.g.customBigFileOpt = true
@@ -21,10 +24,6 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 vim.g.disableFormat = false
 vim.api.nvim_set_keymap("", ";", ";", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("", ",", ",", { noremap = true, silent = true })
-vim.opt.cursorline = false -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
--- Just in case your theme enforces underline on CursorLine
-vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false })
-vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false })
 
 vim.g.nvchad_hot_reload = false
 vim.opt.laststatus = 2 -- always show statusline

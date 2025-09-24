@@ -55,29 +55,11 @@ local plugins = {
             vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#fce5b0", bold = true })
         end,
 
-        --TODO: Find better colors to show here than a simple yellow
-    },
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            require("telescope").setup({
-                defaults = {
-                    layout_strategy = "vertical",
-                    layout_config = {
-                        prompt_position = "top",
-                    },
-                    sorting_strategy = "ascending",
-                    winblend = 0,
-                },
-            })
-            vim.cmd([[highlight TelescopeBorder guifg=#3b4261]])
-        end,
-
         --WARN: This makes it so that telescope is used for everything, like: themes, text searching, files, etc...
 
         --TODO: Custamize the telescope interface
     },
+
     {
         "rasulomaroff/reactive.nvim",
         enabled = false,

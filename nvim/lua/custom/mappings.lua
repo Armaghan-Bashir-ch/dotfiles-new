@@ -701,7 +701,7 @@ M.general = {
             [["_d"]],
             "Delete without overwriting register",
         },
-        ["<leader>pp"] = {
+        ["<M-pp>"] = {
             [["_dP"]],
             "Paste without overwriting register",
         },
