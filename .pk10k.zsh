@@ -10,10 +10,7 @@
   unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
 
   [[ $ZSH_VERSION == (5.<1->*|<6->.*) ]] || return
-# Adds 2 spaces before the directory line
 # Make both lines of the prompt start with `  ❯`
-
-# Make all prompt lines start with 2 spaces
 
 # Align both lines with 2 spaces
 typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=' '
