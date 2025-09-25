@@ -24,6 +24,7 @@ alias wfetch='wakafetch -d 7'
 alias lgit='lazygit'
 alias zen='zen-browser'
 alias ov='nvim'
+alias vim='nvim'
 alias neofetch="$HOME/neofetch-solid-arch.sh"
 alias matrix='cmatrix -C red'
 alias cd="z"
