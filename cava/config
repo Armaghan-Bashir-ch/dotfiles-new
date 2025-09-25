@@ -14,7 +14,7 @@ gradient_color_5 = '#5e81ac'
 gradient_color_6 = '#6c7f96'
 gradient_color_7 = '#7b8aa4'
 gradient_color_8 = '#8fbcbb'
-sensitivity = 100
+sensitivity = 90
 ; bars = 0
 bar_width = 2.5
 bar_spacing = 1.3
@@ -94,8 +94,6 @@ gradient_color_6 = '#dc699e'
 gradient_color_7 = '#e26282'
 gradient_color_8 = '#e05f65'
 
-
-
 [smoothing]
 
 ; integral = 77
@@ -108,7 +106,6 @@ gradient_color_8 = '#e05f65'
 ; ignore = 0
 
 ; noise_reduction = 0.77
-
 
 [eq]
 
