@@ -8,7 +8,7 @@ configuration {
     font:                        "JetBrains Mono Nerd Font 10";
 }
 
-@import "~/.config/rofi/launcher/themes/Rose-Pine.rasi"
+@import "~/.config/rofi/themes/Rose-Pine.rasi"
 
 /*****----- Main Window -----*****/
 window {

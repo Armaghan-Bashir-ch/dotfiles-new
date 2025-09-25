@@ -10,7 +10,7 @@ configuration {
     kb-row-right:    "l";
 }
 
-@theme "~/.config/rofi/launcher/themes/Rose-Pine.rasi"
+@theme "~/.config/rofi/themes/Rose-Pine.rasi"
 
 // Main //
 window {
