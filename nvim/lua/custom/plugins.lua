@@ -439,8 +439,6 @@ local plugins = {
         lazy = false,
     },
 
-    --NOTE: This plugin is not reliable, and is best kept off, and is very nich
-
     {
         "antosha417/nvim-lsp-file-operations",
         dependencies = {
