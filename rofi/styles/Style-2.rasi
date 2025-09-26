@@ -9,7 +9,7 @@ configuration {
     drun-display-format:         "{name}";
     window-format:               "{w}{t}";
     font:                        "JetBrainsMono Nerd Font 10";
-        icon-theme: "tela-circle-icon-theme-black";
+    icon-theme: "tela-circle-icon-theme-black";
 }
 
 // Main //
@@ -34,7 +34,7 @@ mainbox {
     orientation:                 vertical;
     children:                    [ "inputbar" , "listbox" ];
     background-color:            transparent;
-    background-image: url("/home/armaghan/backgrounds/Gruvbox-Retro/GNU-LogoCrown.jpg", width);
+    background-image: url("/home/armaghan/backgrounds/Decay-Green/Blue-Lines.png", width);
 }
 
 
@@ -45,7 +45,7 @@ inputbar {
     padding:                     80px;
     children:                    [ "entry" ];
     background-color:            transparent;
-    background-image: url("/home/armaghan/backgrounds/Gruvbox-Retro/GNU-LogoCrown.jpg", width);
+    background-image: url("/home/armaghan/backgrounds/Decay-Green/Blue-Lines.png", width);
 }
 entry {
     border-radius:               50px;
