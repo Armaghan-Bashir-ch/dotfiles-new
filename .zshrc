@@ -85,6 +85,37 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=#9ece6a,bold'
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#f7768e,bold'    
 ZSH_HIGHLIGHT_STYLES[default]='fg=#c0caf5'                
 
+autoload -U compinit; compinit
+source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# custom fzf flags
+# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+# To make fzf-tab follow FZF_DEFAULT_OPTS.
+# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-flags \
+    --color=fg:7,hl:1,hl+:3,border:4 \
+    --color=info:3,prompt:2,spinner:1,pointer:8,marker:8 \
+    --color=fg+:2,hl+:3 \
+    --bind=tab:accept,btab:preview-up \
+    --pointer="" \
+    --border=rounded \
+    --preview-window=left:90%:wrap \
+    --layout=reverse-list
+
 # ZFF:
 
 if [[ -f ~/zff/zff.sh ]]; then
@@ -117,9 +148,17 @@ export FZF_DEFAULT_OPTS="
 zle -N fzf-history-widget
 
 fzf-history-widget() {
-  BUFFER=$(fc -rl 1 | fzf +s --tac --height 10% | sed 's/^[0-9 \t]*//')
-  CURSOR=$#BUFFER
-  zle redisplay
+    BUFFER=$(fc -rl 1 | fzf +s --tac \
+        --color=fg:7,bg:0,hl:1,hl+:3,border:4 \
+        --color=info:3,prompt:2,spinner:1,pointer:8,marker:8 \
+        --color=fg+:2,bg+:0,hl+:3 \
+        --bind=tab:accept \
+        --pointer="" \
+        --preview-window=right:60%:wrap \
+        --layout=reverse-list \
+        --height 10% | sed 's/^[0-9 \t]*//')
+    CURSOR=$#BUFFER
+    zle redisplay
 }
 
 bindkey '^R' fzf-history-widget
@@ -129,3 +168,4 @@ cdi_widget() {
   cdi  
   zle reset-prompt
 }
+
