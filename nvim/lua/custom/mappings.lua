@@ -90,7 +90,7 @@ M.snacks = {
             end,
             "Select Scratch Buffer",
         },
-        ["<leader>lg"] = {
+        ["<M-l>"] = {
             function()
                 Snacks.lazygit()
             end,
