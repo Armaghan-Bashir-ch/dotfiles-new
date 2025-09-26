@@ -10,7 +10,7 @@ configuration {
     kb-row-right:    "l";
 }
 
-@theme "~/.config/rofi/themes/Rose-Pine.rasi"
+@theme "~/.config/rofi/themes/Decay-Green.rasi"
 
 // Main //
 window {
