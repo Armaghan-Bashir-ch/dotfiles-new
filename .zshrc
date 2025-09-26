@@ -19,6 +19,7 @@ source ~/.pk10k.zsh
 alias cls='clear'
 alias notify-send='dunstify -u critical -t 3000'
 alias lgit='lazygit'
+alias ai='tmux attach-session -t ai'
 alias git status='git status -u'
 alias wfetch='wakafetch -d 7'
 alias lgit='lazygit'
@@ -71,18 +72,18 @@ echo -ne '\e[4 q'
 
 # Syntax highlighting with custom colors:
 
-ZSH_HIGHLIGHT_STYLES[comment]='fg=#565f89'                # Slate blue (soft comment)
-ZSH_HIGHLIGHT_STYLES[command]='fg=#7aa2f7,bold'          # Bright blue command
-ZSH_HIGHLIGHT_STYLES[function]='fg=#bb9af7,bold'         # Lavender function
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=#7dcfff,bold'          # Cyan builtin
-ZSH_HIGHLIGHT_STYLES[alias]='fg=#7dcfff,underline'       # Cyan alias, underlined
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=#ff9e64,bold'    # Orange reserved keywords
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=#ff9e64'              # Orange glob patterns
-ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=#89ddff,bold' # Light blue separators
-ZSH_HIGHLIGHT_STYLES[argument]='fg=#c0caf5'              # Light grey for arguments
-ZSH_HIGHLIGHT_STYLES[path]='fg=#9ece6a,bold'             # Green paths, bold
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#f7768e,bold'    # Red errors
-ZSH_HIGHLIGHT_STYLES[default]='fg=#c0caf5'               # Default text (light grey)
+ZSH_HIGHLIGHT_STYLES[comment]='fg=#626880,italic'       
+ZSH_HIGHLIGHT_STYLES[command]='fg=#7aa2f7,bold'          
+ZSH_HIGHLIGHT_STYLES[function]='fg=#bb9af7,bold'     
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=#7dcfff,bold'       
+ZSH_HIGHLIGHT_STYLES[alias]='fg=#4fd6be,underline'    
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=#ffb86c,bold' 
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=#ffb86c'            
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=#89ddff,bold'
+ZSH_HIGHLIGHT_STYLES[argument]='fg=#c0caf5'            
+ZSH_HIGHLIGHT_STYLES[path]='fg=#9ece6a,bold'            
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#f7768e,bold'    
+ZSH_HIGHLIGHT_STYLES[default]='fg=#c0caf5'                
 
 # ZFF:
 
