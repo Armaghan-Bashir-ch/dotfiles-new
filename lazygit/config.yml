@@ -16,7 +16,7 @@ gui:
     unstagedChangesColor:
       - '#d20f39'
     defaultFgColor:
-      - '#ffffff'
+      - '#a9b1d6'
     searchingActiveBorderColor:
       - '#df8e1d'
   skipDiscardChangeWarning: false
