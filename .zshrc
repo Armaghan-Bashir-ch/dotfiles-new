@@ -105,15 +105,13 @@ zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
 # NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:*' fzf-flags \
-    --height=40% \
-    --layout=reverse \
-    --border=rounded \
-    --inline-info \
-    --color=fg:7,hl:1,hl+:3,border:4,fg+:2,hl+:3,info:3,prompt:2,spinner:1,pointer:8,marker:8,bg:-1 \
+    --color=fg:7,hl:1,hl+:3,border:9,fg+:2,hl+:3,info:3,prompt:2,spinner:1,pointer:8,marker:8,bg:-1 \
     --bind=tab:accept,btab:preview-up \
     --pointer="" \
-    --preview-window=right:30%:wrap
+    --border=rounded \
+    --height=10% \
 
 # ZFF:
 
