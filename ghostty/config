@@ -8,7 +8,7 @@ font-size = 15
 copy-on-select = true
 keybind = ctrl+v=paste_from_clipboard
 cursor-style-blink = true
-cursor-style = block
+cursor-style = underline
 mouse-hide-while-typing = true
 font-synthetic-style = bold
 
