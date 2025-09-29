@@ -6,7 +6,7 @@ The `.dotfiles` have been pushed publicly to github on "https://github.com/Armag
 
 Every single file has been symlinked to their counter-part/original file/dir/script in `.config` folder, not using `stow` (since I did not knew it existed when I was synlinking the files)
 
-## Instructions:
+## Instructions
 
 - Read this `CRUSH.md` every singel time before doing anything.
 - Do not add your attribution, when pushing or doing anything to these `dotfiles`
@@ -20,6 +20,10 @@ Every single file has been symlinked to their counter-part/original file/dir/scr
   - `nvim/custom`
   - `ghostty`
 - Use `#!/bin/bash` as the shebang in a executable bash script
+- When naming directories or files, make sure to name them simply/short and make them relate to each to each other, and use consistant naming
+- Do use comments to explain some really big change or something that might confuse the end-user
+- scripts for any tool will be available inside of `scripts` dir in every single dir for any tool
+- Use spell check in bash scripts
 
 ### Nvim
 
@@ -42,7 +46,7 @@ Every single file has been symlinked to their counter-part/original file/dir/scr
   - `hyprland.conf`
   - `hyprlock.conf`
   - `scripts` does not need any kind of change it is working fine.
-- `hyprland.conf` is the main file, it handels every single thing about my machine, it has all the shortcuts and other stuff it is well documanted
+- `hyprland.conf` is the main file, it handles every single thing about my machine, it has all the shortcuts and other stuff it is well documanted, so be careeful with this file
 - `hyprlock.conf` is just for the lockscreen
 
 $ TODO: ADD SOME OTHER STUFF HERE
