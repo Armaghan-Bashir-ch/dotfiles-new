@@ -2,7 +2,10 @@
 printf '\033[2J\033[H'
 path="$(echo "$1" | sed 's/^[^ ]* //;s|^~|'"$HOME"'|')"
 
-if [[ ! -f "$path" ]]; then
+if [[ -d "$path" ]]; then
+  ls --color=always -lah "$path" | head -n 25
+  return
+elif [[ ! -f "$path" ]]; then
   echo "File not found: $path"
   return 1
 fi
