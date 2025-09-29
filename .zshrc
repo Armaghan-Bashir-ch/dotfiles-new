@@ -18,6 +18,7 @@ source ~/.pk10k.zsh
 
 alias cls='clear'
 alias notify-send='dunstify -u critical -t 3000'
+alias tree='tree -C'
 alias lgit='lazygit'
 alias ai='tmux attach-session -t ai'
 alias git status='git status -u'
