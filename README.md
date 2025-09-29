@@ -22,6 +22,43 @@
 
 This _can_ work on other [Linux-distros](https://en.wikipedia.org/wiki/List_of_Linux_distributions) with Hyprland as GUI, but I have not tested it, and I will not, so do that on your own risk.
 
+#### Requirements
+
+- Arch Linux
+- Hyprland
+- Nvim
+- Waybar
+- Rofi
+- Zoxide (optional)
+- zff, alternative to fzf
+- Crush Charm AI CLI model (Optional)
+- zshell
+- tmux
+- Ghostty
+- Lazygit
+- Obsidian (Optional)
+- wlogout
+- alacritty (Optional)
+- dunst
+- powerlevel10k
+
+##### Stuff that I use personally, would also recommand
+
+- Swayosd
+- lsd, alternative to ls
+- bat
+- swww, never reall liked hyprpaper
+- btop
+- repgrep
+- fd, for find
+- zoxide
+
+###### Neovim stuff
+
+- NvChad
+- Lazy.nvim
+- And a whole bunch of other plugins listed inside of [plugins.lua](nvim/lua/custom/plugins.lua)
+
 ##### Commands
 
 ```
