@@ -118,18 +118,9 @@ zstyle ':fzf-tab:*' fzf-flags \
 if [[ -f ~/zff/zff.sh ]]; then
   source ~/zff/zff.sh
 fi
-export ZFF_FZF_OPTS='
---color=fg:7,hl:1,hl+:3,border:4 \
-    --color=info:3,prompt:2,spinner:1,pointer:8,marker:8 \
-    --color=fg+:2,hl+:3 \
-    --bind=tab:accept \
-    --pointer="" \
-    --border=rounded \
-    --preview-window=right:60%:wrap \
-    --layout=reverse-list \
-    --height=40%'
-zle -N zffi
-bindkey '^F' zffi # Ctrl + T
+zle -N zff
+bindkey '^F' zff 
+
 
 # Bind Ctrl+F to the widget
 
@@ -169,5 +160,9 @@ bindkey '^R' fzf-history-widget
 cdi_widget() {
   zle -I    
   cdi  
+  zle reset-prompt
+}
+zff_widget() {
+  zff
   zle reset-prompt
 }
