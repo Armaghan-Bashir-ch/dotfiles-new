@@ -19,6 +19,7 @@ Every single file has been symlinked to their counter-part/original file/dir/scr
   - `hypr`
   - `nvim/custom`
   - `ghostty`
+- Use `#!/bin/bash` as the shebang in a executable bash script
 
 ### Nvim
 
@@ -35,9 +36,13 @@ Every single file has been symlinked to their counter-part/original file/dir/scr
 - Read and only READ these files find out about the context safe it inside of your memory and whenever I ask for someting related to it, make sure to remember that context and things about that dir. Everything that you have leared from those main 4 files should be placed here in this file in bullet points clearly
 - Ask for whether or not to add comments to any file, when adding code
 
-### `hypr` 
+### hypr
 
 - There is mainly just one main file, you can say there are two:
   - `hyprland.conf`
   - `hyprlock.conf`
   - `scripts` does not need any kind of change it is working fine.
+- `hyprland.conf` is the main file, it handels every single thing about my machine, it has all the shortcuts and other stuff it is well documanted
+- `hyprlock.conf` is just for the lockscreen
+
+$ TODO: ADD SOME OTHER STUFF HERE
