@@ -121,7 +121,6 @@ fi
 zle -N zff
 bindkey '^F' zff 
 
-
 # Bind Ctrl+F to the widget
 
 # Zoxide menu

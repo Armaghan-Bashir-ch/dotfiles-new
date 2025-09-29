@@ -98,7 +98,7 @@ _zff_selector() {
     get_oldfiles
 
     # Priority 1: CWD
-    fd -t f -H -d "$cwdDepth" "${zff_fd_excludes[@]}" . "$PWD" 2>/dev/null | sed "s/^/$cwdIcon /"
+    fd -t f -t d -H -d "$cwdDepth" "${zff_fd_excludes[@]}" . "$PWD" 2>/dev/null | sed "s/^/$cwdIcon /"
 
     # Priority 2: Zoxide dirs
     if [[ $HAS_ZOXIDE -eq 1 ]]; then
@@ -162,18 +162,22 @@ get_zoxide_files() {
   if [[ ${#filtered_dirs[@]} -eq 0 ]]; then
     return 0
   fi
-  fd -H -d "$zoxideDepth" "${zff_fd_excludes[@]}" . "${filtered_dirs[@]}" 2>/dev/null |
+  fd -t f -t d -H -d "$zoxideDepth" "${zff_fd_excludes[@]}" . "${filtered_dirs[@]}" 2>/dev/null |
     awk '!seen[$0]++' | sed "s/^/$zoxideIcon /"
 }
 
 # main function (opener)
-zff() {
-  local target_file
-  target_file=$(_zff_selector)
-  if [[ -n "$target_file" ]]; then
-    openFile "$target_file"
-  fi
 
+zff() {
+  local target
+  target=$(_zff_selector)
+  if [[ -n "$target" ]]; then
+    if [[ -d "$target" ]]; then
+      cd "$target"
+    else
+      openFile "$target"
+    fi
+  fi
 }
 
 # --- setup for the INSERTER ---
