@@ -1,3 +1,10 @@
+customCommands:
+  - key: ';'
+    context: 'global'
+    command: '/home/armaghan/.lazygit-commit.sh'
+    output: terminal
+    description: 'Quick add, commit, push'
+
 gui:
   theme:
     activeBorderColor:
@@ -20,5 +27,5 @@ gui:
     searchingActiveBorderColor:
       - '#df8e1d'
   skipDiscardChangeWarning: false
-authorColors:
-  '*': '#7287fd'
+  authorColors:
+    '*': '#7287fd'
