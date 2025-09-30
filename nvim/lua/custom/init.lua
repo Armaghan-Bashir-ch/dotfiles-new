@@ -1,8 +1,5 @@
 local opt = vim.opt                                                                                    -- Shortcut alias for Neovim's option settings
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 opt.relativenumber = true                                                                              -- Adding Relative Line Numbers to be turned on every single time on starup
 vim.opt.expandtab = true                                                                               -- Convert tabs to spaces
 vim.opt.tabstop = 4                                                                                    -- Number of spaces a tab represents
@@ -255,11 +252,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {
-  pattern = "*",
-  callback = function()
-    if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv()[0]) == 1 then
-      vim.cmd("silent bwipeout")  -- Close any loaded buffers
-      vim.cmd("enew")             -- Create new empty buffer to trigger btw.nvim banner
-    end
-  end,
+    pattern = "*",
+    callback = function()
+        if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv()[0]) == 1 then
+            vim.cmd("silent bwipeout") -- Close any loaded buffers
+            vim.cmd("enew")   -- Create new empty buffer to trigger btw.nvim banner
+        end
+    end,
 })
