@@ -113,6 +113,7 @@ zstyle ':fzf-tab:*' fzf-flags \
     --pointer="" \
     --border=rounded \
     --height=10% \
+    zle reset-prompt
 
 # ZFF:
 
@@ -159,6 +160,7 @@ fzf-history-widget() {
         --height 10% | sed 's/^[0-9 \t]*//')
     CURSOR=$#BUFFER
     zle redisplay
+    zle reset-prompt
 }
 
 bindkey '^R' fzf-history-widget
