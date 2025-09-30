@@ -1,58 +1,7 @@
 local M = {}
 
 function M.setup()
-  local icon = require "hieulw.icons"
   local lualine = require "lualine"
-
-  local filetype = { "filetype", icon_only = true }
-
-  local lsp_status = {
-    "lsp_status",
-    icon = "", -- f013
-    symbols = {
-      spinner = icon.spinner,
-      done = false,
-      separator = " ",
-    },
-    -- List of LSP names to ignore (e.g., `null-ls`):
-    ignore_lsp = {},
-  }
-
-  local diagnostics = {
-    "diagnostics",
-    sources = { "nvim_diagnostic" },
-    sections = { "error", "warn", "info", "hint" },
-    symbols = {
-      error = icon.diagnostics.Error,
-      hint = icon.diagnostics.Hint,
-      info = icon.diagnostics.Info,
-      warn = icon.diagnostics.Warning,
-    },
-    colored = true,
-    update_in_insert = false,
-    always_visible = false,
-  }
-
-  local diff = {
-    "diff",
-    source = function()
-      local gitsigns = vim.b.gitsigns_status_dict
-      if gitsigns then
-        return {
-          added = gitsigns.added,
-          modified = gitsigns.changed,
-          removed = gitsigns.removed,
-        }
-      end
-    end,
-    symbols = {
-      added = icon.git.LineAdded .. " ",
-      modified = icon.git.LineModified .. " ",
-      removed = icon.git.LineRemoved .. " ",
-    },
-    colored = true,
-    always_visible = false,
-  }
 
   lualine.setup {
     options = {
@@ -63,10 +12,48 @@ function M.setup()
       disabled_filetypes = { "mason", "lazy", "NvimTree" },
     },
     sections = {
-      lualine_a = { "mode" },
+      lualine_a = {
+        {
+          "mode",
+          color = function()
+            local mode_color = {
+              n = "#ff9e64",
+              i = "#9ece6a",
+              v = "#7aa2f7",
+              ["\22"] = "#7aa2f7",
+              V = "#7aa2f7",
+              c = "#e0af68",
+              no = "#ff9e64",
+              s = "#f7768e",
+              S = "#f7768e",
+              ["\19"] = "#f7768e",
+              ic = "#9ece6a",
+              R = "#bb9af7",
+              Rv = "#bb9af7",
+              cv = "#e0af68",
+              ce = "#e0af68",
+              r = "#bb9af7",
+              rm = "#bb9af7",
+              ["r?"] = "#bb9af7",
+              ["!"] = "#e0af68",
+              t = "#2ac3de",
+            }
+            return { fg = mode_color[vim.fn.mode()] }
+          end,
+        },
+        "branch",
+      },
       lualine_b = {},
-      lualine_c = { "filename", lsp_status, "codecompanion", "supermaven" },
-      lualine_x = { diff, diagnostics, filetype },
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {},
+    },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
       lualine_y = {},
       lualine_z = {},
     },

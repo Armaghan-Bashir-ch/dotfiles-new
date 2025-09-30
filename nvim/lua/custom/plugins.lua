@@ -982,7 +982,7 @@ local plugins = {
         config = function()
             require("auto-session").setup({
                 auto_session_enable_last_session = vim.fn.argc() == 0,
-            pre_save_cmds = { "tabdo NvimTreeClose" },
+                pre_save_cmds = { "tabdo NvimTreeClose" },
             })
         end,
     },

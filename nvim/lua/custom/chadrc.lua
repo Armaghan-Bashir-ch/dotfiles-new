@@ -19,7 +19,6 @@ M.ui = {
         separator_style = "round",
         overriden_modules = nil,
     },
-
     tabufline = {
         enabled = false, -- disable NvChad's tab thingi at the top
     },
