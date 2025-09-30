@@ -30,7 +30,7 @@ Every single file has been symlinked to their counter-part/original file/dir/scr
 
 - You are only allowed to ask to look for the following directories/files inside of `/nvim`
   - `lua`
-  - `todo.md` (Sometimes)
+  - `todo.md` (Sometimes when I have some nvim related todo list inside of it, you should be able to detect when the todo list has already been done, and when it has not already been done)
 - Inside of `lua` there are three main dirctories but there is really only one main, and only one that I will be asking you to manage/do stuff with:
   - `custom`
 - inside of `custom` there is `/configs`, but that is very rarely changed, main files inside of this dir and the ones that you should definaely understand the context and nature of are:
