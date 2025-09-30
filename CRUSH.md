@@ -24,6 +24,7 @@ Every single file has been symlinked to their counter-part/original file/dir/scr
 - Do use comments to explain some really big change or something that might confuse the end-user
 - scripts for any tool will be available inside of `scripts` dir in every single dir for any tool
 - Use spell check in bash scripts
+- Use bullet points to explain/describe anything
 
 ### Nvim
 
