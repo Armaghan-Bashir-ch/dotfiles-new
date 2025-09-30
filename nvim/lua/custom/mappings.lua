@@ -102,6 +102,12 @@ M.snacks = {
             end,
             "Git browse",
         },
+        ["<leader>bB"] = {
+            function()
+                vim.fn.system("xdg-open https://github.com/Armaghan-Bashir-ch/dotfiles-new &")
+            end,
+            "Open dotfiles repo",
+        },
         ["<leader>nh"] = {
             function()
                 Snacks.notifier.show_history()
@@ -156,6 +162,7 @@ M.spider_motion = {
             "Spider-b",
         },
     },
+
     o = {
         ["w"] = {
             "<cmd>lua require('spider').motion('w')<CR>",

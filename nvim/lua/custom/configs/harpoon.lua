@@ -5,7 +5,7 @@ local keys = function()
             function()
                 require("harpoon"):list():add()
             end,
-            desc = "Harpoon File",
+            desc = "Add Current Buffer To Harpoon Pinned File List",
         },
         {
             "<leader>h",
@@ -13,21 +13,21 @@ local keys = function()
                 local harpoon = require("harpoon")
                 harpoon.ui:toggle_quick_menu(harpoon:list())
             end,
-            desc = "Harpoon Quick Menu",
+            desc = "Harpoon Pinned Files Menu",
         },
         {
             "<M-[>",
             function()
                 require("harpoon"):list():prev()
             end,
-            desc = "Harpoon Prev",
+            desc = "Harpoon Previous File",
         },
         {
             "<M-]>",
             function()
                 require("harpoon"):list():next()
             end,
-            desc = "Harpoon Next",
+            desc = "Harpoon Next File",
         },
     }
 
