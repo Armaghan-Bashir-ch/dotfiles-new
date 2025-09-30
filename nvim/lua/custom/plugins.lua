@@ -1058,7 +1058,7 @@ local plugins = {
             opts.max_width = 100
             opts.max_height = 50
 
-            -- Center messages on screen
+            -- Position notifications at top to avoid tmux/statusline overlap
             opts.on_open = function(win)
                 local config = vim.api.nvim_win_get_config(win)
                 config.relative = "editor"
@@ -1066,8 +1066,8 @@ local plugins = {
 
                 local width = 50
                 local height = 5
-                config.row = math.floor((vim.o.lines - height) / 2)
-                config.col = math.floor((vim.o.columns - width) / 2)
+                config.row = 1                           -- Top position (small offset from edge)
+                config.col = math.floor((vim.o.columns - width) / 2) -- Center horizontally
 
                 vim.api.nvim_win_set_config(win, config)
             end
@@ -1076,12 +1076,22 @@ local plugins = {
         end,
     },
 
+    -- lazy.nvim
+    -- lazy.nvim
     {
         "folke/noice.nvim",
         event = "VeryLazy",
         enabled = false,
+        opts = {
+            -- add any options here
+        },
         dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
             "MunifTanjim/nui.nvim",
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            "rcarriga/nvim-notify",
         },
     },
 

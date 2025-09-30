@@ -5,12 +5,11 @@ vim.opt.expandtab = true                                                        
 vim.opt.tabstop = 4                                                                                    -- Number of spaces a tab represents
 vim.opt.shiftwidth = 4                                                                                 -- Number of spaces for autoindent
 vim.opt.showtabline = 0                                                                                -- Disables file tab names at the top, don't know the right name for it
-vim.opt.cmdheight = 1                                                                                  -- Sets the Command Line height to be one line above the bottom edge
 vim.opt.wrap = false                                                                                   -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
 vim.opt.cursorline = false                                                                             -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
 vim.g.fancyScroll = true                                                                               -- Disabling fancy scroll, fancy scroll is basically replacement of control+d/u but with the mice
+vim.opt.cmdheight = 1                                                                                  -- Sets the statusline height to be one line above the bottom, helps with cleaness
 vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE" })                                                     -- Needed for the lastest --version of nvim (0.11.4)
-vim.opt.statusline = "%#ModeBright# %{mode()}%=%f %y"                                                  -- Why doesn't this work?
 vim.opt.laststatus = 2                                                                                 -- always show statusline
 vim.g.nvchad_hot_reload = false                                                                        -- Don't automatically reload the NvChad config. You'll have to restart Neovim to see your changes.
 vim.g.lazyvim_prettier_needs_config = false                                                            -- Run Prettier without requiring a config file
@@ -258,5 +257,11 @@ vim.api.nvim_create_autocmd("VimEnter", {
             vim.cmd("silent bwipeout") -- Close any loaded buffers
             vim.cmd("enew")   -- Create new empty buffer to trigger btw.nvim banner
         end
+    end,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        print("Autocmd triggered!")
     end,
 })
