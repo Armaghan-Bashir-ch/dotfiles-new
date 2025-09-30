@@ -132,11 +132,17 @@ bindkey '^N' cdi_widget
 # Enabling fzf hitory widget with fzf
 
 export FZF_DEFAULT_OPTS="
-  --height=80%        \
-  --layout=reverse    \
-  --border            \
-  --margin=1,2        \
-  --padding=1,2       \
+    --height=100%        \
+    --layout=reverse    \
+    --no-border            \
+    --margin=1,5        \
+    --padding=1,2       \
+    --preview-window=right:90%:wrap \
+    --color=bg+:-1,bg:-1,spinner:#9ece6a,hl:#89ddff \
+    --color=fg:#a9b1d6,header:#f38ba8,info:#ff9e64,pointer:#ff9e64 \
+    --color=marker:#7aa2f7,fg+:#cdd6f4,prompt:#f7768e,hl+:#89ddff \
+    --color=selected-bg:-1 \
+    --color=border:#45475a,label:#ff9e64
 "
 
 zle -N fzf-history-widget
