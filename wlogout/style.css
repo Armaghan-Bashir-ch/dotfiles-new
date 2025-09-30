@@ -11,7 +11,7 @@ window {
 
 button {
   color: #ffffff;
-  background-color: #999dad;
+  background-color: @main-bg;
   outline-style: none;
   border: 2px;
   border-width: 500px;
@@ -25,12 +25,12 @@ button {
 }
 
 button:focus {
-  background-color: #5a5d75;
+  background-color: @main-bg;
   background-size: 30%;
 }
 
 button:hover {
-  background-color: #d88876;
+  background-color: @wb-hvr-bg;
   background-size: 25%;
   border-radius: 25px;
   animation: gradient_f 20s ease-in infinite;
