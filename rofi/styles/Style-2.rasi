@@ -34,7 +34,7 @@ mainbox {
     orientation:                 vertical;
     children:                    [ "inputbar" , "listbox" ];
     background-color:            transparent;
-    background-image: url("/home/armaghan/backgrounds/Decay-Green/Blue-Lines.png", width);
+    background-image: url("/home/armaghan/backgrounds/Gruvbox-Retro/Skull-OnFire.png", width);
 }
 
 
@@ -45,8 +45,9 @@ inputbar {
     padding:                     80px;
     children:                    [ "entry" ];
     background-color:            transparent;
-    background-image: url("/home/armaghan/backgrounds/Decay-Green/Blue-Lines.png", width);
+    background-image: url("/home/armaghan/backgrounds/Gruvbox-Retro/Skull-OnFire.png", width);
 }
+
 entry {
     border-radius:               50px;
     enabled:                     true;
