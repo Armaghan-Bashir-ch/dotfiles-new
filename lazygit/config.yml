@@ -29,3 +29,6 @@ gui:
   skipDiscardChangeWarning: false
   authorColors:
     '*': '#7287fd'
+
+os:
+  editor: true
