@@ -1047,6 +1047,7 @@ local plugins = {
         end,
     },
 
+    -- ~/.config/nvim/lua/plugins/lualine.lua
     --NOTE: Do not change the theme to anything else
 
     {
@@ -1076,8 +1077,6 @@ local plugins = {
         end,
     },
 
-    -- lazy.nvim
-    -- lazy.nvim
     {
         "folke/noice.nvim",
         event = "VeryLazy",
