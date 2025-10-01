@@ -113,7 +113,6 @@ zstyle ':fzf-tab:*' fzf-flags \
     --pointer="" \
     --border=rounded \
     --height=10% \
-    zle reset-prompt
 
 # ZFF:
 
