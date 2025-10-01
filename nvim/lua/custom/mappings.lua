@@ -255,7 +255,7 @@ M.true_zen = {
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
-vim.keymap.set("n", "<C-f>", "<C-f>zz", { desc = "Scroll full page down and center" })
+vim.keymap.set("n", "<C-f>", "<cmd>FzfLua<CR>", { desc = "Open fzf-lua menu" })
 
 -- Makes it so going half buffer down or up, centers the cursor on the screen
 

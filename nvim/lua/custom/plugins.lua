@@ -123,6 +123,18 @@ local plugins = {
             })
         end,
     },
+
+    {
+        "ibhagwan/fzf-lua",
+        -- optional for icon support
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        lazy = false,
+        enabeld = true,
+        -- or if using mini.icons/mini.nvim
+        -- dependencies = { "nvim-mini/mini.icons" },
+        opts = {},
+    },
+
     {
         "abecodes/tabout.nvim",
         enabled = false,
