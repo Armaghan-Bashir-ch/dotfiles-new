@@ -662,6 +662,10 @@ local plugins = {
             },
             settings = {
                 save_on_toggle = true,
+                project = {
+                    enable = true,
+                    root_files = {".git"}
+                },
             },
         },
         keys = require("custom.configs.harpoon"),
@@ -993,7 +997,8 @@ local plugins = {
         lazy = false,
         config = function()
             require("auto-session").setup({
-                auto_session_enable_last_session = vim.fn.argc() == 0,
+                auto_restore = false,
+                auto_session_enable_last_session = false,
                 pre_save_cmds = { "tabdo NvimTreeClose" },
             })
         end,

@@ -25,10 +25,6 @@ vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false })  
 -- opt.foldlevelstart = 99
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-vim.keymap.set("n", "<C-Tab>", function()
-    require("harpoon"):list():next()
-end, { desc = "Next Harpoon file" })
-
 vim.api.nvim_create_augroup("PasteRemoveCarriageReturn", { clear = true })
 vim.g.maplocalleader = ","
 
@@ -253,15 +249,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_autocmd("VimEnter", {
     pattern = "*",
     callback = function()
-        if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv()[0]) == 1 then
-            vim.cmd("silent bwipeout") -- Close any loaded buffers
-            vim.cmd("enew")   -- Create new empty buffer to trigger btw.nvim banner
+        if vim.fn.argc() == 0 or (vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv()[0]) == 1) then
+            vim.cmd("silent! %bwipeout")
+            vim.cmd("enew")
         end
-    end,
-})
-
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        print("Autocmd triggered!")
     end,
 })
