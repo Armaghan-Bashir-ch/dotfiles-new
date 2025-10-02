@@ -100,8 +100,10 @@ M.snacks = {
             function()
                 Snacks.gitbrowse()
             end,
-            "Git browse",
+            "Git Browse",
+            mode = { "n", "v" },
         },
+
         ["<leader>bB"] = {
             function()
                 vim.fn.system("xdg-open https://github.com/Armaghan-Bashir-ch/dotfiles-new &")

@@ -882,6 +882,17 @@ local plugins = {
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
+        init = function()
+            vim.api.nvim_set_hl(0, "LazygitActive", { fg = "#b85a3a", bold = true })
+            vim.api.nvim_set_hl(0, "LazygitInactive", { fg = "#444444" })
+            vim.api.nvim_set_hl(0, "LazygitSelected", { bg = "#2a2a4e" })
+            vim.api.nvim_set_hl(0, "LazygitDefault", { fg = "#c0c0c0" })
+            vim.api.nvim_set_hl(0, "LazygitUnstaged", { fg = "#ff4444" })
+            vim.api.nvim_set_hl(0, "LazygitCherryBg", { fg = "#ffaa00" })
+            vim.api.nvim_set_hl(0, "LazygitCherryFg", { fg = "#ffffff" })
+            vim.api.nvim_set_hl(0, "LazygitOptions", { fg = "#b85a3a" })
+            vim.api.nvim_set_hl(0, "LazygitSearch", { fg = "#ff0088", bold = true })
+        end,
         ---@type snacks.Config
         opts = {
             bigfile = { enabled = true },
@@ -907,7 +918,20 @@ local plugins = {
                 },
             },
             quickfile = { enabled = true },
-            lazygit = { enabled = true },
+            lazygit = {
+                enabled = true,
+                theme = {
+                    activeBorderColor = { fg = "LazygitActive" },
+                    cherryPickedCommitBgColor = { fg = "LazygitCherryBg" },
+                    cherryPickedCommitFgColor = { fg = "LazygitCherryFg" },
+                    defaultFgColor = { fg = "LazygitDefault" },
+                    inactiveBorderColor = { fg = "LazygitInactive" },
+                    optionsTextColor = { fg = "LazygitOptions" },
+                    searchingActiveBorderColor = { fg = "LazygitSearch" },
+                    selectedLineBgColor = { bg = "LazygitSelected" },
+                    unstagedChangesColor = { fg = "LazygitUnstaged" },
+                },
+            },
             scratch = { enabled = true },
             gitbrowse = { enabled = true },
             notifier = { enabled = true },
