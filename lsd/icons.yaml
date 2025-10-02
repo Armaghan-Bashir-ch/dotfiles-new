@@ -74,7 +74,11 @@ name:
   lazygit:  
   .n8n: 
   usr: 
+  lsd: 
   .crush:   
+
+  # TODO: Why doesn't this section work?
+
   Catppuccin-Latte:  
   Frosted-Glass:   
   Catppuccin-Mocha: 
