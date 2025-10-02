@@ -21,12 +21,11 @@ vim.o.sessionoptions =
 "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"                        -- Define what gets saved/restored in a Vim session
 vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false })                       -- Remove underline/undercurl from the line number of the current cursor line
 vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false })                         -- Remove underline/undercurl from the background of the current cursor line
+vim.api.nvim_create_augroup("PasteRemoveCarriageReturn", { clear = true })
+vim.g.maplocalleader = ","
 -- opt.foldmethod = "expr"
 -- opt.foldlevelstart = 99
 -- opt.foldexpr = "nvim_treesitter#foldexpr()"
-
-vim.api.nvim_create_augroup("PasteRemoveCarriageReturn", { clear = true })
-vim.g.maplocalleader = ","
 
 -- adds .env to sh group
 vim.cmd([[
