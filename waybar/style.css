@@ -73,6 +73,7 @@ tooltip {
   color: @main-fg;
   border-radius: 8px;
   border-width: 0px;
+  box-shadow: none;
 }
 
 #workspaces button {
