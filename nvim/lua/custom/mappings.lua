@@ -719,6 +719,9 @@ M.general = {
     i = {
         ["<S-Tab>"] = { "<C-w>" },
         ["<C-h>"] = { "<C-w>" },
+        ["<C-BS>"] = { "<C-w>", "Delete previous word" },
+        ["<Esc>[1;5C"] = { "<C-Right>", "Move to next word" },
+        ["<Esc>[1;5D"] = { "<C-Left>", "Move to previous word" },
     },
 }
 
