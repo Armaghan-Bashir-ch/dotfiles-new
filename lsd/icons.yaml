@@ -76,6 +76,8 @@ name:
   usr: 
   lsd: 
   .crush:   
+  crush:   
+  opencode:  
 
   # TODO: Why doesn't this section work?
 
