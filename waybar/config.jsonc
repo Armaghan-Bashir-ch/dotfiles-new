@@ -43,7 +43,16 @@
 
     "clock": {
         "format": "  {:%I:%M - %d %a}",
-        "tooltip-format": "<tt><big>{calendar}</big></tt>"
+        "tooltip-format": "<tt><big>{calendar}</big></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b>{}</b></span>"
+            }
+        }
     },
 
     "custom/todo": {
