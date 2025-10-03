@@ -44,6 +44,7 @@ local opts = {
 	},
 	keymap = {
 		preset = "super-tab",
+		["<A-Space>"] = { "show", "show_documentation", "hide_documentation" },
 		["<CR>"] = { "accept", "fallback" },
 		-- TODO: replace with a loop
 		["<A-1>"] = {
