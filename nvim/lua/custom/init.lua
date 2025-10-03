@@ -1,3 +1,5 @@
+require "custom.options"
+
 local opt = vim.opt                                                                                    -- Shortcut alias for Neovim's option settings
 
 opt.relativenumber = true                                                                              -- Adding Relative Line Numbers to be turned on every single time on starup
