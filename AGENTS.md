@@ -2,7 +2,7 @@
 
 These are my `.dotfiles` for Arch Linux `Hyprland` setup, it includes my config, files, and custom scripts for `Neovim` (my editor) `hyprland`, `lazygit`, `tmux`, `zsh`, `rofi`, `waybar` `wlogout` and many others
 
-The `.dotfiles` have been pushed publicly to github on "https://github.com/Armaghan-Bashir-ch/`dotfiles-new`", and are being updated nearly every 5 hours.
+The `.dotfiles` have been pushed publicly to github on "https://github.com/Armaghan-Bashir-ch/dotfiles-new", and are being updated nearly every 5 hours.
 
 Every single file has been symlinked to their counter-part/original file/dir/script in `.config` folder, not using `stow` (since I did not knew it existed when I was synlinking the files)
 
