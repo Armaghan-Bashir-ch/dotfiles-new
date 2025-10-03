@@ -1,0 +1,18 @@
+{
+  "theme": "opencode",
+  "$schema": "https://opencode.ai/config.json",
+    "keybinds": {
+        "app_help": "ctrl+p",
+        "app_exit": "ctrl+q",
+        "editor_open": "ctrl+e",
+        "theme_list": "alt+t",
+        "session_new": "ctrl+n",
+        "session_list": "ctrl+s",
+        "session_interrupt": "esc",
+        "session_child_cycle": "ctrl+right",
+        "session_child_cycle_reverse": "ctrl+left",
+        "model_list": "ctrl+m",
+        "agent_list": "alt+a",
+        "input_paste": "ctrl+v",
+    }
+}
