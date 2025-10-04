@@ -34,7 +34,7 @@ local config = function()
     job:start()
     local result = rx()
     if result then
-      print(result) -- Print the result to Neovim's command line
+      vim.schedule(function() vim.notify(result, vim.log.levels.INFO) end)
     end
   end)
 
