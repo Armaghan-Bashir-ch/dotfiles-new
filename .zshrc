@@ -49,7 +49,6 @@ bindkey '^[^I' autosuggest-accept
 
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>'
 bindkey '^H' backward-kill-word
-export GTK_THEME=TokyoNight-Dark-BL
 
 # Setting command history to be a big number:
 
@@ -58,15 +57,16 @@ SAVEHIST=10000
 
 # Setting up Yazi config to be in the config file, and terminal to be ghostty and editor to be nvim
 
+export GTK_THEME=TokyoNight-Dark-BL
 export TERMINAL=ghostty
 export EDITOR=nvim
 export YAZI_CONFIG_HOME="$HOME/.config/yazi"
-
-# Exporting the Path, and sourcing zsh syntax highlighting in the terminal:
-
 export PATH="$PATH:/home/armaghan/.local/bin"
 export PATH="$PATH:/usr/local/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# Exporting the Path, and sourcing zsh syntax highlighting in the terminal:
+
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
 echo -ne '\e[4 q'
