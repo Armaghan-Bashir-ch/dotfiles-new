@@ -11,7 +11,7 @@
         "session_interrupt": "esc",
         "session_child_cycle": "ctrl+right",
         "session_child_cycle_reverse": "ctrl+left",
-        "model_list": "ctrl+m",
+        "model_list": "alt+m",
         "agent_list": "alt+a",
         "input_paste": "ctrl+v",
     }

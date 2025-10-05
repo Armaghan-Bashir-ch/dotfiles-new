@@ -1,0 +1,362 @@
+{
+  // JSON schema reference for configuration validation
+  "$schema": "https://opencode.ai/config.json",
+  // Theme name to use for the interface
+  "theme": "opencode",
+  // Custom keybind configurations
+  "keybinds": {
+    // Leader key for keybind combinations
+    "leader": "ctrl+x",
+    // Show help dialog
+    "app_help": "ctrl+p",
+    // Exit the application
+    "app_exit": "ctrl+c,<leader>q",
+    // Open external editor
+    "editor_open": "<leader>e",
+    // List available themes
+    "theme_list": "<leader>t",
+    // Create/update AGENTS.md
+    "project_init": "<leader>i",
+    // Toggle tool details
+    "tool_details": "<leader>d",
+    // Toggle thinking blocks
+    "thinking_blocks": "<leader>b",
+    // Export session to editor
+    "session_export": "<leader>x",
+    // Create a new session
+    "session_new": "<leader>n",
+    // List all sessions
+    "session_list": "<leader>l",
+    // Show session timeline
+    "session_timeline": "<leader>g",
+    // Share current session
+    "session_share": "<leader>s",
+    // Unshare current session
+    "session_unshare": "none",
+    // Interrupt current session
+    "session_interrupt": "esc",
+    // Compact the session
+    "session_compact": "<leader>c",
+    // Cycle to next child session
+    "session_child_cycle": "ctrl+right",
+    // Cycle to previous child session
+    "session_child_cycle_reverse": "ctrl+left",
+    // Scroll messages up by one page
+    "messages_page_up": "pgup",
+    // Scroll messages down by one page
+    "messages_page_down": "pgdown",
+    // Scroll messages up by half page
+    "messages_half_page_up": "ctrl+alt+u",
+    // Scroll messages down by half page
+    "messages_half_page_down": "ctrl+alt+d",
+    // Navigate to first message
+    "messages_first": "ctrl+g",
+    // Navigate to last message
+    "messages_last": "ctrl+alt+g",
+    // Copy message
+    "messages_copy": "<leader>y",
+    // Undo message
+    "messages_undo": "<leader>u",
+    // Redo message
+    "messages_redo": "<leader>r",
+    // List available models
+    "model_list": "<leader>m",
+    // Next recent model
+    "model_cycle_recent": "f2",
+    // Previous recent model
+    "model_cycle_recent_reverse": "shift+f2",
+    // List agents
+    "agent_list": "<leader>a",
+    // Next agent
+    "agent_cycle": "tab",
+    // Previous agent
+    "agent_cycle_reverse": "shift+tab",
+    // Clear input field
+    "input_clear": "ctrl+c",
+    // Paste from clipboard
+    "input_paste": "ctrl+v",
+    // Submit input
+    "input_submit": "enter",
+    // Insert newline in input
+    "input_newline": "shift+enter,ctrl+j"
+  },
+  // TUI specific settings
+  "tui": {
+    // TUI scroll speed
+    "scroll_speed": 2
+  },
+  // Command configuration, see https://opencode.ai/docs/commands
+  "command": {
+    "example_command": {
+      // Template for the command
+      "template": "Run this command",
+      // Description of the command
+      "description": "An example command",
+      // Agent to use for the command
+      "agent": "general",
+      // Model to use for the command
+      "model": "anthropic/claude-3-5-sonnet-20241022",
+      // Whether this is a subtask
+      "subtask": false
+    }
+  },
+  // Watcher configuration
+  "watcher": {
+    // Files/patterns to ignore
+    "ignore": ["*.log", "node_modules"]
+  },
+  // Plugin list
+  "plugin": ["example-plugin"],
+  // Enable snapshots
+  "snapshot": true,
+  // Control sharing behavior: 'manual', 'auto', or 'disabled'
+  "share": "manual",
+  // Automatically update to the latest version
+  "autoupdate": true,
+  // Disable providers that are loaded automatically
+  "disabled_providers": ["example-provider"],
+  // Default model to use
+  "model": "anthropic/claude-3-5-sonnet-20241022",
+  // Small model for tasks like title generation
+  "small_model": "anthropic/claude-3-haiku-20240307",
+  // Custom username to display
+  "username": "custom_user",
+  // Agent configuration, see https://opencode.ai/docs/agent
+  "agent": {
+    // Plan agent configuration
+    "plan": {
+      // Model for plan agent
+      "model": "anthropic/claude-3-haiku-20240307",
+      // Temperature setting
+      "temperature": 0.7,
+      // Top-p setting
+      "top_p": 0.9,
+      // Prompt for the agent
+      "prompt": "You are a planning agent.",
+      // Tools enabled for the agent
+      "tools": {
+        "grep": true,
+        "read": true
+      },
+      // Whether the agent is disabled
+      "disable": false,
+      // Description of when to use the agent
+      "description": "Agent for planning tasks",
+      // Mode: subagent, primary, or all
+      "mode": "primary",
+      // Permissions for the agent
+      "permission": {
+        // Edit permission: ask, allow, deny
+        "edit": "ask",
+        // Bash permission
+        "bash": "ask",
+        // Webfetch permission
+        "webfetch": "allow"
+      }
+    },
+    // Build agent configuration
+    "build": {
+      "model": "anthropic/claude-3-5-sonnet-20241022",
+      "temperature": 0.5,
+      "top_p": 0.95,
+      "prompt": "You are a build agent.",
+      "tools": {
+        "edit": true,
+        "bash": true
+      },
+      "disable": false,
+      "description": "Agent for building code",
+      "mode": "primary",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "webfetch": "allow"
+      }
+    },
+    // General agent configuration
+    "general": {
+      "model": "anthropic/claude-3-5-sonnet-20241022",
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "prompt": "You are a general purpose agent.",
+      "tools": {
+        "grep": true,
+        "read": true,
+        "edit": true,
+        "bash": true,
+        "webfetch": true
+      },
+      "disable": false,
+      "description": "General purpose agent",
+      "mode": "all",
+      "permission": {
+        "edit": "ask",
+        "bash": "ask",
+        "webfetch": "allow"
+      }
+    }
+  },
+  // Custom provider configurations and model overrides
+  "provider": {
+    "example_provider": {
+      // API endpoint
+      "api": "https://api.example.com",
+      // Provider name
+      "name": "Example Provider",
+      // Environment variables
+      "env": ["EXAMPLE_API_KEY"],
+      // Provider ID
+      "id": "example",
+      // NPM package
+      "npm": "@example/provider",
+      // Models configuration
+      "models": {
+        "example-model": {
+          // Model ID
+          "id": "example-model",
+          // Model name
+          "name": "Example Model",
+          // Release date
+          "release_date": "2024-01-01",
+          // Supports attachments
+          "attachment": true,
+          // Supports reasoning
+          "reasoning": false,
+          // Supports temperature
+          "temperature": true,
+          // Supports tool calls
+          "tool_call": true,
+          // Cost configuration
+          "cost": {
+            "input": 0.001,
+            "output": 0.002
+          },
+          // Limits
+          "limit": {
+            "context": 128000,
+            "output": 4096
+          },
+          // Experimental flag
+          "experimental": false,
+          // Custom options
+          "options": {
+            "custom_option": "value"
+          }
+        }
+      },
+      // Provider options
+      "options": {
+        "apiKey": "your-api-key",
+        "baseURL": "https://api.example.com",
+        "timeout": 300000
+      }
+    }
+  },
+  // MCP (Model Context Protocol) server configurations
+  "mcp": {
+    // Local MCP server
+    "example_local": {
+      // Type of connection
+      "type": "local",
+      // Command to run the server
+      "command": ["node", "server.js"],
+      // Environment variables
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      // Enable on startup
+      "enabled": true
+    },
+    // Remote MCP server
+    "example_remote": {
+      "type": "remote",
+      // URL of the server
+      "url": "https://mcp.example.com",
+      "enabled": true,
+      // Headers for the request
+      "headers": {
+        "Authorization": "Bearer token"
+      }
+    }
+  },
+  // Formatter configurations
+  "formatter": {
+    "prettier": {
+      // Whether disabled
+      "disabled": false,
+      // Command to run
+      "command": ["prettier", "--write"],
+      // Environment variables
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      // File extensions
+      "extensions": [".js", ".ts", ".json"]
+    }
+  },
+  // LSP configurations
+  "lsp": {
+    "example_lsp": {
+      // Command to run the LSP
+      "command": ["example-lsp", "--stdio"],
+      // File extensions
+      "extensions": [".ex"],
+      // Whether disabled
+      "disabled": false,
+      // Environment variables
+      "env": {
+        "EXAMPLE_PATH": "/usr/local/bin"
+      },
+      // Initialization options
+      "initialization": {
+        "settings": {
+          "example": {
+            "enable": true
+          }
+        }
+      }
+    }
+  },
+  // Additional instruction files or patterns
+  "instructions": ["README.md", "docs/*.md"],
+  // Global permissions
+  "permission": {
+    "edit": "ask",
+    "bash": {
+      "git": "allow",
+      "npm": "allow"
+    },
+    "webfetch": "allow"
+  },
+  // Global tools configuration
+  "tools": {
+    "grep": true,
+    "read": true,
+    "edit": true,
+    "bash": true,
+    "webfetch": true
+  },
+  // Experimental features
+  "experimental": {
+    // Hooks for various events
+    "hook": {
+      // Hooks for file edited events
+      "file_edited": {
+        "*.js": [
+          {
+            // Command to run
+            "command": ["eslint", "--fix"]
+          }
+        ]
+      },
+      // Hooks for session completed events
+      "session_completed": [
+        {
+          "command": ["git", "add", "."]
+        }
+      ]
+    },
+    // Disable paste summary
+    "disable_paste_summary": false
+  }
+}
