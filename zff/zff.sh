@@ -47,7 +47,7 @@ zff_fd_ignores=(
 
 # function to open the selected file
 openFile() {
-  if file --mime-type -b "$1" | grep -E -q 'text/|application/(json|javascript|xml|csv|x-yaml)|inode/x-empty';then
+  if file --mime-type -L -b "$1" | grep -E -q 'text/|application/(json|javascript|xml|csv|x-yaml|x-shellscript)|inode/x-empty';then
     ${EDITOR:-nvim} "$1"
   else
     xdg-open "$1" &>/dev/null &
@@ -184,27 +184,9 @@ zff() {
 # ZSH
 if [[ -n "$ZSH_VERSION" ]]; then
   zffi() {
-    local selected_files
-    selected_files=$(_zff_selector)
-    if [[ -n "$selected_files" ]]; then
-      while IFS= read -r target_file; do
-        if [[ -n "$target_file" ]]; then
-          # If path contains a space, use full, quoted path.
-          if [[ "$target_file" =~ \  ]]; then
-            # shellcheck disable=SC2296
-            LBUFFER+="${(q)target_file} "
-          else
-            # use tilde if no spaces coz its cool
-            if [[ "$target_file" == "$HOME"* ]]; then
-              target_file="~${target_file#$HOME}"
-            fi
-            LBUFFER+="$target_file "
-        fi
-      fi
-    done <<< "$selected_files"
-    zle redisplay
-  fi
-}
+    zff
+    zle reset-prompt
+  }
 
 # BASH setup
 elif [[ -n "$BASH_VERSION" && $- == *i* ]]; then

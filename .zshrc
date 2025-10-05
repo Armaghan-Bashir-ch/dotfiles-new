@@ -119,8 +119,8 @@ zstyle ':fzf-tab:*' fzf-flags \
 if [[ -f ~/zff/zff.sh ]]; then
   source ~/zff/zff.sh
 fi
-zle -N zff
-bindkey '^F' zff 
+zle -N zffi
+bindkey '^F' zffi
 
 # Bind Ctrl+F to the widget
 
