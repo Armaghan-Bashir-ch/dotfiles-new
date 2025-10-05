@@ -104,12 +104,22 @@ M.snacks = {
             mode = { "n", "v" },
         },
 
+        ["<leader>bA"] = {
+            function()
+                vim.notify("Opening Github Account....")
+                vim.fn.system("xdg-open https://github.com/Armaghan-Bashir-ch")
+            end,
+            "Open Github Account",
+        },
+
         ["<leader>bB"] = {
             function()
+                vim.notify("Opening Dotfiles Repo...")
                 vim.fn.system("xdg-open https://github.com/Armaghan-Bashir-ch/dotfiles-new &")
             end,
             "Open dotfiles repo",
         },
+
         ["<leader>nh"] = {
             function()
                 Snacks.notifier.show_history()
