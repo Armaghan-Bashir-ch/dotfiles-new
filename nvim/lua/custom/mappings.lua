@@ -654,6 +654,8 @@ M.general = {
         ["<leader>b7"] = { "<cmd>buffer 7<CR>", "Select buffer 7" },
         ["<leader>b8"] = { "<cmd>buffer 8<CR>", "Select buffer 8" },
         ["<leader>b9"] = { "<cmd>buffer 9<CR>", "Select buffer 9" },
+        ["<leader>oo"] = { "<cmd>vsplit | term opencode<CR>", "Open opencode" },
+        ["<leader>cc"] = { "<cmd>vsplit | term crush<CR>", "Open Crush" },
     },
 
     v = {

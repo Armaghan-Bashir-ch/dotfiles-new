@@ -446,6 +446,40 @@ local plugins = {
     },
 
     {
+        "default-anton/llm-sidekick.nvim",
+        enabled = true,
+        lazy = false,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("llm-sidekick").setup({
+                -- Model aliases configuration
+                aliases = {
+                    pro = "gemini-2.5-pro",
+                    flash = "gemini-2.5-flash",
+                    opus = "claude-opus-4-20250514",
+                    sonnet = "claude-sonnet-4-20250514",
+                    bedrock_opus = "anthropic.claude-opus-4",
+                    bedrock_sonnet = "anthropic.claude-sonnet-4",
+                    deepseek = "deepseek-chat",
+                    chatgpt = "gpt-4.1",
+                    mini = "gpt-4.1-mini",
+                    high_o3 = "o3-high",
+                    medium_o3 = "o3-medium",
+                },
+                yolo_mode = {
+                    file_operations = false,                     -- Automatically accept file operations
+                    terminal_commands = false,                   -- Automatically accept terminal commands
+                    auto_commit_changes = true,                  -- Enable auto-commit
+                },
+                auto_commit_model = "gpt-4.1-mini",              -- Use a specific model for commit messages
+                safe_terminal_commands = { "mkdir", "touch", "git commit" }, -- List of terminal commands to automatically accept
+            })
+        end,
+    },
+
+    {
         "NStefan002/speedtyper.nvim",
         branch = "v2",
         lazy = false,
