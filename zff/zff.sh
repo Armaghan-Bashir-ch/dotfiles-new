@@ -174,6 +174,7 @@ zff() {
   if [[ -n "$target" ]]; then
     if [[ -d "$target" ]]; then
       cd "$target"
+      zle reset-prompt
     else
       openFile "$target"
     fi
