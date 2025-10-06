@@ -505,6 +505,12 @@ M.general = {
         },
         ["<A-j>"] = { "6j", "Move 6 lines down" },
         ["<A-k>"] = { "6k", "Move 6 lines up" },
+        ["<A-w>"] = { "6w", "Move 6 words forward" },
+        ["<A-b>"] = { "6b", "Move 6 lines backwards" },
+        ["<A-_>"] = { "6_", "Move 6 lines begaining" },
+        ["<A-{>"] = { "6{", "Move 6 pragraphs down" },
+        ["<A-}>"] = { "6}", "Move 6 pragraphs up" },
+
         ["<leader>ex"] = {
             "<cmd>execute 'normal! Iexport '<CR>",
             "Add 'export' at the start of the current line",
