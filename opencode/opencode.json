@@ -2,6 +2,7 @@
   "theme": "opencode",
   "$schema": "https://opencode.ai/config.json",
     "keybinds": {
+        "leader": "ctrl+o",
         "app_help": "ctrl+p",
         "app_exit": "ctrl+q",
         "editor_open": "ctrl+e",
@@ -14,5 +15,7 @@
         "model_list": "alt+m",
         "agent_list": "alt+a",
         "input_paste": "ctrl+v",
+        "project_init": "alt+i",
+        "messages_copy": "<leader>y",
     }
 }
