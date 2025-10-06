@@ -4,7 +4,6 @@ local plugins = {
     -- text editing
     {
         "zbirenbaum/copilot.lua",
-        enabled = vim.g.auto_ai,
         cmd = "Copilot",
         event = "InsertEnter",
         config = function()
