@@ -136,10 +136,19 @@ zstyle ':completion:*:cd:*' file-patterns '*(/)'
 if [[ -f ~/zff/zff.sh ]]; then
   source ~/zff/zff.sh
 fi
+# Bind Ctrl+F to the widget
 zle -N zffi
 bindkey '^F' zffi
 
-# Bind Ctrl+F to the widget
+
+## OPENCODE
+
+opencode_widget() {
+  opencode
+  zle reset-prompt
+}
+zle -N opencode_widget
+bindkey '^O' opencode_widget
 
 # Zoxide menu
 
