@@ -11,6 +11,8 @@ vim.g.fancyScroll = true                                                        
 vim.opt.cmdheight = 1                                                                                  -- Sets the statusline height to be one line above the bottom, helps with cleaness
 vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE" })                                                     -- Needed for the lastest --version of nvim (0.11.4)
 vim.opt.laststatus = 2                                                                                 -- always show statusline
+vim.opt.ttimeoutlen = 0                                                                                -- Reduce delay for key code sequences
+vim.opt.timeoutlen = 500                                                                               -- Timeout for mappings
 vim.g.nvchad_hot_reload = false                                                                        -- Don't automatically reload the NvChad config. You'll have to restart Neovim to see your changes.
 vim.g.lazyvim_prettier_needs_config = false                                                            -- Run Prettier without requiring a config file
 vim.g.auto_ai = false                                                                                  -- Disable automatic AI completions/integrations out of the box, nobody needs AI
@@ -63,13 +65,13 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 })
 
 -- Define autocmd group
-vim.cmd([[
-  augroup LineNumberToggle
-    autocmd!
-    autocmd InsertLeave * setlocal relativenumber
-    autocmd InsertEnter * setlocal norelativenumber
-  augroup END
-]])
+-- vim.cmd([[
+--   augroup LineNumberToggle
+--     autocmd!
+--     autocmd InsertLeave * setlocal relativenumber
+--     autocmd InsertEnter * setlocal norelativenumber
+--   augroup END
+-- ]])
 
 local highLightClr = "#3e4451"
 
