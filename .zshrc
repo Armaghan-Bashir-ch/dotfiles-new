@@ -123,6 +123,14 @@ zstyle ':fzf-tab:*' fzf-flags \
 # Pressing enter executes the selected completion immediately
 zstyle ':fzf-tab:*' accept-line enter
 
+# Make nvim/vim/ov tab completion show only files (no directories)
+zstyle ':completion:*:nvim:*' file-patterns '*(.)'
+zstyle ':completion:*:vim:*' file-patterns '*(.)'
+zstyle ':completion:*:ov:*' file-patterns '*(.)'
+
+# Ensure cd tab completion shows only directories
+zstyle ':completion:*:cd:*' file-patterns '*(/)'
+
 # ZFF:
 
 if [[ -f ~/zff/zff.sh ]]; then
