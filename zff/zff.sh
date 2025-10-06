@@ -167,6 +167,7 @@ get_zoxide_files() {
 }
 
 # main function (opener)
+# Equivalent to zstyle ':fzf-tab:*' accept-line enter for fzf-tab
 
 zff() {
   local target

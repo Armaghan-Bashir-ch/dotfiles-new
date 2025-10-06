@@ -108,11 +108,20 @@ zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:*' fzf-flags \
-    --color=fg:7,hl:1,hl+:3,border:9,fg+:2,hl+:3,info:3,prompt:2,spinner:1,pointer:8,marker:8,bg:-1 \
-    --bind=tab:accept,btab:preview-up \
-    --pointer="" \
-    --border=rounded \
-    --height=10% \
+    --color=fg:#cdd6f4,bg:-1,hl:#f38ba8,fg+:#cdd6f4,bg+:-1,hl+:#f5c2e7 \
+    --color=info:#cba6f7,prompt:#89b4fa,pointer:#f38ba8,marker:#a6e3a1,spinner:#f9e2af,header:#f38ba8 \
+    --bind=tab:accept,ctrl-j:down,ctrl-k:up,ctrl-space:toggle \
+    --border=sharp \
+    --height=60% \
+    --layout=reverse \
+    --info=right \
+    --header="i use arch (btw)" \
+    --header-first \
+    --margin=1,2 \
+    --padding=1,1 \
+    --cycle
+# Pressing enter executes the selected completion immediately
+zstyle ':fzf-tab:*' accept-line enter
 
 # ZFF:
 
