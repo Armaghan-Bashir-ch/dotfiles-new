@@ -661,10 +661,10 @@ M.general = {
         ["<leader>b8"] = { "<cmd>buffer 8<CR>", "Select buffer 8" },
         ["<leader>b9"] = { "<cmd>buffer 9<CR>", "Select buffer 9" },
         ["<leader>oo"] = { "<cmd>vsplit | term opencode<CR>", "Open opencode" },
-        ["<leader>cc"] = { "<cmd>vsplit | term crush<CR>", "Open Crush" },
-    },
+         ["<leader>cc"] = { "<cmd>vsplit | term crush<CR>", "Open Crush" },
+     },
 
-    v = {
+     v = {
         ["<A-j>"] = { "6j", "Move 6 lines down" },
         ["<A-k>"] = { "6k", "Move 6 lines up" },
         ["<leader>w$"] = {

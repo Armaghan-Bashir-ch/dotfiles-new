@@ -8,34 +8,35 @@ customCommands:
 gui:
   theme:
     activeBorderColor:
-      - '#00ffff'
+      - '#88c0d0'
       - bold
     inactiveBorderColor:
-      - '#0080ff'
-    searchingActiveBorderColor:
-      - '#ff00ff'
-      - bold
+      - '#4c566a'
     optionsTextColor:
-      - '#00ff00'
+      - '#a3be8c'
     selectedLineBgColor:
-      - '#000000'
+      - '#3b4252'
     inactiveViewSelectedLineBgColor:
       - bold
-    cherryPickedCommitFgColor:
-      - '#ffff00'
     cherryPickedCommitBgColor:
-      - '#ff0080'
+      - '#d08770'
+    cherryPickedCommitFgColor:
+      - '#ebcb8b'
     markedBaseCommitFgColor:
-      - '#00ffff'
+      - '#81a1c1'
     markedBaseCommitBgColor:
-      - '#8000ff'
+      - '#b48ead'
     unstagedChangesColor:
-      - '#ff0000'
+      - '#bf616a'
     defaultFgColor:
-      - '#ffffff'
+      - '#eceff4'
+    searchingActiveBorderColor:
+      - '#bf616a'
+      - bold
   skipDiscardChangeWarning: false
-  authorColors:
-    '*': '#7287fd'
+
+authorColors:
+  '*': '#b4befe'
 
 os:
   editor: true
