@@ -9,7 +9,7 @@ configuration {
     drun-display-format:         "{name}";
     window-format:               "{w}{t}";
     font:                        "JetBrainsMono Nerd Font 10";
-    icon-theme: "tela-circle-icon-theme-black";
+                                 icon-theme: "tela-circle-icon-theme-black";
 }
 
 // Main //
