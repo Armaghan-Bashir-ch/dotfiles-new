@@ -256,3 +256,11 @@ vim.api.nvim_create_autocmd("VimEnter", {
         end
     end,
 })
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    callback = function()
+        if vim.bo.filetype == "" then
+            vim.cmd("filetype detect")
+        end
+    end,
+})
