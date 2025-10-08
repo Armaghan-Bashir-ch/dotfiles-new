@@ -42,15 +42,15 @@
     },
 
     "clock": {
-        "format": "  {:%I:%M - %d %a}",
+        "format": "  {:%I:%M %p - %d %a}",
         "tooltip-format": "<tt><big>{calendar}</big></tt>",
         "calendar": {
             "mode": "month",
             "mode-mon-col": 3,
             "format": {
-                "months": "<span color='#87ceeb'><b>{}</b></span>",
-                "weekdays": "<span color='#00ced1'><b>{}</b></span>",
-                "today": "<span color='#9370db'><b>{}</b></span>"
+                "months": "<span color='#ff6347'><b>{}</b></span>",
+                "weekdays": "<span color='#ff6347'><b>{}</b></span>",
+                "today": "<span color='#ffd700'><b>{}</b></span>"
             }
         }
     },
