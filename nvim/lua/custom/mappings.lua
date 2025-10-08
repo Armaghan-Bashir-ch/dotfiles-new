@@ -503,8 +503,8 @@ M.general = {
             end,
             "Open file with xdg-open silently",
         },
-        ["<A-j>"] = { "6jzz", "Move 6 lines down and center carret on screen" },
-        ["<A-k>"] = { "6kzz", "Move 6 lines up and center carret on screen" },
+        ["<A-j>"] = { "8jzz", "Move 6 lines down and center carret on screen" },
+        ["<A-k>"] = { "8kzz", "Move 6 lines up and center carret on screen" },
         ["<A-w>"] = { "6w", "Move 6 words forward" },
         ["<A-b>"] = { "6b", "Move 6 lines backward" },
         ["<A-_>"] = { "6_zz", "Move 6 lines begaining and center carret on screen" },
@@ -661,10 +661,10 @@ M.general = {
         ["<leader>b8"] = { "<cmd>buffer 8<CR>", "Select buffer 8" },
         ["<leader>b9"] = { "<cmd>buffer 9<CR>", "Select buffer 9" },
         ["<leader>oo"] = { "<cmd>vsplit | term opencode<CR>", "Open opencode" },
-         ["<leader>cc"] = { "<cmd>vsplit | term crush<CR>", "Open Crush" },
-     },
+        ["<leader>cc"] = { "<cmd>vsplit | term crush<CR>", "Open Crush" },
+    },
 
-     v = {
+    v = {
         ["<A-j>"] = { "6j", "Move 6 lines down" },
         ["<A-k>"] = { "6k", "Move 6 lines up" },
         ["<leader>w$"] = {
