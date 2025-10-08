@@ -3,6 +3,15 @@ return function()
     local themes = require("telescope.themes")
 
     telescope.setup({
+        defaults = {
+            layout_config = {
+                horizontal = {
+                    width = 0.95,
+                    height = 0.99,
+                    preview_width = 0.7,
+                },
+            },
+        },
         extensions = {
             undo = {},
             ["ui-select"] = themes.get_dropdown({
@@ -14,7 +23,6 @@ return function()
     -- Load Telescope extensions
     telescope.load_extension("undo")
     telescope.load_extension("refactoring")
-    telescope.load_extension("ui-select")
     telescope.load_extension("yank_history")
     telescope.load_extension("fzf")
     telescope.load_extension("textcase")
