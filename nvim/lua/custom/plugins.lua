@@ -1,7 +1,7 @@
 local load_mappings = require("core.utils").load_mappings
 
 local plugins = {
-    -- text editing
+
     {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
@@ -267,9 +267,9 @@ local plugins = {
             delay_after_key = 4,
 
             -- Main mode animation
-            trailing_stiffness = 0.8, -- stiffer (default was 0.45)
+            trailing_stiffness = 1.5, -- stiffer (default was 0.45)
             trailing_exponent = 2.5, -- favor the head even more
-            distance_stop_animating = 0.1, -- stops earlier
+            distance_stop_animating = 0.5, -- stops earlier
 
             -- Insert mode animation (vertical bar cursor)
             stiffness_insert_mode = 0.7,       -- stronger resistance
