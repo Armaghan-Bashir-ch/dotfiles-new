@@ -128,7 +128,7 @@ local plugins = {
         -- optional for icon support
         dependencies = { "nvim-tree/nvim-web-devicons" },
         lazy = false,
-        enabeld = true,
+        enabled = true,
         -- or if using mini.icons/mini.nvim
         -- dependencies = { "nvim-mini/mini.icons" },
         opts = {},
@@ -686,13 +686,6 @@ local plugins = {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
         opts = {
-            menu = {
-                width = 50,
-                height = 10,
-                border = "rounded", -- options: "none", "single", "double", "rounded", "solid", "shadow"
-                row = 0.3, -- float pos (0.0 = top, 1.0 = bottom)
-                col = 0.5, -- float pos (0.0 = left, 1.0 = right)
-            },
             settings = {
                 save_on_toggle = true,
                 project = {
@@ -701,7 +694,7 @@ local plugins = {
                 },
             },
         },
-        keys = require("custom.configs.harpoon"),
+        keys = require("custom.configs.harpoon")(),
     },
 
     --TODO: Custamize the harpoon menu is possible
