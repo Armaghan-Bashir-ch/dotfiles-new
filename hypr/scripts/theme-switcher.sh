@@ -7,17 +7,17 @@
 WALLPAPER_PATH=$(swww query | grep -oP 'image: \K.*')
 
 if [ -z "$WALLPAPER_PATH" ]; then
-    echo "No wallpaper set, using default theme"
+    notify-send "Theme Switcher" "No wallpaper set, using default theme"
     THEME="Catppuccin-Mocha"
 else
     # Extract theme from directory name
     THEME_DIR=$(dirname "$WALLPAPER_PATH")
     THEME=$(basename "$THEME_DIR")
-    
+
     # Validate theme (list of supported themes)
     VALID_THEMES=("Catppuccin-Latte" "Catppuccin-Mocha" "Decay-Green" "Frosted-Glass" "Gruvbox-Retro" "Material-Sakura" "Nordic-Blue" "Rose-Pine" "Synth-Wave" "Tokyo-Night")
     if [[ ! " ${VALID_THEMES[@]} " =~ " ${THEME} " ]]; then
-        echo "Invalid theme '$THEME', using default"
+        notify-send "Theme Switcher" "Invalid theme '$THEME', using default"
         THEME="Catppuccin-Mocha"
     fi
 fi
@@ -47,4 +47,4 @@ fi
 # Reload waybar
 pkill -SIGUSR2 waybar
 
-echo "Switched to $THEME theme"
+notify-send -i "$WALLPAPER_PATH" "Theme Switcher" "Switched to $THEME theme"
