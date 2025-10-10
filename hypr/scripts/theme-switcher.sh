@@ -14,17 +14,48 @@ else
     THEME_DIR=$(dirname "$WALLPAPER_PATH")
     THEME=$(basename "$THEME_DIR")
 
-    # Validate theme (list of supported themes)
-    VALID_THEMES=("Catppuccin-Latte" "Catppuccin-Mocha" "Decay-Green" "Frosted-Glass" "Gruvbox-Retro" "Material-Sakura" "Nordic-Blue" "Rose-Pine" "Synth-Wave" "Tokyo-Night")
-    if [[ ! " ${VALID_THEMES[@]} " =~ " ${THEME} " ]]; then
-        notify-send "Theme Switcher" "Invalid theme '$THEME', using default"
-        THEME="Catppuccin-Mocha"
-    fi
+# Validate theme (list of supported themes)
+VALID_THEMES=("Catppuccin-Latte" "Catppuccin-Mocha" "Decay-Green" "Frosted-Glass" "Gruvbox-Retro" "Material-Sakura" "Nordic-Blue" "Rose-Pine" "Synth-Wave" "Tokyo-Night")
+if [[ ! " ${VALID_THEMES[@]} " =~ " ${THEME} " ]]; then
+    notify-send "Theme Switcher" "Invalid theme '$THEME', using default"
+    THEME="Catppuccin-Mocha"
 fi
+
+# Randomly select waybar theme variant for multi-variant themes
+WAYBAR_THEME="$THEME"
+case "$THEME" in
+    "Catppuccin-Mocha")
+        if [ $((RANDOM % 2)) -eq 0 ]; then
+            WAYBAR_THEME="Catppuccin-Macchiato"
+        fi
+        ;;
+    "Catppuccin-Latte")
+        if [ $((RANDOM % 2)) -eq 0 ]; then
+            WAYBAR_THEME="Catppuccin-Frappe"
+        else
+            WAYBAR_THEME="Catppuccin-Latte"
+        fi
+        ;;
+    "Tokyo-Night")
+        VARIANTS=("Tokyo-Day" "Tokyo-Future" "Tokyo-Moon" "Tokyo-Night" "Tokyo-Storm")
+        WAYBAR_THEME="${VARIANTS[$((RANDOM % 5))]}"
+        ;;
+    "Gruvbox-Retro")
+        VARIANTS=("Gruvbox-Dark" "Gruvbox-Light" "Gruvbox-Retro")
+        WAYBAR_THEME="${VARIANTS[$((RANDOM % 3))]}"
+        ;;
+    "Rose-Pine")
+        VARIANTS=("Rose-Pine" "Rose-Pine-Dawn" "Rose-Pine-Moon")
+        WAYBAR_THEME="${VARIANTS[$((RANDOM % 3))]}"
+        ;;
+    *)
+        WAYBAR_THEME="$THEME"
+        ;;
+esac
 
 # Update waybar style.css
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
-sed -i "s|@import \"themes/.*\.css\";|@import \"themes/$THEME.css\";|" "$WAYBAR_STYLE"
+sed -i "s|@import \"themes/.*\.css\";|@import \"themes/$WAYBAR_THEME.css\";|" "$WAYBAR_STYLE"
 
 # Update rofi styles that import themes
 ROFI_STYLES=("$HOME/.config/rofi/launcher/style.rasi" "$HOME/.config/rofi/wallselect/style.rasi")
@@ -48,3 +79,4 @@ fi
 pkill -SIGUSR2 waybar
 
 notify-send -i "$WALLPAPER_PATH" "Theme Switcher" "Switched to $THEME theme"
+fi
