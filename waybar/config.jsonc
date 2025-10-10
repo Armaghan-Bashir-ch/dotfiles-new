@@ -15,7 +15,7 @@
     "passthrough": false,
     "gtk-layer-shell": true,
 
-	"modules-left": ["custom/padd","custom/l_end","battery","backlight","pulseaudio","custom/r_end","custom/l_end","bluetooth","network","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
+	"modules-left": ["custom/padd","custom/l_end","battery","backlight","pulseaudio","custom/r_end","custom/l_end","pulseaudio#microphone","network","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","custom/todo","custom/r_end","custom/padd"],
 	"modules-right": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd","custom/l_end","custom/ghostty","custom/lockscreen","custom/wallchange","custom/r_end","custom/l_end","cpu","memory","custom/tempinfo","custom/r_end","custom/padd"],
 
