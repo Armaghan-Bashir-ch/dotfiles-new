@@ -126,7 +126,7 @@
     "network": {
         "format-wifi": "󰤨  {essid}",
         "format-ethernet": "󱘖 Wired",
-        "tooltip-format": "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}",
+        "tooltip-format": "羽 {frequency}GHz  {bandwidthUpBytes}  {bandwidthDownBytes}",
         "format-linked": "󱘖 {ifname} (No IP)",
         "format-disconnected": "  Disconnected",
         "format-alt": "󰤨 {signalStrength}%",
