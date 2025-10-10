@@ -1,0 +1,56 @@
+label {
+  font-family: "Jetbrains Mono Nerd Font";
+  font-size: 15pt;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+window#osd {
+  border-radius: 999px;
+  background: linear-gradient(
+    45deg,
+    rgb(20, 20, 20),
+    rgb(10, 10, 10),
+    rgb(0, 0, 0),
+    rgb(5, 5, 5)
+  );
+  box-shadow: none;
+}
+
+window#osd #container {
+  margin: 7px;
+  padding: 5px;
+}
+
+window#osd image,
+window#osd label {
+  color: #cdd6f4; /* Catppuccin-like text color */
+  text-shadow: 0px 0px 4px rgba(180, 180, 255, 0.5);
+  font-weight: 600;
+}
+
+window#osd progressbar:disabled,
+window#osd image:disabled {
+  opacity: 1;
+}
+
+window#osd progressbar {
+  min-height: 6px;
+  border-radius: 999px;
+  background: #fbfbfb;
+  border: none;
+}
+
+window#osd trough {
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background: #7e7e7e;
+}
+
+window#osd progress {
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background: #fafafa;
+  box-shadow: 0px 0px 8px rgba(137, 180, 250, 0.7);
+}
