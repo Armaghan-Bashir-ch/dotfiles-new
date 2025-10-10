@@ -316,6 +316,22 @@ M.general = {
             end,
             "Git commit & push",
         },
+
+        ["<leader>rr"] = {
+            function()
+                if vim.bo.filetype == "sh" then
+                    vim.cmd("!bash %")
+                else
+                    vim.notify("Not a bash script")
+                end
+            end,
+            "Run bash script",
+        },
+
+        ["<M-q>"] = {
+            "<cmd>!chmod +x %<CR>",
+            "Make file executable",
+        },
         -- plugin specifics:
         ["<leader>du"] = { "<cmd>tabnew | DBUIToggle<CR>", "Toggle Dadbod UI in a new tab" },
         ["<leader>db"] = {
