@@ -114,10 +114,24 @@ M.snacks = {
 
         ["<leader>bB"] = {
             function()
-                vim.notify("Opening Dotfiles Repo...")
-                vim.fn.system("xdg-open https://github.com/Armaghan-Bashir-ch/dotfiles-new &")
+                local options = {
+                    { label = "Walls",        url = "https://github.com/Armaghan-Bashir-ch/walls" },
+                    { label = "Dotfiles",     url = "https://github.com/Armaghan-Bashir-ch/dotfiles-new" },
+                    { label = "Dotfiles_Old", url = "https://github.com/Armaghan-Bashir-ch/dotfiles" },
+                }
+                vim.ui.select(options, {
+                    prompt = "Select a repo to open:",
+                    format_item = function(item)
+                        return item.label
+                    end,
+                }, function(choice)
+                    if choice then
+                        vim.notify("Opening " .. choice.label .. "...")
+                        vim.fn.system("xdg-open " .. choice.url .. " &")
+                    end
+                end)
             end,
-            "Open dotfiles repo",
+            "Open repo menu",
         },
 
         ["<leader>nh"] = {
