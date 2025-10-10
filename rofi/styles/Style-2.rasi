@@ -23,8 +23,8 @@ window {
     spacing:                     0px;
     padding:                     0px;
     border-radius:               40px;
-    border-color: @main-fg;
-    border: 2px;
+    border-color: @main-bg;
+border: 2px;
     background-color:            transparent;
 }
 mainbox {
