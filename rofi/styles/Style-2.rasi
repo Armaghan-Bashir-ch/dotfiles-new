@@ -23,6 +23,8 @@ window {
     spacing:                     0px;
     padding:                     0px;
     border-radius:               40px;
+    border-color: @main-fg;
+    border: 2px;
     background-color:            transparent;
 }
 mainbox {
@@ -32,7 +34,7 @@ mainbox {
     orientation:                 vertical;
     children:                    [ "inputbar" , "listbox" ];
     background-color:            transparent;
-    background-image: url("/home/armaghan/backgrounds/Decay-Green/Blue-Lines.png", width);
+    background-image: url("/home/armaghan/backgrounds/Decay-Green/Disk-OrbitSolar.png", width);
 }
 
 
@@ -43,7 +45,7 @@ inputbar {
     padding:                     80px;
     children:                    [ "entry" ];
     background-color:            transparent;
-    background-image: url("/home/armaghan/backgrounds/Decay-Green/Blue-Lines.png", width);
+    background-image: url("/home/armaghan/backgrounds/Decay-Green/Disk-OrbitSolar.png", width);
 }
 
 entry {
