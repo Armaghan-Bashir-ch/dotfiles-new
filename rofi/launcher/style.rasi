@@ -1,2 +1,2 @@
-@import "themes/Decay-Green.rasi"
+@import "/home/armaghan/.config/rofi/themes/Decay-Green.rasi"
 @import "styles/Style-2.rasi"

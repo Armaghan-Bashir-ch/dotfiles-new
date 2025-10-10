@@ -27,4 +27,6 @@ if [ -n "$SELECTED" ]; then
         --transition-type grow \
         --transition-duration 0.5 \
         --transition-fps 144
+    # Switch themes based on wallpaper
+    ~/.config/hypr/scripts/theme-switcher.sh
 fi
