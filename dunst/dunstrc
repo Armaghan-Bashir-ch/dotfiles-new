@@ -81,8 +81,6 @@
 
     max_icon_size = 128
 
-    icon_path = /usr/share/icons/Tela-circle-dracula/16/actions:/usr/share/icons/Tela-circle-dracula/16/apps:/usr/share/icons/Tela-circle-dracula/16/devices:/usr/share/icons/Tela-circle-dracula/16/mimetypes:/usr/share/icons/Tela-circle-dracula/16/panel:/usr/share/icons/Tela-circle-dracula/16/places:/usr/share/icons/Tela-circle-dracula/16/status
-
     sticky_history = yes
 
     history_length = 20
@@ -111,13 +109,13 @@
 [experimental]
     per_monitor_dpi = false
 
-[Type-1]
-    summary = "t1"
-    format = "<b>%a</b>"
+[Type-1] summary = "Volume" format = " %a\n%b"
 
-[Type-2]
-    summary = "t2"
-    format = "<span size="250%">%a</span>\n%b"
+[Type-2] summary = "Music" format = " %a\n%s\n%b"
+
+[Type-3] summary = "System" format = " %a\n%s\n%b"
+
+[Type-4] summary = "Theme" format = " %a\n%s\n%b"
 
 [urgency_low]
     background = "#1e1e2e"
