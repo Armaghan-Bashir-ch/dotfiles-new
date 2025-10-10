@@ -97,7 +97,7 @@ element selected.normal {
 
 element-icon {
     size:                        75%;    
-    border-radius:               15px 15px 0px 0px;
+    border-radius:               25px;
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
