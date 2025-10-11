@@ -117,21 +117,21 @@
 
 [Type-4] summary = "Theme" format = " %a\n%s\n%b"
 
-[urgency_low]
-    background = "#1e1e2e"
-    foreground = "#cdd6f4"
-    frame_color = "#89b4fa"
-    timeout = 5
-
-[urgency_normal]
-    background = "#1e1e2e"
-    foreground = "#cdd6f4"
+[urgency_critical]
+    background = "#f5e0dc"
+    foreground = "#1e1e2e"
     frame_color = "#f38ba8"
+    icon = "~/.config/dunst/icons/arch.png"
+    timeout = 0
+
+[urgency_low]
+    background = "#625CA4"
+    foreground = "#B168A2"
+    frame_color = "#B168A2"
     timeout = 3
 
-[urgency_critical]
-    background = "#1e1e2e"
-    foreground = "#cdd6f4"
-    frame_color = "#fab387"
-    timeout = 0
-    highlight = "#fab387"
+[urgency_normal]
+    background = "#271E58"
+    foreground = "#F4A9AC"
+    frame_color = "#F4A9AC"
+    timeout = 3

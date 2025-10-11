@@ -78,7 +78,7 @@ fi
 # Reload waybar
 pkill -SIGUSR2 waybar
 
-notify-send -i "$WALLPAPER_PATH" "Theme Switcher" "Switched to $THEME theme"
+notify-send -h string:image-path:"$WALLPAPER_PATH" "Theme Switcher" "Switched to $THEME theme"
 
 # Save current theme for other scripts
 echo "$THEME" > ~/.config/hypr/current_theme.txt
