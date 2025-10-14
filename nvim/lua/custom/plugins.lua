@@ -2,63 +2,55 @@ local load_mappings = require("core.utils").load_mappings
 
 local plugins = {
 
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({})
-        end,
-    },
-    {
-        "goolord/alpha-nvim",
-        lazy = false,
-        enabled = false,
-        config = function()
-            local dashboard = require("alpha.themes.dashboard")
-            dashboard.section.header.val = {
-                [[                                                                       ]],
-                [[                                                                     ]],
-                [[       ████ ██████           █████      ██                     ]],
-                [[      ███████████             █████                             ]],
-                [[      █████████ ███████████████████ ███   ███████████   ]],
-                [[     █████████  ███    █████████████ █████ ██████████████   ]],
-                [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
-                [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
-                [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
-                [[                                                                       ]],
-                [[                                                                       ]],
-                [[                                                                       ]],
-            }
-
-            --TODO: Make the dashboard banner centered and bigger so that it fills the entire startup screen
-            --TODO: Find out how the heck was this generated
-
-            dashboard.section.buttons.val = {
-                dashboard.button("f", "󰈞  Find File", ":Telescope find_files<CR>"),
-                dashboard.button("e", "  New File", ":ene <BAR> startinsert <CR>"),
-                dashboard.button("q", "  Quit or :q! like a real man", ":qa<CR>"),
-            }
-
-            --TODO: Choose between which buttons to show
-
-            dashboard.section.header.opts = {
-                hl = "DashboardHeader",
-                position = "center",
-            }
-
-            dashboard.section.footer.val = "Welcome back nerd!"
-            dashboard.opts.opts.noautocmd = true
-
-            require("alpha").setup(dashboard.opts)
-            vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#fce5b0", bold = true })
-        end,
-
-        --WARN: This makes it so that telescope is used for everything, like: themes, text searching, files, etc...
-
-        --TODO: Custamize the telescope interface
-    },
-
+    -- {
+    --     "goolord/alpha-nvim",
+    --     lazy = false,
+    --     enabled = false,
+    --     config = function()
+    --         local dashboard = require("alpha.themes.dashboard")
+    --         dashboard.section.header.val = {
+    --             [[                                                                       ]],
+    --             [[                                                                     ]],
+    --             [[       ████ ██████           █████      ██                     ]],
+    --             [[      ███████████             █████                             ]],
+    --             [[      █████████ ███████████████████ ███   ███████████   ]],
+    --             [[     █████████  ███    █████████████ █████ ██████████████   ]],
+    --             [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
+    --             [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
+    --             [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
+    --             [[                                                                       ]],
+    --             [[                                                                       ]],
+    --             [[                                                                       ]],
+    --         }
+    --
+    --         --TODO: Make the dashboard banner centered and bigger so that it fills the entire startup screen
+    --         --TODO: Find out how the heck was this generated
+    --
+    --         dashboard.section.buttons.val = {
+    --             dashboard.button("f", "󰈞  Find File", ":Telescope find_files<CR>"),
+    --             dashboard.button("e", "  New File", ":ene <BAR> startinsert <CR>"),
+    --             dashboard.button("q", "  Quit or :q! like a real man", ":qa<CR>"),
+    --         }
+    --
+    --         --TODO: Choose between which buttons to show
+    --
+    --         dashboard.section.header.opts = {
+    --             hl = "DashboardHeader",
+    --             position = "center",
+    --         }
+    --
+    --         dashboard.section.footer.val = "Welcome back nerd!"
+    --         dashboard.opts.opts.noautocmd = true
+    --
+    --         require("alpha").setup(dashboard.opts)
+    --         vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#fce5b0", bold = true })
+    --     end,
+    --
+    --     --WARN: This makes it so that telescope is used for everything, like: themes, text searching, files, etc...
+    --
+    --     --TODO: Custamize the telescope interface
+    -- },
+    --
     {
         "rasulomaroff/reactive.nvim",
         enabled = false,
