@@ -24,6 +24,7 @@ keybind = alt+7=unbind
 keybind = alt+8=unbind
 keybind = alt+9=unbind
 keybind = alt+0=unbind
+keybind = ctrl+j=unbind
 
 # Unbinding CTRL+(1-9), just in-case
 
