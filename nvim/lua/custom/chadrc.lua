@@ -16,7 +16,7 @@ M.ui = {
 
     statusline = {
         theme = "default",
-        separator_style = "round",
+        separator_style = "arrow",
         overriden_modules = nil,
     },
     tabufline = {
