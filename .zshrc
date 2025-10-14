@@ -200,9 +200,10 @@ zff_widget() {
 
 # FZF directory widget
 cd_fzf() {
-  local dir=$(fd --type d --exclude .git . $HOME | fzf --height 40% --reverse --border)
+  local dir=$(fd --hidden --type d --exclude .git . $HOME | fzf --height 40% --reverse --border)
   if [[ -n $dir ]]; then
     cd "$dir"
+    zle accept-line
     zle reset-prompt
   fi
 }
