@@ -158,7 +158,6 @@ bindkey '^N' cdi_widget
 
 export FZF_DEFAULT_OPTS="
     --height=100%        \
-    --layout=reverse    \
     --no-border            \
     --margin=1,5        \
     --padding=1,2       \
@@ -198,3 +197,14 @@ zff_widget() {
   zff
   zle reset-prompt
 }
+
+# FZF directory widget
+cd_fzf() {
+  local dir=$(fd --type d --exclude .git . $HOME | fzf --height 40% --reverse --border)
+  if [[ -n $dir ]]; then
+    cd "$dir"
+    zle reset-prompt
+  fi
+}
+zle -N cd_fzf
+bindkey '^J' cd_fzf
