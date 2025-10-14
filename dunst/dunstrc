@@ -121,7 +121,6 @@
     background = "#f5e0dc"
     foreground = "#1e1e2e"
     frame_color = "#f38ba8"
-    icon = "~/.config/dunst/icons/arch.png"
     timeout = 0
 
 [urgency_low]
