@@ -13,6 +13,7 @@ else
     # Extract theme from directory name
     THEME_DIR=$(dirname "$WALLPAPER_PATH")
     THEME=$(basename "$THEME_DIR")
+    WALLPAPER_NAME=$(basename "$WALLPAPER_PATH")
 
 # Validate theme (list of supported themes)
 VALID_THEMES=("Catppuccin-Latte" "Catppuccin-Mocha" "Decay-Green" "Frosted-Glass" "Gruvbox-Retro" "Material-Sakura" "Nordic-Blue" "Rose-Pine" "Synth-Wave" "Tokyo-Night")
@@ -21,32 +22,90 @@ if [[ ! " ${VALID_THEMES[@]} " =~ " ${THEME} " ]]; then
     THEME="Catppuccin-Mocha"
 fi
 
-# Randomly select waybar theme variant for multi-variant themes
+# Select waybar theme based on specific wallpapers
 WAYBAR_THEME="$THEME"
 case "$THEME" in
+    "Catppuccin-Latte")
+        WAYBAR_THEME="Catppuccin-Latte"
+        ;;
     "Catppuccin-Mocha")
-        if [ $((RANDOM % 2)) -eq 0 ]; then
+        LIGHT_WALLPAPERS=("Up-InSky.jpg" "ColorfulRoad-Design.jpg" "StreeView-FromRoofTop.png" "Abandoned-Town.jpg" "DarkWinter-Forest.jpg" "Aesthetic-FuturisticTown.jpg" "Sunset-Evening.png")
+        if [[ " ${LIGHT_WALLPAPERS[@]} " =~ " ${WALLPAPER_NAME} " ]]; then
+            WAYBAR_THEME="Catppuccin-Frappe"
+        else
             WAYBAR_THEME="Catppuccin-Macchiato"
         fi
         ;;
+    "Tokyo-Night")
+        if [ "$WALLPAPER_NAME" = "Night-Cafe.jpg" ]; then
+            VARIANTS=("Tokyo-Future" "Tokyo-Moon" "Tokyo-Storm")
+            WAYBAR_THEME="${VARIANTS[$((RANDOM % 3))]}"
+        else
+            WAYBAR_THEME="Tokyo-Day"
+        fi
+        ;;
+    "Gruvbox-Retro")
+        LIGHT_WALLPAPERS=("Morning-StreetView.png" "ChillBedroom-Cyan.png" "PrettyGreen-Town.jpg" "Town-in-Progress.jpg")
+        if [[ " ${LIGHT_WALLPAPERS[@]} " =~ " ${WALLPAPER_NAME} " ]]; then
+            WAYBAR_THEME="Gruvbox-Light"
+        else
+            VARIANTS=("Gruvbox-Dark" "Gruvbox-Retro")
+            WAYBAR_THEME="${VARIANTS[$((RANDOM % 2))]}"
+        fi
+        ;;
+    "Rose-Pine")
+        LIGHT_WALLPAPERS=("SunSet-AnimatedForest.png" "Japanese-WavesFlow.jpg" "Warm-Setup.jpeg" "Reflected-Ocean.jpg")
+        if [[ " ${LIGHT_WALLPAPERS[@]} " =~ " ${WALLPAPER_NAME} " ]]; then
+            WAYBAR_THEME="Rose-Pine-Dawn"
+        else
+            VARIANTS=("Rose-Pine" "Rose-Pine-Moon")
+            WAYBAR_THEME="${VARIANTS[$((RANDOM % 2))]}"
+        fi
+        ;;
+    *)
+        WAYBAR_THEME="$THEME"
+        ;;
+esac
+
+# Select waybar theme based on specific wallpapers
+WAYBAR_THEME="$THEME"
+case "$THEME" in
     "Catppuccin-Latte")
-        if [ $((RANDOM % 2)) -eq 0 ]; then
+        WAYBAR_THEME="Catppuccin-Latte"
+        ;;
+    "Catppuccin-Mocha")
+        LIGHT_WALLPAPERS=("Up-InSky.jpg" "ColorfulRoad-Design.jpg" "StreeView-FromRoofTop.png" "Abandoned-Town.jpg" "DarkWinter-Forest.jpg" "Aesthetic-FuturisticTown.jpg" "Sunset-Evening.png")
+        if [[ " ${LIGHT_WALLPAPERS[@]} " =~ " ${WALLPAPER_NAME} " ]]; then
             WAYBAR_THEME="Catppuccin-Frappe"
         else
-            WAYBAR_THEME="Catppuccin-Latte"
+            WAYBAR_THEME="Catppuccin-Macchiato"
         fi
         ;;
     "Tokyo-Night")
-        VARIANTS=("Tokyo-Day" "Tokyo-Future" "Tokyo-Moon" "Tokyo-Night" "Tokyo-Storm")
-        WAYBAR_THEME="${VARIANTS[$((RANDOM % 5))]}"
+        if [ "$WALLPAPER_NAME" = "Night-Cafe.jpg" ]; then
+            VARIANTS=("Tokyo-Future" "Tokyo-Moon" "Tokyo-Storm")
+            WAYBAR_THEME="${VARIANTS[$((RANDOM % 3))]}"
+        else
+            WAYBAR_THEME="Tokyo-Day"
+        fi
         ;;
     "Gruvbox-Retro")
-        VARIANTS=("Gruvbox-Dark" "Gruvbox-Light" "Gruvbox-Retro")
-        WAYBAR_THEME="${VARIANTS[$((RANDOM % 3))]}"
+        LIGHT_WALLPAPERS=("Morning-StreetView.png" "ChillBedroom-Cyan.png" "PrettyGreen-Town.jpg" "Town-in-Progress.jpg")
+        if [[ " ${LIGHT_WALLPAPERS[@]} " =~ " ${WALLPAPER_NAME} " ]]; then
+            WAYBAR_THEME="Gruvbox-Light"
+        else
+            VARIANTS=("Gruvbox-Dark" "Gruvbox-Retro")
+            WAYBAR_THEME="${VARIANTS[$((RANDOM % 2))]}"
+        fi
         ;;
     "Rose-Pine")
-        VARIANTS=("Rose-Pine" "Rose-Pine-Dawn" "Rose-Pine-Moon")
-        WAYBAR_THEME="${VARIANTS[$((RANDOM % 3))]}"
+        LIGHT_WALLPAPERS=("SunSet-AnimatedForest.png" "Japanese-WavesFlow.jpg" "Warm-Setup.jpeg" "Reflected-Ocean.jpg")
+        if [[ " ${LIGHT_WALLPAPERS[@]} " =~ " ${WALLPAPER_NAME} " ]]; then
+            WAYBAR_THEME="Rose-Pine-Dawn"
+        else
+            VARIANTS=("Rose-Pine" "Rose-Pine-Moon")
+            WAYBAR_THEME="${VARIANTS[$((RANDOM % 2))]}"
+        fi
         ;;
     *)
         WAYBAR_THEME="$THEME"
