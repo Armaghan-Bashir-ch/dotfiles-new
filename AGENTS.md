@@ -25,6 +25,7 @@ Every single file has been symlinked to their counter-part/original file/dir/scr
 - scripts for any tool will be available inside of `scripts` dir in every single dir for any tool
 - Use spell check in bash scripts
 - Use bullet points to explain/describe anything
+- Do not run bash scripts, unless I ask you to
 
 ### Nvim
 
