@@ -38,33 +38,33 @@ button:hover {
 }
 
 button:hover#lock {
-  border-radius: 25px 0px 0px 25px;
-  margin: 0px 0px 0px 0px;
+  border-radius: 25px;
+  margin: 0px;
 }
 
 button:hover#logout {
-  border-radius: 0px;
-  margin: 0px 0px 0px 0px;
+  border-radius: 25px;
+  margin: 0px;
 }
 
 button:hover#suspend {
-  border-radius: 0px;
-  margin: 0px 0px 0px 0px;
+  border-radius: 25px;
+  margin: 0px;
 }
 
 button:hover#shutdown {
-  border-radius: 0px;
-  margin: 0px 0px 0px 0px;
+  border-radius: 25px;
+  margin: 0px;
 }
 
 button:hover#hibernate {
-  border-radius: 0px;
-  margin: 0px 0px 0px 0px;
+  border-radius: 25px;
+  margin: 0px;
 }
 
 button:hover#reboot {
-  border-radius: 0px 25px 25px 0px;
-  margin: 0px 0px 0px 0px;
+  border-radius: 25px;
+  margin: 0px;
 }
 
 #lock {
@@ -73,8 +73,8 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/lock.png"),
     url("/usr/local/share/wlogout/icons/lock.png")
   );
-  border-radius: 25px 0px 0px 25px;
-  margin: 0px 0px 0px 0px;
+  border-radius: 15px 0px 0px 15px;
+  margin: 0px;
 }
 
 #logout {
@@ -83,8 +83,7 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/logout.png"),
     url("/usr/local/share/wlogout/icons/logout.png")
   );
-  border-radius: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
+  margin: 0px;
 }
 
 #suspend {
@@ -93,8 +92,7 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/suspend.png"),
     url("/usr/local/share/wlogout/icons/suspend.png")
   );
-  border-radius: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
+  margin: 0px;
 }
 
 #shutdown {
@@ -103,8 +101,7 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/shutdown.png"),
     url("/usr/local/share/wlogout/icons/shutdown.png")
   );
-  border-radius: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
+  margin: 0px;
 }
 
 #hibernate {
@@ -113,8 +110,7 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/hibernate.png"),
     url("/usr/local/share/wlogout/icons/hibernate.png")
   );
-  border-radius: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
+  margin: 0px;
 }
 
 #reboot {
@@ -123,6 +119,6 @@ button:hover#reboot {
     url("/usr/share/wlogout/icons/reboot.png"),
     url("/usr/local/share/wlogout/icons/reboot.png")
   );
-  border-radius: 0px 25px 25px 0px;
-  margin: 0px 0px 0px 0px;
+  border-radius: 0px 15px 15px 0px;
+  margin: 0px;
 }
