@@ -33,6 +33,7 @@ alias cdi="zi"
 alias top='btop'
 alias setcursor='hyprctl setcursor "Bibata-Modern-Ice" 20'
 alias count='find . -type f | wc -l'
+alias ll='ls -lah'
 
 # Making CONTROL+RIGHT/LEFT ARROW keys work in terminal:
 
