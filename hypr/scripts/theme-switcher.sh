@@ -84,13 +84,29 @@ for STYLE in "${ROFI_STYLES[@]}"; do
     fi
 done
 
-# Update rofi launcher background-image to current wallpaper
-ROFI_STYLE2="$HOME/.config/rofi/styles/Style-2.rasi"
-if [ -f "$ROFI_STYLE2" ] && [ -n "$WALLPAPER_PATH" ]; then
+# Randomly switch launcher between Style-1 and Style-2
+LAUNCHER_STYLE_FILE="$HOME/.config/rofi/launcher/style.rasi"
+if [ -f "$LAUNCHER_STYLE_FILE" ]; then
+    RANDOM_STYLE=$((RANDOM % 2))
+    if [ $RANDOM_STYLE -eq 0 ]; then
+        STYLE_FILE="Style-1.rasi"
+    else
+        STYLE_FILE="Style-2.rasi"
+    fi
+    sed -i "s|@import \"styles/.*\.rasi\"|@import \"styles/$STYLE_FILE\"|" "$LAUNCHER_STYLE_FILE"
+fi
+
+# Update rofi launcher background-image to current wallpaper in both styles
+ROFI_STYLES_UPDATE=("$HOME/.config/rofi/styles/Style-1.rasi" "$HOME/.config/rofi/styles/Style-2.rasi")
+if [ -n "$WALLPAPER_PATH" ]; then
     # Escape path for sed
     ESCAPED_PATH=$(printf '%s\n' "$WALLPAPER_PATH" | sed 's/[[\.*^$()+?{|]/\\&/g')
-    sed -i "s|url(\"[^\"]*\", height)|url(\"$ESCAPED_PATH\", height)|g" "$ROFI_STYLE2"
-    sed -i "s|url(\"[^\"]*\", width)|url(\"$ESCAPED_PATH\", width)|g" "$ROFI_STYLE2"
+    for STYLE_FILE in "${ROFI_STYLES_UPDATE[@]}"; do
+        if [ -f "$STYLE_FILE" ]; then
+            sed -i "s|url(\"[^\"]*\", height)|url(\"$ESCAPED_PATH\", height)|g" "$STYLE_FILE"
+            sed -i "s|url(\"[^\"]*\", width)|url(\"$ESCAPED_PATH\", width)|g" "$STYLE_FILE"
+        fi
+    done
 fi
 
 # Reload waybar
