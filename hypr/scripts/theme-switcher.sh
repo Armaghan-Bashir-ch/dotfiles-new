@@ -67,54 +67,13 @@ case "$THEME" in
         ;;
 esac
 
-# Select waybar theme based on specific wallpapers
-WAYBAR_THEME="$THEME"
-case "$THEME" in
-    "Catppuccin-Latte")
-        WAYBAR_THEME="Catppuccin-Latte"
-        ;;
-    "Catppuccin-Mocha")
-        LIGHT_WALLPAPERS=("Up-InSky.jpg" "ColorfulRoad-Design.jpg" "StreeView-FromRoofTop.png" "Abandoned-Town.jpg" "DarkWinter-Forest.jpg" "Aesthetic-FuturisticTown.jpg" "Sunset-Evening.png")
-        if [[ " ${LIGHT_WALLPAPERS[@]} " =~ " ${WALLPAPER_NAME} " ]]; then
-            WAYBAR_THEME="Catppuccin-Frappe"
-        else
-            WAYBAR_THEME="Catppuccin-Macchiato"
-        fi
-        ;;
-    "Tokyo-Night")
-        if [ "$WALLPAPER_NAME" = "Night-Cafe.jpg" ]; then
-            VARIANTS=("Tokyo-Future" "Tokyo-Moon" "Tokyo-Storm")
-            WAYBAR_THEME="${VARIANTS[$((RANDOM % 3))]}"
-        else
-            WAYBAR_THEME="Tokyo-Day"
-        fi
-        ;;
-    "Gruvbox-Retro")
-        LIGHT_WALLPAPERS=("Morning-StreetView.png" "ChillBedroom-Cyan.png" "PrettyGreen-Town.jpg" "Town-in-Progress.jpg")
-        if [[ " ${LIGHT_WALLPAPERS[@]} " =~ " ${WALLPAPER_NAME} " ]]; then
-            WAYBAR_THEME="Gruvbox-Light"
-        else
-            VARIANTS=("Gruvbox-Dark" "Gruvbox-Retro")
-            WAYBAR_THEME="${VARIANTS[$((RANDOM % 2))]}"
-        fi
-        ;;
-    "Rose-Pine")
-        LIGHT_WALLPAPERS=("SunSet-AnimatedForest.png" "Japanese-WavesFlow.jpg" "Warm-Setup.jpeg" "Reflected-Ocean.jpg")
-        if [[ " ${LIGHT_WALLPAPERS[@]} " =~ " ${WALLPAPER_NAME} " ]]; then
-            WAYBAR_THEME="Rose-Pine-Dawn"
-        else
-            VARIANTS=("Rose-Pine" "Rose-Pine-Moon")
-            WAYBAR_THEME="${VARIANTS[$((RANDOM % 2))]}"
-        fi
-        ;;
-    *)
-        WAYBAR_THEME="$THEME"
-        ;;
-esac
-
 # Update waybar style.css
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
 sed -i "s|@import \"themes/.*\.css\";|@import \"themes/$WAYBAR_THEME.css\";|" "$WAYBAR_STYLE"
+
+# Update wlogout style.css
+WLOGOUT_STYLE="$HOME/.config/wlogout/style.css"
+sed -i "s|@import \"/home/armaghan/.config/waybar/themes/.*\.css\";|@import \"/home/armaghan/.config/waybar/themes/$WAYBAR_THEME.css\";|" "$WLOGOUT_STYLE"
 
 # Update rofi styles that import themes
 ROFI_STYLES=("$HOME/.config/rofi/launcher/style.rasi" "$HOME/.config/rofi/wallselect/style.rasi")
