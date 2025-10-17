@@ -73,18 +73,18 @@ echo -ne '\e[4 q'
 
 # Syntax highlighting with custom colors:
 
-ZSH_HIGHLIGHT_STYLES[comment]='fg=#626880,italic'       
-ZSH_HIGHLIGHT_STYLES[command]='fg=#7aa2f7,bold'          
-ZSH_HIGHLIGHT_STYLES[function]='fg=#bb9af7,bold'     
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=#7dcfff,bold'       
-ZSH_HIGHLIGHT_STYLES[alias]='fg=#4fd6be,underline'    
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=#ffb86c,bold' 
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=#ffb86c'            
+ZSH_HIGHLIGHT_STYLES[comment]='fg=#565f89,italic'     
+ZSH_HIGHLIGHT_STYLES[command]='fg=#7aa2f7,bold'
+ZSH_HIGHLIGHT_STYLES[function]='fg=#bb9af7,bold'   
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=#7dcfff,bold'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=#73daca,underline'  
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=#ff9e64,bold'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=#ff9e64'          
 ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=#89ddff,bold'
-ZSH_HIGHLIGHT_STYLES[argument]='fg=#c0caf5'            
-ZSH_HIGHLIGHT_STYLES[path]='fg=#9ece6a,bold'            
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#f7768e,bold'    
-ZSH_HIGHLIGHT_STYLES[default]='fg=#c0caf5'                
+ZSH_HIGHLIGHT_STYLES[argument]='fg=#c0caf5'          
+ZSH_HIGHLIGHT_STYLES[path]='fg=#9ece6a,bold'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=#f7768e,bold'  
+ZSH_HIGHLIGHT_STYLES[default]='fg=#c0caf5'
 
 autoload -U compinit; compinit
 source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
