@@ -181,7 +181,7 @@ fzf-history-widget() {
         --pointer="" \
         --preview-window=right:60%:wrap \
         --layout=reverse-list \
-        --height 10% | sed 's/^[0-9 \t]*//')
+        --height 100% | sed 's/^[0-9 \t]*//')
     CURSOR=$#BUFFER
     zle redisplay
     zle reset-prompt
@@ -201,7 +201,7 @@ zff_widget() {
 
 # FZF directory widget
 cd_fzf() {
-  local dir=$(fd --hidden --type d --exclude .git . $HOME | fzf --height 40% --reverse --border)
+  local dir=$(fd --hidden --type d --exclude .git . $HOME | fzf --height 100% --reverse --border)
   if [[ -n $dir ]]; then
     cd "$dir"
     zle accept-line
@@ -210,3 +210,16 @@ cd_fzf() {
 }
 zle -N cd_fzf
 bindkey '^J' cd_fzf
+
+# Ripgrep + FZF function
+rgf() {
+  local file
+  file=$(rg --files | fzf --preview 'bat --style=numbers --color=always {} || cat {}' --bind 'enter:become($EDITOR {})')
+  if [[ -n $file ]]; then
+    $EDITOR $file
+  fi
+}
+
+# Bind Ctrl+G to rgf
+zle -N rgf
+bindkey '^G' rgf
