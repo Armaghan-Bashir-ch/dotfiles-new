@@ -6,28 +6,30 @@ cd ~
 git clone https://aur.archlinux.gsettings set org/yay.git && cd yay && makepkg -si
 git clone https://aur.archlinux.gsettings set org/paru.git && cd paru && makepkg -si
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-sudo pacman -S eza oh-my-zsh hyprpicker zsh fzf ghostty zen-browser-bin neovim alacritty dunst lsd rofi-wayland waybar yazi wlogout btop npm python3 fastfetch obsidian lazygit zoxide fd vlc wev man wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake crush docker brightnessctl figlet tmux imagemagick hyprlock swww spotify imv lolcat bat ripgrep wl-clipboard 
-yay -S swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli
+sudo pacman -S --noconfirm hyprshot eza oh-my-zsh hyprpicker zsh fzf ghostty zen-browser-bin neovim alacritty dunst lsd rofi-wayland waybar yazi wlogout btop npm python3 fastfetch obsidian lazygit zoxide fd vlc wev man wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake crush docker brightnessctl figlet tmux imagemagick hyprlock swww spotify imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator tty-clock
+sudo pacman -Rns --noconfirm nano wofi
+yay -S --noconfirm nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
-git clone https://github.com/Armaghan-Bashir-ch/dotfiles-new ~/.config
 git clone https://github.com/Armaghan-Bashir-ch/walls ~/backgrounds/
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 nvim --headless +Lazy sync +qa
+yay -S ttf-font-awesome
 mv ~/.config/.zshrc ~/.zshrc
 mv ~/.config/.tmux.conf ~/.tmux.conf
 mv ~/.config/.pk10k.zsh ~/.pk10k.zsh
+cp -r ~/.config/zff ~/.zff
 mkdir -p "home/armaghan/Obsidian Vault/.obsidian/snippets"
 cp -r ~/.config/obsidian-snippets "home/armaghan/Obsidian Vault/.obsidian/snippets"
 (chsh -s $(which zsh))
+swww-daemon &
+sudo pacman -Sc --noconfirm
+yay -Sc --noconfirm
+hyprctl setcursor "Bibata-Modern-Ice" 18
 
 # Setting up
 
-chmod +x hypr/scripts/pgdown-to-rightarrow.sh
-chmod +x hypr/scripts/select-to-line-start.sh
-chmod +x hypr/scripts/startup_apps.sh
-chmod +x hypr/scripts/tempinfo.sh
-chmod +x hypr/scripts/theme-switcher.sh
-chmod +x hypr/scripts/tty-clock.sh
+cd ~/.config/hypr/scripts/
+chmod +x *.sh
 chmod +x rofi/clipboard/launcher.sh
 chmod +x rofi/shortcuts/script.sh
 chmod +x rofi/wallselect/script.sh
@@ -41,9 +43,6 @@ spicetify config current_theme StarryNight
 spicetify config color_scheme Forest
 spicetify apply
 fc-cache -fv
-yay -S nerd-fonts-cascadia-code
-yay -S nerd-fonts-jetbrains-mono
-yay -S ttf-font-awesome
 gsettings set org.gnome.desktop.interface accent-color 'blue'
 gsettings set org.gnome.desktop.interface avatar-directories @as []
 gsettings set org.gnome.desktop.interface can-change-accels false
@@ -89,6 +88,10 @@ gsettings set org.gnome.desktop.interface toolbar-detachable false
 gsettings set org.gnome.desktop.interface toolbar-icons-size 'large'
 gsettings set org.gnome.desktop.interface toolbar-style 'both-horiz'
 gsettings set org.gnome.desktop.interface toolkit-accessibility false
+cd ~
+mkdir -p media books Downloads armaghan@work
+cd media
+mkdir -p tvShows Movies Others
 
 # Npm installing
 
@@ -110,9 +113,9 @@ ln -s ~/dotfiles/wlogout ~/.config/wlogout
 cp -r ~/.config/yazi . 
 rm -rf ~/.config/yazi 
 ln -s ~/dotfiles/yazi ~/.config/yazi
-cp -r ~/.config/zff . 
+mv ~/.config/zff . 
 rm -rf ~/.config/zff 
-ln -s ~/dotfiles/zff ~/.config/zff
+ln -s ~/dotfiles/zff ~/.zff
 cp ~/.zshrc . 
 rm ~/.zshrc 
 ln -s ~/dotfiles/.zshrc ~/.zshrc
@@ -153,7 +156,9 @@ ln -s ~/dotfiles/waybar ~/.config/waybar
 cp -r ~/.config/wlogout . 
 rm -rf ~/.config/wlogout 
 ln -s ~/dotfiles/wlogout ~/.config/wlogout
-cp -r ~/.config/alacritty . rm -rf ~/.config/alacritty ln -s ~/dotfiles/alacritty ~/.config/alacritty
+cp -r ~/.config/alacritty . 
+rm -rf ~/.config/alacritty 
+ln -s ~/dotfiles/alacritty ~/.config/alacritty
 cp -r ~/.config/btop . 
 rm -rf ~/.config/btop 
 ln -s ~/dotfiles/btop ~/.config/btop
