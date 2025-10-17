@@ -1,3 +1,12 @@
+filekinds:
+  normal:
+    foreground: 14
+  directory:
+    foreground: 43
+  symlink:
+    foreground: Cyan
+  executable:
+    foreground: Green
 filenames:
   # Just change the icon glyph
   hypr: {icon: {glyph: ""}}
@@ -76,7 +85,7 @@ filenames:
   .n8n: {icon: {glyph: ""}}
   usr: {icon: {glyph: ""}}
   lsd: {icon: {glyph: ""}}
-  .crush: {filename: {foreground: Red}, icon: {glyph: ""}}
+  .crush: {icon: {glyph: ""}}
   crush: {icon: {glyph: ""}}
   opencode: {icon: {glyph: ""}}
   btop: {icon: {glyph: ""}}
@@ -87,3 +96,5 @@ filenames:
   yazi: {icon: {glyph: "󱧶"}}
   nvim: {icon: {glyph: ""}}
   eza: {icon: {glyph: ""}}
+extensions:
+  md: {icon: {glyph: "", style: {foreground: Yellow}}, filename: {foreground: Yellow, is_underline: true}}

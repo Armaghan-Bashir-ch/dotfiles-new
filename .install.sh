@@ -6,7 +6,7 @@ cd ~
 git clone https://aur.archlinux.gsettings set org/yay.git && cd yay && makepkg -si
 git clone https://aur.archlinux.gsettings set org/paru.git && cd paru && makepkg -si
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-sudo pacman -S --noconfirm hyprshot tldr eza oh-my-zsh hyprpicker zsh fzf ghostty zen-browser-bin neovim alacritty dunst lsd rofi-wayland waybar yazi btop npm python3 fastfetch obsidian lazygit zoxide fd vlc wev man wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake crush docker brightnessctl figlet tmux imagemagick hyprlock swww spotify imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator tty-clock
+sudo pacman -S --noconfirm hyprshot tldr eza oh-my-zsh hyprpicker zsh fzf ghostty zen-browser-bin neovim alacritty dunst eza rofi-wayland waybar yazi btop npm python3 fastfetch obsidian lazygit zoxide fd vlc wev man wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake crush docker brightnessctl figlet tmux imagemagick hyprlock swww spotify imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator tty-clock
 sudo pacman -Rns --noconfirm nano wofi
 yay -S --noconfirm wlogout nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes ttf-font-awesome
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
