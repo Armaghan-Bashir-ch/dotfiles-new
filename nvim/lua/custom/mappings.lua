@@ -366,13 +366,13 @@ M.general = {
             "Clear timber log statements in current buffer",
         },
 
-        -- remaps for tabs
-        ["<leader>tn"] = { "<cmd>tabnext<CR>", "Go to next tab" },
-        ["<leader>tx"] = { "<cmd>tabclose<CR>", "Go to next tab" },
-        ["<leader>tp"] = { "<cmd>tabprevious<CR>", "Go to previous tab" },
-        ["<leader>t1"] = { "<cmd>tabn 1<CR>", "Go to tab 1" },
-        ["<leader>t2"] = { "<cmd>tabn 2<CR>", "Go to tab 2" },
-        ["<leader>t3"] = { "<cmd>tabn 2<CR>", "Go to tab 3" },
+        -- remaps for tabs, not needed since I use harpoon, and don't use tabs
+        -- ["<leader>tn"] = { "<cmd>tabnext<CR>", "Go to next tab" },
+        -- ["<leader>tx"] = { "<cmd>tabclose<CR>", "Go to next tab" },
+        -- ["<leader>tp"] = { "<cmd>tabprevious<CR>", "Go to previous tab" },
+        -- ["<leader>t1"] = { "<cmd>tabn 1<CR>", "Go to tab 1" },
+        -- ["<leader>t2"] = { "<cmd>tabn 2<CR>", "Go to tab 2" },
+        -- ["<leader>t3"] = { "<cmd>tabn 2<CR>", "Go to tab 3" },
 
         ["<leader>tdg"] = {
             function()
