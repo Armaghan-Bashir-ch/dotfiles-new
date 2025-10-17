@@ -6,14 +6,14 @@ cd ~
 git clone https://aur.archlinux.gsettings set org/yay.git && cd yay && makepkg -si
 git clone https://aur.archlinux.gsettings set org/paru.git && cd paru && makepkg -si
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-sudo pacman -S --noconfirm hyprshot eza oh-my-zsh hyprpicker zsh fzf ghostty zen-browser-bin neovim alacritty dunst lsd rofi-wayland waybar yazi wlogout btop npm python3 fastfetch obsidian lazygit zoxide fd vlc wev man wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake crush docker brightnessctl figlet tmux imagemagick hyprlock swww spotify imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator tty-clock
+sudo pacman -S --noconfirm hyprshot tldr eza oh-my-zsh hyprpicker zsh fzf ghostty zen-browser-bin neovim alacritty dunst lsd rofi-wayland waybar yazi btop npm python3 fastfetch obsidian lazygit zoxide fd vlc wev man wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake crush docker brightnessctl figlet tmux imagemagick hyprlock swww spotify imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator tty-clock
 sudo pacman -Rns --noconfirm nano wofi
-yay -S --noconfirm nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes
+yay -S --noconfirm wlogout nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes ttf-font-awesome
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
 git clone https://github.com/Armaghan-Bashir-ch/walls ~/backgrounds/
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab/
 nvim --headless +Lazy sync +qa
-yay -S ttf-font-awesome
 mv ~/.config/.zshrc ~/.zshrc
 mv ~/.config/.tmux.conf ~/.tmux.conf
 mv ~/.config/.pk10k.zsh ~/.pk10k.zsh
@@ -153,9 +153,6 @@ ln -s ~/dotfiles/swayosd ~/.config/swayosd
 cp -r ~/.config/waybar . 
 rm -rf ~/.config/waybar 
 ln -s ~/dotfiles/waybar ~/.config/waybar
-cp -r ~/.config/wlogout . 
-rm -rf ~/.config/wlogout 
-ln -s ~/dotfiles/wlogout ~/.config/wlogout
 cp -r ~/.config/alacritty . 
 rm -rf ~/.config/alacritty 
 ln -s ~/dotfiles/alacritty ~/.config/alacritty

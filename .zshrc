@@ -28,12 +28,16 @@ alias ov='nvim'
 alias vim='nvim'
 alias matrix='cmatrix -C red'
 alias cd="z"
-alias ls="lsd -A"
+alias ls="eza -A -a --icons --group-directories-first"
 alias cdi="zi"
 alias top='btop'
 alias setcursor='hyprctl setcursor "Bibata-Modern-Ice" 20'
 alias count='find . -type f | wc -l'
-alias ll='ls -lah'
+alias ll='eza -lah'
+alias ..='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
 
 # Making CONTROL+RIGHT/LEFT ARROW keys work in terminal:
 
