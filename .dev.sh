@@ -3,23 +3,18 @@
 # Installing stuff:
 
 cd ~
-git clone https://aur.archlinux.gsettings set org/yay.git && cd yay && makepkg -si
-git clone https://aur.archlinux.gsettings set org/paru.git && cd paru && makepkg -si
+git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+git clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-sudo pacman -S --noconfirm hyprshot tldr eza oh-my-zsh hyprpicker zsh fzf ghostty zen-browser-bin neovim alacritty dunst eza rofi-wayland waybar yazi btop npm python3 fastfetch obsidian lazygit zoxide fd vlc wev man wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake crush docker brightnessctl figlet tmux imagemagick hyprlock swww spotify imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator tty-clock
+sudo pacman -S --noconfirm hyprshot pavucontrol wev tldr eza oh-my-zsh hyprpicker zsh fzf ghostty zen-browser-bin neovim alacritty dunst eza rofi-wayland waybar yazi btop npm python3 fastfetch obsidian lazygit zoxide fd vlc wev wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake crush docker brightnessctl figlet tmux imagemagick hyprlock swww spotify imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator tty-clock
 sudo pacman -Rns --noconfirm nano wofi
-yay -S --noconfirm wlogout nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes ttf-font-awesome
+yay -S --noconfirm wlogout bibata-cursor-themes nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes ttf-font-awesome
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
-git clone https://github.com/Armaghan-Bashir-ch/walls ~/backgrounds/
+git clone https://github.com/Armaghan-Bashir-ch/walls ~/backgrounds
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab/
 nvim --headless +Lazy sync +qa
-mv ~/.config/.zshrc ~/.zshrc
-mv ~/.config/.tmux.conf ~/.tmux.conf
-mv ~/.config/.pk10k.zsh ~/.pk10k.zsh
-cp -r ~/.config/zff ~/.zff
-mkdir -p "home/armaghan/Obsidian Vault/.obsidian/snippets"
-cp -r ~/.config/obsidian-snippets "home/armaghan/Obsidian Vault/.obsidian/snippets"
+mkdir -p "/home/armaghan/Obsidian Vault/.obsidian/snippets"
 (chsh -s $(which zsh))
 swww-daemon &
 sudo pacman -Sc --noconfirm
@@ -100,72 +95,31 @@ npm install @google/gemini-cli@0.1.11 @github/copilot@0.0.342 @electron/asar@0.0
 # Symlinks/Copy and aftermath commands
 
 mkdir -p ~/dotfiles
+mkdir -p ~/.config
 cd ~/dotfiles
-cp -r ~/.config/hypr .
-rm -rf ~/.config/hypr
 ln -s ~/dotfiles/hypr ~/.config/hypr
-cp -r ~/.config/waybar . 
-rm -rf ~/.config/waybar 
 ln -s ~/dotfiles/waybar ~/.config/waybar
-cp -r ~/.config/wlogout . 
-rm -rf ~/.config/wlogout 
 ln -s ~/dotfiles/wlogout ~/.config/wlogout
-cp -r ~/.config/yazi . 
-rm -rf ~/.config/yazi 
 ln -s ~/dotfiles/yazi ~/.config/yazi
-mv ~/.config/zff . 
-rm -rf ~/.config/zff 
-ln -s ~/dotfiles/zff ~/.zff
-cp ~/.zshrc . 
-rm ~/.zshrc 
+ln -s ~/dotfiles/zff ~/zff
 ln -s ~/dotfiles/.zshrc ~/.zshrc
-cp ~/.tmux.conf . 
-rm ~/.tmux.conf 
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
-cp ~/.pk10k.zsh . 
-rm ~/.pk10k.zsh 
 ln -s ~/dotfiles/.pk10k.zsh ~/.pk10k.zsh
-cp ~/.install.sh . 
-rm ~/.install.sh 
 ln -s ~/dotfiles/.install.sh ~/.install.sh
-cp -r ~/.config/lazygit . 
-rm -rf ~/.config/lazygit 
 ln -s ~/dotfiles/lazygit ~/.config/lazygit
-cp -r ~/.config/lsd . 
-rm -rf ~/.config/lsd 
-ln -s ~/dotfiles/lsd ~/.config/lsd
-cp -r ~/.config/obsidian-snippets .
-rm -rf ~/.config/obsidian-snippets
-rm -rf "/home/armaghan/Obsidian Vault/.obsidian/snippets"
+ln -s ~/dotfiles/eza ~/.config/eza
 ln -s ~/dotfiles/obsidian-snippets/ "/home/armaghan/Obsidian Vault/.obsidian/snippets"
-cp -r ~/.config/nvim . 
-rm -rf ~/.config/nvim 
 ln -s ~/dotfiles/nvim ~/.config/nvim
-cp -r ~/.config/opencode . 
-rm -rf ~/.config/opencode 
 ln -s ~/dotfiles/opencode ~/.config/opencode
-cp -r ~/.config/rofi . 
-rm -rf ~/.config/rofi 
 ln -s ~/dotfiles/rofi ~/.config/rofi
-cp -r ~/.config/swayosd . 
-rm -rf ~/.config/swayosd 
 ln -s ~/dotfiles/swayosd ~/.config/swayosd
-cp -r ~/.config/waybar . 
-rm -rf ~/.config/waybar 
 ln -s ~/dotfiles/waybar ~/.config/waybar
-cp -r ~/.config/alacritty . 
-rm -rf ~/.config/alacritty 
 ln -s ~/dotfiles/alacritty ~/.config/alacritty
-cp -r ~/.config/btop . 
-rm -rf ~/.config/btop 
 ln -s ~/dotfiles/btop ~/.config/btop
-cp -r ~/.config/dunst . 
-rm -rf ~/.config/dunst 
 ln -s ~/dotfiles/dunst ~/.config/dunst
-cp -r ~/.config/ghostty . 
-rm -rf ~/.config/ghostty 
 ln -s ~/dotfiles/ghostty ~/.config/ghostty
-git init
+cd ~/armaghan@work
+source ~/.zshrc
 
 # Reloading hyprland
 
