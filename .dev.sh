@@ -2,13 +2,14 @@
 
 # Installing stuff:
 
+echo "Welcome (back) to Arch!"
+
 cd ~
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 git clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-sudo pacman -S --noconfirm hyprshot pavucontrol wev tldr eza oh-my-zsh hyprpicker zsh fzf ghostty zen-browser-bin neovim alacritty dunst eza rofi-wayland waybar yazi btop npm python3 fastfetch obsidian lazygit zoxide fd vlc wev wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake crush docker brightnessctl figlet tmux imagemagick hyprlock swww spotify imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator tty-clock
-sudo pacman -Rns --noconfirm nano wofi
-yay -S --noconfirm wlogout bibata-cursor-themes nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes ttf-font-awesome
+sudo pacman -S --noconfirm stow hyprshot pavucontrol wev tldr eza oh-my-zsh hyprpicker zsh fzf ghostty neovim alacritty dunst rofi-wayland waybar yazi btop fastfetch obsidian lazygit zoxide fd vlc wev wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake docker brightnessctl figlet tmux imagemagick hyprlock swww imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator 
+yay -S --noconfirm spotify python nodejs networkmanager tty-clock crush oh-my-zsh zen-browser-bin wlogout bibata-cursor-themes nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes ttf-font-awesome
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
 git clone https://github.com/Armaghan-Bashir-ch/walls ~/backgrounds
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -30,6 +31,7 @@ chmod +x rofi/shortcuts/script.sh
 chmod +x rofi/wallselect/script.sh
 chmod +x rofi/wallselect/wall-cycle.sh
 chmod +x rofi/wifi/wifi.sh
+cd ~
 swayosd-server  >/dev/null 2>&1 &
 systemctl enable docker
 systemctl enable NetworkManager 
@@ -119,8 +121,9 @@ ln -s ~/dotfiles/btop ~/.config/btop
 ln -s ~/dotfiles/dunst ~/.config/dunst
 ln -s ~/dotfiles/ghostty ~/.config/ghostty
 cd ~/armaghan@work
+pkill dunst 
+dunst &
 source ~/.zshrc
-
-# Reloading hyprland
-
+notify-send "Test Message" "Did the installation work?"
 hyprctl reload
+sudo pacman -Rns --noconfirm nano wofi kitty
