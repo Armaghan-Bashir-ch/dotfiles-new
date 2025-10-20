@@ -2,8 +2,6 @@
 
 # Installing stuff:
 
-echo "Welcome (back) to Arch!"
-
 cd ~
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 git clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si
@@ -13,24 +11,25 @@ yay -S --noconfirm spotify python nodejs networkmanager tty-clock crush oh-my-zs
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
 git clone https://github.com/Armaghan-Bashir-ch/walls ~/backgrounds
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab/
+git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 nvim --headless +Lazy sync +qa
 mkdir -p "/home/armaghan/Obsidian Vault/.obsidian/snippets"
 (chsh -s $(which zsh))
-swww-daemon &
 sudo pacman -Sc --noconfirm
 yay -Sc --noconfirm
-hyprctl setcursor "Bibata-Modern-Ice" 18
 
 # Setting up
 
-cd ~/.config/hypr/scripts/
+cd ~/.config/hypr/scripts
 chmod +x *.sh
 chmod +x rofi/clipboard/launcher.sh
 chmod +x rofi/shortcuts/script.sh
 chmod +x rofi/wallselect/script.sh
 chmod +x rofi/wallselect/wall-cycle.sh
 chmod +x rofi/wifi/wifi.sh
+cd ~/dotfiles/zff
+chmod +x zff-preview.sh
 cd ~
 swayosd-server  >/dev/null 2>&1 &
 systemctl enable docker
@@ -85,6 +84,7 @@ gsettings set org.gnome.desktop.interface toolbar-detachable false
 gsettings set org.gnome.desktop.interface toolbar-icons-size 'large'
 gsettings set org.gnome.desktop.interface toolbar-style 'both-horiz'
 gsettings set org.gnome.desktop.interface toolkit-accessibility false
+hyprctl setcursor "Bibata-Modern-Ice" 18
 cd ~
 mkdir -p media books Downloads armaghan@work
 cd media
@@ -97,33 +97,50 @@ npm install @google/gemini-cli@0.1.11 @github/copilot@0.0.342 @electron/asar@0.0
 # Symlinks/Copy and aftermath commands
 
 mkdir -p ~/dotfiles
-mkdir -p ~/.config
 cd ~/dotfiles
+rm -rf ~/.config/hypr
 ln -s ~/dotfiles/hypr ~/.config/hypr
+rm -rf ~/.config/waybar
 ln -s ~/dotfiles/waybar ~/.config/waybar
+rm -rf ~/.config/wlogout
 ln -s ~/dotfiles/wlogout ~/.config/wlogout
+rm -rf ~/.config/yazi
 ln -s ~/dotfiles/yazi ~/.config/yazi
+rm -rf ~/zff
 ln -s ~/dotfiles/zff ~/zff
+rm -rf ~/.zshrc
 ln -s ~/dotfiles/.zshrc ~/.zshrc
+rm rf ~/.tmux.conf
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+rm -rf ~/.pk10k.zsh
 ln -s ~/dotfiles/.pk10k.zsh ~/.pk10k.zsh
-ln -s ~/dotfiles/.install.sh ~/.install.sh
 ln -s ~/dotfiles/lazygit ~/.config/lazygit
+rm -rf ~/.config/eza
 ln -s ~/dotfiles/eza ~/.config/eza
+rm -rf ~/Obsidian Vault/.obsidian/snippets
 ln -s ~/dotfiles/obsidian-snippets/ "/home/armaghan/Obsidian Vault/.obsidian/snippets"
+rm -rf ~/.config/nvim
 ln -s ~/dotfiles/nvim ~/.config/nvim
+rm -rf ~/.config/opencode
 ln -s ~/dotfiles/opencode ~/.config/opencode
+rm -rf ~/.config/rofi
 ln -s ~/dotfiles/rofi ~/.config/rofi
+rm -rf ~/.config/swayosd
 ln -s ~/dotfiles/swayosd ~/.config/swayosd
+rm -rf ~/.config/waybar
 ln -s ~/dotfiles/waybar ~/.config/waybar
+rm -rf ~/.config/alacritty
 ln -s ~/dotfiles/alacritty ~/.config/alacritty
+rm -rf ~/.config/btop
 ln -s ~/dotfiles/btop ~/.config/btop
+rm -rf ~/.config/dunst
 ln -s ~/dotfiles/dunst ~/.config/dunst
+rm -rf ~/.config/ghostty
 ln -s ~/dotfiles/ghostty ~/.config/ghostty
 cd ~/armaghan@work
-pkill dunst 
 dunst &
+notify-send "Test Message" "Did the setup work?"
 source ~/.zshrc
-notify-send "Test Message" "Did the installation work?"
+source ~/.pk10k.zsh
 hyprctl reload
 sudo pacman -Rns --noconfirm nano wofi kitty
