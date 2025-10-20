@@ -180,20 +180,23 @@
         }
     },
 
-    "mpris": {
-        "format": "{player_icon} {dynamic}",
-        "format-paused": "{status_icon} <i>{dynamic}</i>",
-        "player-icons": { 
-            "default": "▶",
-            "mpv": " "
-        },
-
-        "status-icons": {
-            "paused": "⏸ "
-        },
-        "max-length": 1000
-    },
-
+  "mpris": {
+    "interval": 10,
+    "players": ["spotify"],
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} {player_icon} {artist} - {title}",
+    "format-stopped": "{player_icon} No song playing",
+    "on-click-middle": "playerctl play-pause",
+    "on-click": "playerctl previous",
+    "on-click-right": "playerctl next",
+    "scroll-step": 5.0,
+    "smooth-scrolling-threshold": 1,
+    "tooltip": true,
+    "tooltip-format": "{status_icon} {dynamic}\nLeft Click: previous\nMid Click: Pause\nRight Click: Next",
+    "player-icons": {
+      "spotify": ""
+    }
+  },
 
     "pulseaudio#microphone": {
         "format": "{format_source}",
