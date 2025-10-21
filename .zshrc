@@ -163,7 +163,7 @@ bindkey '^N' cdi_widget
 # Enabling fzf hitory widget with fzf
 
 export FZF_DEFAULT_OPTS="
-    --height=100%        \
+    --height=50%        \
     --no-border            \
     --margin=1,5        \
     --padding=1,2       \
