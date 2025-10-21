@@ -7,7 +7,7 @@ git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 git clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 sudo pacman -S --noconfirm stow hyprshot pavucontrol wev tldr eza oh-my-zsh hyprpicker zsh fzf ghostty neovim alacritty dunst rofi-wayland waybar yazi btop fastfetch obsidian lazygit zoxide fd vlc wev wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake docker brightnessctl figlet tmux imagemagick hyprlock swww imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator 
-yay -S --noconfirm spotify python nodejs networkmanager tty-clock crush oh-my-zsh zen-browser-bin wlogout bibata-cursor-themes nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes ttf-font-awesome
+yay -S --noconfirm wakafetch-git spotify python nodejs networkmanager tty-clock crush oh-my-zsh zen-browser-bin wlogout bibata-cursor-themes nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes ttf-font-awesome
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
 git clone https://github.com/Armaghan-Bashir-ch/walls ~/backgrounds
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
