@@ -80,7 +80,7 @@ ROFI_STYLES=("$HOME/.config/rofi/launcher/style.rasi" "$HOME/.config/rofi/wallse
 THEME_PATH="$HOME/.config/rofi/themes/$THEME.rasi"
 for STYLE in "${ROFI_STYLES[@]}"; do
     if [ -f "$STYLE" ]; then
-        sed -i "s|@import \".*themes/.*\.rasi\"|@import \"$THEME_PATH\"|" "$STYLE"
+        sed -i "s|@import \".*themes/.*\.rasi\"|@import \"$THEME_PATH\"|g; s|@theme \".*themes/.*\.rasi\"|@theme \"$THEME_PATH\"|g" "$STYLE"
     fi
 done
 

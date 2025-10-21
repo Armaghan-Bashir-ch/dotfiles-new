@@ -10,7 +10,7 @@ configuration {
     kb-row-right:    "l";
 }
 
-@theme "~/.config/rofi/themes/Decay-Green.rasi"
+@theme "/home/armaghan/.config/rofi/themes/Decay-Green.rasi"
 
 // Main //
 window {
@@ -24,7 +24,7 @@ window {
     border:                      1px;
     border-radius:               100px;
     border-color:                transparent;
-    background-color:            #000000;
+    background-color:            @main-bg;
 }
 mainbox {
     enabled:                     true;
