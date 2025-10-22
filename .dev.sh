@@ -6,15 +6,14 @@ cd ~
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 git clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-sudo pacman -S --noconfirm stow hyprshot pavucontrol wev tldr eza oh-my-zsh hyprpicker zsh fzf ghostty neovim alacritty dunst rofi-wayland waybar yazi btop fastfetch obsidian lazygit zoxide fd vlc wev wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake docker brightnessctl figlet tmux imagemagick hyprlock swww imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator 
-yay -S --noconfirm wakafetch-git spotify python nodejs networkmanager tty-clock crush oh-my-zsh zen-browser-bin wlogout bibata-cursor-themes nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes ttf-font-awesome
+sudo pacman -S --noconfirm gping rust stow hyprshot pavucontrol wev tldr eza oh-my-zsh hyprpicker zsh fzf ghostty neovim alacritty dunst rofi-wayland waybar yazi btop fastfetch obsidian lazygit zoxide fd vlc wev wakatime wget curl lua luarocks cliphist zsh-syntax-highlighting cmake docker brightnessctl figlet tmux imagemagick hyprlock swww imv lolcat bat ripgrep wl-clipboard gnome-calendar gnome-calculator 
+yay -S --noconfirm go wakafetch-git spotify python nodejs networkmanager tty-clock crush oh-my-zsh zen-browser-bin wlogout bibata-cursor-themes nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono swayosd less crontab zff spicetify-cli spicetify-themes-git tokyonight-gtk-theme github-cli bibata-cursor-themes ttf-font-awesome
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 
 git clone https://github.com/Armaghan-Bashir-ch/walls ~/backgrounds
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 nvim --headless +Lazy sync +qa
-mkdir -p "/home/armaghan/Obsidian Vault/.obsidian/snippets"
 (chsh -s $(which zsh))
 sudo pacman -Sc --noconfirm
 yay -Sc --noconfirm
@@ -26,7 +25,7 @@ systemctl enable docker
 systemctl enable NetworkManager 
 spicetify backup apply enable-devtools
 spicetify config current_theme StarryNight
-spicetify config color_scheme Forest
+spicetify config color_scheme StarryNight
 spicetify apply
 fc-cache -fv
 gsettings set org.gnome.desktop.interface accent-color 'blue'
@@ -126,6 +125,7 @@ rm -rf ~/.config/dunst
 ln -s ~/dotfiles/dunst ~/.config/dunst
 rm -rf ~/.config/ghostty
 ln -s ~/dotfiles/ghostty ~/.config/ghostty
+nvim --headless +Lazy sync +qa
 swayosd-server  >/dev/null 2>&1 &
 chmod +x rofi/clipboard/launcher.sh
 chmod +x rofi/shortcuts/script.sh
