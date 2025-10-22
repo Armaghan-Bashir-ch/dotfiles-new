@@ -21,17 +21,7 @@ yay -Sc --noconfirm
 
 # Setting up
 
-cd ~/.config/hypr/scripts
-chmod +x *.sh
-chmod +x rofi/clipboard/launcher.sh
-chmod +x rofi/shortcuts/script.sh
-chmod +x rofi/wallselect/script.sh
-chmod +x rofi/wallselect/wall-cycle.sh
-chmod +x rofi/wifi/wifi.sh
-cd ~/dotfiles/zff
-chmod +x zff-preview.sh
 cd ~
-swayosd-server  >/dev/null 2>&1 &
 systemctl enable docker
 systemctl enable NetworkManager 
 spicetify backup apply enable-devtools
@@ -96,7 +86,6 @@ npm install @google/gemini-cli@0.1.11 @github/copilot@0.0.342 @electron/asar@0.0
 
 # Symlinks/Copy and aftermath commands
 
-mkdir -p ~/dotfiles
 cd ~/dotfiles
 rm -rf ~/.config/hypr
 ln -s ~/dotfiles/hypr ~/.config/hypr
@@ -137,6 +126,16 @@ rm -rf ~/.config/dunst
 ln -s ~/dotfiles/dunst ~/.config/dunst
 rm -rf ~/.config/ghostty
 ln -s ~/dotfiles/ghostty ~/.config/ghostty
+swayosd-server  >/dev/null 2>&1 &
+chmod +x rofi/clipboard/launcher.sh
+chmod +x rofi/shortcuts/script.sh
+chmod +x rofi/wallselect/script.sh
+chmod +x rofi/wallselect/wall-cycle.sh
+chmod +x rofi/wifi/wifi.sh
+cd ~/dotfiles/zff
+chmod +x zff-preview.sh
+cd hypr/scripts
+chmod +x *.sh
 cd ~/armaghan@work
 dunst &
 notify-send "Test Message" "Did the setup work?"
