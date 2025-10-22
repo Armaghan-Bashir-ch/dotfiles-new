@@ -482,7 +482,7 @@ M.general = {
         },
         ["<leader>fbc"] = { "<cmd>Telescope git_bcommits<CR>", "Find buffer commits" },
         ["<leader>gvh"] = { "<cmd>Gitsigns select_hunk<CR>", "Visual selection for the git hunk" },
-        ["<C-p>"] = { "<cmd>Telescope find_files cwd=~/dotfiles<CR>" },
+        ["<C-p>"] = { "<cmd>FFFFind<CR>" },
         ["<C-g>"] = { "<cmd>Telescope git_status<CR>" },
         ["gd"] = { "<cmd>Telescope lsp_definitions<CR>", "Lsp defination" },
 
