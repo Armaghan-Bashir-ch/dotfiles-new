@@ -74,10 +74,6 @@ gsettings set org.gnome.desktop.interface toolbar-icons-size 'large'
 gsettings set org.gnome.desktop.interface toolbar-style 'both-horiz'
 gsettings set org.gnome.desktop.interface toolkit-accessibility false
 hyprctl setcursor "Bibata-Modern-Ice" 18
-cd ~
-mkdir -p media books Downloads armaghan@work
-cd media
-mkdir -p tvShows Movies Others
 
 # Npm installing
 
