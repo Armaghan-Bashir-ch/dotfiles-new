@@ -2,32 +2,32 @@ local load_mappings = require("core.utils").load_mappings
 
 local plugins = {
 
-    {
-        "rasulomaroff/reactive.nvim",
-        enabled = false,
-        event = "VeryLazy",
-        config = function()
-            require("reactive").setup({
-                builtin = {
-                    cursorline = true,
-                    cursor = true,
-                    modemsg = true,
-                },
-            })
-        end,
-    },
-    {
-        "danielfalk/smart-open.nvim",
-        lazy = false,
-        branch = "0.2.x",
-        dependencies = {
-            "kkharji/sqlite.lua",
-            -- Only required if using match_algorithm fzf
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-            -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
-            { "nvim-telescope/telescope-fzy-native.nvim" },
-        },
-    },
+    -- {
+    --     "rasulomaroff/reactive.nvim",
+    --     enabled = false,
+    --     event = "VeryLazy",
+    --     config = function()
+    --         require("reactive").setup({
+    --             builtin = {
+    --                 cursorline = true,
+    --                 cursor = true,
+    --                 modemsg = true,
+    --             },
+    --         })
+    --     end,
+    -- },
+    -- {
+    --     "danielfalk/smart-open.nvim",
+    --     lazy = false,
+    --     branch = "0.2.x",
+    --     dependencies = {
+    --         "kkharji/sqlite.lua",
+    --         -- Only required if using match_algorithm fzf
+    --         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    --         -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+    --         { "nvim-telescope/telescope-fzy-native.nvim" },
+    --     },
+    -- },
 
     {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -662,11 +662,6 @@ local plugins = {
         keys = require("custom.configs.harpoon")(),
     },
 
-    --TODO: Custamize the harpoon menu is possible
-
-    --NOTE: Harpoon is a little buggy with showing files with FULL path example: ~/.config/hypr/hyprland.conf. Fix this
-
-    -- Misc
     {
         "m4xshen/hardtime.nvim",
         lazy = false,
