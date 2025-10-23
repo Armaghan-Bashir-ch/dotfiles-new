@@ -12,6 +12,7 @@ cursor-style = underline
 mouse-hide-while-typing = true
 font-synthetic-style = bold
 confirm-close-surface = false
+fullscreen = true
 
 # Unbinding ALT+(1-9) so that I can use it in tmux to switch windows
 
