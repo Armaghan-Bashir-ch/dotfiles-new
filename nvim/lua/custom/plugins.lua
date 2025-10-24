@@ -265,11 +265,15 @@ local plugins = {
             require("nvim-surround").setup({})
         end,
     },
+
     {
         "folke/todo-comments.nvim",
-        event = { "BufReadPost", "BufNewFile" },
         dependencies = { "nvim-lua/plenary.nvim" },
-        config = true, -- use default setup
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
     },
 
     {

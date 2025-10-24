@@ -286,4 +286,10 @@ function M.closeOtherBuffers()
   vim.cmd "normal! zz"           -- centers you
 end
 
+-- Statusline utils
+M.vim_zen = ""
+M.buffer_size = ""
+M.streak_display = ""
+M.wakatime_stats = ""
+
 return M

@@ -3,6 +3,12 @@ require("custom.init")
 ---@type ChadrcConfig
 local M = {}
 
+M.base46 = {
+  hl_override = {
+    St_NormalMode = { fg = "#ffffff", bg = "#ff0000" },  -- White text on red bg for Normal mode
+  }
+}
+
 M.plugins = "custom.plugins"
 M.mappings = require("custom.mappings")
 
@@ -25,5 +31,9 @@ M.ui = {
 
     --NOTE: Hides the file tabs at the top
 }
+
+local custom_ui = require("custom.ui")
+M.ui.statusline.overriden_modules = custom_ui.statusline.overriden_modules
+M.ui.tabufline = custom_ui.tabufline
 
 return M
