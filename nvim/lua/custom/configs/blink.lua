@@ -127,7 +127,7 @@ local opts = {
 					-- Default pointers define the lexical relations listed under each definition,
 					-- see Pointer Symbols below.
 					-- Default is as below ("antonyms", "similar to" and "also see").
-					pointer_symbols = { "!", "&", "^" },
+					definition_pointers = { "!", "&", "^" },
 				},
 			},
 
@@ -145,7 +145,7 @@ local opts = {
 					score_offset = 0,
 
 					-- See above
-					pointer_symbols = { "!", "&", "^" },
+					definition_pointers = { "!", "&", "^" },
 				},
 			},
 		},
