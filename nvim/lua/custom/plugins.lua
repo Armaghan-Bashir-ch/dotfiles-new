@@ -1080,6 +1080,15 @@ local plugins = {
         end,
     },
 
+    {
+        "atiladefreitas/dooing",
+        config = function()
+            require("dooing").setup({
+                -- your custom config here (optional)
+            })
+        end,
+    },
+
     -- ~/.config/nvim/lua/plugins/lualine.lua
     --NOTE: Do not change the theme to anything else
 
