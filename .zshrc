@@ -160,7 +160,7 @@ bindkey '^N' cdi_widget
 # Enabling fzf hitory widget with fzf
 
 export FZF_DEFAULT_OPTS="
-    --height=50%        \
+    --height=30%        \
     --no-border            \
     --margin=1,5        \
     --padding=1,2       \
@@ -202,7 +202,7 @@ zff_widget() {
 
 # FZF directory widget
 cd_fzf() {
-  local dir=$(fd --hidden --type d --exclude .git --exclude .zen --exclude .cargo --exclude go --exclude .vim --exclude Tokyo-Night-GTK-Theme --exclude .bun --exclude .rustup --exclude .qwen --exclude .copilot --exclude .gemini --exclude .crush --exclude paru --exclude .themes --exclude armaghan@work/python --exclude .mypy_cache --exclude .mozilla --exclude .subversion --exclude .parallel --exclude .local . $HOME | fzf --height 100% --border)
+  local dir=$(fd --hidden --type d --exclude .git --exclude .zen --exclude .cargo --exclude go --exclude .vim --exclude Tokyo-Night-GTK-Theme --exclude .bun --exclude .rustup --exclude .qwen --exclude .copilot --exclude .gemini --exclude .crush --exclude paru --exclude .themes --exclude armaghan@work/python --exclude .mypy_cache --exclude .mozilla --exclude .subversion --exclude .parallel --exclude .local . $HOME | fzf --height 30% --border)
   if [[ -n $dir ]]; then
     cd "$dir"
     zle accept-line
