@@ -860,14 +860,6 @@ local plugins = {
     },
 
     --NOTE: Yazi is pretty useless, once you get used to telescope and harpoon, but its there for the sake of being there
-
-    {
-        "atiladefreitas/dooing",
-        event = "VeryLazy",
-        config = function()
-            require("dooing").setup({})
-        end,
-    },
     {
         "folke/snacks.nvim",
         priority = 1000,
@@ -1082,9 +1074,13 @@ local plugins = {
 
     {
         "atiladefreitas/dooing",
+        cmd = { "Dooing", "DooingLocal" },
         config = function()
             require("dooing").setup({
-                -- your custom config here (optional)
+                window = {
+                    position = 'center',
+                },
+                quick_keys = false,
             })
         end,
     },
