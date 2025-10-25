@@ -105,27 +105,19 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
 # preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-# custom fzf flags
-# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
-zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # To make fzf-tab follow FZF_DEFAULT_OPTS.
-# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':fzf-tab:*' fzf-flags \
-    --color=fg:#cdd6f4,bg:-1,hl:#f38ba8,fg+:#cdd6f4,bg+:-1,hl+:#f5c2e7 \
-    --color=info:#cba6f7,prompt:#89b4fa,pointer:#f38ba8,marker:#a6e3a1,spinner:#f9e2af,header:#f38ba8 \
-    --bind=tab:accept,ctrl-j:down,ctrl-k:up,ctrl-space:toggle \
-    --border=sharp \
-    --height=60% \
-    --layout=reverse \
-    --info=right \
-    --header="i use arch (btw)" \
-    --header-first \
-    --margin=1,2 \
-    --padding=1,1 \
-    --cycle
 # Pressing enter executes the selected completion immediately
 zstyle ':fzf-tab:*' accept-line enter
 
@@ -141,7 +133,7 @@ zstyle ':completion:*:cd:*' file-patterns '*(/)'
 
 fzf_file_widget() {
   local dirs=$(zoxide query --list 2>/dev/null | awk '{print $2}' | grep -E '^(/home/armaghan/\.config|/home/armaghan/dotfiles)' | head -20)
-  local files=$(fd --hidden --type f . $dirs ~/.config ~/dotfiles 2>/dev/null | fzf --multi --bind 'enter:accept' --height 50% --layout reverse --info=inline --cycle)
+  local files=$(fd --hidden --type f . $dirs ~/.config ~/dotfiles 2>/dev/null | fzf --multi --bind 'enter:accept' --height 50% --info=inline --cycle)
   if [[ -n $files ]]; then
     vim $files
   fi
@@ -190,7 +182,6 @@ fzf-history-widget() {
         --bind=tab:accept \
         --pointer="" \
         --preview-window=right:60%:wrap \
-        --layout=reverse-list \
         --height 100% | sed 's/^[0-9 \t]*//')
     CURSOR=$#BUFFER
     zle redisplay
@@ -211,7 +202,7 @@ zff_widget() {
 
 # FZF directory widget
 cd_fzf() {
-  local dir=$(fd --hidden --type d --exclude .git . $HOME | fzf --height 100% --reverse --border)
+  local dir=$(fd --hidden --type d --exclude .git . $HOME | fzf --height 100% --border)
   if [[ -n $dir ]]; then
     cd "$dir"
     zle accept-line
