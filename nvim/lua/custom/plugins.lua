@@ -568,6 +568,7 @@ local plugins = {
         "nvzone/timerly",
         dependencies = "nvzone/volt",
         cmd = "TimerlyToggle",
+        config = require("custom.configs.timerly").setup,
     },
     {
         "jay-babu/mason-null-ls.nvim",
