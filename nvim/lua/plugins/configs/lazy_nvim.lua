@@ -3,17 +3,22 @@ return {
     install = { colorscheme = { "nvchad" } },
 
     ui = {
+        border = "rounded",
+        title_pos = "center",
         icons = {
-            ft = "", -- file type: nf-md-file_document_outline
-            lazy = "󰒲", -- lazy.nvim: nf-md-rocket_launch or nf-md-power
-            loaded = "󰄴 ", -- loaded: nf-md-check_circle_outline
-            not_loaded = "󰚌", -- not loaded: nf-md-circle_dashed
+            ft = "", -- file type: nf-fa-file_o
+            lazy = "🚀", -- lazy.nvim: rocket
+            loaded = "", -- loaded: nf-fa-check_circle
+            not_loaded = "", -- not loaded: nf-md-circle_outline
             backdrop = 100,
-            title = "Lazy Plugin Manager",
+            title = "🚀 Lazy Plugin Manager 🚀",
+        },
+        colors = {
+            loaded = "#00ff88",
+            not_loaded = "#ff4444",
+            special = "#ffaa00",
         },
     },
-
-    --TODO: Find better icons, and see if they suit this or not
 
     performance = {
         rtp = {
