@@ -3,7 +3,7 @@ local ui = {
     transparency = false, -- Disable transparency to see bg colors
     statusline = {
         theme = "default",
-        separator_style = "round",
+        separator_style = "block",
         overriden_modules = function(modules)
             -- Available highlight groups (from statusline/default.lua):
             -- %#St_NormalMode# - Blue background (mode colors)
@@ -25,14 +25,14 @@ local ui = {
             modules[3] = "%#St_gitIcons#" .. " " .. (utils.vim_zen or "zen") .. " "
             modules[7] = "" -- Hide LSP diagnostics
             modules[8] = "%#St_lspHints#" .. " " .. (utils.buffer_size or "size") .. " "
-            modules[9] = (function()
-                if (utils.streak_display or "") ~= "" then
-                    return "%#St_lspWarning#" .. " " .. utils.streak_display .. " "
-                else
-                    return ""
-                end
-            end)()
-            modules[10] = (utils.wakatime_stats or "") ~= "" and "%#St_file_txt#" .. " | " .. utils.wakatime_stats or ""
+             modules[9] = (function()
+                 if (utils.streak_display or "") ~= "" then
+                     return "%#St_lspWarning#" .. " " .. utils.streak_display .. " "
+                 else
+                     return ""
+                 end
+             end)()
+             modules[10] = "" -- Hide cursor position
         end,
     },
     tabufline = {
