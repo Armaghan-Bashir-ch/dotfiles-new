@@ -247,7 +247,6 @@ local plugins = {
 
     --NOTE: smear cursor is a very buggy kind of plugin, with a lot of bugs, this is a minimal setup that prevents those bugs
 
-
     {
         "chrisgrieser/nvim-puppeteer",
         lazy = false,
@@ -357,7 +356,7 @@ local plugins = {
             end, { desc = "lint file" })
         end,
     },
-    { "chrisgrieser/nvim-rulebook", cmd = "Rulebook", keys = load_mappings("rulebook") },
+    { "chrisgrieser/nvim-rulebook",               cmd = "Rulebook", keys = load_mappings("rulebook") },
     {
         "MeanderingProgrammer/render-markdown.nvim",
         lazy = false,
@@ -442,9 +441,10 @@ local plugins = {
     -- },
 
     {
-        "NStefan002/speedtyper.nvim",
-        branch = "v2",
-        lazy = false,
+        "nvzone/typr",
+        dependencies = "nvzone/volt",
+        opts = {},
+        cmd = { "Typr", "TyprStats" },
     },
 
     {
@@ -965,7 +965,7 @@ local plugins = {
             vim.g.db_ui_use_nerd_fonts = 1
         end,
     },
-    { "akinsho/git-conflict.nvim",                version = "*", config = true, event = "VeryLazy" },
+    { "akinsho/git-conflict.nvim",  version = "*", config = true, event = "VeryLazy" },
 
     {
         "chrisgrieser/nvim-rip-substitute",
@@ -1052,7 +1052,7 @@ local plugins = {
         "nvim-lua/plenary.nvim",
         config = require("custom.configs.plenary"),
     },
-    { "wakatime/vim-wakatime",      lazy = false },
+    { "wakatime/vim-wakatime", lazy = false },
 
     -- ADD TOKYONIGHT PLUGIN HERE INSIDE THE TABLE
 
