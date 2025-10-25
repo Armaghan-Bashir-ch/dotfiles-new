@@ -73,7 +73,7 @@
   "refactoring.nvim": { "branch": "master", "commit": "6784b54587e6d8a6b9ea199318512170ffb9e418" },
   "render-markdown.nvim": { "branch": "main", "commit": "bfd67f1402b97ac619cb538f4bbaed12a7fa89aa" },
   "smear-cursor.nvim": { "branch": "main", "commit": "abfa5835920b1d76c0e24e1465a618ad914be90a" },
-  "snacks.nvim": { "branch": "main", "commit": "37cae803efdef3343de98334cf94fda3df199c24" },
+  "snacks.nvim": { "branch": "main", "commit": "d569072b2e39e0078b55ea56b133fb9a30d78bad" },
   "specs.nvim": { "branch": "main", "commit": "2743e412bbe21c9d73954c403d01e8de7377890d" },
   "speedtyper.nvim": { "branch": "v2", "commit": "fb89e52db25770c92115410d349811c5ae3fd6c2" },
   "sqlite.lua": { "branch": "master", "commit": "50092d60feb242602d7578398c6eb53b4a8ffe7b" },
