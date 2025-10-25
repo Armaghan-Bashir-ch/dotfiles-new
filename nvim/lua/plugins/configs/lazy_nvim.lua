@@ -18,6 +18,11 @@ return {
             not_loaded = "#ff4444",
             special = "#ffaa00",
         },
+        highlights = {
+            LazyProgressDone = { fg = "#00ff88" },
+            LazyError = { fg = "#ff4444" },
+            LazyWarning = { fg = "#ffaa00" },
+        },
     },
 
     performance = {

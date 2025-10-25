@@ -563,6 +563,12 @@ local plugins = {
         event = "LspAttach",
         config = require("custom.configs.prettier"),
     },
+
+    {
+        "nvzone/timerly",
+        dependencies = "nvzone/volt",
+        cmd = "TimerlyToggle",
+    },
     {
         "jay-babu/mason-null-ls.nvim",
         event = { "BufReadPre", "BufNewFile" },
