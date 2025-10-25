@@ -137,14 +137,18 @@ zstyle ':completion:*:ov:*' file-patterns '*(.)'
 # Ensure cd tab completion shows only directories
 zstyle ':completion:*:cd:*' file-patterns '*(/)'
 
-# ZFF:
+# FZF File Widget: searches all files in $HOME including hidden, using fd and zoxide for quick search
 
-if [[ -f ~/zff/zff.sh ]]; then
-  source ~/zff/zff.sh
-fi
-# Bind Ctrl+F to the widget
-zle -N zffi
-bindkey '^F' zffi
+fzf_file_widget() {
+  local dirs=$(zoxide query --list 2>/dev/null | awk '{print $2}' | grep -E '^(/home/armaghan/\.config|/home/armaghan/dotfiles)' | head -20)
+  local files=$(fd --hidden --type f . $dirs ~/.config ~/dotfiles 2>/dev/null | fzf --multi --bind 'enter:accept' --height 50% --layout reverse --info=inline --cycle)
+  if [[ -n $files ]]; then
+    vim $files
+  fi
+  zle reset-prompt
+}
+zle -N fzf_file_widget
+bindkey '^F' fzf_file_widget
 
 
 ## OPENCODE
