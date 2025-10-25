@@ -172,8 +172,6 @@ M.code_refactor = {
     },
 }
 
-
-
 M.rulebook = {
     plugin = true,
     n = {
@@ -647,17 +645,6 @@ M.general = {
         ["<leader>b9"] = { "<cmd>buffer 9<CR>", "Select buffer 9" },
         ["<leader>oo"] = { "<cmd>vsplit | term opencode<CR>", "Open opencode" },
         ["<leader>cc"] = { "<cmd>vsplit | term crush<CR>", "Open Crush" },
-        ["f"] = { "f", "f motion forwards" },
-        ["t"] = { "F", "f motion backwards" },
-        ["F"] = { "F", "F motion forwards" },
-        ["T"] = { "T", "T motion backwards" },
-    },
-
-    o = {
-        ["f"] = { "f", "f motion forwards" },
-        ["t"] = { "F", "f motion backwards" },
-        ["F"] = { "F", "F motion forwards" },
-        ["T"] = { "T", "T motion backwards" },
     },
 
     v = {
@@ -708,10 +695,6 @@ M.general = {
             ":m '<-2<CR>gv=gv",
             "Move selected lines up",
         },
-        ["f"] = { "f", "f motion forwards" },
-        ["t"] = { "F", "f motion backwards" },
-        ["F"] = { "F", "F motion forwards" },
-        ["T"] = { "T", "T motion backwards" },
     },
 
     x = {
@@ -732,10 +715,6 @@ M.general = {
             [["_dP"]],
             "Paste without overwriting register",
         },
-        ["f"] = { "f", "f motion forwards" },
-        ["t"] = { "F", "f motion backwards" },
-        ["F"] = { "F", "F motion forwards" },
-        ["T"] = { "T", "T motion backwards" },
     },
 
     i = {
