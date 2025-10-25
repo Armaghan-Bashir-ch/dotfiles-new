@@ -71,9 +71,9 @@
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "quicker.nvim": { "branch": "master", "commit": "12a2291869a326424b1cbee937f4f80334433012" },
   "refactoring.nvim": { "branch": "master", "commit": "6784b54587e6d8a6b9ea199318512170ffb9e418" },
-  "render-markdown.nvim": { "branch": "main", "commit": "475d3ad8cae486b0df6fc6050cf5b5ea1de42db8" },
+  "render-markdown.nvim": { "branch": "main", "commit": "bfd67f1402b97ac619cb538f4bbaed12a7fa89aa" },
   "smear-cursor.nvim": { "branch": "main", "commit": "abfa5835920b1d76c0e24e1465a618ad914be90a" },
-  "snacks.nvim": { "branch": "main", "commit": "a2c1e69245b4c9cc513f78af31c517e5535dad30" },
+  "snacks.nvim": { "branch": "main", "commit": "37cae803efdef3343de98334cf94fda3df199c24" },
   "specs.nvim": { "branch": "main", "commit": "2743e412bbe21c9d73954c403d01e8de7377890d" },
   "speedtyper.nvim": { "branch": "v2", "commit": "fb89e52db25770c92115410d349811c5ae3fd6c2" },
   "sqlite.lua": { "branch": "master", "commit": "50092d60feb242602d7578398c6eb53b4a8ffe7b" },
@@ -103,5 +103,5 @@
   "vim-wakatime": { "branch": "master", "commit": "d7973b157a632d1edeff01818f18d67e584eeaff" },
   "which-key.nvim": { "branch": "main", "commit": "b4177e3eaf15fe5eb8357ebac2286d488be1ed00" },
   "yanky.nvim": { "branch": "main", "commit": "04775cc6e10ef038c397c407bc17f00a2f52b378" },
-  "yazi.nvim": { "branch": "main", "commit": "3c52751614a2c55f84fc42b5f7b1473c8a4bd8d3" }
+  "yazi.nvim": { "branch": "main", "commit": "dd90db198cd5937a7644b392315a8488e259653f" }
 }
