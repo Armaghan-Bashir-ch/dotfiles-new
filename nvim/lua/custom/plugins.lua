@@ -71,12 +71,7 @@ local plugins = {
         build = function()
             require("fff.download").download_or_build_binary()
         end,
-        opts = {
-            debug = {
-                enabled = true,
-                show_scores = true,
-            },
-        },
+        opts = require("custom.configs.fff"),
         lazy = false,
         keys = {
             {
