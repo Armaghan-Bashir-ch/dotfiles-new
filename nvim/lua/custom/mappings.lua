@@ -172,52 +172,7 @@ M.code_refactor = {
     },
 }
 
-M.spider_motion = {
-    plugin = true,
-    n = {
-        ["w"] = {
-            "<cmd>lua require('spider').motion('w')<CR>",
-            "Spider-w",
-        },
-        ["e"] = {
-            "<cmd>lua require('spider').motion('e')<CR>",
-            "Spider-e",
-        },
-        ["b"] = {
-            "<cmd>lua require('spider').motion('b')<CR>",
-            "Spider-b",
-        },
-    },
 
-    o = {
-        ["w"] = {
-            "<cmd>lua require('spider').motion('w')<CR>",
-            "Spider-w",
-        },
-        ["e"] = {
-            "<cmd>lua require('spider').motion('e')<CR>",
-            "Spider-e",
-        },
-        ["b"] = {
-            "<cmd>lua require('spider').motion('b')<CR>",
-            "Spider-b",
-        },
-    },
-    x = {
-        ["w"] = {
-            "<cmd>lua require('spider').motion('w')<CR>",
-            "Spider-w",
-        },
-        ["e"] = {
-            "<cmd>lua require('spider').motion('e')<CR>",
-            "Spider-e",
-        },
-        ["b"] = {
-            "<cmd>lua require('spider').motion('b')<CR>",
-            "Spider-b",
-        },
-    },
-}
 
 M.rulebook = {
     plugin = true,

@@ -247,7 +247,7 @@ local plugins = {
 
     --NOTE: smear cursor is a very buggy kind of plugin, with a lot of bugs, this is a minimal setup that prevents those bugs
 
-    { "chrisgrieser/nvim-spider",   lazy = false,     keys = load_mappings("spider_motion") },
+
     {
         "chrisgrieser/nvim-puppeteer",
         lazy = false,
