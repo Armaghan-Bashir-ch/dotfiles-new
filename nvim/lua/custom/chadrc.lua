@@ -3,12 +3,6 @@ require("custom.init")
 ---@type ChadrcConfig
 local M = {}
 
-M.base46 = {
-  hl_override = {
-    St_NormalMode = { fg = "#ffffff", bg = "#ff0000" },  -- White text on red bg for Normal mode
-  }
-}
-
 M.plugins = "custom.plugins"
 M.mappings = require("custom.mappings")
 
@@ -22,7 +16,7 @@ M.ui = {
 
     statusline = {
         theme = "default",
-        separator_style = "round",
+        separator_style = "default",
         overriden_modules = nil,
     },
     tabufline = {
