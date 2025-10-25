@@ -458,6 +458,7 @@ M.general = {
         ["fws"] = { "1z=", "Fix word speling under cursor" },
         -- for git diff
         ["<leader>gd"] = { "<cmd> DiffviewOpen <CR>", "Open git diff" },
+        ["<leader>dt"] = { "<cmd> Dooing <CR>", "Open Todo-List" },
         ["<leader>gdc"] = { "<cmd> DiffviewClose <CR>", "Close git diff" },
         ["<leader>gdo"] = { "<cmd> DiffviewOpen <CR>", "Toggle files git diff" },
 
