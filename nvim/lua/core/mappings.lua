@@ -1,3 +1,9 @@
+-- Vim Motions:
+-- • f<char>: Move cursor to the next occurrence of <char> on the current line
+-- • F<char>: Move cursor to the previous occurrence of <char> on the current line
+-- • t<char>: Move cursor to just before the next occurrence of <char> on the current line
+-- • T<char>: Move cursor to just before the previous occurrence of <char> on the current line
+
 -- n, v, i, t = mode names
 
 local M = {}
