@@ -201,7 +201,7 @@ local plugins = {
 
     {
         "sphamba/smear-cursor.nvim",
-        enabled = true,
+        enabled = false,
         lazy = false,
         opts = {
             smear_between_buffers = true,
