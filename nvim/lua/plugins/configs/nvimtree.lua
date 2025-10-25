@@ -4,7 +4,7 @@ local options = {
     exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
   },
   disable_netrw = true,
-  hijack_netrw = true,
+  hijack_netrw = false,
   hijack_cursor = true,
   hijack_unnamed_buffer_when_opening = true,
   sync_root_with_cwd = true,
@@ -13,9 +13,17 @@ local options = {
     update_root = false,
   },
   view = {
-    adaptive_size = false,
-    side = "right",
-    width = 30,
+    float = {
+      enable = true,
+      open_win_config = {
+        relative = "editor",
+        width = vim.o.columns,
+        height = vim.o.lines - 1,
+        row = 0,
+        col = 0,
+        border = "none",
+      },
+    },
     preserve_window_proportions = true,
   },
   git = {
