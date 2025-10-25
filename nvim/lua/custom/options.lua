@@ -9,3 +9,6 @@ opt.cursorlineopt = "number" -- Highlight only number in cursorline
 opt.timeout = true
 opt.ttimeout = true
 opt.ttimeoutlen = 50
+
+-- Disable WakaTime notifications
+vim.g.wakatime_DisableNotifications = 1

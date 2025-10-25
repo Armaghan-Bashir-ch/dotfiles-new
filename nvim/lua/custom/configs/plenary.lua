@@ -41,13 +41,13 @@ local config = function()
     end
 
     job:start()
-    local result = rx()
-    if result then
-      vim.schedule(function()
-        vim.notify(result, vim.log.levels.INFO)
-        last_notification_time = os.time()
-      end)
-    end
+     local result = rx()
+     if result then
+       vim.schedule(function()
+         require("custom.utils").wakatime_stats = result
+         last_notification_time = os.time()
+       end)
+     end
   end)
 
   -- Define a command to execute the async function

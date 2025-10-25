@@ -27,5 +27,4 @@ return function()
     telescope.load_extension("fzf")
     telescope.load_extension("textcase")
     telescope.load_extension("package_info")
-    telescope.load_extension("smart_open")
 end
