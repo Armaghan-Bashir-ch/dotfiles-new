@@ -430,8 +430,8 @@ M.general = {
         ["<leader>flr"] = { "<cmd> Telescope lsp_references <CR>", "LSP References" },
         ["gt"] = { "<cmd> Telescope lsp_type_definitions <CR>", "Type Definations" },
         ["<leader>u"] = {
-            "<cmd>Telescope undo<cr>",
-            "Open undo history using Telescope",
+            "<cmd>UndotreeToggle<cr>",
+            "Toggle undo tree",
         },
         ["<leader>fbc"] = { "<cmd>Telescope git_bcommits<CR>", "Find buffer commits" },
         ["<leader>gvh"] = { "<cmd>Gitsigns select_hunk<CR>", "Visual selection for the git hunk" },

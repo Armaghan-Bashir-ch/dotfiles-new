@@ -837,6 +837,10 @@ local plugins = {
     {
         "mbbill/undotree",
         cmd = "UndotreeToggle",
+        config = function()
+            vim.g.undotree_WindowLayout = 3  -- Position undotree on the right
+            vim.g.undotree_SplitWidth = 40   -- Make it wider
+        end,
     },
     {
         "ThePrimeagen/vim-be-good",
