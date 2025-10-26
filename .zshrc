@@ -133,7 +133,7 @@ zstyle ':completion:*:cd:*' file-patterns '*(/)'
 
 fzf_file_widget() {
   local dirs=$(zoxide query --list 2>/dev/null | awk '{print $2}' | grep -E '^(/home/armaghan/\.config|/home/armaghan/dotfiles)' | head -20)
-  local files=$(fd --hidden --type f . $dirs ~/.config ~/dotfiles 2>/dev/null | fzf --multi --bind 'enter:accept' --height 50% --info=inline --cycle)
+  local files=$(fd --hidden --type f . $dirs ~/.config ~/dotfiles 2>/dev/null | fzf --multi --bind 'enter:accept' --height 50% --info=inline --cycle --preview 'bat --style=numbers --color=always {} || cat {}')
   if [[ -n $files ]]; then
     vim $files
   fi
@@ -164,7 +164,7 @@ export FZF_DEFAULT_OPTS="
     --no-border            \
     --margin=1,5        \
     --padding=1,2       \
-    --preview-window=right:90%:wrap \
+    --preview-window=right:50%:wrap \
     --color=bg+:-1,bg:-1,spinner:#9ece6a,hl:#89ddff \
     --color=fg:#a9b1d6,header:#f38ba8,info:#ff9e64,pointer:#ff9e64 \
     --color=marker:#7aa2f7,fg+:#cdd6f4,prompt:#f7768e,hl+:#89ddff \
