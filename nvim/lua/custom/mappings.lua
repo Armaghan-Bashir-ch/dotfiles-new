@@ -484,6 +484,7 @@ M.general = {
         ["<A-w>"] = { "6w", "Move 6 words forward" },
         ["<A-b>"] = { "6b", "Move 6 lines backward" },
         ["<A-_>"] = { "6_zz", "Move 6 lines begaining and center carret on screen" },
+        ["<A-->"] = { "6-zz", "Move 6 lines to beginning and center caret on screen" },
         ["<A-{>"] = { "6{zz", "Move 6 pragraphs down and center carret on screen" },
         ["<A-}>"] = { "6}zz", "Move 6 pragraphs up and center carret on screen" },
 
