@@ -255,20 +255,6 @@ M.general = {
         ["T"] = { "<cmd>b#<CR>", "Open last closed buffer" },
         ["<leader>tmt"] = { ":silent !tmuxt<CR>", "Toggle tmux status bar" },
         ["<leader>poc"] = { ":silent !git poc &<CR>", "Push to the current branch in the background" },
-        ["<leader>acp"] = {
-            function()
-                vim.ui.input({ prompt = "Commit message: " }, function(msg)
-                    if msg and msg ~= "" then
-                        local cmd = "git acp " .. vim.fn.shellescape(msg) .. " &"
-                        vim.fn.system(cmd) -- Run silently in the background
-                        print("✅ Committing & pushing: " .. msg)
-                    else
-                        print("❌ Commit aborted: No message provided.")
-                    end
-                end)
-            end,
-            "Git commit & push",
-        },
 
         ["<leader>rr"] = {
             function()
