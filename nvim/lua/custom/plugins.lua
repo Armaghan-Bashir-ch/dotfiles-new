@@ -1157,9 +1157,6 @@ local plugins = {
         end,
     },
 
-    -- ~/.config/nvim/lua/plugins/lualine.lua
-    --NOTE: Do not change the theme to anything else
-
     {
         "rcarriga/nvim-notify",
         opts = function(_, opts)
