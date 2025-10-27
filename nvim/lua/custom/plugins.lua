@@ -201,7 +201,7 @@ local plugins = {
 
     {
         "sphamba/smear-cursor.nvim",
-        enabled = false,
+        enabled = true,
         lazy = false,
         opts = {
             smear_between_buffers = true,
@@ -222,20 +222,20 @@ local plugins = {
             never_draw_over_target = true,
             hide_target_hack = false,
 
-            time_interval = 16, -- ~60FPS
-            delay_event_to_smear = 2,
-            delay_after_key = 4,
+            time_interval = 17, -- ~60FPS
+            delay_event_to_smear = 1,
+            delay_after_key = 3,
 
             -- Main mode animation
-            trailing_stiffness = 1.5, -- stiffer (default was 0.45)
-            trailing_exponent = 2.5, -- favor the head even more
-            distance_stop_animating = 0.5, -- stops earlier
+            trailing_stiffness = 0.45, -- stiffer (default was 0.45)
+            trailing_exponent = 3, -- favor the head even more
+            distance_stop_animating = 0.1, -- stops earlier
 
             -- Insert mode animation (vertical bar cursor)
-            stiffness_insert_mode = 0.7,       -- stronger resistance
-            trailing_stiffness_insert_mode = 0.6, -- more stiffness vertically
-            trailing_exponent_insert_mode = 1.5, -- slightly sharper curve
-            distance_stop_animating_vertical_bar = 0.4, -- shorter smear
+            stiffness_insert_mode = 0.5,         -- stronger resistance
+            trailing_stiffness_insert_mode = 0.5, -- more stiffness vertically
+            trailing_exponent_insert_mode = 1,   -- slightly sharper curve
+            distance_stop_animating_vertical_bar = 0.875, -- shorter smear
 
             -- Smear limits
             max_length = 20,
@@ -244,8 +244,6 @@ local plugins = {
     },
 
     --WARN: Do not change the smaer cursor section one bit
-
-    --NOTE: smear cursor is a very buggy kind of plugin, with a lot of bugs, this is a minimal setup that prevents those bugs
 
     {
         "chrisgrieser/nvim-puppeteer",
