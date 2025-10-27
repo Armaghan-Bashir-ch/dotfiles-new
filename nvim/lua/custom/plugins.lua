@@ -464,45 +464,107 @@ local plugins = {
         end,
     },
 
-    -- {
-    --     "default-anton/llm-sidekick.nvim",
-    --     enabled = true,
-    --     lazy = false,
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim",
-    --     },
-    --     config = function()
-    --         require("llm-sidekick").setup({
-    --             -- Model aliases configuration
-    --             aliases = {
-    --                 pro = "gemini-2.5-pro",
-    --                 flash = "gemini-2.5-flash",
-    --                 opus = "claude-opus-4-20250514",
-    --                 sonnet = "claude-sonnet-4-20250514",
-    --                 bedrock_opus = "anthropic.claude-opus-4",
-    --                 bedrock_sonnet = "anthropic.claude-sonnet-4",
-    --                 deepseek = "deepseek-chat",
-    --                 chatgpt = "gpt-4.1",
-    --                 mini = "gpt-4.1-mini",
-    --                 high_o3 = "o3-high",
-    --                 medium_o3 = "o3-medium",
-    --             },
-    --             yolo_mode = {
-    --                 file_operations = false,                     -- Automatically accept file operations
-    --                 terminal_commands = false,                   -- Automatically accept terminal commands
-    --                 auto_commit_changes = true,                  -- Enable auto-commit
-    --             },
-    --             auto_commit_model = "gpt-4.1-mini",              -- Use a specific model for commit messages
-    --             safe_terminal_commands = { "mkdir", "touch", "git commit" }, -- List of terminal commands to automatically accept
-    --         })
-    --     end,
-    -- },
-
     {
         "nvzone/typr",
         dependencies = "nvzone/volt",
         opts = {},
         cmd = { "Typr", "TyprStats" },
+    },
+
+    {
+        "folke/sidekick.nvim",
+        opts = {
+            -- add any options here
+            cli = {
+                mux = {
+                    backend = "tmux",
+                    enabled = true,
+                },
+            },
+        },
+        keys = {
+            {
+                "<tab>",
+                function()
+                    -- if there is a next edit, jump to it, otherwise apply it if any
+                    if not require("sidekick").nes_jump_or_apply() then
+                        return "<Tab>" -- fallback to normal tab
+                    end
+                end,
+                expr = true,
+                desc = "Goto/Apply Next Edit Suggestion",
+            },
+            {
+                "<c-.>",
+                function()
+                    require("sidekick.cli").toggle()
+                end,
+                desc = "Sidekick Toggle",
+                mode = { "n", "t", "i", "x" },
+            },
+            {
+                "<leader>aa",
+                function()
+                    require("sidekick.cli").toggle()
+                end,
+                desc = "Sidekick Toggle CLI",
+            },
+            {
+                "<leader>as",
+                function()
+                    require("sidekick.cli").select()
+                end,
+                -- Or to select only installed tools:
+                -- require("sidekick.cli").select({ filter = { installed = true } })
+                desc = "Select CLI",
+            },
+            {
+                "<leader>ad",
+                function()
+                    require("sidekick.cli").close()
+                end,
+                desc = "Detach a CLI Session",
+            },
+            {
+                "<leader>at",
+                function()
+                    require("sidekick.cli").send({ msg = "{this}" })
+                end,
+                mode = { "x", "n" },
+                desc = "Send This",
+            },
+            {
+                "<leader>af",
+                function()
+                    require("sidekick.cli").send({ msg = "{file}" })
+                end,
+                desc = "Send File",
+            },
+            {
+                "<leader>av",
+                function()
+                    require("sidekick.cli").send({ msg = "{selection}" })
+                end,
+                mode = { "x" },
+                desc = "Send Visual Selection",
+            },
+            {
+                "<leader>ap",
+                function()
+                    require("sidekick.cli").prompt()
+                end,
+                mode = { "n", "x" },
+                desc = "Sidekick Select Prompt",
+            },
+            -- Example of a keybinding to open Claude directly
+            {
+                "<leader>ac",
+                function()
+                    require("sidekick.cli").toggle({ name = "claude", focus = true })
+                end,
+                desc = "Sidekick Toggle Claude",
+            },
+        },
     },
 
     {
