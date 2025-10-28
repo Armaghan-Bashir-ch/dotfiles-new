@@ -100,14 +100,14 @@ local plugins = {
         lazy = false,
         config = function()
             require("tabout").setup({
-                tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
+                tabkey = "<Tab>",             -- key to trigger tabout, set to an empty string to disable
                 backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
-                act_as_tab = true, -- shift content if tab out is not possible
-                act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-                default_tab = "<C-t>", -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
-                default_shift_tab = "<C-d>", -- reverse shift default action,
-                enable_backwards = true, -- well ...
-                completion = false, -- if the tabkey is used in a completion pum
+                act_as_tab = true,            -- shift content if tab out is not possible
+                act_as_shift_tab = false,     -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+                default_tab = "<C-t>",        -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+                default_shift_tab = "<C-d>",  -- reverse shift default action,
+                enable_backwards = true,      -- well ...
+                completion = false,           -- if the tabkey is used in a completion pum
                 tabouts = {
                     { open = "'", close = "'" },
                     { open = '"', close = '"' },
@@ -123,7 +123,7 @@ local plugins = {
         dependencies = { -- These are optional
             "nvim-treesitter/nvim-treesitter",
         },
-        opt = true,        -- Set this to true if the plugin is optional
+        opt = true,              -- Set this to true if the plugin is optional
         event = "InsertCharPre", -- Set the event to 'InsertCharPre' for better compatibility
         priority = 1000,
     },
@@ -227,14 +227,14 @@ local plugins = {
             delay_after_key = 3,
 
             -- Main mode animation
-            trailing_stiffness = 0.45, -- stiffer (default was 0.45)
-            trailing_exponent = 3, -- favor the head even more
+            trailing_stiffness = 0.45,     -- stiffer (default was 0.45)
+            trailing_exponent = 3,         -- favor the head even more
             distance_stop_animating = 0.1, -- stops earlier
 
             -- Insert mode animation (vertical bar cursor)
-            stiffness_insert_mode = 0.5,         -- stronger resistance
-            trailing_stiffness_insert_mode = 0.5, -- more stiffness vertically
-            trailing_exponent_insert_mode = 1,   -- slightly sharper curve
+            stiffness_insert_mode = 0.5,                  -- stronger resistance
+            trailing_stiffness_insert_mode = 0.5,         -- more stiffness vertically
+            trailing_exponent_insert_mode = 1,            -- slightly sharper curve
             distance_stop_animating_vertical_bar = 0.875, -- shorter smear
 
             -- Smear limits
@@ -378,6 +378,12 @@ local plugins = {
         dependencies = { "OXY2DEV/markview.nvim" },
         opts = {},
         cmd = "Store",
+    },
+
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+        enabled = true,
     },
 
     --INFO: This makes allows you to use a ".md" file as a proper note taking app inside of obsidian, with callouts, etc..
@@ -825,13 +831,13 @@ local plugins = {
         opts = {
             highlights = {
                 up_to_date = { fg = "#3C4048" }, -- Text color for up to date package virtual text
-                outdated = { fg = "#fc514e" }, -- Text color for outdated package virtual text
+                outdated = { fg = "#fc514e" },   -- Text color for outdated package virtual text
             },
             icons = {
-                enable = true,    -- Whether to display icons
+                enable = true,             -- Whether to display icons
             },
-            autostart = true,     -- Whether to autostart when `package.json` is opened
-            hide_up_to_date = true, -- It hides up to date versions when displaying virtual text
+            autostart = true,              -- Whether to autostart when `package.json` is opened
+            hide_up_to_date = true,        -- It hides up to date versions when displaying virtual text
             hide_unstable_versions = true, -- It hides unstable versions from version list e.g next-11.1.3-canary3
 
             package_manager = "yarn",
@@ -859,7 +865,7 @@ local plugins = {
             { "<Leader>cv", "<CMD>TWValues<CR>", desc = "Tailwind CSS values" },
         },
         opts = {
-            border = "rounded", -- Valid window border style,
+            border = "rounded",          -- Valid window border style,
             show_unknown_classes = true, -- Shows the unknown classes popup
         },
     },
@@ -907,7 +913,7 @@ local plugins = {
         cmd = "UndotreeToggle",
         config = function()
             vim.g.undotree_WindowLayout = 3 -- Position undotree on the right
-            vim.g.undotree_SplitWidth = 40 -- Make it wider
+            vim.g.undotree_SplitWidth = 40  -- Make it wider
         end,
     },
     {
@@ -995,7 +1001,7 @@ local plugins = {
                     duration = { step = 12, total = 180 }, -- nice and smooth
                 },
                 animate_repeat = {
-                    delay = 10,          -- if next scroll happens within 80ms, use fast mode
+                    delay = 10,                         -- if next scroll happens within 80ms, use fast mode
                     duration = { step = 1, total = 1 }, -- basically instant
                 },
             },
@@ -1131,7 +1137,7 @@ local plugins = {
         lazy = false,
         priority = 1000,
         opts = {
-            style = "night", -- THIS IS WHAT FORCES THE 'night' variant
+            style = "night",    -- THIS IS WHAT FORCES THE 'night' variant
             transparent = true, --  This is not needed inside of ghostty and hyprland since the transparency is already enabled by default, but is important if your own some other OS
             styles = {
                 sidebars = "transparent",
@@ -1174,7 +1180,7 @@ local plugins = {
 
                 local width = 50
                 local height = 5
-                config.row = 1                           -- Top position (small offset from edge)
+                config.row = 1                                       -- Top position (small offset from edge)
                 config.col = math.floor((vim.o.columns - width) / 2) -- Center horizontally
 
                 vim.api.nvim_win_set_config(win, config)
