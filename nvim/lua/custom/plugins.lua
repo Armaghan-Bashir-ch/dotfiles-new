@@ -1063,7 +1063,7 @@ local plugins = {
         "letieu/btw.nvim",
         config = function()
             require("btw").setup({
-                text = "I use Neovim with Arch (BTW)",
+                text = "i use Neovim with arch (btw)",
             })
         end,
         lazy = false,
