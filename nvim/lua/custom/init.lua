@@ -10,7 +10,6 @@ vim.opt.cursorline = false                                                      
 vim.g.fancyScroll = true                                                                               -- Disabling fancy scroll, fancy scroll is basically replacement of control+d/u but with the mice
 vim.opt.cmdheight = 1                                                                                  -- Sets the statusline height to be one line above the bottom, helps with cleaness
 vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE" })                                                     -- Needed for the lastest --version of nvim (0.11.4)
-vim.opt.laststatus = 2                                                                                 -- always show statusline
 vim.opt.ttimeoutlen = 0                                                                                -- Reduce delay for key code sequences
 vim.opt.timeoutlen = 500                                                                               -- Timeout for mappings
 vim.g.nvchad_hot_reload = false                                                                        -- Don't automatically reload the NvChad config. You'll have to restart Neovim to see your changes.
@@ -192,6 +191,13 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end,
 })
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+    pattern = "*",
+    callback = function()
+        vim.opt.laststatus = 2 -- always show statusline when opening files
+    end,
+})
+
 vim.keymap.set("n", "<leader>y", "<cmd>Telescope yank_history<CR>", { desc = "Yank history" })
 
 vim.api.nvim_create_autocmd("BufReadPre", {
@@ -253,6 +259,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
         if vim.fn.argc() == 0 or (vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv()[0]) == 1) then
             vim.cmd("silent! %bwipeout")
             vim.cmd("enew")
+            vim.opt.laststatus = 0 -- hide statusline on blank startup
         end
     end,
 })
