@@ -11,7 +11,11 @@ local keys = function()
             "<leader>h",
             function()
                 local harpoon = require("harpoon")
-                harpoon.ui:toggle_quick_menu(harpoon:list())
+                harpoon.ui:toggle_quick_menu(harpoon:list(), {
+                    height_in_lines = 7,
+                    ui_max_width = 40,
+                    border = "rounded",
+                })
             end,
             desc = "Harpoon Pinned Files Menu",
         },
