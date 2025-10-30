@@ -35,11 +35,11 @@ alias setcursor='hyprctl setcursor "Bibata-Modern-Ice" 20'
 alias count='find . -type f | wc -l'
 alias ll='eza -lah -a --icons --group-directories-first'
 alias lt='eza --tree -a --icons'
-alias diff='diff-so-fancy'
 alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
+alias update='sudo pacman -Syu'
 
 # Making CONTROL+RIGHT/LEFT ARROW keys work in terminal:
 
