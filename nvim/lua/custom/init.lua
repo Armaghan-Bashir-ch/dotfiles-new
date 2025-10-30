@@ -100,6 +100,8 @@ vim.api.nvim_create_autocmd("VimLeave", {
     command = "set guicursor=a:hor30",
 })
 
+vim.opt.guicursor = "i:block"
+
 local uv = vim.loop
 
 vim.api.nvim_create_autocmd({ "VimEnter", "VimLeave" }, {
