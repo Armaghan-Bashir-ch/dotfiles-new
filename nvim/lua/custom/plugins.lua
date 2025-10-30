@@ -739,7 +739,9 @@ local plugins = {
         lazy = false,
         enabled = true,
         dependencies = { "MunifTanjim/nui.nvim" },
-        opts = {},
+        opts = {
+            max_count = 20,
+        },
     },
 
     --NOTE: Enable this when you get use to vim motions, never before
