@@ -56,7 +56,7 @@
     },
 
     "custom/todo": {
-        "format": "  Get Disiplined",  // NOTE: Replace with your very own to-do //
+        "format": "¯\\(ツ)/¯",  // NOTE: Replace with your very own to-do //
         "separate-outputs": true,
         "max-length": 1000
     },
