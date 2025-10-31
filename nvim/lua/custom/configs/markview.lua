@@ -186,42 +186,57 @@ local config = {
 
     list_items = {
         enable = true,
-        indent_size = function (buffer)
+        indent_size = function(buffer)
             if type(buffer) ~= "number" then
-                return vim.bo.shiftwidth or 4;
+                return vim.bo.shiftwidth or 4
             end
 
             -- Use 'shiftwidth' value.
-            return vim.bo[buffer].shiftwidth or 4;
+            return vim.bo[buffer].shiftwidth or 4
         end,
         shift_width = 2,
         marker_minus = {
             text = function(_, item)
                 local level = item.indent + 1
-                if level == 1 then return "●"
-                elseif level == 2 then return "□"
-                elseif level == 3 then return "○"
-                else return "△" end
+                if level == 1 then
+                    return "●"
+                elseif level == 2 then
+                    return "□"
+                elseif level == 3 then
+                    return "○"
+                else
+                    return "○"
+                end
             end,
             hl = "MarkviewListItemMinus",
         },
         marker_plus = {
             text = function(_, item)
                 local level = item.indent + 1
-                if level == 1 then return "◈"
-                elseif level == 2 then return "□"
-                elseif level == 3 then return "○"
-                else return "△" end
+                if level == 1 then
+                    return "◈"
+                elseif level == 2 then
+                    return "□"
+                elseif level == 3 then
+                    return "○"
+                else
+                    return "○"
+                end
             end,
             hl = "MarkviewListItemPlus",
         },
         marker_star = {
             text = function(_, item)
                 local level = item.indent + 1
-                if level == 1 then return "◇"
-                elseif level == 2 then return "□"
-                elseif level == 3 then return "○"
-                else return "△" end
+                if level == 1 then
+                    return "◇"
+                elseif level == 2 then
+                    return "□"
+                elseif level == 3 then
+                    return "○"
+                else
+                    return "○"
+                end
             end,
             hl = "MarkviewListItemStar",
         },
