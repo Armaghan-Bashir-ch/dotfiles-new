@@ -356,12 +356,12 @@ local plugins = {
     },
     { "chrisgrieser/nvim-rulebook",               cmd = "Rulebook", keys = load_mappings("rulebook") },
     {
-        "MeanderingProgrammer/render-markdown.nvim",
+        "OXY2DEV/markview.nvim",
         lazy = false,
-        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-        ---@module 'render-markdown'
-        ---@type render.md.UserConfig
-        opts = {},
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        config = function()
+            require('markview').setup(require('custom.configs.markview'))
+        end,
     },
     {
         "iamcco/markdown-preview.nvim",
