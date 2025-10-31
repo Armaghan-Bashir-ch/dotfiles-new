@@ -186,18 +186,43 @@ local config = {
 
     list_items = {
         enable = true,
-        indent_size = 0,
-        shift_width = 0,
+        indent_size = function (buffer)
+            if type(buffer) ~= "number" then
+                return vim.bo.shiftwidth or 4;
+            end
+
+            -- Use 'shiftwidth' value.
+            return vim.bo[buffer].shiftwidth or 4;
+        end,
+        shift_width = 2,
         marker_minus = {
-            text = "●",
+            text = function(_, item)
+                local level = item.indent + 1
+                if level == 1 then return "●"
+                elseif level == 2 then return "□"
+                elseif level == 3 then return "○"
+                else return "△" end
+            end,
             hl = "MarkviewListItemMinus",
         },
         marker_plus = {
-            text = "◈",
+            text = function(_, item)
+                local level = item.indent + 1
+                if level == 1 then return "◈"
+                elseif level == 2 then return "□"
+                elseif level == 3 then return "○"
+                else return "△" end
+            end,
             hl = "MarkviewListItemPlus",
         },
         marker_star = {
-            text = "◇",
+            text = function(_, item)
+                local level = item.indent + 1
+                if level == 1 then return "◇"
+                elseif level == 2 then return "□"
+                elseif level == 3 then return "○"
+                else return "△" end
+            end,
             hl = "MarkviewListItemStar",
         },
         marker_dot = {
@@ -223,8 +248,8 @@ vim.api.nvim_set_hl(0, "MarkviewHeading4", { fg = "#a6e3a1", bold = true })
 vim.api.nvim_set_hl(0, "MarkviewHeading5", { fg = "#74c7ec", bold = true })
 vim.api.nvim_set_hl(0, "MarkviewHeading6", { fg = "#b4befe", bold = true })
 
-vim.api.nvim_set_hl(0, "MarkviewListItemMinus", { fg = "#F395AA" })
-vim.api.nvim_set_hl(0, "MarkviewListItemPlus", { fg = "#F395AA" })
-vim.api.nvim_set_hl(0, "MarkviewListItemStar", { fg = "#F395AA" })
+vim.api.nvim_set_hl(0, "MarkviewListItemMinus", { fg = "#FF9E64" })
+vim.api.nvim_set_hl(0, "MarkviewListItemPlus", { fg = "#FF9E64" })
+vim.api.nvim_set_hl(0, "MarkviewListItemStar", { fg = "#FF9E64" })
 
 return config
