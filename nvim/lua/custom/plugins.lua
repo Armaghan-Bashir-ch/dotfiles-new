@@ -1009,7 +1009,7 @@ local plugins = {
         "alex-popov-tech/store.nvim",
         dependencies = { "OXY2DEV/markview.nvim" },
         lazy = true,
-        enabled = true
+        enabled = true,
         opts = {},
         cmd = "Store"
     },
