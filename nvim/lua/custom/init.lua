@@ -1,23 +1,25 @@
-local opt = vim.opt                                                                                    -- Shortcut alias for Neovim's option settings
+local opt = vim.opt                                -- Shortcut alias for Neovim's option settings
 
-opt.relativenumber = true                                                                              -- Adding Relative Line Numbers to be turned on every single time on starup
-vim.opt.expandtab = true                                                                               -- Convert tabs to spaces
-vim.opt.tabstop = 4                                                                                    -- Number of spaces a tab represents
-vim.opt.shiftwidth = 4                                                                                 -- Number of spaces for autoindent
-vim.opt.showtabline = 0                                                                                -- Disables file tab names at the top, don't know the right name for it
-vim.opt.wrap = false                                                                                   -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
-vim.opt.cursorline = false                                                                             -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
-vim.g.fancyScroll = true                                                                               -- Disabling fancy scroll, fancy scroll is basically replacement of control+d/u but with the mice
-vim.opt.cmdheight = 1                                                                                  -- Sets the statusline height to be one line above the bottom, helps with cleaness
-vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE" })                                                     -- Needed for the lastest --version of nvim (0.11.4)
-vim.opt.ttimeoutlen = 0                                                                                -- Reduce delay for key code sequences
-vim.opt.timeoutlen = 500                                                                               -- Timeout for mappings
-vim.g.nvchad_hot_reload = false                                                                        -- Don't automatically reload the NvChad config. You'll have to restart Neovim to see your changes.
-vim.g.lazyvim_prettier_needs_config = false                                                            -- Run Prettier without requiring a config file
-vim.g.auto_ai = false                                                                                  -- Disable automatic AI completions/integrations out of the box, nobody needs AI
-vim.g.customBigFileOpt = true                                                                          -- Enable custom optimizations for large files
-vim.o.swapfile = false                                                                                 -- Disable creation of swap files
-vim.g.disableFormat = false                                                                            -- Keep code formatting enabled
+opt.relativenumber = true                          -- Adding Relative Line Numbers to be turned on every single time on starup
+vim.opt.expandtab = true                           -- Convert tabs to spaces
+vim.opt.tabstop = 4                                -- Number of spaces a tab represents
+vim.opt.shiftwidth = 4                             -- Number of spaces for autoindent
+vim.opt.showtabline = 0                            -- Disables file tab names at the top, don't know the right name for it
+vim.opt.wrap = false                               -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
+vim.opt.cursorline = false                         -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
+vim.g.fancyScroll = true                           -- Disabling fancy scroll, fancy scroll is basically replacement of control+d/u but with the mice
+vim.opt.cmdheight = 1                              -- Sets the statusline height to be one line above the bottom, helps with cleaness
+vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE" }) -- Needed for the lastest --version of nvim (0.11.4)
+vim.opt.ttimeoutlen = 0                            -- Reduce delay for key code sequences
+vim.opt.timeoutlen = 500                           -- Timeout for mappings
+vim.g.nvchad_hot_reload = false                    -- Don't automatically reload the NvChad config. You'll have to restart Neovim to see your changes.
+vim.g.lazyvim_prettier_needs_config = false        -- Run Prettier without requiring a config file
+vim.g.auto_ai = false                              -- Disable automatic AI completions/integrations out of the box, nobody needs AI
+vim.g.customBigFileOpt = true                      -- Enable custom optimizations for large files
+vim.o.swapfile = false                             -- Disable creation of swap files
+vim.g.disableFormat = false                        -- Keep code formatting enabled
+vim.opt.incsearch = true
+vim.opt.hlsearch = true
 vim.o.sessionoptions =
 "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"                        -- Define what gets saved/restored in a Vim session
 vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false })                       -- Remove underline/undercurl from the line number of the current cursor line
