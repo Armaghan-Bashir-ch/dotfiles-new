@@ -741,6 +741,7 @@ local plugins = {
         dependencies = { "MunifTanjim/nui.nvim" },
         opts = {
             max_count = 20,
+            notification = false,
         },
     },
 
