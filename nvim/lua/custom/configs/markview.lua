@@ -186,66 +186,48 @@ local config = {
 
     list_items = {
         enable = true,
-        indent_size = function(buffer)
-            if type(buffer) ~= "number" then
-                return vim.bo.shiftwidth or 4
-            end
+        wrap = true,
 
-            -- Use 'shiftwidth' value.
-            return vim.bo[buffer].shiftwidth or 4
+        indent_size = function(buffer)
+            return 0
         end,
+
         shift_width = 2,
+
         marker_minus = {
             text = function(_, item)
-                local level = item.indent + 1
-                if level == 1 then
-                    return "●"
-                elseif level == 2 then
-                    return "□"
-                elseif level == 3 then
-                    return "○"
-                else
-                    return "○"
-                end
+                local level = math.floor(item.indent / 2) + 1
+                local icons = {"●", "○", "⦿", "▪"}
+                return icons[((level - 1) % #icons) + 1]
             end,
             hl = "MarkviewListItemMinus",
         },
+
         marker_plus = {
             text = function(_, item)
-                local level = item.indent + 1
-                if level == 1 then
-                    return "◈"
-                elseif level == 2 then
-                    return "□"
-                elseif level == 3 then
-                    return "○"
-                else
-                    return "○"
-                end
+                local level = math.floor(item.indent / 2) + 1
+                local icons = {"●", "○", "⦿", "▪"}
+                return icons[((level - 1) % #icons) + 1]
             end,
             hl = "MarkviewListItemPlus",
         },
+
         marker_star = {
             text = function(_, item)
-                local level = item.indent + 1
-                if level == 1 then
-                    return "◇"
-                elseif level == 2 then
-                    return "□"
-                elseif level == 3 then
-                    return "○"
-                else
-                    return "○"
-                end
+                local level = math.floor(item.indent / 2) + 1
+                local icons = {"●", "○", "⦿", "▪"}
+                return icons[((level - 1) % #icons) + 1]
             end,
             hl = "MarkviewListItemStar",
         },
+
         marker_dot = {
             text = function(_, item)
                 return string.format("%d.", item.n)
             end,
             hl = "@markup.list.markdown",
         },
+
         marker_parenthesis = {
             text = function(_, item)
                 return string.format("%d)", item.n)
