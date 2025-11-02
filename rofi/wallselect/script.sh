@@ -11,14 +11,16 @@ if ! pgrep -x swww-daemon >/dev/null; then
 fi
 
 # Rofi wallpaper selector with previews (now includes .gif)
-SELECTED=$(find "$WALL_DIR" \
-    -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) \
-    | shuf \
-    | while read -r img; do
-        fname=$(basename "$img")   # extract just filename
-        echo -en "$fname\0icon\x1f$img\n"
-    done \
-    | rofi -dmenu -show-icons -theme "$HOME/.config/rofi/wallselect/style.rasi")
+# Order of directories
+DIRS=("Catppuccin-Latte" "Frosted-Glass" "Catppuccin-Mocha" "Tokyo-Night" "Decay-Green" "Nordic-Blue" "Material-Sakura" "Rose-Pine" "Gruvbox-Retro" "Synth-Wave")
+
+SELECTED=$(for dir in "${DIRS[@]}"; do
+    find "$WALL_DIR/$dir" \
+        -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) 2>/dev/null
+done | while read -r img; do
+    fname=$(basename "$img")   # extract just filename
+    echo -en "$fname\0icon\x1f$img\n"
+done | rofi -dmenu -show-icons -theme "$HOME/.config/rofi/wallselect/style.rasi")
 
 # If user selected a wallpaper, find full path and set it with swww
 if [ -n "$SELECTED" ]; then
