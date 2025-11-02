@@ -34,188 +34,45 @@ local config = {
         },
     },
 
-    code_blocks = {
-        enable = true,
-        border_hl = "MarkviewCode",
-        info_hl = "MarkviewCodeInfo",
-        label_direction = "right",
-        min_width = 60,
-        pad_amount = 2,
-        pad_char = " ",
-        default = {
-            block_hl = "MarkviewCode",
-            pad_hl = "MarkviewCode",
-        },
-        style = "block",
-        sign = true,
-    },
-
-    markdown = {
-        headings = {
-            enable = true,
-            heading_1 = {
-                style = "icon",
-                sign = "󰌕 ",
-                sign_hl = "MarkviewHeading1Sign",
-                icon = "󰼏  ",
-                hl = "MarkviewHeading1",
-            },
-            heading_2 = {
-                style = "icon",
-                sign = "󰌖 ",
-                sign_hl = "MarkviewHeading2Sign",
-                icon = "󰎨  ",
-                hl = "MarkviewHeading2",
-            },
-            heading_3 = {
-                style = "icon",
-                icon = "󰼑  ",
-                hl = "MarkviewHeading3",
-            },
-            heading_4 = {
-                style = "icon",
-                icon = "󰎲  ",
-                hl = "MarkviewHeading4",
-            },
-            heading_5 = {
-                style = "icon",
-                icon = "󰼓  ",
-                hl = "MarkviewHeading5",
-            },
-            heading_6 = {
-                style = "icon",
-                icon = "󰎴  ",
-                hl = "MarkviewHeading6",
-            },
-            setext_1 = {
-                style = "decorated",
-                sign = "󰌕 ",
-                sign_hl = "MarkviewHeading1Sign",
-                icon = "  ",
-                hl = "MarkviewHeading1",
-                border = "▂",
-            },
-            setext_2 = {
-                style = "decorated",
-                sign = "󰌖 ",
-                sign_hl = "MarkviewHeading2Sign",
-                icon = "  ",
-                hl = "MarkviewHeading2",
-                border = "▁",
-            },
-            shift_width = 1,
-        },
-        horizontal_rules = {
-            enable = true,
-            parts = {
-                {
-                    type = "repeating",
-                    direction = "left",
-                    repeat_amount = 20,
-                    text = "─",
-                    hl = {
-                        "MarkviewGradient1",
-                        "MarkviewGradient2",
-                        "MarkviewGradient3",
-                        "MarkviewGradient4",
-                        "MarkviewGradient5",
-                        "MarkviewGradient6",
-                        "MarkviewGradient7",
-                        "MarkviewGradient8",
-                        "MarkviewGradient9",
-                    },
-                },
-                {
-                    type = "text",
-                    text = "  ",
-                    hl = "MarkviewIcon3Fg",
-                },
-                {
-                    type = "repeating",
-                    direction = "right",
-                    repeat_amount = 20,
-                    text = "─",
-                    hl = {
-                        "MarkviewGradient1",
-                        "MarkviewGradient2",
-                        "MarkviewGradient3",
-                        "MarkviewGradient4",
-                        "MarkviewGradient5",
-                        "MarkviewGradient6",
-                        "MarkviewGradient7",
-                        "MarkviewGradient8",
-                        "MarkviewGradient9",
-                    },
-                },
-            },
-        },
-        tables = {
-            enable = true,
-            strict = false,
-            block_decorator = true,
-            use_virt_lines = false,
-            parts = {
-                top = { "╭", "─", "╮", "┬" },
-                header = { "│", "│", "│" },
-                separator = { "├", "─", "┤", "┼" },
-                row = { "│", "│", "│" },
-                bottom = { "╰", "─", "╯", "┴" },
-                overlap = { "┝", "━", "┥", "┿" },
-                align_left = "╼",
-                align_right = "╾",
-                align_center = { "╴", "╶" },
-            },
-            hl = {
-                top = { "MarkviewTableHeader", "MarkviewTableHeader", "MarkviewTableHeader", "MarkviewTableHeader" },
-                header = { "MarkviewTableHeader", "MarkviewTableHeader", "MarkviewTableHeader" },
-                separator = {
-                    "MarkviewTableHeader",
-                    "MarkviewTableHeader",
-                    "MarkviewTableHeader",
-                    "MarkviewTableHeader",
-                },
-                row = { "MarkviewTableBorder", "MarkviewTableBorder", "MarkviewTableBorder" },
-                bottom = { "MarkviewTableBorder", "MarkviewTableBorder", "MarkviewTableBorder", "MarkviewTableBorder" },
-                overlap = { "MarkviewTableBorder", "MarkviewTableBorder", "MarkviewTableBorder", "MarkviewTableBorder" },
-                align_left = "MarkviewTableAlignLeft",
-                align_right = "MarkviewTableAlignRight",
-                align_center = { "MarkviewTableAlignCenter", "MarkviewTableAlignCenter" },
-            },
-        },
-    },
-
     list_items = {
         enable = true,
         wrap = true,
 
-        indent_size = function(buffer)
-            return 0
-        end,
+        indent_size = function (buffer)
+            if type(buffer) ~= "number" then
+                return vim.bo.shiftwidth or 4;
+            end
 
-        shift_width = 2,
+            --- Use 'shiftwidth' value.
+            return vim.bo[buffer].shiftwidth or 4;
+        end,
+        shift_width = 4,
 
         marker_minus = {
+            add_padding = true,
             text = function(_, item)
-                local level = math.floor(item.indent / 2) + 1
-                local icons = {"●", "○", "⦿", "▪"}
+                local level = math.floor(item.indent / 4) + 1
+                local icons = {"●", "○", "▪", "▫"}
                 return icons[((level - 1) % #icons) + 1]
             end,
             hl = "MarkviewListItemMinus",
         },
 
         marker_plus = {
+            add_padding = true,
             text = function(_, item)
-                local level = math.floor(item.indent / 2) + 1
-                local icons = {"●", "○", "⦿", "▪"}
+                local level = math.floor(item.indent / 4) + 1
+                local icons = {"●", "○", "▪", "▫"}
                 return icons[((level - 1) % #icons) + 1]
             end,
             hl = "MarkviewListItemPlus",
         },
 
         marker_star = {
+            add_padding = true,
             text = function(_, item)
-                local level = math.floor(item.indent / 2) + 1
-                local icons = {"●", "○", "⦿", "▪"}
+                local level = math.floor(item.indent / 4) + 1
+                local icons = {"●", "○", "▪", "▫"}
                 return icons[((level - 1) % #icons) + 1]
             end,
             hl = "MarkviewListItemStar",
@@ -226,6 +83,7 @@ local config = {
                 return string.format("%d.", item.n)
             end,
             hl = "@markup.list.markdown",
+            add_padding = true,
         },
 
         marker_parenthesis = {
@@ -233,6 +91,7 @@ local config = {
                 return string.format("%d)", item.n)
             end,
             hl = "@markup.list.markdown",
+            add_padding = true,
         },
     },
 }
