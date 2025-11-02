@@ -991,7 +991,7 @@ local plugins = {
             },
             scratch = { enabled = true },
             gitbrowse = { enabled = true },
-            notifier = { enabled = true },
+             notifier = { enabled = false },
             scroll = {
                 enabled = false,
                 animate = {
