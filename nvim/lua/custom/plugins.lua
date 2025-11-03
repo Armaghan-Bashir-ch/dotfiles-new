@@ -1214,6 +1214,13 @@ local plugins = {
     },
 
     --NOTE: Noice.nvim makes it so that, the statusline stays low on the screen, and also that it collides with the tmux                 status line
+    {
+        "sindrets/diffview.nvim",
+        cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles" },
+        config = function()
+            require("diffview").setup()
+        end,
+    },
 }
 
 return plugins
