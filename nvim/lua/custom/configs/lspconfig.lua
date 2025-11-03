@@ -38,15 +38,15 @@ vim.lsp.config('gopls', {
 })
 vim.lsp.enable('gopls')
 
-vim.lsp.config('marksman', {
+vim.lsp.config('markdown_oxide', {
   on_attach = function(client, bufnr)
     disable_formatting(client) -- Disable formatting for specific servers
     on_attach(client, bufnr)
   end,
   capabilities = capabilities,
-  filetypes = { "markdown" },
+  cmd = { "markdown-oxide" },
 })
-vim.lsp.enable('marksman')
+vim.lsp.enable('markdown_oxide')
 
 vim.lsp.config('bashls', {
   on_attach = function(client, bufnr)
