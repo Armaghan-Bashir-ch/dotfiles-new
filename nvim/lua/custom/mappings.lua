@@ -407,6 +407,7 @@ M.general = {
         ["<leader>ft"] = { "<cmd> TodoTelescope <CR>" },
         ["<leader>fcm"] = { "<cmd> Telescope commands <CR>", "Find command history" },
         ["<leader>flr"] = { "<cmd> Telescope lsp_references <CR>", "LSP References" },
+        ["<leader>vrr"] = { "<cmd> Telescope lsp_references <CR>", "LSP References" },
         ["gt"] = { "<cmd> Telescope lsp_type_definitions <CR>", "Type Definations" },
         ["<leader>u"] = {
             "<cmd>UndotreeToggle<cr>",
@@ -416,7 +417,7 @@ M.general = {
         ["<leader>gvh"] = { "<cmd>Gitsigns select_hunk<CR>", "Visual selection for the git hunk" },
         ["<C-p>"] = { "<cmd>FFFFind<CR>" },
         ["<C-g>"] = { "<cmd>Telescope git_status<CR>" },
-        ["gd"] = { "<cmd>Telescope lsp_definitions<CR>", "Lsp defination" },
+        ["<leader>gd"] = { "<cmd>Telescope lsp_definitions<CR>", "Lsp defination" },
 
         ["<leader>ba"] = {
             function()
