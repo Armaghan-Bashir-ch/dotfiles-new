@@ -125,10 +125,10 @@
 
     "network": {
         "format-wifi": "󰤨  {essid}",
-        "format-ethernet": "󱘖 Wired",
+        "format-ethernet": "󰈀 Wired",
         "tooltip-format": "羽 {frequency}GHz  {bandwidthUpBytes}  {bandwidthDownBytes}",
         "format-linked": "󱘖 {ifname} (No IP)",
-        "format-disconnected": "  Disconnected",
+        "format-disconnected": "󰤠  Disconnected",
         "format-alt": "󰤨 {signalStrength}%",
         "interval": 5
     },
