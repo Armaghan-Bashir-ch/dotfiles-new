@@ -118,17 +118,17 @@
 [Type-4] summary = "Theme" format = " %a\n%s\n%b"
 
 [urgency_critical]
-background = "#eff1f5"
-foreground = "#4c4f69"
-    timeout = 0
-
-    [urgency_low]
     background = "#eff1f5"
     foreground = "#4c4f69"
-    timeout = 3
+    timeout = 2
 
-    [urgency_critical]
+[urgency_low]
+    background = "#eff1f5"
+    foreground = "#4c4f69"
+    timeout = 2
+
+[urgency_critical]
     background = "#eff1f5"
     foreground = "#4c4f69"
     frame_color = "#fe640b"
-    timeout = 3
+    timeout = 2
