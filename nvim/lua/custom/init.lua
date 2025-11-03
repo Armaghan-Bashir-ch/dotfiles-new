@@ -96,12 +96,7 @@ vim.cmd([[
   augroup END
 ]])
 
-vim.api.nvim_create_augroup("Shape", { clear = true })
-vim.api.nvim_create_autocmd("VimLeave", {
-    group = "Shape",
-    -- this is for underscore
-    command = "set guicursor=a:hor30",
-})
+
 
 local uv = vim.loop
 
