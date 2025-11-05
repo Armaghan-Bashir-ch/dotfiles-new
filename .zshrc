@@ -32,14 +32,14 @@ alias ls="eza -A -a --icons --group-directories-first"
 alias cdi="zi"
 alias top='btop'
 alias setcursor='hyprctl setcursor "Bibata-Modern-Ice" 20'
-alias count='find . -type f | wc -l'
+alias count='fd --exclude .git | wc -l'
 alias ll='eza -lah -a --icons --group-directories-first'
 alias lt='eza --tree -a --icons'
 alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
-alias fd='fd --exclude Tokyo-Night-GTK-Theme'
+alias fd='fd --exclude ~/Tokyo-Night-GTK-Theme'
 alias update='sudo pacman -Syu'
 
 # Making CONTROL+RIGHT/LEFT ARROW keys work in terminal:
