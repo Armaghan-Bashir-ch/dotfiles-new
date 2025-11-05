@@ -1221,6 +1221,13 @@ local plugins = {
             require("diffview").setup()
         end,
     },
+    {
+
+        "GreenStarMatter/nvim-golf",
+
+        lazy = false,
+
+    },
 }
 
 return plugins
