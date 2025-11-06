@@ -2,33 +2,6 @@ local load_mappings = require("core.utils").load_mappings
 
 local plugins = {
 
-    -- {
-    --     "rasulomaroff/reactive.nvim",
-    --     enabled = false,
-    --     event = "VeryLazy",
-    --     config = function()
-    --         require("reactive").setup({
-    --             builtin = {
-    --                 cursorline = true,
-    --                 cursor = true,
-    --                 modemsg = true,
-    --             },
-    --         })
-    --     end,
-    -- },
-    -- {
-    --     "danielfalk/smart-open.nvim",
-    --     lazy = false,
-    --     branch = "0.2.x",
-    --     dependencies = {
-    --         "kkharji/sqlite.lua",
-    --         -- Only required if using match_algorithm fzf
-    --         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    --         -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
-    --         { "nvim-telescope/telescope-fzy-native.nvim" },
-    --     },
-    -- },
-
     {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
@@ -1170,51 +1143,6 @@ local plugins = {
     },
 
     {
-        "rcarriga/nvim-notify",
-        opts = function(_, opts)
-            opts.top_down = false
-            opts.stages = "fade_in_slide_out"
-            opts.timeout = 2000
-            opts.max_width = 100
-            opts.max_height = 50
-
-            -- Position notifications at top to avoid tmux/statusline overlap
-            opts.on_open = function(win)
-                local config = vim.api.nvim_win_get_config(win)
-                config.relative = "editor"
-                config.anchor = "NW"
-
-                local width = 50
-                local height = 5
-                config.row = 1                           -- Top position (small offset from edge)
-                config.col = math.floor((vim.o.columns - width) / 2) -- Center horizontally
-
-                vim.api.nvim_win_set_config(win, config)
-            end
-
-            return opts
-        end,
-    },
-
-    {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        enabled = false,
-        opts = {
-            -- add any options here
-        },
-        dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
-            -- OPTIONAL:
-            --   `nvim-notify` is only needed, if you want to use the notification view.
-            --   If not available, we use `mini` as the fallback
-            "rcarriga/nvim-notify",
-        },
-    },
-
-    --NOTE: Noice.nvim makes it so that, the statusline stays low on the screen, and also that it collides with the tmux                 status line
-    {
         "sindrets/diffview.nvim",
         cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles" },
         config = function()
@@ -1224,9 +1152,27 @@ local plugins = {
     {
 
         "GreenStarMatter/nvim-golf",
-
         lazy = false,
+    },
 
+    {
+        "rcarriga/nvim-notify",
+        lazy = false,
+        config = function()
+            require("notify").setup({
+                stages = "fade_in_slide_out",
+                timeout = 2000,
+                max_width = 100,
+                max_height = 50,
+            })
+            local notify = require("notify")
+            vim.notify = function(msg, level, opts)
+                if msg == nil then
+                    return
+                end
+                return notify(msg, level, opts)
+            end
+        end,
     },
 }
 
