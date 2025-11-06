@@ -14,6 +14,8 @@ filenames:
   hyprland.conf: {icon: {glyph: ""}}
   hyprlock.conf: {icon: {glyph: ""}}
   hyprpaper.conf: {icon: {glyph: ""}}
+  hypridle.conf: {icon: {glyph: ""}}
+  hyprsunset.conf: {icon: {glyph: ""}}
   dunst: {icon: {glyph: ""}}
   dunstrc: {icon: {glyph: ""}}
   dunst.conf: {icon: {glyph: ""}}
