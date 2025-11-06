@@ -1160,10 +1160,11 @@ local plugins = {
         lazy = false,
         config = function()
             require("notify").setup({
-                stages = "fade_in_slide_out",
-                timeout = 2000,
-                max_width = 100,
-                max_height = 50,
+                stages = "static",
+                timeout = 1000,
+                width = 1000,
+                height = 1000,
+                render = "compact",
             })
             local notify = require("notify")
             vim.notify = function(msg, level, opts)
