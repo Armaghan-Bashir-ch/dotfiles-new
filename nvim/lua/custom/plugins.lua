@@ -234,9 +234,7 @@ local plugins = {
     {
         "folke/todo-comments.nvim",
         lazy = false,
-        config = function()
-            require("todo-comments").setup({})
-        end,
+        config = require("custom.configs.todo-comments"),
     },
 
     {
