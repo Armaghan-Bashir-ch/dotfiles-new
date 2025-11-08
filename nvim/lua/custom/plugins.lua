@@ -234,6 +234,7 @@ local plugins = {
     {
         "folke/todo-comments.nvim",
         lazy = false,
+        enabled = true,
         config = require("custom.configs.todo-comments"),
     },
 
@@ -329,8 +330,6 @@ local plugins = {
         "OXY2DEV/markview.nvim",
         lazy = false,
         enabled = false,
-        --  BUG: When I enable markview.nvim, it removes the LSP/Dict/Everything related to suggestions/auto_completion from markdown/marksman/.md files.
-        --  TODO: Find a way to enable this, and enable LSP/Dict/Everything related to suggestions/auto_completion menu, in inside of markdown files. Because I also need to use markview.nvim
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         config = function()
             require("markview").setup(require("custom.configs.markview"))
