@@ -38,13 +38,13 @@ local config = {
         enable = true,
         wrap = true,
 
-        indent_size = function (buffer)
+        indent_size = function(buffer)
             if type(buffer) ~= "number" then
-                return vim.bo.shiftwidth or 4;
+                return vim.bo.shiftwidth or 4
             end
 
             --- Use 'shiftwidth' value.
-            return vim.bo[buffer].shiftwidth or 4;
+            return vim.bo[buffer].shiftwidth or 4
         end,
         shift_width = 4,
 
@@ -52,7 +52,7 @@ local config = {
             add_padding = true,
             text = function(_, item)
                 local level = math.floor(item.indent / 4) + 1
-                local icons = {"●", "○", "▪", "▫"}
+                local icons = { "●", "○", "◉", "◎", "◍", "▪", "▫", "◆", "◇", "◈" }
                 return icons[((level - 1) % #icons) + 1]
             end,
             hl = "MarkviewListItemMinus",
@@ -62,7 +62,7 @@ local config = {
             add_padding = true,
             text = function(_, item)
                 local level = math.floor(item.indent / 4) + 1
-                local icons = {"●", "○", "▪", "▫"}
+                local icons = { "●", "○", "◉", "◎", "◍", "▪", "▫", "◆", "◇", "◈" }
                 return icons[((level - 1) % #icons) + 1]
             end,
             hl = "MarkviewListItemPlus",
@@ -72,37 +72,21 @@ local config = {
             add_padding = true,
             text = function(_, item)
                 local level = math.floor(item.indent / 4) + 1
-                local icons = {"●", "○", "▪", "▫"}
+                local icons = { "●", "○", "◉", "◎", "◍", "▪", "▫", "◆", "◇", "◈" }
                 return icons[((level - 1) % #icons) + 1]
             end,
             hl = "MarkviewListItemStar",
-        },
-
-        marker_dot = {
-            text = function(_, item)
-                return string.format("%d.", item.n)
-            end,
-            hl = "@markup.list.markdown",
-            add_padding = true,
-        },
-
-        marker_parenthesis = {
-            text = function(_, item)
-                return string.format("%d)", item.n)
-            end,
-            hl = "@markup.list.markdown",
-            add_padding = true,
         },
     },
 }
 
 -- Define custom highlights
-vim.api.nvim_set_hl(0, "MarkviewHeading1", { fg = "#f38ba8", bold = true })
-vim.api.nvim_set_hl(0, "MarkviewHeading2", { fg = "#fab387", bold = true })
-vim.api.nvim_set_hl(0, "MarkviewHeading3", { fg = "#f9e2af", bold = true })
-vim.api.nvim_set_hl(0, "MarkviewHeading4", { fg = "#a6e3a1", bold = true })
-vim.api.nvim_set_hl(0, "MarkviewHeading5", { fg = "#74c7ec", bold = true })
-vim.api.nvim_set_hl(0, "MarkviewHeading6", { fg = "#b4befe", bold = true })
+vim.api.nvim_set_hl(0, "MarkviewHeading1", { fg = "#F38BA8", bold = true })
+vim.api.nvim_set_hl(0, "MarkviewHeading2", { fg = "#FAB387", bold = true })
+vim.api.nvim_set_hl(0, "MarkviewHeading3", { fg = "#F9E2AF", bold = true })
+vim.api.nvim_set_hl(0, "MarkviewHeading4", { fg = "#A6E3A1", bold = true })
+vim.api.nvim_set_hl(0, "MarkviewHeading5", { fg = "#74C7EC", bold = true })
+vim.api.nvim_set_hl(0, "MarkviewHeading6", { fg = "#B4BEFE", bold = true })
 
 vim.api.nvim_set_hl(0, "MarkviewListItemMinus", { fg = "#FF9E64" })
 vim.api.nvim_set_hl(0, "MarkviewListItemPlus", { fg = "#FF9E64" })
