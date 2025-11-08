@@ -62,7 +62,7 @@ filenames:
   wlogout: {icon: {glyph: ""}}
   cava: {icon: {glyph: "󰎈"}}
   alacritty: {icon: {glyph: "󰞯"}}
-  zff: {icon: {glyph: "󰱼"}}
+  fastfetch: {icon: {glyph: "⟁"}}
   .pk10k.zsh: {icon: {glyph: ""}}
   lua: {icon: {glyph: ""}}
   snippets: {icon: {glyph: ""}}
