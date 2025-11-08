@@ -84,10 +84,8 @@ listview {
 }
 mode-switcher {
     orientation:                 vertical;
-    width:                       100px;
+    width:                       90px;
     enabled:                     true;
-    padding:                     1px;
-    spacing:                     10px;
     background-color:            transparent;
 }
 button {
