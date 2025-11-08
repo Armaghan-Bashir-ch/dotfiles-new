@@ -233,11 +233,10 @@ local plugins = {
 
     {
         "folke/todo-comments.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
         lazy = false,
-        opts = {
-            -- config go here
-        },
+        config = function()
+            require("todo-comments").setup({})
+        end,
     },
 
     {
@@ -331,6 +330,9 @@ local plugins = {
     {
         "OXY2DEV/markview.nvim",
         lazy = false,
+        enabled = false,
+        --  BUG: When I enable markview.nvim, it removes the LSP/Dict/Everything related to suggestions/auto_completion from markdown/marksman/.md files.
+        --  TODO: Find a way to enable this, and enable LSP/Dict/Everything related to suggestions/auto_completion menu, in inside of markdown files. Because I also need to use markview.nvim
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         config = function()
             require("markview").setup(require("custom.configs.markview"))
@@ -1025,7 +1027,12 @@ local plugins = {
     {
         "chrisgrieser/nvim-rip-substitute",
         cmd = "RipSubstitute",
-        opts = {},
+        opts = {
+            popupWin = {
+                position = "top", ---@type "top"|"bottom"
+                hideSearchReplaceLabels = false,
+            },
+        },
         keys = {
             {
                 "<leader>rs",
@@ -1050,7 +1057,7 @@ local plugins = {
         enabled = true,
         config = function()
             require("btw").setup({
-                text = "I use Neovim with Arch (btw)",
+                text = "I use Neovim with Arch (BTW)",
             })
         end,
     },
@@ -1161,10 +1168,9 @@ local plugins = {
         config = function()
             require("notify").setup({
                 stages = "static",
-                timeout = 1000,
-                width = 1000,
-                height = 1000,
-                render = "compact",
+                timeout = 3000,
+                minimum_width = 45,
+                render = "wrapped-default",
             })
             local notify = require("notify")
             vim.notify = function(msg, level, opts)
