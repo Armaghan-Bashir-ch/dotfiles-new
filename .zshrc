@@ -38,7 +38,8 @@ alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
-alias fd='fd --exclude Tokyo-Night-GTK-Theme'
+alias fd='fd --hidden --exclude Tokyo-Night-GTK-Theme'
+alias rg='rg --hidden'
 alias update='sudo pacman -Syu'
 
 # Making CONTROL+RIGHT/LEFT ARROW keys work in terminal:
