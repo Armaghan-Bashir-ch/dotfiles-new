@@ -1,5 +1,5 @@
 {
-  "theme": "vesper",
+  "theme": "aura",
   "$schema": "https://opencode.ai/config.json",
     "keybinds": {
         "leader": "ctrl+o",
