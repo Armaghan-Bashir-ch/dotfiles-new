@@ -14,9 +14,10 @@ This is a dotfiles repository - no traditional build process exists. Linting and
   - C/C++: clang-format
   - SQL: sqlfmt
 
-## Code Style Guidelines
+### Code Style Guidelines
 
-### Lua (Neovim Configuration)
+#### Lua (Neovim Configuration)
+
 - **Indentation**: 4 spaces (vim.opt.tabstop = 4, vim.opt.shiftwidth = 4)
 - **Naming**: descriptive variable names, camelCase for functions, UPPER_CASE for constants
 - **Comments**: Extensive inline comments explaining complex logic
@@ -24,14 +25,16 @@ This is a dotfiles repository - no traditional build process exists. Linting and
 - **Error handling**: Use pcall for potentially failing operations
 - **Imports**: Require modules at top, use local aliases for frequently used modules
 
-### Bash Scripts
+#### Bash Scripts
+
 - **Shebang**: Always `#!/bin/bash`
 - **Error handling**: Check command success with `if` statements, use `notify-send` for user feedback
 - **Variables**: UPPER_CASE for global constants, descriptive names
 - **Comments**: Inline comments for complex logic
 - **Safety**: Use proper quoting, validate inputs before processing
 
-### General Guidelines
+#### General Guidelines
+
 - **Minimalism**: Keep code as minimal as possible while maintaining quality
 - **Focus**: One task at a time, avoid side quests
 - **Careful changes**: Test changes that affect other configurations
@@ -39,13 +42,15 @@ This is a dotfiles repository - no traditional build process exists. Linting and
 - **Comments**: Use comments for complex changes, ask before adding comments to existing code
 - **File structure**: Related files in same directories, consistent naming
 
-### Directory-Specific Rules
+#### Directory-Specific Rules
+
 - **hypr/**: Ask before modifying hyprland.conf or hyprlock.conf
 - **nvim/custom/**: Ask before adding code directly to files
 - **ghostty/**: Ask before modifying configuration
 - **scripts/**: Place tool-specific scripts in respective directories
 
-### Neovim-Specific
+#### Neovim-Specific
+
 - **Main files**: Focus on `init.lua`, `plugins.lua`, `mappings.lua`, `chadrc.lua`
 - **Plugins**: Use lazy.nvim format with proper event/cmd triggers
 - **Mappings**: Load via core.utils.load_mappings()
