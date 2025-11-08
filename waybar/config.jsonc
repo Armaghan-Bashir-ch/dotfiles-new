@@ -15,9 +15,9 @@
     "passthrough": false,
     "gtk-layer-shell": true,
 
-	"modules-left": ["custom/padd","custom/l_end","battery","backlight","pulseaudio","custom/r_end","custom/l_end","custom/applauncher","network","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
+	"modules-left": ["custom/padd","custom/l_end","battery","backlight","pulseaudio","custom/r_end","custom/l_end","bluetooth","network","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","custom/todo","custom/r_end","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd","custom/l_end","custom/ghostty","custom/lockscreen","custom/wallchange","custom/r_end","custom/l_end","cpu","memory","custom/tempinfo","custom/r_end","custom/padd"],
+	"modules-right": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd","custom/l_end","custom/ghostty","custom/lockscreen","custom/wallchange","custom/clipboard","custom/r_end","custom/l_end","cpu","memory","custom/tempinfo","custom/r_end","custom/padd"],
 
 //  INFO: To add a module to waybar, add its name to the "modules-left/modules-right/modules-center" //
   
@@ -79,7 +79,7 @@
     },
 
     "custom/disk": {
-        "exec": "df -h / | awk 'NR==2 {print \" \" $4 \" free\"}'",
+        "exec": "df -h / | awk 'NR==2 {print \"\" $4 \" free\"}'",
         "interval": 60,
         "tooltip": true,
         "tooltip-format": "Disk space available: {output}"
@@ -113,7 +113,7 @@
     "backlight": {
         "device": "intel_backlight",
         "format": "{icon} {percent}%",
-        "format-icons": ["", "󰪞", "󰪟", "󰪠", "󰪢", "󰪣", "󰪤", "󰪥"],
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
         "on-click": " ",
         "on-scroll-up": "brightnessctl set 10%+",
         "on-scroll-down": "brightnessctl set 10%-",
@@ -129,7 +129,7 @@
         "tooltip-format": "羽 {frequency}GHz  {bandwidthUpBytes}  {bandwidthDownBytes}",
         "format-linked": "󱘖 {ifname} (No IP)",
         "format-disconnected": "󰤠  Disconnected",
-        "format-alt": "󰤨 {signalStrength}%",
+        "format-alt": "󰤨  {signalStrength}%",
         "interval": 5
     },
 
@@ -157,7 +157,8 @@
         "format-connected": " {num_connections}",
         "tooltip-format": " {device_alias}",
         "tooltip-format-connected": "{device_enumerate}",
-        "tooltip-format-enumerate-connected": " {device_alias}"
+        "tooltip-format-enumerate-connected": " {device_alias}",
+        "on-click": "blueberry"
     },
 
     "pulseaudio": {
