@@ -7,7 +7,7 @@
 
     height = 600
 
-    origin = top-left
+    origin = top-right
 
     offset = 20x8
 
