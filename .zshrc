@@ -225,3 +225,6 @@ rgf() {
 # Bind Ctrl+G to rgf
 zle -N rgf
 bindkey '^G' rgf
+
+# Atuin shell integration
+eval "$(atuin init zsh)"
