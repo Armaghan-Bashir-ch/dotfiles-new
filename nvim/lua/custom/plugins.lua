@@ -604,10 +604,12 @@ local plugins = {
     },
 
     {
-        "nvzone/timerly",
-        dependencies = "nvzone/volt",
-        cmd = "TimerlyToggle",
-        config = require("custom.configs.timerly").setup,
+        "ravsii/timers.nvim",
+        version = "*", -- use latest stable release
+        lazy = false,
+        config = function()
+          require("timers").setup(require("custom.configs.timers").setup())
+        end,
     },
     {
         "jay-babu/mason-null-ls.nvim",
