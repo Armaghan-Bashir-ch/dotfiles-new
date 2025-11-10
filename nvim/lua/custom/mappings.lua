@@ -119,38 +119,40 @@ M.snacks = {
                     { label = "Dotfiles",     url = "https://github.com/Armaghan-Bashir-ch/dotfiles-new" },
                     { label = "Dotfiles_Old", url = "https://github.com/Armaghan-Bashir-ch/dotfiles" },
                 }
-                require("telescope.pickers").new({
-                    layout_config = {
-                        horizontal = {
-                            width = 0.35,
-                            height = 0.30,
-                            preview_width = 0.7,
+                require("telescope.pickers")
+                    .new({
+                        layout_config = {
+                            horizontal = {
+                                width = 0.35,
+                                height = 0.30,
+                                preview_width = 0.7,
+                            },
                         },
-                    },
-                }, {
-                    prompt_title = "Select a repo to open",
-                    finder = require("telescope.finders").new_table({
-                        results = options,
-                        entry_maker = function(entry)
-                            return {
-                                value = entry,
-                                display = entry.label,
-                                ordinal = entry.label,
-                            }
+                    }, {
+                        prompt_title = "Select a repo to open",
+                        finder = require("telescope.finders").new_table({
+                            results = options,
+                            entry_maker = function(entry)
+                                return {
+                                    value = entry,
+                                    display = entry.label,
+                                    ordinal = entry.label,
+                                }
+                            end,
+                        }),
+                        attach_mappings = function(prompt_bufnr, map)
+                            require("telescope.actions").select_default:replace(function()
+                                require("telescope.actions").close(prompt_bufnr)
+                                local selection = require("telescope.actions.state").get_selected_entry()
+                                if selection then
+                                    vim.notify("Opening " .. selection.value.label .. "...")
+                                    vim.fn.system("xdg-open " .. selection.value.url .. " &")
+                                end
+                            end)
+                            return true
                         end,
-                    }),
-                    attach_mappings = function(prompt_bufnr, map)
-                        require("telescope.actions").select_default:replace(function()
-                            require("telescope.actions").close(prompt_bufnr)
-                            local selection = require("telescope.actions.state").get_selected_entry()
-                            if selection then
-                                vim.notify("Opening " .. selection.value.label .. "...")
-                                vim.fn.system("xdg-open " .. selection.value.url .. " &")
-                            end
-                        end)
-                        return true
-                    end,
-                }):find()
+                    })
+                    :find()
             end,
             "Open repo menu",
         },
@@ -469,6 +471,7 @@ M.general = {
         ["<leader>gd"] = { "<cmd> DiffviewOpen <CR>", "Open git diff" },
         ["<leader>dt"] = { "<cmd> Dooing <CR>", "Open Todo-List" },
         ["<leader>vb"] = { "<cmd> VimBeGood <CR>", "Open VimBeGood" },
+        ["<leader>tt"] = { "<cmd> TimersNew <CR>", "Open VimBeGood" },
         ["<leader>st"] = { "<cmd> Store <CR>", "Open Store.Nvim" },
         ["<leader>gdc"] = { "<cmd> DiffviewClose <CR>", "Close git diff" },
         ["<leader>gdo"] = { "<cmd> DiffviewOpen <CR>", "Toggle files git diff" },
@@ -653,39 +656,57 @@ M.general = {
 
         -- LSP navigation mappings
         ["gd"] = {
-            function() vim.lsp.buf.definition() end,
+            function()
+                vim.lsp.buf.definition()
+            end,
             "LSP definition",
         },
         ["K"] = {
-            function() vim.lsp.buf.hover() end,
+            function()
+                vim.lsp.buf.hover()
+            end,
             "LSP hover",
         },
         ["<leader>vws"] = {
-            function() vim.lsp.buf.workspace_symbol() end,
+            function()
+                vim.lsp.buf.workspace_symbol()
+            end,
             "LSP workspace symbol",
         },
         ["<leader>vd"] = {
-            function() vim.diagnostic.open_float() end,
+            function()
+                vim.diagnostic.open_float()
+            end,
             "LSP diagnostic float",
         },
         ["<leader>vca"] = {
-            function() vim.lsp.buf.code_action() end,
+            function()
+                vim.lsp.buf.code_action()
+            end,
             "LSP code action",
         },
         ["<leader>vrr"] = {
-            function() vim.lsp.buf.references() end,
+            function()
+                vim.lsp.buf.references()
+            end,
             "LSP references",
         },
         ["<leader>vrn"] = {
-            function() vim.lsp.buf.rename() end,
+            function()
+                vim.lsp.buf.rename()
+            end,
             "LSP rename",
         },
         ["[d"] = {
-            function() vim.diagnostic.goto_next() end,
+            function()
+                vim.diagnostic.goto_next()
+            end,
             "Goto next diagnostic",
         },
         ["]d"] = {
-            function() vim.diagnostic.goto_prev() end,
+            function()
+                vim.diagnostic.goto_prev()
+            end,
             "Goto prev diagnostic",
         },
     },
@@ -763,7 +784,9 @@ M.general = {
     i = {
         ["<S-Tab>"] = { "<C-w>" },
         ["<C-h>"] = {
-            function() pcall(vim.lsp.buf.signature_help) end,
+            function()
+                pcall(vim.lsp.buf.signature_help)
+            end,
             "LSP signature help",
         },
         ["<C-BS>"] = { "<C-w>", "Delete previous word" },
