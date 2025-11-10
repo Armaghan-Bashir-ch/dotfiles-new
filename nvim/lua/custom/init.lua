@@ -296,3 +296,14 @@ vim.api.nvim_create_user_command("TimersResume", function(opts) require("timers.
 vim.api.nvim_create_user_command("TimersCancel", function(opts) require("timers.ui").cancel(unpack(opts.fargs)) end, { nargs = "?" })
 vim.api.nvim_create_user_command("TimerCancelAll", function() require("timers.ui").cancel_all() end, {})
 vim.api.nvim_create_user_command("TimerDashboard", function() require("timers.ui").dashboard() end, {})
+
+-- Update statusline every second when timers are active
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.fn.timer_start(1000, function()
+      if require("timers.manager").timers_count() > 0 then
+        vim.cmd("redrawstatus")
+      end
+    end, { ["repeat"] = -1 })
+  end,
+})

@@ -23,7 +23,14 @@ local ui = {
 
             local utils = require("custom.utils")
             modules[3] = "%#St_gitIcons#" .. " " .. (utils.vim_zen or "zen") .. " "
-            modules[7] = "" -- Hide LSP diagnostics
+            modules[7] = (function()
+                local timer = require("timers.integrations.lualine").closest_timer()
+                if timer and timer ~= "" then
+                    return "%#St_lspInfo#" .. " " .. timer .. " "
+                else
+                    return ""
+                end
+            end)()
             modules[8] = "%#St_lspHints#" .. " " .. (utils.buffer_size or "size") .. " "
              modules[9] = (function()
                  if (utils.streak_display or "") ~= "" then
