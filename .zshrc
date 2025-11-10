@@ -228,3 +228,6 @@ bindkey '^G' rgf
 
 # Atuin shell integration
 eval "$(atuin init zsh)"
+
+# Override Atuin's up arrow binding to restore default Zsh behavior
+bindkey '^[[A' up-line-or-history
