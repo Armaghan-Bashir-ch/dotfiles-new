@@ -2,7 +2,7 @@ local M = {}
 
 M.setup = function()
     return {
-        persistent = false,
+        persistent = true,
         default_timer = {
             icon = "󱎫",
             log_level = vim.log.levels.INFO,
