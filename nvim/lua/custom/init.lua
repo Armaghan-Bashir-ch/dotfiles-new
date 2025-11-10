@@ -280,3 +280,22 @@ vim.diagnostic.config({
         },
     },
 })
+
+vim.api.nvim_create_user_command("Timer", function()
+  vim.o.showtabline = 0
+  vim.o.laststatus = 0
+  vim.wo.number = false
+  vim.o.scl = "no"
+  vim.o.cmdheight = 0
+  require("timers.ui").dashboard()
+end, {})
+
+-- Add missing commands from ravsii/timers.nvim
+vim.api.nvim_create_user_command("TimersNew", function() require("timers.ui").create_timer() end, {})
+vim.api.nvim_create_user_command("TimersStart", function(opts) require("timers.ui").start_timer(unpack(opts.fargs)) end, { nargs = "*" })
+vim.api.nvim_create_user_command("TimersActive", function() require("timers.ui").active_timers() end, {})
+vim.api.nvim_create_user_command("TimersPause", function(opts) require("timers.ui").pause(unpack(opts.fargs)) end, { nargs = "?" })
+vim.api.nvim_create_user_command("TimersResume", function(opts) require("timers.ui").resume(unpack(opts.fargs)) end, { nargs = "?" })
+vim.api.nvim_create_user_command("TimersCancel", function(opts) require("timers.ui").cancel(unpack(opts.fargs)) end, { nargs = "?" })
+vim.api.nvim_create_user_command("TimerCancelAll", function() require("timers.ui").cancel_all() end, {})
+vim.api.nvim_create_user_command("TimerDashboard", function() require("timers.ui").dashboard() end, {})
