@@ -1,7 +1,13 @@
 local config = {
     enable = true,
+    preview = {
+        modes = {
+            hybrid = true,
+        },
+    },
 
-    block_quotes = {
+    markdown = {
+        block_quotes = {
         enable = true,
         wrap = true,
         default = {
@@ -32,50 +38,51 @@ local config = {
             title = true,
             icon = "󰳦",
         },
-    },
-
-    list_items = {
-        enable = true,
-        wrap = true,
-
-        indent_size = function(buffer)
-            if type(buffer) ~= "number" then
-                return vim.bo.shiftwidth or 4
-            end
-
-            --- Use 'shiftwidth' value.
-            return vim.bo[buffer].shiftwidth or 4
-        end,
-        shift_width = 4,
-
-        marker_minus = {
-            add_padding = true,
-            text = function(_, item)
-                local level = math.floor(item.indent / 4) + 1
-                local icons = { "●", "○", "◉", "◎", "◍", "▪", "▫", "◆", "◇", "◈" }
-                return icons[((level - 1) % #icons) + 1]
-            end,
-            hl = "MarkviewListItemMinus",
         },
 
-        marker_plus = {
-            add_padding = true,
-            text = function(_, item)
-                local level = math.floor(item.indent / 4) + 1
-                local icons = { "●", "○", "◉", "◎", "◍", "▪", "▫", "◆", "◇", "◈" }
-                return icons[((level - 1) % #icons) + 1]
-            end,
-            hl = "MarkviewListItemPlus",
-        },
+        list_items = {
+            enable = true,
+            wrap = true,
 
-        marker_star = {
-            add_padding = true,
-            text = function(_, item)
-                local level = math.floor(item.indent / 4) + 1
-                local icons = { "●", "○", "◉", "◎", "◍", "▪", "▫", "◆", "◇", "◈" }
-                return icons[((level - 1) % #icons) + 1]
+            indent_size = function(buffer)
+                if type(buffer) ~= "number" then
+                    return vim.bo.shiftwidth or 4
+                end
+
+                --- Use 'shiftwidth' value.
+                return vim.bo[buffer].shiftwidth or 4
             end,
-            hl = "MarkviewListItemStar",
+            shift_width = 4,
+
+            marker_minus = {
+                add_padding = true,
+                text = function(_, item)
+                    local level = math.floor(item.indent / 4) + 1
+                    local icons = { "●", "○", "◉", "◎", "◍", "▪", "▫", "◆", "◇", "◈" }
+                    return icons[((level - 1) % #icons) + 1]
+                end,
+                hl = "MarkviewListItemMinus",
+            },
+
+            marker_plus = {
+                add_padding = true,
+                text = function(_, item)
+                    local level = math.floor(item.indent / 4) + 1
+                    local icons = { "●", "○", "◉", "◎", "◍", "▪", "▫", "◆", "◇", "◈" }
+                    return icons[((level - 1) % #icons) + 1]
+                end,
+                hl = "MarkviewListItemPlus",
+            },
+
+            marker_star = {
+                add_padding = true,
+                text = function(_, item)
+                    local level = math.floor(item.indent / 4) + 1
+                    local icons = { "●", "○", "◉", "◎", "◍", "▪", "▫", "◆", "◇", "◈" }
+                    return icons[((level - 1) % #icons) + 1]
+                end,
+                hl = "MarkviewListItemStar",
+            },
         },
     },
 }
@@ -91,5 +98,7 @@ vim.api.nvim_set_hl(0, "MarkviewHeading6", { fg = "#B4BEFE", bold = true })
 vim.api.nvim_set_hl(0, "MarkviewListItemMinus", { fg = "#FF9E64" })
 vim.api.nvim_set_hl(0, "MarkviewListItemPlus", { fg = "#FF9E64" })
 vim.api.nvim_set_hl(0, "MarkviewListItemStar", { fg = "#FF9E64" })
+
+
 
 return config

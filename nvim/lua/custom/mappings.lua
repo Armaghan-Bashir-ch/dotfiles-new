@@ -119,17 +119,38 @@ M.snacks = {
                     { label = "Dotfiles",     url = "https://github.com/Armaghan-Bashir-ch/dotfiles-new" },
                     { label = "Dotfiles_Old", url = "https://github.com/Armaghan-Bashir-ch/dotfiles" },
                 }
-                vim.ui.select(options, {
-                    prompt = "Select a repo to open:",
-                    format_item = function(item)
-                        return item.label
+                require("telescope.pickers").new({
+                    layout_config = {
+                        horizontal = {
+                            width = 0.35,
+                            height = 0.30,
+                            preview_width = 0.7,
+                        },
+                    },
+                }, {
+                    prompt_title = "Select a repo to open",
+                    finder = require("telescope.finders").new_table({
+                        results = options,
+                        entry_maker = function(entry)
+                            return {
+                                value = entry,
+                                display = entry.label,
+                                ordinal = entry.label,
+                            }
+                        end,
+                    }),
+                    attach_mappings = function(prompt_bufnr, map)
+                        require("telescope.actions").select_default:replace(function()
+                            require("telescope.actions").close(prompt_bufnr)
+                            local selection = require("telescope.actions.state").get_selected_entry()
+                            if selection then
+                                vim.notify("Opening " .. selection.value.label .. "...")
+                                vim.fn.system("xdg-open " .. selection.value.url .. " &")
+                            end
+                        end)
+                        return true
                     end,
-                }, function(choice)
-                    if choice then
-                        vim.notify("Opening " .. choice.label .. "...")
-                        vim.fn.system("xdg-open " .. choice.url .. " &")
-                    end
-                end)
+                }):find()
             end,
             "Open repo menu",
         },
@@ -742,7 +763,7 @@ M.general = {
     i = {
         ["<S-Tab>"] = { "<C-w>" },
         ["<C-h>"] = {
-            function() vim.lsp.buf.signature_help() end,
+            function() pcall(vim.lsp.buf.signature_help) end,
             "LSP signature help",
         },
         ["<C-BS>"] = { "<C-w>", "Delete previous word" },
