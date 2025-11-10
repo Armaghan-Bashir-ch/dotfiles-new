@@ -11,8 +11,8 @@ M.setup = function()
         },
         dashboard = {
             update_interval = 1000,
-            width = 0.8,
-            height = 0.8,
+            width = 0.5,
+            height = 0.5,
         },
     }
 end
