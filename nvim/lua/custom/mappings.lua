@@ -629,6 +629,44 @@ M.general = {
         ["<leader>b9"] = { "<cmd>buffer 9<CR>", "Select buffer 9" },
         ["<leader>oo"] = { "<cmd>vsplit | term opencode<CR>", "Open opencode" },
         ["<leader>cc"] = { "<cmd>vsplit | term crush<CR>", "Open Crush" },
+
+        -- LSP navigation mappings
+        ["gd"] = {
+            function() vim.lsp.buf.definition() end,
+            "LSP definition",
+        },
+        ["K"] = {
+            function() vim.lsp.buf.hover() end,
+            "LSP hover",
+        },
+        ["<leader>vws"] = {
+            function() vim.lsp.buf.workspace_symbol() end,
+            "LSP workspace symbol",
+        },
+        ["<leader>vd"] = {
+            function() vim.diagnostic.open_float() end,
+            "LSP diagnostic float",
+        },
+        ["<leader>vca"] = {
+            function() vim.lsp.buf.code_action() end,
+            "LSP code action",
+        },
+        ["<leader>vrr"] = {
+            function() vim.lsp.buf.references() end,
+            "LSP references",
+        },
+        ["<leader>vrn"] = {
+            function() vim.lsp.buf.rename() end,
+            "LSP rename",
+        },
+        ["[d"] = {
+            function() vim.diagnostic.goto_next() end,
+            "Goto next diagnostic",
+        },
+        ["]d"] = {
+            function() vim.diagnostic.goto_prev() end,
+            "Goto prev diagnostic",
+        },
     },
 
     v = {
@@ -703,7 +741,10 @@ M.general = {
 
     i = {
         ["<S-Tab>"] = { "<C-w>" },
-        ["<C-h>"] = { "<C-w>" },
+        ["<C-h>"] = {
+            function() vim.lsp.buf.signature_help() end,
+            "LSP signature help",
+        },
         ["<C-BS>"] = { "<C-w>", "Delete previous word" },
     },
 }
