@@ -11,6 +11,7 @@ filenames:
   # Just change the icon glyph
   hypr: {icon: {glyph: ""}}
   .config/hypr: {icon: {glyph: ""}}
+  current_theme.txt: {icon: {glyph: ""}}
   hyprland.conf: {icon: {glyph: ""}}
   hyprlock.conf: {icon: {glyph: ""}}
   hyprpaper.conf: {icon: {glyph: ""}}
