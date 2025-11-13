@@ -173,52 +173,6 @@ local plugins = {
     },
 
     {
-        "sphamba/smear-cursor.nvim",
-        enabled = false,
-        lazy = false,
-        opts = {
-            smear_between_buffers = true,
-            smear_between_neighbor_lines = true,
-            smear_horizontally = true,
-            smear_vertically = true,
-            smear_diagonally = true,
-
-            smear_to_cmd = true,
-            smear_insert_mode = true,
-            smear_replace_mode = false,
-            smear_terminal_mode = false,
-
-            vertical_bar_cursor = true,
-            vertical_bar_cursor_insert_mode = true,
-            horizontal_bar_cursor_replace_mode = true,
-
-            never_draw_over_target = true,
-            hide_target_hack = false,
-
-            time_interval = 17, -- ~60FPS
-            delay_event_to_smear = 1,
-            delay_after_key = 3,
-
-            -- Main mode animation
-            trailing_stiffness = 0.45, -- stiffer (default was 0.45)
-            trailing_exponent = 3, -- favor the head even more
-            distance_stop_animating = 0.1, -- stops earlier
-
-            -- Insert mode animation (vertical bar cursor)
-            stiffness_insert_mode = 0.5,         -- stronger resistance
-            trailing_stiffness_insert_mode = 0.5, -- more stiffness vertically
-            trailing_exponent_insert_mode = 1,   -- slightly sharper curve
-            distance_stop_animating_vertical_bar = 0.875, -- shorter smear
-
-            -- Smear limits
-            max_length = 20,
-            max_length_insert_mode = 1,
-        },
-    },
-
-    --WARN: Do not change the smaer cursor section one bit
-
-    {
         "chrisgrieser/nvim-puppeteer",
         lazy = false,
     },
@@ -608,7 +562,7 @@ local plugins = {
         version = "*", -- use latest stable release
         lazy = false,
         config = function()
-          require("timers").setup(require("custom.configs.timers").setup())
+            require("timers").setup(require("custom.configs.timers").setup())
         end,
     },
     {
