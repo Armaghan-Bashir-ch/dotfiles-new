@@ -786,7 +786,9 @@ M.general = {
         ["<S-Tab>"] = { "<C-w>" },
         ["<C-h>"] = {
             function()
-                pcall(vim.lsp.buf.signature_help)
+                if vim.lsp.get_clients({ bufnr = 0, method = "textDocument/signatureHelp" })[1] then
+                    vim.lsp.buf.signature_help()
+                end
             end,
             "LSP signature help",
         },
