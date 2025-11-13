@@ -1072,6 +1072,14 @@ local plugins = {
     -- ADD TOKYONIGHT PLUGIN HERE INSIDE THE TABLE
 
     {
+        "nvim-lualine/lualine.nvim",
+        lazy = true,
+        config = function()
+            require("plugins.configs.statusline")
+        end,
+    },
+
+    {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
