@@ -838,7 +838,7 @@ local plugins = {
         cmd = "UndotreeToggle",
         config = function()
             vim.g.undotree_WindowLayout = 3 -- Position undotree on the right
-            vim.g.undotree_SplitWidth = 40 -- Make it wider
+            vim.g.undotree_SplitWidth = 60 -- Make it wider
         end,
     },
     {
