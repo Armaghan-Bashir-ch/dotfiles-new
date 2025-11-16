@@ -15,6 +15,5 @@
         "agent_list": "alt+a",
         "input_paste": "ctrl+v",
         "messages_copy": "<leader>y",
-        "innit": "alt+r",
     }
 }
