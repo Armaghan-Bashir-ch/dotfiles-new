@@ -6,7 +6,7 @@
         "app_exit": "ctrl+q",
         "editor_open": "ctrl+e",
         "theme_list": "alt+t",
-        "session_new": "ctrl+n",
+        "session_new": "<leader>n",
         "session_list": "ctrl+s",
         "session_interrupt": "esc",
         "session_child_cycle": "ctrl+right",
@@ -15,5 +15,7 @@
         "agent_list": "alt+a",
         "input_paste": "ctrl+v",
         "messages_copy": "<leader>y",
+        "history_previous": "ctrl+p",
+        "history_next": "ctrl+n",
     }
 }
