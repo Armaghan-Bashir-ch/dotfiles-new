@@ -1,5 +1,5 @@
-{
-  "theme": "opencode",
+ {
+  "theme": "rosepine",
   "$schema": "https://opencode.ai/config.json",
     "keybinds": {
         "leader": "ctrl+o",
@@ -13,8 +13,11 @@
         "session_child_cycle_reverse": "ctrl+left",
         "model_list": "alt+m",
         "agent_list": "alt+a",
+        "command_list": "ctrl+p",
         "input_paste": "ctrl+v",
         "messages_copy": "<leader>y",
+        "messages_half_page_down": "alt+j",
+        "messages_half_page_up": "alt+k",
         "history_previous": "ctrl+p",
         "history_next": "ctrl+n",
     }
