@@ -34,7 +34,7 @@ mainbox {
     orientation:                 vertical;
     children:                    [ "inputbar" , "listbox" ];
     background-color:            transparent;
-    background-image: url("/home/armaghan/backgrounds/Decay-Green/Earth-Rings.jpg", width);
+    background-image: url("/home/armaghan/backgrounds/Rose-Pine/Pixels-Spread.png", width);
 }
 
 
@@ -45,7 +45,7 @@ inputbar {
     padding:                     80px;
     children:                    [ "entry" ];
     background-color:            transparent;
-    background-image: url("/home/armaghan/backgrounds/Decay-Green/Earth-Rings.jpg", width);
+    background-image: url("/home/armaghan/backgrounds/Rose-Pine/Pixels-Spread.png", width);
 }
 
 entry {
