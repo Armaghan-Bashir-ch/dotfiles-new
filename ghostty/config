@@ -15,6 +15,7 @@ fullscreen = true
 
 # Unbinding ALT+(1-9) so that I can use it in tmux to switch windows
 
+keybind = ctrl+shift+n=unbind
 keybind = alt+1=unbind
 keybind = alt+2=unbind
 keybind = alt+3=unbind
