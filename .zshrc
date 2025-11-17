@@ -202,17 +202,7 @@ zff_widget() {
   zle reset-prompt
 }
 
-# FZF directory widget
-cd_fzf() {
-    local dir=$(fd --hidden --type d --exclude .git --exclude .zen --exclude .cargo --exclude go --exclude .vim --exclude Tokyo-Night-GTK-Theme --exclude .bun --exclude ~/.cache/ --exclude .rustup --exclude .qwen --exclude .copilot --exclude .gemini --exclude .crush --exclude paru --exclude .themes --exclude armaghan@work/python --exclude .mypy_cache --exclude .mozilla --exclude .subversion --exclude .parallel --exclude .local . $HOME | fzf --height 30% )
-  if [[ -n $dir ]]; then
-    cd "$dir"
-    zle accept-line
-    zle reset-prompt
-  fi
-}
-zle -N cd_fzf
-bindkey '^J' cd_fzf
+
 
 # Ripgrep + FZF function
 rgf() {
