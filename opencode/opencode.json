@@ -1,6 +1,6 @@
  {
-  "theme": "rosepine",
-  "$schema": "https://opencode.ai/config.json",
+     "theme": "ayu",
+     "$schema": "https://opencode.ai/config.json",
     "keybinds": {
         "leader": "ctrl+o",
         "app_exit": "ctrl+q",
