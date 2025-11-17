@@ -1010,7 +1010,7 @@ local plugins = {
         enabled = true,
         config = function()
             require("btw").setup({
-                text = "I use Neovim with Arch (BTW)",
+                text = "I use Neovim with Arch (btw)",
             })
         end,
     },
