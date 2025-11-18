@@ -13,7 +13,7 @@ local keys = function()
                 local harpoon = require("harpoon")
                 harpoon.ui:toggle_quick_menu(harpoon:list(), {
                     height_in_lines = 5,
-                    ui_max_width = 45,
+                    ui_max_width = 35,
                     border = "rounded",
                 })
             end,
