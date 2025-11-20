@@ -760,6 +760,8 @@ M.general = {
             ":m '<-2<CR>gv=gv",
             "Move selected lines up",
         },
+        ["<A-j>"] = { "8jzz", "Move 8 lines down and center cursor on screen" },
+        ["<A-k>"] = { "8kzz", "Move 8 lines up and center cursor on screen" },
     },
 
     x = {
@@ -778,6 +780,8 @@ M.general = {
             [["_dP"]],
             "Paste without overwriting register",
         },
+        ["<A-j>"] = { "8jzz", "Move 8 lines down and center cursor on screen" },
+        ["<A-k>"] = { "8kzz", "Move 8 lines up and center cursor on screen" },
     },
 
     i = {
