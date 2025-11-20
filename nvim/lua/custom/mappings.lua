@@ -762,8 +762,6 @@ M.general = {
     },
 
     x = {
-        ["<A-j>"] = { "6j", "Move 6 lines down" },
-        ["<A-k>"] = { "6k", "Move 6 lines up" },
         ["<leader>rr"] = {
             function()
                 require("telescope").extensions.refactoring.refactors()
