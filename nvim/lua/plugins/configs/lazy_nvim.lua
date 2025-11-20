@@ -9,7 +9,7 @@ return {
             ft = "", -- file type: nf-fa-file_o
             loaded = "", -- loaded: nf-fa-check_circle
             not_loaded = "", -- not loaded: nf-md-circle_outline
-            backdrop = 100,
+            backdrop = 50,
             title = " Lazy Plugin Manager",
         },
         colors = {
