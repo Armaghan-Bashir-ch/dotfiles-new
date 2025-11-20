@@ -40,3 +40,6 @@ white = '#acb0d0'
 
 [colors.selection]
 background = '#7aa2f7'
+
+[colors.cursor]
+background = '#59C2FF'
