@@ -10,7 +10,7 @@ return {
             loaded = "", -- loaded: nf-fa-check_circle
             not_loaded = "", -- not loaded: nf-md-circle_outline
             backdrop = 100,
-            title = "Lazy Plugin Manager",
+            title = " Lazy Plugin Manager",
         },
         colors = {
             loaded = "#00ff88",
