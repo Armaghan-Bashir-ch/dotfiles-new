@@ -502,6 +502,7 @@ M.general = {
         ["<A-->"] = { "6-zz", "Move 6 lines to beginning and center caret on screen" },
         ["<A-{>"] = { "6{zz", "Move 6 pragraphs down and center carret on screen" },
         ["<A-}>"] = { "6}zz", "Move 6 pragraphs up and center carret on screen" },
+        ["<leader>Y"] = { "yG", "Yank entire file into system clipboard" },
 
         ["<leader>ex"] = {
             "<cmd>execute 'normal! Iexport '<CR>",
