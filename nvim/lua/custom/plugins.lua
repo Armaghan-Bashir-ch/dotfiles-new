@@ -69,7 +69,7 @@ local plugins = {
 
     {
         "abecodes/tabout.nvim",
-        enabled = false,
+        enabled = true,
         lazy = false,
         config = function()
             require("tabout").setup({
