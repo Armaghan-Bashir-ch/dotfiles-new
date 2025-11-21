@@ -1,1 +1,1 @@
-Rose-Pine
+Catppuccin-Mocha
