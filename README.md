@@ -1,2 +1,11 @@
->[!todo]
-> Add a nice README.md here by December 1st
+- [ ] Add a nice README.md here by December 1st
+- [ ] it should contain:
+    - [ ] Project Description
+    - [ ] Requirements
+    - [ ] Installation Instructions
+    - [ ] Proper table form Keybinds
+    - [ ] Previews/Screenshots of my setup
+    - [ ] Maintenance Notes
+    - [ ] Topics/Tags
+    - [ ] License/Disclaimer (figure out the License part)
+:D
