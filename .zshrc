@@ -123,13 +123,7 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 # Pressing enter executes the selected completion immediately
 zstyle ':fzf-tab:*' accept-line enter
 
-# Make nvim/vim/ov tab completion show only files (no directories)
-zstyle ':completion:*:nvim:*' file-patterns '*(.)'
-zstyle ':completion:*:vim:*' file-patterns '*(.)'
-zstyle ':completion:*:ov:*' file-patterns '*(.)'
 
-# Ensure cd tab completion shows only directories
-zstyle ':completion:*:cd:*' file-patterns '*(/)'
 
 # FZF File Widget: searches all files in $HOME including hidden, using fd and zoxide for quick search
 
