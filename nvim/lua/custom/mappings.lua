@@ -471,6 +471,7 @@ M.general = {
         ["<leader>gd"] = { "<cmd> DiffviewOpen <CR>", "Open git diff" },
         ["<leader>dt"] = { "<cmd> Dooing <CR>", "Open Todo-List" },
         ["<leader>vb"] = { "<cmd> VimBeGood <CR>", "Open VimBeGood" },
+        ["<leader>ol"] = { "<cmd> Oil <CR>", "Open Oil file tree" },
         ["<leader>sy"] = { "<cmd> syntax <CR>", "Check Syntax" },
         ["<leader>tt"] = { "<cmd> TimersNew <CR>", "Create new Timer menu" },
         ["<leader>tD"] = { "<cmd> TimersDashboard <CR>", "Open Timers.nvim plugin dashboard menu" },
