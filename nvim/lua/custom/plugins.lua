@@ -87,8 +87,8 @@ local plugins = {
         ---@type Flash.Config
         opts = {
             modes = {
-                chars = {
-                    jump_labels = true,
+                char = {
+                    enabled = false,
                 },
             },
         },
