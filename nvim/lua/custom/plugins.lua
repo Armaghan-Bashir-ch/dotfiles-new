@@ -1047,23 +1047,7 @@ local plugins = {
         end,
     },
 
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {
-            style = "moon", -- THIS IS WHAT FORCES THE 'night' variant
-            transparent = true, --  This is not needed inside of ghostty and hyprland since the transparency is already enabled by default, but is important if your own some other OS
-            styles = {
-                sidebars = "transparent",
-                floats = "transparent",
-            },
-        },
-        config = function(_, opts)
-            require("tokyonight").setup(opts) -- <- you were missing this
-            vim.cmd("colorscheme tokyonight")
-        end,
-    },
+
 
     {
         "atiladefreitas/dooing",

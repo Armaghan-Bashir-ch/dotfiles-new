@@ -35,12 +35,12 @@ vim.g.maplocalleader = ","
 vim.cmd([[
   autocmd BufRead,BufNewFile *.env* set filetype=sh
 ]])
-vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern = "*",
-    callback = function()
-        vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#1e1e2e", bg = "#89b4fa", bold = true })
-    end,
-})
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--     pattern = "*",
+--     callback = function()
+--         vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#1e1e2e", bg = "#89b4fa", bold = true })
+--     end,
+-- })
 
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
@@ -78,15 +78,15 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 local highLightClr = "#3e4451"
 
 -- set highlight color as this
-vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
-    group = vim.api.nvim_create_augroup("Color", {}),
-    pattern = "*",
-    callback = function()
-        vim.api.nvim_set_hl(0, "LspReferenceRead", { fg = highLightClr })
-        vim.api.nvim_set_hl(0, "LspReferenceWrite", { fg = highLightClr })
-        vim.api.nvim_set_hl(0, "LspReferenceText", { fg = highLightClr })
-    end,
-})
+-- vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+--     group = vim.api.nvim_create_augroup("Color", {}),
+--     pattern = "*",
+--     callback = function()
+--         vim.api.nvim_set_hl(0, "LspReferenceRead", { fg = highLightClr })
+--         vim.api.nvim_set_hl(0, "LspReferenceWrite", { fg = highLightClr })
+--         vim.api.nvim_set_hl(0, "LspReferenceText", { fg = highLightClr })
+--     end,
+-- })
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.cmd([[
