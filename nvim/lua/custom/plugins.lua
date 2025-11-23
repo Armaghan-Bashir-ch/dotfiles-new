@@ -1051,15 +1051,6 @@ local plugins = {
     { "wakatime/vim-wakatime", lazy = false },
 
     -- ADD TOKYONIGHT PLUGIN HERE INSIDE THE TABLE
-
-    {
-        "nvim-lualine/lualine.nvim",
-        lazy = true,
-        config = function()
-            require("plugins.configs.statusline")
-        end,
-    },
-
     {
         "atiladefreitas/dooing",
         cmd = { "Dooing", "DooingLocal" },

@@ -12,7 +12,7 @@ M.mappings = require("custom.mappings")
 
 M.ui = {
     theme = "tokyonight",
-    transparency = false,
+    transparency = true,
 
     statusline = {
         theme = "default",

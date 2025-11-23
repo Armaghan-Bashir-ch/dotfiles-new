@@ -1,6 +1,6 @@
 local ui = {
     theme = "tokyonight",
-    transparency = false, -- Disable transparency to see bg colors
+    transparency = true, -- Disable transparency to see bg colors
     statusline = {
         theme = "default",
         separator_style = "block",
@@ -25,14 +25,14 @@ local ui = {
             modules[3] = "%#St_gitIcons#" .. " " .. (utils.vim_zen or "zen") .. " "
             modules[7] = "" -- Hide LSP diagnostics
             modules[8] = "%#St_lspHints#" .. " " .. (utils.buffer_size or "size") .. " "
-             modules[9] = (function()
-                 if (utils.streak_display or "") ~= "" then
-                     return "%#St_lspWarning#" .. " " .. utils.streak_display .. " "
-                 else
-                     return ""
-                 end
-             end)()
-             modules[10] = "" -- Hide cursor position
+            modules[9] = (function()
+                if (utils.streak_display or "") ~= "" then
+                    return "%#St_lspWarning#" .. " " .. utils.streak_display .. " "
+                else
+                    return ""
+                end
+            end)()
+            modules[10] = "" -- Hide cursor position
         end,
     },
     tabufline = {
