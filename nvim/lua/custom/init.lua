@@ -281,6 +281,30 @@ vim.diagnostic.config({
     },
 })
 
+-- Position LSP hover window at the top (above cursor)
+vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
+    config = config or {}
+    config.focus_id = ctx.method
+    if not (result and result.contents) then
+        return
+    end
+    local markdown_lines = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
+    markdown_lines = vim.lsp.util.trim_empty_lines(markdown_lines)
+    if vim.tbl_isempty(markdown_lines) then
+        return
+    end
+    return vim.lsp.util.open_floating_preview(markdown_lines, "markdown", {
+        border = "rounded",
+        max_width = 80,
+        max_height = 20,
+        relative = "cursor",
+        row = -10, -- position above cursor
+        col = 0,
+    })
+end
+
+
+
 vim.api.nvim_create_user_command("Timer", function()
   vim.wo.number = false
   vim.o.scl = "no"

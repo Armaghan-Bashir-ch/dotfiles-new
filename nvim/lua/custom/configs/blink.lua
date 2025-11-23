@@ -40,6 +40,11 @@ local opts = {
 		documentation = {
 			auto_show = true,
 			auto_show_delay_ms = 200,
+			window = {
+				border = "rounded",
+				max_width = 60,
+				max_height = 15,
+			},
 		},
 	},
 	keymap = {

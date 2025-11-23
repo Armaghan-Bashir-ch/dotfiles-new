@@ -468,11 +468,7 @@ local plugins = {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "neovim/nvim-lspconfig",
-            {
-                "saghen/blink.cmp",
-                lazy = false,
-                priority = 1000,
-            },
+
         },
         ft = { "typescript", "typescriptreact", "javascript", "javascriptreact", "svelte" },
         opts = {
