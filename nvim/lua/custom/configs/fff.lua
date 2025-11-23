@@ -1,4 +1,4 @@
-return {
+local config = {
     base_path = vim.fn.getcwd(),
     prompt = "  ",
     title = "FFFiles",
@@ -9,8 +9,8 @@ return {
         height = 0.7,
         width = 0.85,
         prompt_position = "bottom", -- or 'top'
-        preview_position = "right", -- or 'left', 'right', 'top', 'bottom'
-        preview_size = 0.5,
+        preview_position = "left", -- or 'left', 'right', 'top', 'bottom'
+        preview_size = 0.55,
     },
     preview = {
         enabled = true,
@@ -42,7 +42,7 @@ return {
     hl = {
         border = "FloatBorder",
         normal = "Normal",
-        cursor = "CursorLine",
+        cursor = "FFFCursor",
         matched = "IncSearch",
         title = "Title",
         prompt = "Question",
@@ -64,3 +64,7 @@ return {
         log_level = "info",
     },
 }
+
+vim.api.nvim_set_hl(0, "FFFCursor", { fg = "#000000", bg = "NONE" })
+
+return config
