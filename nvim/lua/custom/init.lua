@@ -20,7 +20,8 @@ vim.o.swapfile = false                             -- Disable creation of swap f
 vim.g.disableFormat = false                        -- Keep code formatting enabled
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
-vim.opt.guicursor = "i:block"
+vim.opt.guicursor =
+"i:block"                                                                                              -- Making the cursor appear like a block even when I am in Insert mode, don't like think cursors
 vim.o.sessionoptions =
 "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"                        -- Define what gets saved/restored in a Vim session
 vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false })                       -- Remove underline/undercurl from the line number of the current cursor line
@@ -95,8 +96,6 @@ vim.cmd([[
     au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=300})
   augroup END
 ]])
-
-
 
 local uv = vim.loop
 
@@ -303,31 +302,45 @@ vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
     })
 end
 
-
-
 vim.api.nvim_create_user_command("Timer", function()
-  vim.wo.number = false
-  vim.o.scl = "no"
-  require("timers.ui").dashboard()
+    vim.wo.number = false
+    vim.o.scl = "no"
+    require("timers.ui").dashboard()
 end, {})
 
 -- Add missing commands from ravsii/timers.nvim
-vim.api.nvim_create_user_command("TimersNew", function() require("timers.ui").create_timer() end, {})
-vim.api.nvim_create_user_command("TimersStart", function(opts) require("timers.ui").start_timer(unpack(opts.fargs)) end, { nargs = "*" })
-vim.api.nvim_create_user_command("TimersActive", function() require("timers.ui").active_timers() end, {})
-vim.api.nvim_create_user_command("TimersPause", function(opts) require("timers.ui").pause(unpack(opts.fargs)) end, { nargs = "?" })
-vim.api.nvim_create_user_command("TimersResume", function(opts) require("timers.ui").resume(unpack(opts.fargs)) end, { nargs = "?" })
-vim.api.nvim_create_user_command("TimersCancel", function(opts) require("timers.ui").cancel(unpack(opts.fargs)) end, { nargs = "?" })
-vim.api.nvim_create_user_command("TimerCancelAll", function() require("timers.ui").cancel_all() end, {})
-vim.api.nvim_create_user_command("TimerDashboard", function() require("timers.ui").dashboard() end, {})
+vim.api.nvim_create_user_command("TimersNew", function()
+    require("timers.ui").create_timer()
+end, {})
+vim.api.nvim_create_user_command("TimersStart", function(opts)
+    require("timers.ui").start_timer(unpack(opts.fargs))
+end, { nargs = "*" })
+vim.api.nvim_create_user_command("TimersActive", function()
+    require("timers.ui").active_timers()
+end, {})
+vim.api.nvim_create_user_command("TimersPause", function(opts)
+    require("timers.ui").pause(unpack(opts.fargs))
+end, { nargs = "?" })
+vim.api.nvim_create_user_command("TimersResume", function(opts)
+    require("timers.ui").resume(unpack(opts.fargs))
+end, { nargs = "?" })
+vim.api.nvim_create_user_command("TimersCancel", function(opts)
+    require("timers.ui").cancel(unpack(opts.fargs))
+end, { nargs = "?" })
+vim.api.nvim_create_user_command("TimerCancelAll", function()
+    require("timers.ui").cancel_all()
+end, {})
+vim.api.nvim_create_user_command("TimerDashboard", function()
+    require("timers.ui").dashboard()
+end, {})
 
 -- Update statusline every second when timers are active
 vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.fn.timer_start(1000, function()
-      if require("timers.manager").timers_count() > 0 then
-        vim.cmd("redrawstatus")
-      end
-    end, { ["repeat"] = -1 })
-  end,
+    callback = function()
+        vim.fn.timer_start(1000, function()
+            if require("timers.manager").timers_count() > 0 then
+                vim.cmd("redrawstatus")
+            end
+        end, { ["repeat"] = -1 })
+    end,
 })

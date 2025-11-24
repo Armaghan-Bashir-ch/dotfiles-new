@@ -80,7 +80,7 @@ M.snacks = {
     n = {
         ["<leader>."] = {
             function()
-                Snacks.scratch()
+                Snacks.scratch({ height = 10 })
             end,
             "Toggle Scratch Buffer",
         },

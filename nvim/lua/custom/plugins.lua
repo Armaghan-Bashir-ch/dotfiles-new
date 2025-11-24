@@ -880,7 +880,13 @@ local plugins = {
                     unstagedChangesColor = { fg = "LazygitUnstaged" },
                 },
             },
-            scratch = { enabled = true },
+            scratch = {
+                enabled = true,
+                win = {
+                    height = 10,
+                    width = 60,
+                },
+            },
             gitbrowse = { enabled = true },
             notifier = { enabled = false },
             scroll = {
@@ -982,26 +988,26 @@ local plugins = {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
-         opts = {
-             style = "night", -- THIS IS WHAT FORCES THE 'night' variant
-             transparent = true, -- optional: use your compositor's background
-             styles = {
-                 sidebars = "transparent",
-                 floats = "transparent",
-             },
-             on_highlights = function(highlights, colors)
-                 -- Unset semantic highlights to let treesitter handle syntax
-                 for k in pairs(highlights) do
-                     if k:match("^@") then
-                         highlights[k] = nil
-                     end
-                 end
-             end,
-         },
-         config = function(_, opts)
-             require("tokyonight").setup(opts) -- <- you were missing this
-             require("tokyonight").load(opts) -- Load TokyoNight highlights without setting colorscheme
-         end,
+        opts = {
+            style = "night", -- THIS IS WHAT FORCES THE 'night' variant
+            transparent = true, -- optional: use your compositor's background
+            styles = {
+                sidebars = "transparent",
+                floats = "transparent",
+            },
+            on_highlights = function(highlights, colors)
+                -- Unset semantic highlights to let treesitter handle syntax
+                for k in pairs(highlights) do
+                    if k:match("^@") then
+                        highlights[k] = nil
+                    end
+                end
+            end,
+        },
+        config = function(_, opts)
+            require("tokyonight").setup(opts) -- <- you were missing this
+            require("tokyonight").load(opts) -- Load TokyoNight highlights without setting colorscheme
+        end,
     },
 
     -- This is a cool nvim banner for the default screen
