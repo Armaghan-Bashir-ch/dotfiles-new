@@ -37,7 +37,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.cmd [[
       highlight StatusLine guibg=NONE
       highlight StatusLineNC guibg=NONE
-      highlight MsgArea guibg=NONE
     ]]
   end,
 })
@@ -46,5 +45,4 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 vim.cmd [[
   highlight StatusLine guibg=NONE
   highlight StatusLineNC guibg=NONE
-  highlight MsgArea guibg=NONE
 ]]

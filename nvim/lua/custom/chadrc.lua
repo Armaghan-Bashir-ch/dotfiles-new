@@ -22,6 +22,9 @@ M.ui = {
     tabufline = {
         enabled = false, -- disable NvChad's tab thingi at the top
     },
+    telescope = {
+        style = "bordered",
+    },
 
     --NOTE: Hides the file tabs at the top
 }

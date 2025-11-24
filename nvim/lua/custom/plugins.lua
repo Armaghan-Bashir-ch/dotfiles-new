@@ -992,7 +992,7 @@ local plugins = {
         },
         config = function(_, opts)
             require("tokyonight").setup(opts) -- <- you were missing this
-            vim.cmd("colorscheme tokyonight")
+            -- vim.cmd("colorscheme tokyonight") -- Removed to use base46 theme
         end,
     },
 
