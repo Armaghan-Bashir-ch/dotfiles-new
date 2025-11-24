@@ -882,6 +882,7 @@ local plugins = {
             },
             scratch = {
                 enabled = true,
+                ft = "markdown",
                 win = {
                     height = 10,
                     width = 60,
