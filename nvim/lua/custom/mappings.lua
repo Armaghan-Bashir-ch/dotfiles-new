@@ -64,14 +64,6 @@ M.yazi = {
             "<cmd>Yazi<cr>",
             "Open yazi at the current file",
         },
-        ["<leader>cw"] = {
-            "<cmd>Yazi cwd<cr>",
-            "Open the file manager in nvim's working directory",
-        },
-        ["<c-up>"] = {
-            "<cmd>Yazi toggle<cr>",
-            "Resume the last yazi session",
-        },
     },
 }
 
