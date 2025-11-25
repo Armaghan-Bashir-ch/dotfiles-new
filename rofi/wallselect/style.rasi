@@ -10,7 +10,7 @@ configuration {
     kb-row-right:    "l";
 }
 
-@theme "/home/armaghan/.config/rofi/themes/Catppuccin-Mocha.rasi"
+@theme "/home/armaghan/.config/rofi/themes/Decay-Green.rasi"
 
 // Main //
 window {
