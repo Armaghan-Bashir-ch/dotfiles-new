@@ -519,15 +519,6 @@ local plugins = {
         event = "LspAttach",
         config = require("custom.configs.prettier"),
     },
-
-    {
-        "ravsii/timers.nvim",
-        version = "*", -- use latest stable release
-        lazy = false,
-        config = function()
-            require("timers").setup(require("custom.configs.timers").setup())
-        end,
-    },
     {
         "jay-babu/mason-null-ls.nvim",
         event = { "BufReadPre", "BufNewFile" },
@@ -996,19 +987,7 @@ local plugins = {
                 sidebars = "transparent",
                 floats = "transparent",
             },
-            on_highlights = function(highlights, colors)
-                -- Unset semantic highlights to let treesitter handle syntax
-                for k in pairs(highlights) do
-                    if k:match("^@") then
-                        highlights[k] = nil
-                    end
-                end
-            end,
         },
-        config = function(_, opts)
-            require("tokyonight").setup(opts) -- <- you were missing this
-            require("tokyonight").load(opts) -- Load TokyoNight highlights without setting colorscheme
-        end,
     },
 
     -- This is a cool nvim banner for the default screen
