@@ -173,3 +173,14 @@ vim.lsp.config('asm_lsp', {
   filetypes = { "asm", "s", "S" }, -- Common assembly file extensions
 })
 vim.lsp.enable('asm_lsp')
+
+vim.lsp.config('ts_ls', {
+  on_attach = function(client, bufnr)
+    disable_formatting(client) -- Disable formatting for specific servers
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
+})
+vim.lsp.enable('ts_ls')
