@@ -248,15 +248,15 @@ local plugins = {
         end,
     },
     { "chrisgrieser/nvim-rulebook",               cmd = "Rulebook", keys = load_mappings("rulebook") },
-    {
-        "OXY2DEV/markview.nvim",
-        lazy = false,
-        enabled = false,
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-        config = function()
-            require("markview").setup(require("custom.configs.markview"))
-        end,
-    },
+    -- {
+    --     "OXY2DEV/markview.nvim",
+    --     lazy = false,
+    --     enabled = false,
+    --     dependencies = { "nvim-treesitter/nvim-treesitter" },
+    --     config = function()
+    --         require("markview").setup(require("custom.configs.markview"))
+    --     end,
+    -- },
     {
         "iamcco/markdown-preview.nvim",
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
