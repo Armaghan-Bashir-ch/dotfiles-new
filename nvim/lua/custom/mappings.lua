@@ -110,6 +110,7 @@ M.snacks = {
                     { label = "Walls",        url = "https://github.com/Armaghan-Bashir-ch/walls" },
                     { label = "Dotfiles",     url = "https://github.com/Armaghan-Bashir-ch/dotfiles-new" },
                     { label = "Dotfiles_Old", url = "https://github.com/Armaghan-Bashir-ch/dotfiles" },
+                    { label = "Server.c",     url = "https://github.com/Armaghan-Bashir-ch/Server.c" },
                 }
                 require("telescope.pickers")
                     .new({
