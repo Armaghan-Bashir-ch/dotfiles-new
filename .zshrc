@@ -139,14 +139,14 @@ zle -N fzf_file_widget
 bindkey '^F' fzf_file_widget
 
 
-## OPENCODE
-
-opencode_widget() {
-  opencode
-  zle reset-prompt
-}
-zle -N opencode_widget
-bindkey '^O' opencode_widget
+# ## OPENCODE
+#
+# opencode_widget() {
+#   opencode
+#   zle reset-prompt
+# }
+# zle -N opencode_widget
+# bindkey '^O' opencode_widget
 
 # Zoxide menu
 
