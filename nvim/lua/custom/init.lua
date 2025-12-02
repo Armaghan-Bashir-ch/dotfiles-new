@@ -14,7 +14,6 @@ vim.opt.ttimeoutlen = 0                            -- Reduce delay for key code 
 vim.opt.timeoutlen = 0                             -- Timeout for mappings
 vim.g.nvchad_hot_reload = false                    -- Don't automatically reload the NvChad config. You'll have to restart Neovim to see your changes.
 vim.g.lazyvim_prettier_needs_config = false        -- Run Prettier without requiring a config file
-vim.g.auto_ai = false                              -- Disable automatic AI completions/integrations out of the box, nobody needs AI
 vim.g.customBigFileOpt = true                      -- Enable custom optimizations for large files
 vim.o.swapfile = false                             -- Disable creation of swap files
 vim.g.disableFormat = false                        -- Keep code formatting enabled
