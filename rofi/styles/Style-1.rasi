@@ -33,7 +33,7 @@ mainbox {
     orientation:                 horizontal;
     children:                    [  "inputbar" , "listbox" ];
     background-color:            transparent;
-    background-image:            url("/home/armaghan/backgrounds/Decay-Green/Bright-Stars.png", height);
+    background-image:            url("/home/armaghan/backgrounds/Catppuccin-Mocha/ImaginedMinimal-Setup.jpg", height);
 }
 
 
@@ -43,7 +43,7 @@ inputbar {
     width:                       35%;
     children:                    [ "mode-switcher" , "entry" ];
     background-color:            transparent;
-    background-image:            url("/home/armaghan/backgrounds/Decay-Green/Bright-Stars.png", height);
+    background-image:            url("/home/armaghan/backgrounds/Catppuccin-Mocha/ImaginedMinimal-Setup.jpg", height);
 }
 
 entry {
@@ -60,7 +60,7 @@ mode-switcher{
     padding:                     160px 10px 160px 10px;
     spacing:                     25px;
     background-color:            transparent;
-    background-image:            url("/home/armaghan/backgrounds/Decay-Green/Bright-Stars.png", height);
+    background-image:            url("/home/armaghan/backgrounds/Catppuccin-Mocha/ImaginedMinimal-Setup.jpg", height);
 }
 button {
     cursor:                      pointer;
