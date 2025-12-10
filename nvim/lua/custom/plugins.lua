@@ -265,6 +265,15 @@ local plugins = {
         cmd = "Store",
     },
 
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+        enabled = true,
+        config = function()
+            require("markview.spec").config = require("custom.configs.markview")
+        end,
+    },
+
     --INFO: This makes allows you to use a ".md" file as a proper note taking app inside of obsidian, with callouts, etc..
 
     {
