@@ -118,10 +118,10 @@
 [Type-4] summary = "Theme" format = " %a\n%s\n%b"
 
 [urgency_normal]
-   background = "#eff1f5"
-   foreground = "#000000"
+   background = "#000000"
+   foreground = "#eff1f5"
    frame_color = "#fe640b"
-   timeout = 2.5
+   timeout = 2
 
 [urgency_low]
     background = "#eff1f5"
