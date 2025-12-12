@@ -120,7 +120,7 @@
 [urgency_normal]
    background = "#000000"
    foreground = "#eff1f5"
-   frame_color = "#fe640b"
+   frame_color = "#cba6f7"
    timeout = 2
 
 [urgency_low]
