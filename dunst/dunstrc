@@ -3,7 +3,7 @@
 
     follow = none
 
-    width = 200
+    width = 300
 
     height = 600
 
@@ -118,7 +118,7 @@
 [Type-4] summary = "Theme" format = " %a\n%s\n%b"
 
 [urgency_normal]
-   background = "#000000"
+   background = "#281d54"
    foreground = "#eff1f5"
    frame_color = "#cba6f7"
    timeout = 2
