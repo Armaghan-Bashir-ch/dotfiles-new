@@ -5,18 +5,18 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    font:                        "JetBrains Mono Nerd Font 12";
-    background:                  #11111b;
+    font:                        "JetBrains Mono Nerd Font 14";
+    background:                  #1e1e2e;
     background-alt:              #313244;
-    foreground:                  #eff1f5;
-    selected:                    #cba6f7;
-    active:                      #6E77FF;
-    urgent:                      #8E3596;
+    foreground:                  #cdd6f4;
+    selected:                    #89b4fa;
+    active:                      #f38ba8;
+    urgent:                      #f38ba8;
 }
 
 /*****----- Main Window -----*****/
 window {
-    transparency:                "real";
+    transparency:                "false";
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
@@ -26,7 +26,7 @@ window {
 
     /* properties for all widgets */
     enabled:                     true;
-    border-radius:               8px;
+    border-radius:               20px;
     cursor:                      "default";
     background-color:            @background;
 }
@@ -55,10 +55,11 @@ textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
     str:                         "";
-    padding:                     12px 24px 12px 14px;
-    border-radius:               100%;
+    padding:                     12px 24px;
+    border-radius:               50%;
     background-color:            #a6e3a1;
     text-color:                  @background;
+    font:                        "JetBrains Mono Nerd Font 16";
 }
 
 /*****----- Listview -----*****/
@@ -74,8 +75,8 @@ listview {
 
     spacing:                     0px;
     margin: 			 28px 24px;
-    border-radius: 		 8px;
-    background-color:            #1e1e2e;
+    border-radius: 		 20px;
+    background-color:            @background;
     text-color:                  @foreground;
     cursor:                      "default";
 }
@@ -85,14 +86,15 @@ element {
     enabled:                     true;
     spacing:                     0px;
     padding:                     12px 8px;
-    border-radius:               8px;
-    background-color:            transparent;
+    border-radius:               12px;
+    background-color:            #45475a;
     text-color:                  @foreground;
     cursor:                      pointer;
 }
 element selected.normal {
     background-color:            @selected;
     text-color:                  @background;
+    border-radius:               12px;
 }
 element-icon {
     background-color:            transparent;

@@ -23,8 +23,27 @@ enable_wifi_menu() {
 
 # Menu: List Wi-Fi Networks
 list_wifi_menu() {
-    echo -e "󰤨   Disable Wi-Fi\n${connection_status}   Manual Setup\n${wifi_list}" \
-        | rofi -markup-rows -dmenu -theme "$LIST_THEME"
+    # Start with core options
+    menu_items=("󰤨   Disable Wi-Fi")
+    menu_items+=("   Manual Setup")
+
+    # Add connection status if connected
+    if [[ -n "$connected_ssid" ]]; then
+        menu_items+=("   Connected to $connected_ssid")
+    fi
+
+    # Add saved connections
+    for conn in "${saved_connections[@]}"; do
+        menu_items+=("$conn")
+    done
+
+    # Add available networks
+    for network in "${available_networks[@]}"; do
+        menu_items+=("$network")
+    done
+
+    # Join with newlines
+    printf '%s\n' "${menu_items[@]}" | rofi -markup-rows -dmenu -theme "$LIST_THEME"
 }
 
 # Prompt for SSID
@@ -54,18 +73,37 @@ connected_ssid=$(nmcli -t -f active,ssid dev wifi 2>/dev/null \
     | grep '^yes' | cut -d: -f2- || true)
 
 # -------------------------
-# Get available networks (safe)
+# Get saved connections (can connect without password)
 # -------------------------
-wifi_list=""
+saved_connections=()
+saved_ssids=()
+while IFS= read -r conn_name; do
+    if [[ -n "$conn_name" && "$conn_name" != "--" && "$conn_name" != "$connected_ssid" ]]; then
+        saved_connections+=("󰖩   $conn_name")
+        saved_ssids+=("$conn_name")
+    fi
+done < <(nmcli -t -f name,type connection show 2>/dev/null | grep ":802-11-wireless" | cut -d: -f1)
+
+# -------------------------
+# Get available networks (safe) - exclude saved connections and connected network
+# -------------------------
+available_networks=()
 if [[ "$wifi_status" == "enabled" ]]; then
-    wifi_list=$(nmcli -t -f ssid,security dev wifi 2>/dev/null || echo "" \
-        | awk -F: '
-        {
-            icon = ($2 ~ /WPA|WEP|802\.1X/) ? "" : "";
-            if ($1 != "") {
-                printf "%s   %s\n", icon, $1
-            }
-        }' | sort -u)
+    while IFS= read -r ssid; do
+        if [[ -n "$ssid" && "$ssid" != "--" && "$ssid" != "$connected_ssid" ]]; then
+            # Check if this SSID is already in saved connections
+            skip=false
+            for saved_ssid in "${saved_ssids[@]}"; do
+                if [[ "$ssid" == "$saved_ssid" ]]; then
+                    skip=true
+                    break
+                fi
+            done
+            if [[ "$skip" == false ]]; then
+                available_networks+=("   $ssid")
+            fi
+        fi
+    done < <(nmcli -t -f ssid dev wifi 2>/dev/null | sort -u)
 fi
 
 # -------------------------
@@ -115,7 +153,37 @@ case "$choice" in
         ;;
 
     *)
-        password=$(prompt_password)
-        nmcli dev wifi connect "$choice" password "$password"
+        # Check if it's a saved connection (starts with 󰖩)
+        if [[ "$choice" == 󰖩* ]]; then
+            # Extract connection name (remove icon)
+            conn_name=$(echo "$choice" | sed 's/^[^ ]*  //')
+            # Try to connect to saved connection
+            if nmcli connection up "$conn_name" 2>/dev/null; then
+                # Success - saved connection worked
+                true
+            else
+                # Saved connection failed - try connecting with password
+                password=$(prompt_password)
+                nmcli dev wifi connect "$choice" password "$password"
+            fi
+        else
+            # Check if this network has a saved connection by SSID
+            saved_conn=$(nmcli -t -f name connection show 2>/dev/null | grep -i "^$choice$" | head -1)
+            if [[ -n "$saved_conn" ]]; then
+                # Try to connect using saved connection
+                if nmcli connection up "$saved_conn" 2>/dev/null; then
+                    # Success - used saved connection
+                    true
+                else
+                    # Saved connection failed - ask for password
+                    password=$(prompt_password)
+                    nmcli dev wifi connect "$choice" password "$password"
+                fi
+            else
+                # Regular network - ask for password
+                password=$(prompt_password)
+                nmcli dev wifi connect "$choice" password "$password"
+            fi
+        fi
         ;;
 esac
