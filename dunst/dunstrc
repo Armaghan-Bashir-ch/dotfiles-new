@@ -3,7 +3,7 @@
 
     follow = none
 
-    width = 300
+    width = 200
 
     height = 600
 
@@ -55,7 +55,7 @@
 
     markup = full
 
-    format = "󰟪  %a\n<b>󰋑  %s</b>\n%b"
+    format = "<b> %s</b>\n%b"
 
     alignment = left
 
