@@ -2,7 +2,7 @@
 
 notify-send "󰂯  Checking Bluetooth devices"
 
-set -euo pipefail
+set -uo pipefail
 
 # -------------------------
 # Paths to Rofi themes
@@ -41,10 +41,36 @@ list_bluetooth_menu() {
 # -------------------------
 # Check Bluetooth status
 # -------------------------
-bluetooth_status=$(bluetoothctl show | grep "Powered:" | awk '{print $2}')
+bluetooth_status=$(bluetoothctl show 2>/dev/null | grep "Powered:" | awk '{print $2}' || echo "no")
 
 # -------------------------
-# Get device arrays
+# Safe device name parsing
+# -------------------------
+parse_device_name() {
+    local line="$1"
+    # Try multiple parsing methods for robustness
+    local name=""
+
+    # Method 1: Use awk to skip first two fields
+    if [[ -z "$name" ]]; then
+        name=$(echo "$line" | awk 'NF>=3 {$1=$2=""; print substr($0,3)}' 2>/dev/null | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//' || echo "")
+    fi
+
+    # Method 2: Use cut to get everything after the second space
+    if [[ -z "$name" ]]; then
+        name=$(echo "$line" | cut -d' ' -f3- 2>/dev/null | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//' || echo "")
+    fi
+
+    # Method 3: Simple sed approach
+    if [[ -z "$name" ]]; then
+        name=$(echo "$line" | sed 's/^[[:space:]]*[^[:space:]]*[[:space:]]*[^[:space:]]*[[:space:]]*//' 2>/dev/null | sed 's/[[:space:]]*$//' || echo "")
+    fi
+
+    echo "$name"
+}
+
+# -------------------------
+# Get device arrays with error handling
 # -------------------------
 connected_devices=()
 available_devices=()
@@ -53,9 +79,9 @@ connected_names=()
 if [[ "$bluetooth_status" == "yes" ]]; then
     # Get connected devices
     while IFS= read -r line; do
-        if [[ -n "$line" ]]; then
-            device_name=$(echo "$line" | awk '{$1=$2=""; print substr($0,3)}' | sed 's/^[[:space:]]*//')
-            if [[ -n "$device_name" ]]; then
+        if [[ -n "$line" ]] && [[ "$line" != "Device "* ]]; then
+            device_name=$(parse_device_name "$line")
+            if [[ -n "$device_name" ]] && [[ "$device_name" != "Device" ]]; then
                 connected_devices+=("󰂱  $device_name")
                 connected_names+=("$device_name")
             fi
@@ -64,9 +90,9 @@ if [[ "$bluetooth_status" == "yes" ]]; then
 
     # Get paired but not connected devices (exclude connected ones)
     while IFS= read -r line; do
-        if [[ -n "$line" ]]; then
-            device_name=$(echo "$line" | awk '{$1=$2=""; print substr($0,3)}' | sed 's/^[[:space:]]*//')
-            if [[ -n "$device_name" ]]; then
+        if [[ -n "$line" ]] && [[ "$line" != "Device "* ]]; then
+            device_name=$(parse_device_name "$line")
+            if [[ -n "$device_name" ]] && [[ "$device_name" != "Device" ]]; then
                 # Check if this device is already connected
                 skip=false
                 for connected_name in "${connected_names[@]}"; do
@@ -84,9 +110,9 @@ if [[ "$bluetooth_status" == "yes" ]]; then
 
     # Get discovered devices (not paired, exclude connected ones and already listed paired devices)
     while IFS= read -r line; do
-        if [[ -n "$line" ]]; then
-            device_name=$(echo "$line" | awk '{$1=$2=""; print substr($0,3)}' | sed 's/^[[:space:]]*//')
-            if [[ -n "$device_name" ]]; then
+        if [[ -n "$line" ]] && [[ "$line" != "Device "* ]]; then
+            device_name=$(parse_device_name "$line")
+            if [[ -n "$device_name" ]] && [[ "$device_name" != "Device" ]]; then
                 # Check if this device is already connected or already in available_devices
                 skip=false
                 for connected_name in "${connected_names[@]}"; do
@@ -114,13 +140,17 @@ if [[ "$bluetooth_status" == "yes" ]]; then
 fi
 
 # -------------------------
-# Main interaction
+# Main interaction with error handling
 # -------------------------
 if [[ "$bluetooth_status" == "yes" ]]; then
-    choice=$(list_bluetooth_menu)
+    choice=$(list_bluetooth_menu 2>/dev/null || echo "ERROR")
+    if [[ "$choice" == "ERROR" ]]; then
+        # Fallback menu if device detection failed
+        choice=$(echo -e "󰂲  Disable Bluetooth\n󰂰  Scan for devices" | rofi -markup-rows -dmenu -theme "$THEME" 2>/dev/null || echo "")
+    fi
 else
     # Show enable menu when Bluetooth is disabled
-    choice=$(echo -e "󰂯  Enable Bluetooth" | rofi -dmenu -theme "$THEME")
+    choice=$(echo -e "󰂯  Enable Bluetooth" | rofi -dmenu -theme "$THEME" 2>/dev/null || echo "")
 fi
 
 # -------------------------
