@@ -21,7 +21,6 @@ local options = {
         "c",
         "cpp",
         "sql",
-        "hyprlang",
     },
     highlight = {
         enable = true,
