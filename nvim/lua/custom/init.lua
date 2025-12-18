@@ -35,12 +35,21 @@ vim.g.maplocalleader = ","
 vim.cmd([[
   autocmd BufRead,BufNewFile *.env* set filetype=sh
 ]])
--- vim.api.nvim_create_autocmd("ColorScheme", {
---     pattern = "*",
---     callback = function()
---         vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal", { fg = "#1e1e2e", bg = "#89b4fa", bold = true })
---     end,
--- })
+vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+        -- Force tokyonight colors and transparency for floats, telescope, sidebars, and command line
+        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "#c0caf5" })
+        vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", fg = "#3b4261" })
+        vim.api.nvim_set_hl(0, "MsgArea", { bg = "none", fg = "#c0caf5" })
+        vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none", fg = "#c0caf5" })
+        vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none", fg = "#3b4261" })
+        vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none", fg = "#c0caf5" })
+        vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "none", fg = "#c0caf5" })
+        vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
+        vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "none" })
+    end,
+})
 
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 

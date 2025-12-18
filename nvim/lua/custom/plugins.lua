@@ -976,20 +976,6 @@ local plugins = {
         end,
     },
 
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {
-            style = "night", -- THIS IS WHAT FORCES THE 'night' variant
-            transparent = true, -- optional: use your compositor's background
-            styles = {
-                sidebars = "transparent",
-                floats = "transparent",
-            },
-        },
-    },
-
     -- This is a cool nvim banner for the default screen
 
     {
