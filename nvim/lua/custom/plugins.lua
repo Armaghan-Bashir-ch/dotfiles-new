@@ -1031,6 +1031,26 @@ local plugins = {
     { "wakatime/vim-wakatime", lazy = false },
 
     -- ADD TOKYONIGHT PLUGIN HERE INSIDE THE TABLE
+
+    {
+
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            style = "night", -- THIS IS WHAT FORCES THE 'night' variant
+            transparent = true, -- optional: use your compositor's background
+            styles = {
+                sidebars = "transparent",
+                floats = "transparent",
+            },
+        },
+        config = function(_, opts)
+            require("tokyonight").setup(opts) -- <- you were missing this
+            vim.cmd("colorscheme tokyonight")
+        end,
+    },
+
     {
         "atiladefreitas/dooing",
         cmd = { "Dooing", "DooingLocal" },
