@@ -1077,7 +1077,7 @@ local plugins = {
         "nvim-lua/plenary.nvim",
         config = require("custom.configs.plenary"),
     },
-    { "wakatime/vim-wakatime", lazy = false },
+    { "wakatime/vim-wakatime",                     lazy = false },
 
     -- ADD TOKYONIGHT PLUGIN HERE INSIDE THE TABLE
 
@@ -1112,6 +1112,7 @@ local plugins = {
             })
         end,
     },
+    { "nvim-telescope/telescope-file-browser.nvim" },
 
     {
         "sindrets/diffview.nvim",
