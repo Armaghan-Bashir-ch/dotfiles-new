@@ -501,6 +501,7 @@ M.general = {
         -- for git diff
         ["<leader>dt"] = { "<cmd> Dooing <CR>", "Open Todo-List" },
         ["<leader>vb"] = { "<cmd> VimBeGood <CR>", "Open VimBeGood" },
+        ["<leader>fb"] = { "<cmd>Telescope file_browser<CR>", "Open file browser by telescope" },
         ["<leader>ol"] = { "<cmd> Oil <CR>", "Open Oil file tree" },
         ["<leader>sy"] = { "<cmd> syntax <CR>", "Check Syntax" },
         ["<leader>tt"] = { "<cmd> TimersNew <CR>", "Create new Timer menu" },
