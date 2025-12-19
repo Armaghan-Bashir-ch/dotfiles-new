@@ -131,6 +131,25 @@ return {
             max_line_length = 500, -- max line length
             ft = nil, ---@type string? filetype for highlighting. Use `nil` for auto detect
         },
+        markdown = function(ctx)
+            -- Custom markdown previewer that enables Markview rendering
+            local max_size = 1024 * 1024 -- 1MB
+            local stat = vim.loop.fs_stat(ctx.item.file)
+            if not stat or stat.size > max_size then
+                return false
+            end
+
+            local content = vim.fn.readfile(ctx.item.file)
+            vim.api.nvim_buf_set_lines(ctx.buf, 0, -1, false, content)
+            vim.bo[ctx.buf].ft = "markdown"
+
+            -- Enable Markview rendering if available
+            if package.loaded["markview"] and package.loaded["markview"].render then
+                require("markview").render(ctx.buf, { enable = true, hybrid_mode = false })
+            end
+
+            return true
+        end,
         man_pager = nil, ---@type string? MANPAGER env to use for `man` preview
     },
     ---@class snacks.picker.jump.Config
