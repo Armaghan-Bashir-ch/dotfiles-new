@@ -1,12 +1,19 @@
 local config = {
-    enable = true,
     preview = {
-        modes = {
-            hybrid = true,
-        },
+        enable = true,
+        modes = { "n", "no", "c" },
+        hybrid_modes = { "n" },
     },
 
     markdown = {
+        code_blocks = {
+            enable = true,
+            style = "block",
+            default = {
+                block_hl = nil,
+                pad_hl = nil,
+            },
+        },
         block_quotes = {
         enable = true,
         wrap = true,
