@@ -92,6 +92,38 @@ local config = {
             },
         },
     },
+
+     markdown_inline = {
+         hyperlinks = {
+             enable = true,
+
+             default = {
+                 icon = "󰌷 ",
+                 hl = "MarkviewHyperlink",
+             },
+
+             -- YouTube links
+             ["youtube%.com"] = {
+                 icon = " ",
+                 hl = "MarkviewYouTube",
+             },
+
+             -- Twitter/X links
+             ["x%.com"] = {
+                 icon = "X ",
+                 hl = "MarkviewTwitter",
+             },
+             ["twitter%.com"] = {
+                 icon = "X ",
+                 hl = "MarkviewTwitter",
+             },
+             ["twitter%.com"] = {
+                 priority = -9999,
+                 icon = "X ",
+                 hl = "MarkviewTwitter",
+             },
+         },
+     },
 }
 
 -- Define custom highlights
@@ -106,6 +138,8 @@ vim.api.nvim_set_hl(0, "MarkviewListItemMinus", { fg = "#FF9E64" })
 vim.api.nvim_set_hl(0, "MarkviewListItemPlus", { fg = "#FF9E64" })
 vim.api.nvim_set_hl(0, "MarkviewListItemStar", { fg = "#FF9E64" })
 
-
+-- Custom hyperlink highlights
+vim.api.nvim_set_hl(0, "MarkviewYouTube", { fg = "#FC0033" })
+vim.api.nvim_set_hl(0, "MarkviewTwitter", { fg = "#000000" })
 
 return config
