@@ -322,7 +322,20 @@ local plugins = {
                 picker = "fzf-lua",
                 tools = {
                     opencode = {
-                        cmd = { "opencode" },
+                        cmd = { "bash", "-c", "opencode" },
+                    },
+                },
+                win = {
+                    split = {
+                        width = 40,
+                    },
+                    keys = {
+                        say_hi = {
+                            "<c-s>",
+                            function()
+                                require("sidekick.cli").focus()
+                            end,
+                        },
                     },
                 },
                 win = {
