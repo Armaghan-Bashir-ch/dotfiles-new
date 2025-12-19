@@ -111,7 +111,9 @@ local plugins = {
             "TmuxNavigatePrevious",
             "TmuxNavigatorProcessList",
         },
-        keys = load_mappings("vim_tmux_navigator"),
+        config = function()
+            require("core.utils").load_mappings("vim_tmux_navigator")
+        end,
     },
     {
         "chrisgrieser/nvim-various-textobjs",
@@ -143,14 +145,6 @@ local plugins = {
     {
         "chrisgrieser/nvim-puppeteer",
         lazy = false,
-    },
-    {
-        "kylechui/nvim-surround",
-        version = "*",
-        lazy = false,
-        config = function()
-            require("nvim-surround").setup({})
-        end,
     },
 
     {
@@ -919,7 +913,19 @@ local plugins = {
                     SNACKS_GHOSTTY = true,
                 },
             },
-            notifier = { enabled = false },
+            notifier = {
+                enabled = true,
+                timeout = 3000,
+                style = "compact",
+                width = { min = 35 },
+                icons = {
+                    error = " ",
+                    warn = " ",
+                    info = " ",
+                    debug = " ",
+                    trace = " ",
+                },
+            },
             scroll = {
                 enabled = false,
                 animate = {
@@ -1119,46 +1125,5 @@ local plugins = {
         "GreenStarMatter/nvim-golf",
         lazy = false,
     },
-
-    {
-        "rcarriga/nvim-notify",
-        lazy = false,
-        config = function()
-            require("notify").setup({
-                stages = "static",
-                timeout = 3000,
-                minimum_width = 35,
-                render = "wrapped-default",
-            })
-            local notify = require("notify")
-            vim.notify = function(msg, level, opts)
-                if msg == nil then
-                    return
-                end
-                return notify(msg, level, opts)
-            end
-            vim.cmd("highlight NotifyERRORBorder guifg=#8A1F1F")
-            vim.cmd("highlight NotifyWARNBorder guifg=#79491D")
-            vim.cmd("highlight NotifyINFOBorder guifg=#4F6752")
-            vim.cmd("highlight NotifyDEBUGBorder guifg=#8B8B8B")
-            vim.cmd("highlight NotifyTRACEBorder guifg=#4F3552")
-            vim.cmd("highlight NotifyERRORIcon guifg=#DB4B4B")
-            vim.cmd("highlight NotifyWARNIcon guifg=#E0AF68")
-            vim.cmd("highlight NotifyINFOIcon guifg=#A9FF68")
-            vim.cmd("highlight NotifyDEBUGIcon guifg=#8B8B8B")
-            vim.cmd("highlight NotifyTRACEIcon guifg=#D484FF")
-            vim.cmd("highlight NotifyERRORTitle  guifg=#DB4B4B")
-            vim.cmd("highlight NotifyWARNTitle guifg=#E0AF68")
-            vim.cmd("highlight NotifyINFOTitle guifg=#A9FF68")
-            vim.cmd("highlight NotifyDEBUGTitle  guifg=#8B8B8B")
-            vim.cmd("highlight NotifyTRACETitle  guifg=#D484FF")
-            vim.cmd("highlight link NotifyERRORBody Normal")
-            vim.cmd("highlight link NotifyWARNBody Normal")
-            vim.cmd("highlight link NotifyINFOBody Normal")
-            vim.cmd("highlight link NotifyDEBUGBody Normal")
-            vim.cmd("highlight link NotifyTRACEBody Normal")
-        end,
-    },
 }
-
 return plugins
