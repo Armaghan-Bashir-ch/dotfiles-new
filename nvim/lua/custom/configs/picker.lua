@@ -48,7 +48,7 @@
 ---@field db? snacks.picker.db.Config|{}
 ---@field debug? snacks.picker.debug|{}
 return {
-    prompt = " ",
+    prompt = "  ",
     sources = {},
     focus = "input",
     show_delay = 5000,
@@ -278,8 +278,8 @@ return {
     icons = {
         files = {
             enabled = true, -- show file icons
-            dir = "󰉋 ",
-            dir_open = "󰝰 ",
+            dir = " ",
+            dir_open = " ",
             file = "󰈚 ",
         },
         keymaps = {
