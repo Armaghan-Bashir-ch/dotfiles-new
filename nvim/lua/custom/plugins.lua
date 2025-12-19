@@ -1115,6 +1115,15 @@ local plugins = {
     { "nvim-telescope/telescope-file-browser.nvim" },
 
     {
+        "ravsii/timers.nvim",
+        enabled = true,
+        lazy = false,
+        version = "*", -- use latest stable release
+        -- See below, empty is fine
+        opts = {},
+    },
+
+    {
         "sindrets/diffview.nvim",
         cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles" },
         config = function()
