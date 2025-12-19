@@ -213,7 +213,7 @@ M.snacks = {
             end,
             "Toggle zoom Zen",
         },
-        ["<leader>ff"] = {
+        ["<C-p>"] = {
             function()
                 Snacks.picker.files()
             end,
@@ -475,7 +475,6 @@ M.general = {
         },
         ["<leader>fbc"] = { "<cmd>Telescope git_bcommits<CR>", "Find buffer commits" },
         ["<leader>gvh"] = { "<cmd>Gitsigns select_hunk<CR>", "Visual selection for the git hunk" },
-        ["<C-p>"] = { "<cmd>FFFFind<CR>" },
         ["<C-g>"] = { "<cmd>Telescope git_status<CR>" },
         ["<leader>gd"] = { "<cmd>Telescope lsp_definitions<CR>", "Lsp defination" },
 
