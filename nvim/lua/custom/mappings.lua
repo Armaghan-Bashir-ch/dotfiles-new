@@ -181,6 +181,13 @@ M.snacks = {
             "Open repo menu",
         },
 
+        ["<leader>sn"] = {
+            function()
+                Snacks.notifier.show_history()
+            end,
+            "Notification history",
+        },
+
         ["<leader>nh"] = {
             function()
                 Snacks.notifier.show_history()

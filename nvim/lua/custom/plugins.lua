@@ -915,7 +915,7 @@ local plugins = {
             },
             notifier = {
                 enabled = true,
-                timeout = 3000,
+                timeout = 2500,
                 style = "compact",
                 width = { min = 35 },
                 icons = {
