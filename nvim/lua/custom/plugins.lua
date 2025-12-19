@@ -31,7 +31,7 @@ local plugins = {
         enabled = true,
         -- or if using mini.icons/mini.nvim
         -- dependencies = { "nvim-mini/mini.icons" },
-        opts = {},
+        opts = { ui_select = true },
     },
 
     {
@@ -311,15 +311,29 @@ local plugins = {
         opts = {},
         cmd = { "Typr", "TyprStats" },
     },
-
     {
         "folke/sidekick.nvim",
         opts = {
-            -- add any options here
             cli = {
                 mux = {
                     backend = "tmux",
                     enabled = true,
+                },
+                picker = "fzf-lua",
+                tools = {
+                    opencode = {
+                        cmd = { "opencode" },
+                    },
+                },
+                win = {
+                    keys = {
+                        say_hi = {
+                            "<c-h>",
+                            function()
+                                require("sidekick.cli").focus()
+                            end,
+                        },
+                    },
                 },
             },
         },
@@ -405,9 +419,15 @@ local plugins = {
                 end,
                 desc = "Sidekick Toggle Claude",
             },
+            {
+                "<leader>o",
+                function()
+                    require("sidekick.cli").toggle({ name = "opencode", focus = true })
+                end,
+                desc = "Toggle Opencode",
+            },
         },
     },
-
     {
         "antosha417/nvim-lsp-file-operations",
         dependencies = {
@@ -896,6 +916,10 @@ local plugins = {
                     delay = 10,          -- if next scroll happens within 80ms, use fast mode
                     duration = { step = 1, total = 1 }, -- basically instant
                 },
+            },
+            picker = {
+                enabled = true,
+                ui_select = true,
             },
         },
         keys = load_mappings("snacks"),
