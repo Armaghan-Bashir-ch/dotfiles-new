@@ -862,6 +862,7 @@ local plugins = {
         ---@type snacks.Config
         opts = {
             bigfile = { enabled = true },
+            words = { enabled = true },
             zen = {
                 enabled = true,
                 on_open = function(_)
