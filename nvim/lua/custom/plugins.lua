@@ -938,11 +938,7 @@ local plugins = {
                     duration = { step = 1, total = 1 }, -- basically instant
                 },
             },
-            picker = {
-                enabled = true,
-                ui_select = true,
-                picker = require("custom.configs.picker"),
-            },
+            picker = require("custom.configs.picker"),
         },
         keys = load_mappings("snacks"),
     },
