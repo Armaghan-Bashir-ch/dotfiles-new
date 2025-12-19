@@ -941,6 +941,7 @@ local plugins = {
             picker = {
                 enabled = true,
                 ui_select = true,
+                picker = require("custom.configs.picker"),
             },
         },
         keys = load_mappings("snacks"),
