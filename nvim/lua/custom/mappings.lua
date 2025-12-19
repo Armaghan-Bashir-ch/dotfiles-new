@@ -213,6 +213,12 @@ M.snacks = {
             end,
             "Toggle zoom Zen",
         },
+        ["<leader>ff"] = {
+            function()
+                Snacks.picker.files()
+            end,
+            "Find Files",
+        },
     },
 }
 
