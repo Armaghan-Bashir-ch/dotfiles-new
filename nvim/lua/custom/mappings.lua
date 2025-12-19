@@ -95,6 +95,37 @@ M.snacks = {
             "Git Browse",
             mode = { "n", "v" },
         },
+        ["<leader>gi"] = {
+            function()
+                Snacks.picker.gh_issue({ repo = "https://github.com/itse4elhaam/prs-td" })
+            end,
+            "GitHub Issues (specific repo)",
+        },
+        ["<leader>gI"] = {
+            function()
+                Snacks.picker.gh_issue({ repo = "https://github.com/itse4elhaam/prs-td", state = "all" })
+            end,
+            "GitHub Issues (all)",
+        },
+        ["<leader>gp"] = {
+            function()
+                Snacks.picker.gh_pr({ repo = "https://github.com/itse4elhaam/prs-td" })
+            end,
+            "GitHub Pull Requests (open)",
+        },
+        ["<leader>gP"] = {
+            function()
+                Snacks.picker.gh_pr({ repo = "https://github.com/itse4elhaam/prs-td", state = "all" })
+            end,
+            "GitHub Pull Requests (all)",
+        },
+        ["<leader>si"] = {
+            function()
+                print("Image hover called")
+                Snacks.image.hover()
+            end,
+            "Image hover",
+        },
 
         ["<leader>bA"] = {
             function()

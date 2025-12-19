@@ -268,7 +268,7 @@ local plugins = {
     {
         "OXY2DEV/markview.nvim",
         lazy = false,
-        enabled = true,
+        enabled = false,
         config = function()
             require("markview.spec").config = require("custom.configs.markview")
         end,
@@ -880,6 +880,12 @@ local plugins = {
                 },
             },
             gitbrowse = { enabled = true },
+            gh = {},
+            image = {
+                env = {
+                    SNACKS_GHOSTTY = true,
+                },
+            },
             notifier = { enabled = false },
             scroll = {
                 enabled = false,
