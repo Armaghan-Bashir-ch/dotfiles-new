@@ -1135,6 +1135,12 @@ local plugins = {
     },
 
     {
+        "lewis6991/gitsigns.nvim",
+        enabled = true,
+        lazy = false,
+    },
+
+    {
         "sindrets/diffview.nvim",
         cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles" },
         config = function()

@@ -48,7 +48,7 @@
 ---@field db? snacks.picker.db.Config|{}
 ---@field debug? snacks.picker.debug|{}
 return {
-    prompt = "  ",
+    prompt = "❯ ",
     sources = {},
     focus = "input",
     show_delay = 5000,
