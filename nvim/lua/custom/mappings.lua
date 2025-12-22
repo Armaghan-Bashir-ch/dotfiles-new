@@ -215,7 +215,11 @@ M.snacks = {
         },
         ["<C-p>"] = {
             function()
-                Snacks.picker.files()
+                if vim.bo.filetype == "store" or vim.bo.buftype ~= "" then
+                    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-p>", true, false, true), "n", false)
+                else
+                    Snacks.picker.files()
+                end
             end,
             "Find Files",
         },
