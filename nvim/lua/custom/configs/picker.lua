@@ -170,6 +170,7 @@ return {
     win = {
         -- input window
         input = {
+            border = "rounded",
             keys = {
                 -- to close the picker on ESC instead of going to normal mode,
                 -- add the following keymap to your config
