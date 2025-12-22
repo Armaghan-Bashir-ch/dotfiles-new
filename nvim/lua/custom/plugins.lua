@@ -535,10 +535,7 @@ local plugins = {
             "mfussenegger/nvim-dap",
             { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
         },
-        branch = "regexp", -- This is the regexp branch, use this for the new version
-        config = function()
-            require("venv-selector").setup()
-        end,
+        opts = { search = {}, options = {} },
         ft = { "python" },
         -- keys = load_mappings "venv_selector",
     },
