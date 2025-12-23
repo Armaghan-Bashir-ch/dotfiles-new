@@ -15,36 +15,36 @@ local config = {
             },
         },
         block_quotes = {
-        enable = true,
-        wrap = true,
-        default = {
-            border = "▋",
-            hl = "MarkviewBlockQuoteDefault",
-        },
-        ["NOTE"] = {
-            hl = "MarkviewBlockQuoteNote",
-            preview = "󰋽 Note",
-            title = true,
-            icon = "󰋽",
-        },
-        ["TIP"] = {
-            hl = "MarkviewBlockQuoteOk",
-            preview = " Tip",
-            title = true,
-            icon = "",
-        },
-        ["WARNING"] = {
-            hl = "MarkviewBlockQuoteWarn",
-            preview = " Warning",
-            title = true,
-            icon = "",
-        },
-        ["CAUTION"] = {
-            hl = "MarkviewBlockQuoteError",
-            preview = "󰳦 Caution",
-            title = true,
-            icon = "󰳦",
-        },
+            enable = true,
+            wrap = true,
+            default = {
+                border = "▋",
+                hl = "MarkviewBlockQuoteDefault",
+            },
+            ["NOTE"] = {
+                hl = "MarkviewBlockQuoteNote",
+                preview = "󰋽 Note",
+                title = true,
+                icon = "󰋽",
+            },
+            ["TIP"] = {
+                hl = "MarkviewBlockQuoteOk",
+                preview = " Tip",
+                title = true,
+                icon = "",
+            },
+            ["WARNING"] = {
+                hl = "MarkviewBlockQuoteWarn",
+                preview = " Warning",
+                title = true,
+                icon = "",
+            },
+            ["CAUTION"] = {
+                hl = "MarkviewBlockQuoteError",
+                preview = "󰳦 Caution",
+                title = true,
+                icon = "󰳦",
+            },
         },
 
         list_items = {
@@ -93,45 +93,45 @@ local config = {
         },
     },
 
-     markdown_inline = {
-         hyperlinks = {
-             enable = true,
+    markdown_inline = {
+        hyperlinks = {
+            enable = true,
 
-             default = {
-                 icon = "󰌷 ",
-                 hl = "MarkviewHyperlink",
-             },
+            default = {
+                icon = "󰌷 ",
+                hl = "MarkviewHyperlink",
+            },
 
-             -- YouTube links
-             ["youtube%.com"] = {
-                 icon = " ",
-                 hl = "MarkviewYouTube",
-             },
+            -- YouTube links
+            ["youtube%.com"] = {
+                icon = " ",
+                hl = "MarkviewYouTube",
+            },
 
-             -- Twitter/X links
-             ["x%.com"] = {
-                 icon = "X ",
-                 hl = "MarkviewTwitter",
-             },
-             ["twitter%.com"] = {
-                 icon = "X ",
-                 hl = "MarkviewTwitter",
-             },
-             ["twitter%.com"] = {
-                 priority = -9999,
-                 icon = "X ",
-                 hl = "MarkviewTwitter",
-             },
-         },
-     },
+            -- Twitter/X links
+            ["x%.com"] = {
+                icon = "X ",
+                hl = "MarkviewTwitter",
+            },
+            ["twitter%.com"] = {
+                icon = "X ",
+                hl = "MarkviewTwitter",
+            },
+            ["twitter%.com"] = {
+                priority = -9999,
+                icon = "X ",
+                hl = "MarkviewTwitter",
+            },
+        },
+    },
 }
 
 -- Define custom highlights
 vim.api.nvim_set_hl(0, "MarkviewHeading1", { fg = "#F38BA8", bold = true })
 vim.api.nvim_set_hl(0, "MarkviewHeading2", { fg = "#FAB387", bold = true })
-vim.api.nvim_set_hl(0, "MarkviewHeading3", { fg = "#F9E2AF", bold = true })
+vim.api.nvim_set_hl(0, "MarkviewHeading3", { fg = "#87CEEB", bold = true })
 vim.api.nvim_set_hl(0, "MarkviewHeading4", { fg = "#A6E3A1", bold = true })
-vim.api.nvim_set_hl(0, "MarkviewHeading5", { fg = "#74C7EC", bold = true })
+vim.api.nvim_set_hl(0, "MarkviewHeading5", { fg = "#74ecd4", bold = true })
 vim.api.nvim_set_hl(0, "MarkviewHeading6", { fg = "#B4BEFE", bold = true })
 
 vim.api.nvim_set_hl(0, "MarkviewListItemMinus", { fg = "#FF9E64" })
@@ -143,3 +143,4 @@ vim.api.nvim_set_hl(0, "MarkviewYouTube", { fg = "#FC0033" })
 vim.api.nvim_set_hl(0, "MarkviewTwitter", { fg = "#000000" })
 
 return config
+
