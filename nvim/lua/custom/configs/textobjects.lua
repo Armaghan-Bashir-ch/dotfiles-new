@@ -54,7 +54,6 @@ local config = function()
             },
         },
     })
-    local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
 
 end
