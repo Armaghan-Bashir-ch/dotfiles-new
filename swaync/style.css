@@ -1,6 +1,6 @@
 @define-color bar-bg rgba(31, 35, 40, 0.95);
 
-@define-color main-bg #282c34;
+@define-color main-bg #000000;
 @define-color main-fg #83c7e6;
 
 @define-color wb-act-bg #93cee9;
@@ -80,15 +80,15 @@
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button {
-  margin: 6px;
-  padding: 2px;
+  margin: 10px;
+  padding: 4px;
   border-radius: 25px;
   background-color: transparent;
   border: 1px solid #809CAD;
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button:hover {
-  background-color: @wb-act-bg;
+  background-color: @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button:active {
