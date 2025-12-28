@@ -26,9 +26,9 @@
 
 .floating-notifications.background .notification-row .notification-background {
   background: @main-bg;
-  box-shadow: 8px 8px 8px 0 rgba(0,0,0,.95);
+  box-shadow: 2px 2px 4px 0 rgba(21, 23, 36, 0.5);
   border-radius: 16px;
-  margin: 0px;
+  margin: 0 5px 0 0;
   padding: 0;
 }
 
