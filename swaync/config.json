@@ -41,7 +41,6 @@
     }
   },
   "widgets": [
-    "mpris",
     "title",
     "dnd",
     "notifications"
