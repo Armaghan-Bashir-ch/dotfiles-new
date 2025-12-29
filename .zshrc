@@ -18,7 +18,6 @@ source ~/.pk10k.zsh
 
 alias cls='clear'
 alias nitch='/home/armaghan/nitch/./nitch'
-alias notify-send='dunstify -u critical -t 2000'
 alias lgit='lazygit'
 alias status='git status -u'
 alias wfetch='wakafetch --full'
