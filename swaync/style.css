@@ -75,6 +75,10 @@
     font-weight: 555;
 }
 
+.notification[data-app-name="Discord"] .body img {
+    margin-right: 10px;
+}
+
 .floating-notifications.background .notification-row .notification-background .close-button {
   margin: 10px;
   padding: 4px;
