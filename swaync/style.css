@@ -6,6 +6,8 @@
   font-size: 12px;
   font-family: "Inter", sans-serif;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition: 180ms ease-out;
 
 }
@@ -17,15 +19,16 @@
 }
 
 .floating-notifications.background .notification-row .notification-background {
-  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.005));
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.09), rgba(0, 0, 0, 0.01));
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
   box-shadow: none;
   border: 0.5px solid @main-fg;
   border-radius: 22px;
-  overflow: visible;
   margin: 0 5px 0 0;
   padding: 0;
+  overflow: visible;
+  animation: fadeIn 0.3s ease-in;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification {
@@ -51,6 +54,7 @@
   background-color: linear-gradient(135deg, rgba(131, 199, 230, 0.1), rgba(131, 199, 230, 0.05));
   margin: 6px;
   border: 0.5px solid rgba(131, 199, 230, 0.2);
+  will-change: transform;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
@@ -92,11 +96,12 @@
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button {
-  margin: 10px;
+  margin: 10px 12px;
   padding: 4px;
   border-radius: 22px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
   border: 0.5px solid rgba(255, 255, 255, 0.08);
+  will-change: transform;
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button:hover {
@@ -125,4 +130,13 @@
 
 .control-center .notification-row .notification.critical {
   border: 0.25px solid @main-fg;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
