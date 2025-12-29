@@ -105,12 +105,14 @@
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button:hover {
-  background: linear-gradient(135deg, rgba(131, 199, 230, 0.4), rgba(131, 199, 230, 0.2));
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.1));
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
   transform: scale(1.08);
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button:active {
-  background: linear-gradient(135deg, rgba(147, 206, 233, 0.5), rgba(147, 206, 233, 0.3));
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.08));
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
   color: @main-bg;
 }
 
