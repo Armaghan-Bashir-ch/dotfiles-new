@@ -3,6 +3,9 @@
 # Theme switcher script for waybar and rofi based on wallpaper directory
 # Run after setting wallpaper via swww
 
+# Read current theme
+CURRENT_THEME=$(cat ~/.config/hypr/current_theme.txt 2>/dev/null || echo "")
+
 # Get current wallpaper path
 WALLPAPER_PATH=$(swww query | grep -oP 'image: \K.*')
 
@@ -67,6 +70,9 @@ case "$THEME" in
         ;;
 esac
 
+# Set swaync theme to match waybar
+SWAYNC_THEME="$WAYBAR_THEME"
+
 # Update waybar style.css
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
 sed -i "s|@import \"themes/.*\.css\";|@import \"themes/$WAYBAR_THEME.css\";|" "$WAYBAR_STYLE"
@@ -107,6 +113,19 @@ if [ -n "$WALLPAPER_PATH" ]; then
             sed -i "s|url(\"[^\"]*\", width)|url(\"$ESCAPED_PATH\", width)|g" "$STYLE_FILE"
         fi
     done
+fi
+
+# Update swaync style.css
+SWAYNC_STYLE="$HOME/.config/swaync/style.css"
+sed -i "s|@import \"themes/.*\.css\";|@import \"themes/$SWAYNC_THEME.css\";|" "$SWAYNC_STYLE"
+
+# Reload swaync only if theme changed
+if [ "$THEME" != "$CURRENT_THEME" ]; then
+    (
+        G_MESSAGES_DEBUG=none G_LOG_LEVEL=0 swaync-client --reload-css
+        G_MESSAGES_DEBUG=none G_LOG_LEVEL=0 swaync-client --reload-config
+    ) >/dev/null 2>&1 &
+    disown
 fi
 
 # Reload waybar
