@@ -90,15 +90,10 @@ for STYLE in "${ROFI_STYLES[@]}"; do
     fi
 done
 
-# Randomly switch launcher between Style-1 and Style-2
+# Always use Style-2 for launcher
 LAUNCHER_STYLE_FILE="$HOME/.config/rofi/launcher/style.rasi"
 if [ -f "$LAUNCHER_STYLE_FILE" ]; then
-    RANDOM_STYLE=$((RANDOM % 2))
-    if [ $RANDOM_STYLE -eq 0 ]; then
-        STYLE_FILE="Style-1.rasi"
-    else
-        STYLE_FILE="Style-2.rasi"
-    fi
+    STYLE_FILE="Style-2.rasi"
     sed -i "s|@import \"styles/.*\.rasi\"|@import \"styles/$STYLE_FILE\"|" "$LAUNCHER_STYLE_FILE"
 fi
 
