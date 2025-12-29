@@ -16,7 +16,7 @@
 }
 
 .floating-notifications.background .notification-row .notification-background {
-  background: rgba(16, 20, 25, 0.6);
+  background: rgba(16, 20, 25, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 0.5px solid @main-fg;
