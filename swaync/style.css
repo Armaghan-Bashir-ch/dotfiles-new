@@ -20,7 +20,7 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-  border: 0.5px solid @main-fg;
+  border: 0.25px solid @main-fg;
   border-radius: 16px;
   margin: 0 5px 0 0;
   padding: 0;
@@ -29,11 +29,11 @@
 .floating-notifications.background .notification-row .notification-background .notification {
   padding: 6px;
   border-radius: 16px;
-  border: 0.5px solid @main-fg;
+  border: 0.25px solid @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
-  border: 0.5px solid @main-fg;
+  border: 0.25px solid @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content {
@@ -48,12 +48,12 @@
   border-radius: 16px;
   background-color: @main-fg ;
   margin: 6px;
-  border: 0.5px solid @main-fg;
+  border: 0.25px solid @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
   background-color: @main-fg;
-  border: 0.5px solid @main-fg;
+  border: 0.25px solid @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
@@ -85,7 +85,7 @@
   padding: 4px;
   border-radius: 16px;
   background-color: transparent;
-  border: 0.5px solid @main-fg;
+  border: 0.25px solid @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button:hover {
@@ -108,9 +108,9 @@
 
 /* Control center notification borders */
 .control-center .notification-row .notification {
-  border: 0.5px solid @main-fg;
+  border: 0.25px solid @main-fg;
 }
 
 .control-center .notification-row .notification.critical {
-  border: 0.5px solid @main-fg;
+  border: 0.25px solid @main-fg;
 }
