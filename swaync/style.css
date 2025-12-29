@@ -19,7 +19,7 @@
   background: rgba(16, 20, 25, 0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 0.5px solid @main-fg;
   border-radius: 16px;
   margin: 0 5px 0 0;
   padding: 0;
@@ -28,11 +28,11 @@
 .floating-notifications.background .notification-row .notification-background .notification {
   padding: 6px;
   border-radius: 16px;
-  border: 0.5px solid #809CAD;
+  border: 0.5px solid @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
-  border: 0.5px solid #809CAD;
+  border: 0.5px solid @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification .notification-content {
@@ -47,12 +47,12 @@
   border-radius: 16px;
   background-color: @main-fg ;
   margin: 6px;
-  border: 0.5px solid #809CAD;
+  border: 0.5px solid @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
   background-color: @main-fg;
-  border: 0.5px solid #809CAD;
+  border: 0.5px solid @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
@@ -80,7 +80,7 @@
   padding: 4px;
   border-radius: 16px;
   background-color: transparent;
-  border: 0.1px solid #809CAD;
+  border: 0.5px solid @main-fg;
 }
 
 .floating-notifications.background .notification-row .notification-background .close-button:hover {
@@ -99,4 +99,13 @@
 .notification.low progress,
 .notification.normal progress {
   background-color: @wb-act-bg;
+}
+
+/* Control center notification borders */
+.control-center .notification-row .notification {
+  border: 0.5px solid @main-fg;
+}
+
+.control-center .notification-row .notification.critical {
+  border: 0.5px solid @main-fg;
 }
