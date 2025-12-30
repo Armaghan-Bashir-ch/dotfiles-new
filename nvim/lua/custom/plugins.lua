@@ -860,7 +860,7 @@ local plugins = {
         ---@type snacks.Config
         opts = {
             bigfile = { enabled = true },
-            explorer = { enabled = false },
+            explorer = { enabled = true },
             words = { enabled = false },
             zen = {
                 enabled = true,
