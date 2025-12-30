@@ -79,49 +79,37 @@ local default_plugins = {
         end,
     },
 
+
+    {
+        "nvim-treesitter/nvim-treesitter",
+        lazy = false,      -- load immediately
+        build = ":TSUpdate", 
+        config = function()
+            local status, treesitter_configs = pcall(require, "nvim-treesitter.configs")
+            if status then
+                treesitter_configs.setup({
+                    ensure_installed = { "lua", "vim" },
+                    highlight = { enable = true },
+                    indent = { enable = true },
+                })
+            end
+        end,
+    },
+
     {
         "lukas-reineke/indent-blankline.nvim",
-        version = "2.20.7",
-        event = "User FilePost",
+        lazy = false,
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
         opts = function()
             return require("plugins.configs.others").blankline
         end,
         config = function(_, opts)
             require("core.utils").load_mappings("blankline")
             dofile(vim.g.base46_cache .. "blankline")
-            require("indent_blankline").setup(opts)
+            require("ibl").setup(opts)
         end,
     },
 
-    {
-        "nvim-treesitter/nvim-treesitter",
-        lazy = true,
-        event = { "BufReadPost", "BufNewFile" },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-        },
-        cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-        build = ":TSUpdate",
-        opts = function()
-            return require("plugins.configs.treesitter")
-        end,
-        config = function(_, opts)
-            dofile(vim.g.base46_cache .. "syntax")
-
-            require("nvim-treesitter.configs").setup(vim.tbl_deep_extend("force", opts, {
-                highlight = {
-                    enable = true,
-                    disable = function(lang, buf)
-                        local max_filesize = 700 * 1024
-                        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                        if ok and stats and stats.size > max_filesize and vim.g.customBigFileOpt then
-                            return true
-                        end
-                    end,
-                },
-            }))
-        end,
-    },
 
     -- git stuff
     {
@@ -168,134 +156,134 @@ local default_plugins = {
 
     -- load luasnips + cmp related in insert mode only
     -- {
-    --   "hrsh7th/nvim-cmp",
-    --   enable = false,
-    --   event = "InsertEnter",
-    --   dependencies = {
-    --     {
-    --       -- snippet plugin
-    --       "L3MON4D3/LuaSnip",
-    --       dependencies = "rafamadriz/friendly-snippets",
-    --       opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-    --       config = function(_, opts)
-    --         require("plugins.configs.others").luasnip(opts)
-    --       end,
-    --     },
-    --
-    --     -- autopairing of (){}[] etc
-    --     {
-    --       "windwp/nvim-autopairs",
-    --       opts = {
-    --         fast_wrap = {},
-    --         disable_filetype = { "TelescopePrompt", "vim" },
-    --         enable_check_bracket_line = false,
-    --       },
-    --       config = function(_, opts)
-    --         require("nvim-autopairs").setup(opts)
-    --
-    --         -- setup cmp for autopairs
-    --         local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-    --         require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-    --       end,
-    --     },
-    --
-    --     -- cmp sources plugins
-    --     {
-    --       "saadparwaiz1/cmp_luasnip",
-    --       "hrsh7th/cmp-nvim-lua",
-    --       "hrsh7th/cmp-nvim-lsp",
-    --       "hrsh7th/cmp-buffer",
-    --       "hrsh7th/cmp-path",
-    --     },
-    --   },
-    --   opts = function()
-    --     return require "plugins.configs.cmp"
-    --   end,
-    --   config = function(_, opts)
-    --     require("cmp").setup(opts)
-    --   end,
-    -- },
+        --   "hrsh7th/nvim-cmp",
+        --   enable = false,
+        --   event = "InsertEnter",
+        --   dependencies = {
+            --     {
+                --       -- snippet plugin
+                --       "L3MON4D3/LuaSnip",
+                --       dependencies = "rafamadriz/friendly-snippets",
+                --       opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+                --       config = function(_, opts)
+                    --         require("plugins.configs.others").luasnip(opts)
+                    --       end,
+                    --     },
+                    --
+                    --     -- autopairing of (){}[] etc
+                    --     {
+                        --       "windwp/nvim-autopairs",
+                        --       opts = {
+                            --         fast_wrap = {},
+                            --         disable_filetype = { "TelescopePrompt", "vim" },
+                            --         enable_check_bracket_line = false,
+                            --       },
+                            --       config = function(_, opts)
+                                --         require("nvim-autopairs").setup(opts)
+                                --
+                                --         -- setup cmp for autopairs
+                                --         local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+                                --         require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+                                --       end,
+                                --     },
+                                --
+                                --     -- cmp sources plugins
+                                --     {
+                                    --       "saadparwaiz1/cmp_luasnip",
+                                    --       "hrsh7th/cmp-nvim-lua",
+                                    --       "hrsh7th/cmp-nvim-lsp",
+                                    --       "hrsh7th/cmp-buffer",
+                                    --       "hrsh7th/cmp-path",
+                                    --     },
+                                    --   },
+                                    --   opts = function()
+                                        --     return require "plugins.configs.cmp"
+                                        --   end,
+                                        --   config = function(_, opts)
+                                            --     require("cmp").setup(opts)
+                                            --   end,
+                                            -- },
 
-    {
-        "numToStr/Comment.nvim",
-        keys = {
-            { "gcc", mode = "n",          desc = "Comment toggle current line" },
-            { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
-            { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
-            { "gbc", mode = "n",          desc = "Comment toggle current block" },
-            { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-            { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
-        },
-        init = function()
-            require("core.utils").load_mappings("comment")
-        end,
-        config = function(_, opts)
-            -- Combine existing opts with additional settings
-            local combined_opts = vim.tbl_deep_extend("force", opts or {}, {
-                pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-            })
-            require("Comment").setup(combined_opts)
-        end,
-    },
+                                            {
+                                                "numToStr/Comment.nvim",
+                                                keys = {
+                                                    { "gcc", mode = "n",          desc = "Comment toggle current line" },
+                                                    { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
+                                                    { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
+                                                    { "gbc", mode = "n",          desc = "Comment toggle current block" },
+                                                    { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+                                                    { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
+                                                },
+                                                init = function()
+                                                    require("core.utils").load_mappings("comment")
+                                                end,
+                                                config = function(_, opts)
+                                                    -- Combine existing opts with additional settings
+                                                    local combined_opts = vim.tbl_deep_extend("force", opts or {}, {
+                                                        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+                                                    })
+                                                    require("Comment").setup(combined_opts)
+                                                end,
+                                            },
 
-    -- file managing , picker etc
-    {
-        "nvim-tree/nvim-tree.lua",
-        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-        init = function()
-            require("core.utils").load_mappings("nvimtree")
-        end,
-        opts = function()
-            return require("plugins.configs.nvimtree")
-        end,
-        config = function(_, opts)
-            dofile(vim.g.base46_cache .. "nvimtree")
-            require("nvim-tree").setup(opts)
-        end,
-    },
+                                            -- file managing , picker etc
+                                            {
+                                                "nvim-tree/nvim-tree.lua",
+                                                cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+                                                init = function()
+                                                    require("core.utils").load_mappings("nvimtree")
+                                                end,
+                                                opts = function()
+                                                    return require("plugins.configs.nvimtree")
+                                                end,
+                                                config = function(_, opts)
+                                                    dofile(vim.g.base46_cache .. "nvimtree")
+                                                    require("nvim-tree").setup(opts)
+                                                end,
+                                            },
 
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-        lazy = true,
-        cmd = "Telescope",
-        init = function()
-            require("core.utils").load_mappings("telescope")
-        end,
-        opts = function()
-            return require("plugins.configs.telescope")
-        end,
-        config = function(_, opts)
-            dofile(vim.g.base46_cache .. "telescope")
-            local telescope = require("telescope")
-            telescope.setup(opts)
+                                            {
+                                                "nvim-telescope/telescope.nvim",
+                                                dependencies = { "nvim-treesitter/nvim-treesitter" },
+                                                lazy = true,
+                                                cmd = "Telescope",
+                                                init = function()
+                                                    require("core.utils").load_mappings("telescope")
+                                                end,
+                                                opts = function()
+                                                    return require("plugins.configs.telescope")
+                                                end,
+                                                config = function(_, opts)
+                                                    dofile(vim.g.base46_cache .. "telescope")
+                                                    local telescope = require("telescope")
+                                                    telescope.setup(opts)
 
-            -- load extensions
-            for _, ext in ipairs(opts.extensions_list) do
-                telescope.load_extension(ext)
-            end
-        end,
-    },
+                                                    -- load extensions
+                                                    for _, ext in ipairs(opts.extensions_list) do
+                                                        telescope.load_extension(ext)
+                                                    end
+                                                end,
+                                            },
 
-    -- Only load whichkey after all the gui
-    {
-        "folke/which-key.nvim",
-        keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
-        init = function()
-            require("core.utils").load_mappings("whichkey")
-        end,
-        cmd = "WhichKey",
-        config = function(_, opts)
-            dofile(vim.g.base46_cache .. "whichkey")
-            require("which-key").setup(opts)
-        end,
-    },
-}
+                                            -- Only load whichkey after all the gui
+                                            {
+                                                "folke/which-key.nvim",
+                                                keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+                                                init = function()
+                                                    require("core.utils").load_mappings("whichkey")
+                                                end,
+                                                cmd = "WhichKey",
+                                                config = function(_, opts)
+                                                    dofile(vim.g.base46_cache .. "whichkey")
+                                                    require("which-key").setup(opts)
+                                                end,
+                                            },
+                                        }
 
-local config = require("core.utils").load_config()
+                                        local config = require("core.utils").load_config()
 
-if #config.plugins > 0 then
-    table.insert(default_plugins, { import = config.plugins })
-end
+                                        if #config.plugins > 0 then
+                                            table.insert(default_plugins, { import = config.plugins })
+                                        end
 
-require("lazy").setup(default_plugins, config.lazy_nvim)
+                                        require("lazy").setup(default_plugins, config.lazy_nvim)
