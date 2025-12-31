@@ -5,11 +5,19 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    font:                        "JetBrainsMono Nerd Font Mono Bold 12";
-    background:                  #11111b;
-    selected:                    #cba6f7;
-    active:                      #716251;
-    urgent:                      #934A1C;
+    font:                        "JetBrainsMono Nerd Font 11";
+    main-bg:                     #151720ff;
+    main-fg:                     #cbced3ff;
+    main-br:                     #98d3eecc;
+    main-ex:                     #95d3afcc;
+    select-bg:                   #6fa8dcff;
+    select-fg:                   #151720ff;
+    separatorcolor:              transparent;
+    border-color:                transparent;
+    background:                  @main-bg;
+    selected:                    @select-bg;
+    active:                      @main-br;
+    urgent:                      @main-ex;
 }
 
 /*
@@ -22,14 +30,14 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       350px;
+    width:                       420px;
     x-offset:                    0px;
     y-offset:                    0px;
 
     padding:                     0px;
-    border:                      0px solid;
-    border-radius:               8px;
-    border-color:                @selected;
+    border:                      2px;
+    border-radius:               25px;
+    border-color:                rgba(152, 211, 238, 0.3);
     cursor:                      "default";
     background-color:            @background;
 }
@@ -60,8 +68,8 @@ listview {
     fixed-height:                true;
     fixed-columns:               true;
 
-    spacing:                     16px;
-    padding:                     32px;
+    spacing:                     20px;
+    padding:                     36px;
     margin:                      0px;
     background-color:            transparent;
     cursor:                      "default";
@@ -70,10 +78,12 @@ listview {
 /*****----- Elements -----*****/
 element {
     enabled:                     true;
-    padding:                     17px;
-    border-radius:               16px;
-    background-color:            #585b70;
-    text-color:                  #eff1f5;
+    padding:                     16px 20px;
+    border-radius:               12px;
+    border:                      2px;
+    border-color:                @main-ex;
+    background-color:            rgba(30, 30, 46, 0.8);
+    text-color:                  @main-fg;
     cursor:                      pointer;
 }
 element-text {
@@ -85,20 +95,24 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    background-color:            #8839ef;
+    background-color:            @selected;
+    text-color:                  @select-fg;
+    border-color:                @select-bg;
 }
 
 /*****----- Message -----*****/
 message {
     enabled:                     true;
-    margin:      		 0px 25px;
-    padding:                     10px 20px;
-    border-radius: 		 0% 0% 100% 100%;
-    background-color: 		 #f5c2e7;
+    margin:      		 0px 28px;
+    padding:                     20px 26px;
+    border-radius: 		 12px;
+    border:                      2px;
+    border-color:                @main-br;
+    background-color: 		 rgba(30, 30, 46, 0.8);
 }
 textbox {
     background-color:            transparent;
-    text-color:                  #313244;
+    text-color:                  @main-fg;
     vertical-align:              0.5;
     horizontal-align:            0.5;
 }

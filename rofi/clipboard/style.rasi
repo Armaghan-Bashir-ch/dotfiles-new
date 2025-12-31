@@ -1,12 +1,12 @@
 
 /*****----- Configuration -----*****/
 * {
-    main-bg:            #11111be6;
-    main-fg:            #cdd6f4ff;
-    main-br:            #cba6f7ff;
-    main-ex:            #f5e0dcff;
-    select-bg:          #b4befeff;
-    select-fg:          #11111bff;
+    main-bg:            #151720e6;
+    main-fg:            #cbced3ff;
+    main-br:            #98d3eecc;
+    main-ex:            #95d3afcc;
+    select-bg:          #6fa8dcff;
+    select-fg:          #151720ff;
     separatorcolor:     transparent;
     border-color:       transparent;
 }
@@ -22,7 +22,7 @@ configuration {
     display-window:              "";
     drun-display-format:         "{name}";
     window-format:               "{w}{t}";
-    font:                        "JetBrainsMono Nerd Font 10";
+    font:                        "JetBrainsMono Nerd Font 11";
     icon-theme:                  "Tela-circle-dracula";
 }
 
@@ -30,8 +30,8 @@ configuration {
 
 // Main //
 window {
-    height:                      600px;
-    width:                       900px;
+    height:                      520px;
+    width:                       840px;
     transparency:                "real";
     fullscreen:                  false;
     enabled:                     true;
@@ -39,9 +39,9 @@ window {
     spacing:                     0px;
     padding:                     0px;
     border:                      2px;
-    border-radius:               40px;
-    border-color:                transparent;
-    background-color:            transparent;
+    border-radius:               12px;
+    border-color:                rgba(152, 211, 238, 0.3);
+    background-color:            @main-bg;
 }
 mainbox {
     enabled:                     true;
@@ -49,8 +49,7 @@ mainbox {
     padding:                     0px;
     orientation:                 vertical;
     children:                    [ "inputbar" , "listbox"];
-    background-color:            transparent;
-    background-image:            url("~/wallpapers/solar_system_mocha.png?raw=true", height);
+    background-color:            @main-bg;
 }
 
 
@@ -58,24 +57,24 @@ mainbox {
 inputbar {
     enabled:                     true;
     spacing:                     0px;
-    padding:                     80px;
+    padding:                     20px 24px;
     children:                    [ "entry" ];
     background-color:            @main-bg;
-    background-image:            url("~/wallpapers/solar_system_mocha.png?raw=true", width);
 }
 entry {
-    border-radius:               30px;
+    border-radius:               8px;
     enabled:                     true;
     spacing:                     0px;
-    padding:                     20px;
+    padding:                     10px 14px;
     text-color:                  @main-fg;
-    background-color:            @main-bg;
+    background-color:            rgba(30, 30, 46, 0.8);
+    border:                      1px solid @border-color;
 }
 
 
 // Lists //
 listbox {
-    padding:                     30px;
+    padding:                     24px;
     spacing:                     0px;
     orientation:                 horizontal;
     children:                    [ "listview"];
@@ -83,7 +82,7 @@ listbox {
 }
 listview {
     padding:                     10px;
-    spacing:                     10px;
+    spacing:                     6px;
     enabled:                     true;
     columns:                     2;
     cycle:                       true;
@@ -99,33 +98,37 @@ listview {
 }
 mode-switcher {
     orientation:                 vertical;
-    width:                       95px;
+    width:                       140px;
     enabled:                     true;
-    padding:                     15px;
-    spacing:                     10px;
+    padding:                     16px;
+    spacing:                     6px;
     background-color:            transparent;
 }
 button {
     cursor:                      pointer;
-    border-radius:               50px;
-    background-color:            @main-bg;
+    border-radius:               6px;
+    background-color:            @main-br;
     text-color:                  @main-fg;
+    padding:                     10px 14px;
+    border:                      1px solid @border-color;
 }
 button selected {
-    background-color:            @main-fg;
-    text-color:                  @main-bg;
+    background-color:            @select-bg;
+    text-color:                  @select-fg;
+    border-color:                @select-bg;
 }
 
 
 // Elements //
 element {
     enabled:                     true;
-    spacing:                     20px;
-    padding:                     9px;
-    border-radius:               25px;
+    spacing:                     6px;
+    padding:                     12px 16px;
+    border-radius:               6px;
     cursor:                      pointer;
     background-color:            transparent;
     text-color:                  @main-fg;
+    border:                      1px solid transparent;
 }
 @media(max-aspect-ratio: 1.8) {
     element {
@@ -135,9 +138,10 @@ element {
 element selected.normal {
     background-color:            @select-bg;
     text-color:                  @select-fg;
+    border-color:                @select-bg;
 }
 element-icon {
-    size:                        47px;
+    size:                        28px;
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
@@ -148,5 +152,6 @@ element-text {
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
+    font-size:                   12px;
 }
 
