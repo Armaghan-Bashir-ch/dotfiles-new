@@ -22,6 +22,7 @@ local options = {
          "c",
          "cpp",
          "sql",
+         "jsonc"
      },
     highlight = {
         enable = true,
