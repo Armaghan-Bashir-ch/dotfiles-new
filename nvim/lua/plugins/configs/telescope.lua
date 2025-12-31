@@ -1,5 +1,8 @@
 local options = {
     defaults = {
+        preview = {
+            treesitter = false,
+        },
         vimgrep_arguments = {
             "rg",
             "-L",
@@ -48,7 +51,7 @@ local options = {
         },
     },
 
-    extensions_list = { "themes", "terms" },
+    extensions_list = { "terms" },
 }
 
 return options
