@@ -11,11 +11,14 @@ return function()
                     preview_width = 0.7,
                 },
             },
+            preview = {
+                treesitter = false,
+            },
         },
         extensions = {
             undo = {},
             ["ui-select"] = themes.get_dropdown({
-                previewer = true,
+                previewer = false,
             }),
         },
     })
