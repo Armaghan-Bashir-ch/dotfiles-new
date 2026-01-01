@@ -2,6 +2,9 @@ return {
   "nvim-telescope/telescope.nvim",
   opts = {
     defaults = {
+      preview = {
+        treesitter = false,
+      },
       layout_config = {
         horizontal = { width = 0.9, height = 0.8 },
         vertical = { width = 0.5 },
