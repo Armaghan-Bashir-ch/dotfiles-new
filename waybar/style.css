@@ -62,7 +62,7 @@
 42. Wall-Dcol
 */
 
-@import "themes/Rose-Pine-Moon.css";
+@import "themes/Rose-Pine.css";
 
 window#waybar {
   background: transparent;
