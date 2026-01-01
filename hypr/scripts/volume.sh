@@ -20,7 +20,7 @@ get_icon() {
         echo "$iDIR/volume-mute.png"
     else
         v="$(get_volume_num)"
-        if   (( v <= 30 )); then echo "$iDIR/volume-low.png"
+        if   (( v <= 23 )); then echo "$iDIR/volume-low.png"
         elif (( v <= 60 )); then echo "$iDIR/volume-mid.png"
         else                     echo "$iDIR/volume-high.png"
         fi
