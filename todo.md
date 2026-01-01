@@ -30,3 +30,4 @@
 - [ ] Is this the most efficent workflow?
 - [ ] how to use opencode in a better way
 - [ ] Any way to have a background image/design for the notification daemon?
+- [ ] Can I switch swayosd with the brightness and volume scripts?
