@@ -338,6 +338,51 @@ M.general = {
             "Run bash script",
         },
 
+        ["<leader>acp"] = {
+            function()
+                -- Check if in a git repository
+                local in_git_repo = vim.fn.system('git rev-parse --git-dir > /dev/null 2>&1; echo $?') == '0\n'
+                if not in_git_repo then
+                    vim.notify("  Not in a git repository", vim.log.levels.WARN, { icon = "" })
+                    return
+                end
+                -- Check for uncommitted changes
+                local has_changes = vim.fn.system('git status --porcelain') ~= ''
+                if not has_changes then
+                    vim.notify("  No changes to commit", vim.log.levels.INFO, { icon = "" })
+                    return
+                end
+                Snacks.input({
+                    prompt = "Commit message: ",
+                    win = {
+                        row = math.floor((vim.o.lines - 1) / 2),  -- Center vertically
+                        col = math.floor((vim.o.columns - 60) / 2), -- Center horizontally
+                        relative = "editor",
+                        style = "input"
+                    }
+                }, function(msg)
+                    if msg and msg ~= "" then
+                        -- Run as a job for async execution with callback
+                        local job_id = vim.fn.jobstart({ "bash", "-c", "git add . && git commit -m '" .. msg .. "' && git push" }, {
+                            on_exit = function(_, exit_code, _)
+                                if exit_code == 0 then
+                                    vim.notify("  Successfully committed and pushed", vim.log.levels.INFO, { icon = "" })
+                                else
+                                    vim.notify("  Commit/push failed (exit code: " .. exit_code .. ")", vim.log.levels.ERROR, { icon = "" })
+                                end
+                            end,
+                            stdout_buffered = true,
+                            stderr_buffered = true,
+                        })
+                        print("  Committing & pushing: " .. msg)  -- Keep the immediate feedback
+                    else
+                        vim.notify("  Commit aborted: No message provided", vim.log.levels.INFO, { icon = "" })
+                    end
+                end)
+            end,
+            "Git commit & push",
+        },
+
         ["<M-q>"] = {
             "<cmd>!chmod +x %<CR>",
             "Make file executable",
