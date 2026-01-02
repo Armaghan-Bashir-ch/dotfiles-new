@@ -40,15 +40,21 @@ local opts = {
             return
         end
 
+        local augroup = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
+
         vim.api.nvim_clear_autocmds({
             group = augroup,
             buffer = bufnr,
         })
+
         vim.api.nvim_create_autocmd("BufWritePre", {
             group = augroup,
             buffer = bufnr,
             callback = function()
-                vim.lsp.buf.format({ bufnr = bufnr })
+                local clients = vim.lsp.get_clients({ bufnr = bufnr, method = "textDocument/formatting" })
+                if #clients > 0 then
+                    vim.lsp.buf.format({ bufnr = bufnr, async = true })
+                end
             end,
         })
     end,
