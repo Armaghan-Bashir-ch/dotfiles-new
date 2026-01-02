@@ -98,6 +98,7 @@ local default_plugins = {
 
     {
         "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
         lazy = false,
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         opts = function()
