@@ -31,3 +31,5 @@
 - [ ] how to use opencode in a better way
 - [ ] Any way to have a background image/design for the notification daemon?
 - [ ] Can I switch swayosd with the brightness and volume scripts?
+- [ ] Learn use cases of stow and replace the whole `ln -s` section inside of [@.dev.sh](.dev.sh) with it
+
