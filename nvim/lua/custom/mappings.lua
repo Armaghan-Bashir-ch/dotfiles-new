@@ -352,15 +352,7 @@ M.general = {
                     vim.notify("  No changes to commit", vim.log.levels.INFO, { icon = "" })
                     return
                 end
-                Snacks.input({
-                    prompt = "Commit message: ",
-                    win = {
-                        row = math.floor((vim.o.lines - 1) / 2),  -- Center vertically
-                        col = math.floor((vim.o.columns - 60) / 2), -- Center horizontally
-                        relative = "editor",
-                        style = "input"
-                    }
-                }, function(msg)
+                Snacks.input({ prompt = "Commit message: " }, function(msg)
                     if msg and msg ~= "" then
                         -- Run as a job for async execution with callback
                         local job_id = vim.fn.jobstart({ "bash", "-c", "git add . && git commit -m '" .. msg .. "' && git push" }, {
@@ -374,7 +366,7 @@ M.general = {
                             stdout_buffered = true,
                             stderr_buffered = true,
                         })
-                        print("  Committing & pushing: " .. msg)  -- Keep the immediate feedback
+                        vim.notify("  Committing & pushing: " .. msg, vim.log.levels.INFO, { icon = "" })  -- Changed to notification
                     else
                         vim.notify("  Commit aborted: No message provided", vim.log.levels.INFO, { icon = "" })
                     end
