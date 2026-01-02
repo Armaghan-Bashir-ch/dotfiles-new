@@ -53,7 +53,7 @@ local opts = {
             callback = function()
                 local clients = vim.lsp.get_clients({ bufnr = bufnr, method = "textDocument/formatting" })
                 if #clients > 0 then
-                    vim.lsp.buf.format({ bufnr = bufnr, async = true })
+                    vim.lsp.buf.format({ bufnr = bufnr, async = false })
                 end
             end,
         })

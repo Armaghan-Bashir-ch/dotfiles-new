@@ -20,6 +20,7 @@ opt.cursorline = true
 opt.expandtab = true
 opt.shiftwidth = 2
 opt.smartindent = true
+opt.autoindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
 

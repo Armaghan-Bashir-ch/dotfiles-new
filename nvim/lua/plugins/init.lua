@@ -88,7 +88,11 @@ local default_plugins = {
             local status, treesitter_configs = pcall(require, "nvim-treesitter.configs")
             if status then
                 treesitter_configs.setup({
-                    ensure_installed = { "lua", "vim" },
+                    ensure_installed = {
+                        "lua", "vim", "vimdoc", "javascript", "typescript", "tsx", "go", "gowork",
+                        "css", "markdown", "bash", "json", "yaml", "toml", "json5", "python",
+                        "html", "rust", "c", "cpp", "sql", "jsonc"
+                    },
                     highlight = { enable = true },
                     indent = { enable = true },
                 })
