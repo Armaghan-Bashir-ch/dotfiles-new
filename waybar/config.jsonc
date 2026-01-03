@@ -16,7 +16,7 @@
     "gtk-layer-shell": true,
 
 	"modules-left": ["custom/padd","custom/l_end","battery","backlight","pulseaudio","custom/r_end","custom/l_end","bluetooth","network","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
-	"modules-center": ["custom/padd","custom/l_end","custom/todo","custom/r_end","custom/padd"],
+	"modules-center": ["custom/padd","custom/l_end","custom/swaync","custom/r_end","custom/padd"],
 	"modules-right": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd","custom/l_end","custom/ghostty","custom/lockscreen","custom/wallchange","custom/clipboard","custom/r_end","custom/l_end","cpu","memory","custom/tempinfo","custom/r_end","custom/padd"],
 
 //  INFO: To add a module to waybar, add its name to the "modules-left/modules-right/modules-center" //
@@ -56,10 +56,11 @@
         }
     },
 
-    "custom/todo": {
-        "format": "¯\\(ツ)/¯",  // NOTE: Replace with your very own to-do //
+    "custom/swaync": {
+        "format": " ",  // NOTE: Replace with your very own to-do //
         "separate-outputs": true,
-        "max-length": 1000
+        "max-length": 1000,
+        "on-click": "swaync-client -t",
     },
 
     "custom/player": {

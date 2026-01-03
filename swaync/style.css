@@ -1,4 +1,5 @@
 @import "themes/Rose-Pine-Moon.css";
+@import "center_control.css";
 
 * {
     color: @wb-act-bg;

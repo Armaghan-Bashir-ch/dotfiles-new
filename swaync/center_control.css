@@ -1,0 +1,263 @@
+@import "./themes/Decay-Green.css";
+
+@define-color wb-act-bg #4a7a8c;
+
+* {
+  color: @main-fg;
+  all: unset;
+  font-size: 14px;
+  font-family: "JetBrains Mono Nerd Font 10";
+  transition: 200ms;
+}
+
+/* Avoid 'annoying' background */
+.blank-window {
+  background: transparent;
+}
+
+/* CONTROL CENTER ------------------------------------------------------------------------ */
+
+.control-center {
+  background: #101419;
+  border-radius: 24px;
+  border: 1px solid rgba(74, 122, 140, 0.4);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03), inset 0 -1px 0 rgba(0,0,0,0.1);
+  margin: 18px;
+  padding: 16px;
+}
+
+/* Notifications */
+.control-center .notification-row {
+  position: relative;
+}
+
+.control-center .notification-row .notification-background,
+.control-center .notification-row .notification-background .notification.critical {
+  background: @main-bg;
+  border: none;
+  border-radius: 16px;
+  margin: 8px 0px;
+  padding: 6px 24px;
+}
+
+.control-center .notification-row .notification-background .notification.critical {
+  color: @wb-act-bg;
+}
+
+
+
+.control-center .notification-row .notification-background .notification .notification-content {
+  margin: 6px;
+  padding: 8px 6px 2px 2px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * {
+  min-height: 3.4em;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
+  background: @wb-act-bg;
+  color: @main-fg;
+  border-radius: 12px;
+  margin: 6px;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
+  background: @wb-act-bg;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
+  background-color: @wb-act-bg;
+}
+
+/* Buttons */
+.control-center .close-button {
+  color: #101419;
+}
+
+progressbar,
+progress,
+trough {
+  border-radius: 12px;
+}
+
+progressbar {
+  background-color: rgba(255,255,255,.1);
+}
+
+/* Notifications expanded-group */
+.notification-group {
+  margin: 2px 8px 2px 8px;
+}
+
+.notification-group-headers {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: @main-fg;
+  letter-spacing: 2px;
+}
+
+.notification-group-icon {
+  color: @main-fg;
+}
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: transparent;
+  color: @main-fg;
+  margin: 4px;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover {
+  background: @wb-act-bg;
+}
+
+/* WIDGETS --------------------------------------------------------------------------- */
+
+  /* Notification clear button */
+.widget-title {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: @main-fg;
+  margin: 20px 6px 16px 6px;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.widget-title button {
+  background: linear-gradient(145deg, @main-bg, #0a0e11);
+  border: 1px solid rgba(74, 122, 140, 0.3);
+  border-radius: 8px;
+  padding: 6px 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.widget-title button:hover {
+  background: linear-gradient(145deg, @wb-act-bg, #2e4f5a);
+  border: 1px solid rgba(74, 122, 140, 0.5);
+  box-shadow: 0 4px 12px rgba(74, 122, 140, 0.3);
+}
+
+.widget-title button:active {
+  background-color: @wb-act-bg;
+}
+
+  /* Do not disturb */
+.widget-dnd {
+  margin: 10px 0 18px 0;
+  padding: 14px;
+  background: linear-gradient(145deg, @main-bg, #0a0e11);
+  border-radius: 16px;
+  border: 1px solid rgba(74, 122, 140, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+.widget-dnd > switch {
+  background: @main-bg;
+  font-size: initial;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 2px;
+}
+
+.widget-dnd > switch:hover {
+  background: @wb-act-bg;
+}
+
+.widget-dnd > switch:checked {
+  background: linear-gradient(135deg, @wb-act-bg, #2e4f5a);
+}
+
+.widget-dnd > switch:checked:hover {
+  background: @wb-act-bg;
+}
+
+.widget-dnd > switch slider {
+  background: @main-fg;
+  border-radius: 6px;
+}
+
+  /* Buttons menu */
+.widget-buttons-grid {
+  font-size: x-large;
+  padding: 10px 4px;
+  margin: 8px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, @main-bg, #0a0e11);
+  border: 1px solid rgba(74, 122, 140, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button {
+  margin: 6px 12px;
+  padding: 8px 14px;
+  background: linear-gradient(145deg, @main-bg, #0a0e11);
+  border: 1px solid rgba(74, 122, 140, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+  background: linear-gradient(145deg, @wb-act-bg, #2e4f5a);
+  border: 1px solid rgba(74, 122, 140, 0.4);
+  box-shadow: 0 2px 6px rgba(74, 122, 140, 0.2);
+}
+
+  /* Music player */
+.widget-mpris {
+    background: linear-gradient(145deg, @main-bg, #0a0e11);
+    border: 1px solid rgba(74, 122, 140, 0.3);
+    border-radius: 18px;
+    color: @main-fg;
+    margin: 22px 8px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+  /* NOTE: Background need *opacity 1* otherwise will turn into the album art blurred  */
+.widget-mpris-player {
+    background: linear-gradient(145deg, @main-bg, #0a0e11);
+    border-radius: 20px;
+    padding: 8px 16px;
+    margin: 8px;
+    border: 1px solid rgba(74, 122, 140, 0.2);
+}
+
+.widget-mpris > box > button {
+  color: @main-fg;
+  border-radius: 20px;
+}
+
+.widget-mpris button {
+  color: @main-fg;
+}
+
+.widget-mpris button:hover {
+  color: @main-fg;
+}
+
+.widget-mpris-album-art {
+  border-radius: 16px;
+}
+
+.widget-mpris-title {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.widget-mpris-subtitle {
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+/* Volume */
+.widget-volume {
+  background: linear-gradient(145deg, @main-bg, #0a0e11);
+  color: @main-bg;
+  padding: 6px;
+  margin: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(74, 122, 140, 0.3);
+}
