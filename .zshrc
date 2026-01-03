@@ -76,6 +76,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
+source ~/.zsh/plugins/pwp/pwp.plugin.zsh
 echo -ne '\e[1 q'
 
 # Syntax highlighting with custom colors:
