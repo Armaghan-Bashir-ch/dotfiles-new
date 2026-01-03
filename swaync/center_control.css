@@ -18,7 +18,7 @@
 /* CONTROL CENTER ------------------------------------------------------------------------ */
 
 .control-center {
-  background: rgba(16, 20, 25, 0.80);
+  background: rgba(16, 20, 25, 1);
   border-radius: 24px;
   border: 1px solid rgba(74, 122, 140, 0.4);
   box-shadow: 0 12px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03), inset 0 -1px 0 rgba(0,0,0,0.1);
