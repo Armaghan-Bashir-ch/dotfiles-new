@@ -49,7 +49,7 @@
     "title": {
       "text": "Notifications Center",
       "clear-all-button": true,
-      "button-text": " 󰎟 "
+      "button-text": "Clear All"
     },
     "dnd": {
       "text": "Do not disturb"
