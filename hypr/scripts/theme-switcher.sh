@@ -73,6 +73,9 @@ esac
 # Set swaync theme to match waybar
 SWAYNC_THEME="$WAYBAR_THEME"
 
+# Set ghostty theme to match waybar, converting dashes to spaces
+GHOSTTY_THEME=$(echo "$WAYBAR_THEME" | tr '-' ' ')
+
 # Update waybar style.css
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
 sed -i "s|@import \"themes/.*\.css\";|@import \"themes/$WAYBAR_THEME.css\";|" "$WAYBAR_STYLE"
@@ -114,6 +117,10 @@ fi
 SWAYNC_STYLE="$HOME/.config/swaync/style.css"
 sed -i "s|@import \"themes/.*\.css\";|@import \"themes/$SWAYNC_THEME.css\";|" "$SWAYNC_STYLE"
 
+# Update ghostty config
+GHOSTTY_CONFIG="$HOME/.config/ghostty/config"
+sed -i "s|^theme = .*|theme = $GHOSTTY_THEME|" "$GHOSTTY_CONFIG"
+
 # Reload swaync only if theme changed
 if [ "$THEME" != "$CURRENT_THEME" ]; then
     (
@@ -125,6 +132,12 @@ fi
 
 # Reload waybar
 pkill -SIGUSR2 waybar
+
+# Reload ghostty config if theme changed
+if [ "$THEME" != "$CURRENT_THEME" ]; then
+    pkill -USR2 ghostty >/dev/null 2>&1 &
+    disown
+fi
 
 notify-send -h string:image-path:"$WALLPAPER_PATH" "Theme Switcher" "Switched to $THEME theme"
 
