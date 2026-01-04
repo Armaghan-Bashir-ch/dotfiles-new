@@ -62,7 +62,7 @@
 42. Wall-Dcol
 */
 
-@import "themes/Catppuccin-Macchiato.css";
+@import "themes/Catppuccin-Mocha.css";
 
 window#waybar {
   background: transparent;

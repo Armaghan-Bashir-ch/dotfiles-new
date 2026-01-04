@@ -57,7 +57,7 @@
     },
 
     "custom/swaync": {
-        "format": " ",  // NOTE: Replace with your very own to-do //
+        "format": "",  // NOTE: Replace with your very own to-do //
         "separate-outputs": true,
         "max-length": 1000,
         "on-click": "swaync-client -t",
