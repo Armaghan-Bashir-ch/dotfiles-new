@@ -4,7 +4,7 @@
   "positionY": "top",
 	"cssPriority": "user",
 
-  "control-center-width": 280,
+  "control-center-width": 300,
   "control-center-height": 760, 
   "control-center-margin-top": -30,
   "control-center-margin-bottom": 10,
