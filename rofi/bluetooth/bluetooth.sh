@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-notify-send "󰂯  Checking Bluetooth devices"
+notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Checking Bluetooth devices"
 
 set -euo pipefail
 
@@ -129,23 +129,23 @@ fi
 case "$choice" in
     "󰂯  Enable Bluetooth")
         bluetoothctl power on
-        notify-send "󰂯" "Bluetooth enabled"
+        notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Bluetooth enabled"
         # Re-run the script to show the main menu
         exec "$0"
         ;;
 
     "󰂲  Disable Bluetooth")
         bluetoothctl power off
-        notify-send "󰂲" "Bluetooth disabled"
+        notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Bluetooth disabled"
         exit 0
         ;;
 
     "󰂰  Scan for devices")
-        notify-send "󰂰" "Scanning for Bluetooth devices..."
+        notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Scanning for Bluetooth devices..."
         bluetoothctl scan on &
         sleep 8
         bluetoothctl scan off
-        notify-send "󰂰" "Scan complete"
+        notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Scan complete"
         # Re-run the script to show new devices
         exec "$0"
         ;;
@@ -162,19 +162,19 @@ case "$choice" in
             if bluetoothctl info "$mac" 2>/dev/null | grep -q "Connected: yes"; then
                 # Disconnect
                 bluetoothctl disconnect "$mac"
-                notify-send "󰂲" "Disconnected from $device_name"
+                notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Disconnected from $device_name"
             else
                 # Try to connect - ensure device is trusted first
-                notify-send "󰂯" "Connecting to $device_name..."
+                notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Connecting to $device_name..."
                 bluetoothctl trust "$mac" 2>/dev/null || true
                 if bluetoothctl connect "$mac"; then
-                    notify-send "󰂯" "Connected to $device_name"
+                    notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Connected to $device_name"
                 else
-                    notify-send "❌" "Failed to connect to $device_name"
+                    notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Failed to connect to $device_name"
                 fi
             fi
         else
-            notify-send "❌" "Could not find device: $device_name"
+            notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Could not find device: $device_name"
         fi
         ;;
 
