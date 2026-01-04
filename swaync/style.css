@@ -168,11 +168,13 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/*
 .control-center .notification-row .notification:hover {
-    background: linear-gradient(145deg, rgba(16, 20, 25, 0.95), rgba(16, 20, 25, 0.8));
-    border: 1px solid rgba(131, 199, 230, 0.3);
-    transform: translateX(4px);
+  background: linear-gradient(145deg, rgba(16, 20, 25, 0.95), rgba(16, 20, 25, 0.8));
+  border: 1px solid rgba(131, 199, 230, 0.3);
+  transform: translateX(4px);
 }
+*/
 
 .control-center .notification-row .notification.critical {
     background: linear-gradient(145deg, rgba(31, 35, 40, 0.95), rgba(16, 20, 25, 0.85));

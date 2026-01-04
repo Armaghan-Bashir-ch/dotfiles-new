@@ -7,7 +7,6 @@
   all: unset;
   font-size: 14px;
   font-family: "JetBrains Mono Nerd Font 10";
-  transition: 200ms;
 }
 
 /* Avoid 'annoying' background */
@@ -31,13 +30,38 @@
   position: relative;
 }
 
-.control-center .notification-row .notification-background,
-.control-center .notification-row .notification-background .notification.critical {
-  background: @main-bg;
+.control-center .notification-row .notification-background {
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.09), rgba(0, 0, 0, 0.01));
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(131, 199, 230, 0.4);
+  border-radius: 24px;
+  margin: 0 8px 8px 0;
+  padding: 0;
+  overflow: visible;
+  position: relative;
+}
+
+.control-center .notification-row .notification-background .notification {
+  padding: 6px;
+  border-radius: 23px;
   border: none;
-  border-radius: 16px;
-  margin: 8px 0px;
-  padding: 6px 24px;
+  background: transparent;
+}
+
+.control-center .notification-row .notification-background .notification.critical {
+  border: none;
+}
+
+.control-center .notification-row .notification-background .notification.critical .notification-content {
+  border-left: 3px solid @wb-act-bg;
+  padding-left: 8px;
+}
+
+.control-center .notification-row .notification:hover {
+  background: transparent !important;
+  border: none !important;
+  transform: none !important;
 }
 
 .control-center .notification-row .notification-background .notification.critical {
@@ -47,32 +71,73 @@
 
 
 .control-center .notification-row .notification-background .notification .notification-content {
-  margin: 6px;
-  padding: 8px 6px 2px 2px;
+  margin: 8px 16px;
+  text-align: left;
 }
 
 .control-center .notification-row .notification-background .notification > *:last-child > * {
-  min-height: 3.4em;
+  min-height: 3.6em;
 }
 
 .control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
-  background: @wb-act-bg;
-  color: @main-fg;
-  border-radius: 12px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(131, 199, 230, 0.08), rgba(147, 206, 233, 0.04));
   margin: 6px;
+  border: 1px solid rgba(131, 199, 230, 0.25);
+  will-change: transform;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover::before {
+  left: 100%;
 }
 
 .control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
-  background: @wb-act-bg;
+  background: linear-gradient(135deg, rgba(131, 199, 230, 0.25), rgba(147, 206, 233, 0.15));
+  border: 1px solid rgba(131, 199, 230, 0.4);
+  transform: translateY(-1px);
 }
 
 .control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
-  background-color: @wb-act-bg;
+  background: linear-gradient(135deg, rgba(147, 206, 233, 0.4), rgba(147, 206, 233, 0.2));
+  color: @main-bg;
+  transform: translateY(0);
 }
 
-/* Buttons */
-.control-center .close-button {
-  color: #101419;
+.control-center .notification-row .notification-background .close-button {
+  margin: 50px 14px;
+  padding: 3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(16, 20, 25, 0.8), rgba(16, 20, 25, 0.6));
+  border: 1px solid rgba(131, 199, 230, 0.3);
+  will-change: transform;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.control-center .notification-row .notification-background .close-button:hover {
+  background: linear-gradient(135deg, rgba(131, 199, 230, 0.2), rgba(147, 206, 233, 0.1));
+  border: 1px solid rgba(131, 199, 230, 0.5);
+  transform: scale(1.1) rotate(90deg);
+}
+
+.control-center .notification-row .notification-background .close-button:active {
+  background: linear-gradient(135deg, rgba(147, 206, 233, 0.3), rgba(147, 206, 233, 0.15));
+  color: @main-bg;
+  transform: scale(1.05) rotate(180deg);
 }
 
 progressbar,
@@ -236,6 +301,31 @@ progressbar {
 
 .widget-mpris button:hover {
   color: @main-fg;
+}
+
+.image {
+  margin: 12px 16px 12px 4px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.summary {
+  font-weight: 700;
+  font-size: 1.35rem;
+  margin-top: 8px;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+.body {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+  word-wrap: break-word;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .widget-mpris-album-art {
