@@ -2,8 +2,7 @@
 
 # Exit if clipboard is empty
 if [[ -z $(wl-paste) ]]; then
-    dunstify -h string:x-dunst-stack-tag:clip_notif -t 4000 -u critical \
-        "Clipboard Manager" "Clipboard is empty"
+    notify-send -i ~/App-Icons/Clipboard.png "Clipboard Manager" "Clipboard is Empty, Copy something"
     exit
 fi
 
