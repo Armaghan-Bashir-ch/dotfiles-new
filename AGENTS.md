@@ -1,14 +1,44 @@
-# AGENTS.md - Coding Agent Guidelines
+# INTRODUCTION
 
-## Build/Lint/Test Commands
-This is a dotfiles repository - no traditional build process exists.
-- **Lint single file**: `<leader>ln` in Neovim (triggers nvim-lint)
-- **Format code**: Automatic on save via null-ls formatters
-- **Available linters**: Lua (stylua), Python (black/mypy/pylint), JS/TS (eslint_d), Go (gofumpt), C/C++ (clang-format), SQL (sqlfmt)
+- This is my Arch Linux (Hyprland) Dotfiles
+- It is pushed to github publicly, and is therefore open-sourced
+- This contains The dotfiles of all the tools I use in my everyday workflow 
+- All of the things you see in this location (~/dotfiles) is symlinked to ~/.config dirs.
 
-## Code Style Guidelines
-- **Lua**: 4-space indentation, camelCase functions, UPPER_CASE constants, pcall for error handling, require modules at top
-- **Bash**: `#!/bin/bash`, UPPER_CASE globals, `if` checks with notify-send feedback, proper quoting, input validation
-- **General**: Minimal code, descriptive names, local scoping, extensive comments for complex logic
-- **Neovim**: Focus on init.lua/plugins.lua/mappings.lua/chadrc.lua, lazy.nvim format, load_mappings() for keybinds
-- **Directory rules**: Ask before modifying hypr/hyprland.conf, nvim/custom/ files, or ghostty/ config
+## INSTRUCTUONS
+
+- Do NOT push && commit anything to github without my permission
+- DO NOT run bash scripts in your console or terminal, without my permission
+- Do NOT write code even in `BUILD` mode, without a plan before.
+- Run `git diff .`, before pushing or commiting anything to github (with my permission)
+- Use `#!/bin/bash` or `#!/usr/bin/env bash` 
+- Never Use any sudo commands.
+- Add direct comments only
+- When installing packages, just give commands, never run them
+- When creating new modules for Waybar, do not add them to any module list unless I tell you to
+    - If I do tell you to do so, then add them inside of middle-module
+- When creating new things, make sure their colors and UI, look alike the overall theme of the dotfiles
+- Never open any application
+- Indicate to start a new chat when running with the 'LLM Stamina Issues'
+- Never abandon a project or task
+
+### TOOLS TO USE
+
+>[!Caution]
+> Do not use any of the following things without full permission
+
+
+| Tool                | USE      |
+| ------------------- | --------- |
+| `gh`  | Browsing repos, creating repos, Managing Repos     |
+| `stow`  | For creating symlinks    |
+| `nitch` | For getting system information   |
+| `gh`      | Greping text from terminal  |
+| `fd`      | For finding files or dirs    |
+| `zoxide`    | For travelling through locations      |
+| `atuin`     | Command History   |
+| `notify-send` | Sending Notifications for testing       |
+| `git diff`          | Finding difference to commit the push with context, if asked to  |
+| `hyprctl`           | For finding hyprland stuff       |
+
+
