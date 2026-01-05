@@ -57,7 +57,8 @@
     },
 
     "custom/swaync": {
-        "format": "",  // NOTE: Replace with your very own to-do //
+        "exec": "~/.config/hypr/scripts/swaync-count.sh",
+        "interval": 1,
         "separate-outputs": true,
         "max-length": 1000,
         "on-click": "swaync-client -t",
