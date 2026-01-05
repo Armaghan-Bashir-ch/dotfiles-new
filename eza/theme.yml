@@ -100,5 +100,8 @@ filenames:
   yazi: {icon: {glyph: "󱧶"}}
   nvim: {icon: {glyph: ""}}
   eza: {icon: {glyph: ""}}
+  swaync: {icon: {glyph: "󰂞"}}
+
 extensions:
   md: {icon: {glyph: "", style: {foreground: Yellow}}, filename: {foreground: Yellow, is_underline: true}}
+
