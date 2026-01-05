@@ -4,7 +4,7 @@
   "positionY": "top",
 	"cssPriority": "user",
 
-  "control-center-width": 300,
+  "control-center-width": 325,
   "control-center-height": 760, 
   "control-center-margin-top": 0,
   "control-center-margin-bottom": 50,
@@ -39,7 +39,7 @@
   "widgets": [
     "title",
     "dnd",
-    "notifications",
+    "notifications"
   ],
   "widget-config": {
     "title": {
@@ -53,6 +53,6 @@
     "mpris": {
       "image-size": 96,
       "image-radius": 25
-    },
-  },
+    }
+  }
 }
