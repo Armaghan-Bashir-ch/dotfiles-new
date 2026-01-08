@@ -1,24 +1,27 @@
- {
-     "theme": "cursor",
-     "$schema": "https://opencode.ai/config.json",
-    "keybinds": {
-        "leader": "ctrl+o",
-        "app_exit": "ctrl+q",
-        "editor_open": "ctrl+e",
-        "theme_list": "<leader>t",
-        "session_new": "<leader>n",
-        "session_list": "<leader>s",
-        "session_interrupt": "esc",
-        "session_child_cycle": "<leader>h",
-        "session_child_cycle_reverse": "<leader>l",
-        "model_list": "<leader>m",
-        "agent_list": "<leader>a",
-        "command_list": "<leader>p",
-        "input_paste": "ctrl+v",
-        "messages_copy": "<leader>y",
-        "messages_half_page_down": "alt+j",
-        "messages_half_page_up": "alt+k",
-        "history_previous": "ctrl+p",
-        "history_next": "ctrl+n",
-    }
+{
+  "theme": "system",
+  "$schema": "https://opencode.ai/config.json",
+  "keybinds": {
+    "leader": "ctrl+o",
+    "app_exit": "ctrl+q",
+    "editor_open": "ctrl+e",
+    "theme_list": "<leader>t",
+    "session_new": "<leader>n",
+    "session_list": "<leader>s",
+    "session_interrupt": "esc",
+    "session_child_cycle": "<leader>h",
+    "session_child_cycle_reverse": "<leader>l",
+    "model_list": "<leader>m",
+    "agent_list": "<leader>a",
+    "command_list": "<leader>p",
+    "input_paste": "ctrl+v",
+    "messages_copy": "<leader>y",
+    "messages_half_page_down": "alt+j",
+    "messages_half_page_up": "alt+k",
+    "history_previous": "ctrl+p",
+    "history_next": "ctrl+n"
+  },
+  "plugin": [
+    "oh-my-opencode"
+  ]
 }
