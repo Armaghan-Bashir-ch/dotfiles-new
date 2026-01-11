@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-notify-send "󰤨  Checking for Wifi connections"
+notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager"  "Checking for Wifi connections"
 
 set -euo pipefail
 
@@ -64,7 +64,7 @@ connect_with_feedback() {
     local ssid="$1"
     local password="$2"
 
-    notify-send "🔄 Connecting to $ssid..." -t 2000
+    notify-send -i ~/App-Icons/WiFi_Logo.svg "Wifi Manager" "  Connecting to $ssid..." -t 2000
 
     # Start connection in background
     nmcli dev wifi connect "$ssid" password "$password" &
@@ -77,14 +77,14 @@ connect_with_feedback() {
     while ((count < timeout)); do
         # Check if connection succeeded
         if nmcli -t dev status | grep -q "wifi.*connected" && nmcli -t -f active,ssid dev wifi | grep -q "yes:$ssid"; then
-            notify-send "✅ Connected to $ssid" -t 3000
+            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $ssid" -t 3000
             return 0
         fi
 
         # Check for common errors
         if nmcli -t dev wifi | grep -q "$ssid.*--"; then
             kill $pid 2>/dev/null
-            notify-send "❌ Failed to connect to $ssid" -t 3000
+            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Failed to connect to $ssid" -t 3000
             return 1
         fi
 
@@ -94,7 +94,7 @@ connect_with_feedback() {
 
     # Timeout
     kill $pid 2>/dev/null
-    notify-send "⏰ Connection to $ssid timed out" -t 3000
+    notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connection to $ssid timed out" -t 3000
     return 1
 }
 
@@ -194,12 +194,12 @@ case "$choice" in
     󰖩*|✓*)
         # Saved connection - try to connect without password (nmtui style)
         conn_name=$(echo "$choice" | sed 's/^[^ ]*  //' | sed 's/ (Connected)//')
-        notify-send "🔄 Connecting to saved network: $conn_name..." -t 2000
+        notify-send -i ~/App-Icons/WiFi_Logo.svg "  Connecting to saved network: $conn_name..." -t 2000
 
         if nmcli connection up "$conn_name" --timeout 15 2>/dev/null; then
-            notify-send "✅ Connected to $conn_name" -t 3000
+            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $conn_name" -t 3000
         else
-            notify-send "❌ Failed to connect to saved network: $conn_name" -t 3000
+            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Failed to connect to saved network: $conn_name" -t 3000
         fi
         ;;
 
@@ -210,9 +210,9 @@ case "$choice" in
 
         if [[ -n "$saved_conn" ]]; then
             # Has saved connection - try it first
-            notify-send "🔄 Connecting to saved network: $ssid..." -t 2000
+            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connecting to saved network: $ssid..." -t 2000
             if nmcli connection up "$saved_conn" --timeout 15 2>/dev/null; then
-                notify-send "✅ Connected to $ssid" -t 3000
+                notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $ssid" -t 3000
             else
                 # Saved connection failed - ask for password
                 password=$(prompt_password)
