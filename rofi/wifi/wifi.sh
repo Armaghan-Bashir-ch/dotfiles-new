@@ -1,8 +1,11 @@
-#!/usr/bin/env bash
-
-notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager"  "Checking for Wifi connections"
+#!/bin/bash
 
 set -euo pipefail
+
+# -------------------------
+# Notify initial check
+# -------------------------
+notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "Checking for Wi-Fi connections..."
 
 # -------------------------
 # Paths to Rofi themes
@@ -15,166 +18,149 @@ PASSWORD_THEME="$HOME/.config/rofi/wifi/password.rasi"
 # -------------------------
 # Menu functions
 # -------------------------
-
-# Menu: Enable Wi-Fi
 enable_wifi_menu() {
-    echo -e "Enable Wi-Fi" | rofi -dmenu -theme "$ENABLE_THEME"
+    echo "Enable Wi-Fi" | rofi -dmenu -theme "$ENABLE_THEME"
 }
 
-# Menu: List Wi-Fi Networks
 list_wifi_menu() {
-    # Start with core options
-    menu_items=("󰤨   Disable Wi-Fi")
-    menu_items+=("   Manual Setup")
+    menu_items=("󰤨   Disable Wi-Fi" "   Manual Setup")
 
-    # Add connection status if connected
-    if [[ -n "$connected_ssid" ]]; then
-        menu_items+=("   Connected to $connected_ssid")
-    fi
+    [[ -n "$connected_ssid" ]] && menu_items+=("   Connected to $connected_ssid")
 
-    # Add saved connections
     for conn in "${saved_connections[@]}"; do
         menu_items+=("$conn")
     done
 
-    # Add available networks
-    for network in "${available_networks[@]}"; do
-        menu_items+=("$network")
+    for net in "${available_networks[@]}"; do
+        menu_items+=("$net")
     done
 
-    # Join with newlines
     printf '%s\n' "${menu_items[@]}" | rofi -markup-rows -dmenu -theme "$LIST_THEME"
 }
 
-# Prompt for SSID
 prompt_ssid() {
     rofi -dmenu -p "SSID" -theme "$SSID_THEME"
 }
 
-# Prompt for password
 prompt_password() {
     rofi -dmenu -p "Password" -theme "$PASSWORD_THEME"
 }
 
 # -------------------------
-# Connection functions (nmtui-style)
+# Verify connection
 # -------------------------
-
-connect_with_feedback() {
+verify_connection() {
     local ssid="$1"
-    local password="$2"
-
-    notify-send -i ~/App-Icons/WiFi_Logo.svg "Wifi Manager" "  Connecting to $ssid..." -t 2000
-
-    # Start connection in background
-    nmcli dev wifi connect "$ssid" password "$password" &
-    local pid=$!
-
-    # Monitor connection progress (like nmtui)
-    local timeout=30
+    local max_wait="${2:-15}"
     local count=0
 
-    while ((count < timeout)); do
-        # Check if connection succeeded
-        if nmcli -t dev status | grep -q "wifi.*connected" && nmcli -t -f active,ssid dev wifi | grep -q "yes:$ssid"; then
-            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $ssid" -t 3000
-            return 0
-        fi
+    local device
+    device=$(nmcli -t -f device,type device status 2>/dev/null | grep ":wifi$" | cut -d: -f1 | head -1)
+    [[ -z "$device" ]] && return 1
 
-        # Check for common errors
-        if nmcli -t dev wifi | grep -q "$ssid.*--"; then
-            kill $pid 2>/dev/null
-            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Failed to connect to $ssid" -t 3000
-            return 1
+    while [[ $count -lt $max_wait ]]; do
+        local active_ssid
+        active_ssid=$(nmcli -t -f active,ssid dev "$device" 2>/dev/null | grep '^yes' | cut -d: -f2-)
+
+        if [[ "$active_ssid" == "$ssid" ]]; then
+            local ip
+            ip=$(nmcli -t -f ip4.address dev "$device" 2>/dev/null | head -1)
+            if [[ -n "$ip" && "$ip" != "--" ]]; then
+                if ping -c 1 -W 2 8.8.8.8 >/dev/null 2>&1; then
+                    return 0
+                fi
+            fi
         fi
 
         sleep 1
         ((count++))
     done
 
-    # Timeout
-    kill $pid 2>/dev/null
-    notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connection to $ssid timed out" -t 3000
     return 1
+}
+
+# -------------------------
+# Connect function with feedback
+# -------------------------
+connect_with_feedback() {
+    local ssid="$1"
+    local password="$2"
+
+    notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connecting to $ssid..." -t 2000
+
+    if nmcli dev wifi connect "$ssid" password "$password" --timeout 30 >/dev/null 2>&1; then
+        if verify_connection "$ssid" 15; then
+            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $ssid" -t 3000
+            return 0
+        else
+            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected but no internet - $ssid" -t 3000
+            return 1
+        fi
+    else
+        notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Failed to connect to $ssid" -t 3000
+        return 1
+    fi
 }
 
 # -------------------------
 # Check Wi-Fi status
 # -------------------------
 wifi_status=$(nmcli -t -f WIFI general | tail -n1)
-
-if [[ "$wifi_status" == "disabled" ]]; then
-    choice=$(enable_wifi_menu)
+[[ "$wifi_status" == "disabled" ]] && {
+    enable_wifi_menu >/dev/null
     nmcli radio wifi on
-fi
+}
 
 # -------------------------
-# Get current connection
+# Current connection
 # -------------------------
-connected_ssid=$(nmcli -t -f active,ssid dev wifi 2>/dev/null \
-    | grep '^yes' | cut -d: -f2- || true)
+connected_ssid=$(nmcli -t -f active,ssid dev wifi 2>/dev/null | grep '^yes' | cut -d: -f2- || true)
 
 # -------------------------
-# Get saved connections (can connect without password)
+# Saved connections
 # -------------------------
 saved_connections=()
 saved_ssids=()
 while IFS= read -r conn_name; do
-    if [[ -n "$conn_name" && "$conn_name" != "--" ]]; then
-        # Check if this connection is currently active
-        if [[ "$conn_name" == "$connected_ssid" ]]; then
-            saved_connections+=("✓   $conn_name (Connected)")
-        else
-            saved_connections+=("󰖩   $conn_name")
-        fi
-        saved_ssids+=("$conn_name")
+    [[ -z "$conn_name" || "$conn_name" == "--" ]] && continue
+
+    if [[ "$conn_name" == "$connected_ssid" ]]; then
+        saved_connections+=("✓   $conn_name (Connected)")
+    else
+        saved_connections+=("󰖩   $conn_name")
     fi
+    saved_ssids+=("$conn_name")
 done < <(nmcli -t -f name,type connection show 2>/dev/null | grep ":802-11-wireless" | cut -d: -f1)
 
 # -------------------------
-# Get available networks (safe) - exclude saved connections
+# Available networks
 # -------------------------
 available_networks=()
 if [[ "$wifi_status" == "enabled" ]]; then
     while IFS= read -r ssid; do
-        if [[ -n "$ssid" && "$ssid" != "--" ]]; then
-            # Check if this SSID is already in saved connections
-            skip=false
-            for saved_ssid in "${saved_ssids[@]}"; do
-                if [[ "$ssid" == "$saved_ssid" ]]; then
-                    skip=true
-                    break
-                fi
-            done
-            if [[ "$skip" == false ]]; then
-                available_networks+=("   $ssid")
-            fi
-        fi
+        [[ -z "$ssid" || "$ssid" == "--" ]] && continue
+
+        skip=false
+        for saved_ssid in "${saved_ssids[@]}"; do
+            [[ "$ssid" == "$saved_ssid" ]] && { skip=true; break; }
+        done
+        [[ "$skip" == false ]] && available_networks+=("   $ssid")
     done < <(nmcli -t -f ssid dev wifi 2>/dev/null | sort -u)
 fi
 
 # -------------------------
-# Connection status string
+# Show menu
 # -------------------------
-if [[ -n "$connected_ssid" ]]; then
-    connection_status="   Connected to $connected_ssid\n"
-else
-    connection_status=""
-fi
+choice=$(list_wifi_menu)
 
 # -------------------------
-# Main interaction
+# Strip only whitespace, keep icons
 # -------------------------
-if [[ "$wifi_status" == "enabled" ]]; then
-    choice=$(list_wifi_menu)
-else
-    choice=$(enable_wifi_menu)
-    nmcli radio wifi on
-fi
+choice=$(echo "$choice" | sed -E 's/^[[:space:]]+//;s/[[:space:]]+$//')
 
-# Strip leading icons/spaces
-choice=$(echo "$choice" | sed -E 's/^[^a-zA-Z0-9]+//')
-
+# -------------------------
+# Handle choice
+# -------------------------
 case "$choice" in
     "Enable Wi-Fi")
         nmcli radio wifi on
@@ -192,41 +178,23 @@ case "$choice" in
         ;;
 
     󰖩*|✓*)
-        # Saved connection - try to connect without password (nmtui style)
-        conn_name=$(echo "$choice" | sed 's/^[^ ]*  //' | sed 's/ (Connected)//')
-        notify-send -i ~/App-Icons/WiFi_Logo.svg "  Connecting to saved network: $conn_name..." -t 2000
-
-        if nmcli connection up "$conn_name" --timeout 15 2>/dev/null; then
-            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $conn_name" -t 3000
+        conn_name=$(echo "$choice" | sed -E 's/^[^[:alnum:]]+\s*//;s/\s*\(Connected\)//')
+        ssid=$(nmcli -g 802-11-wireless.ssid connection show "$conn_name" 2>/dev/null)
+        [[ -z "$ssid" ]] && ssid="$conn_name"
+        notify-send -i ~/App-Icons/WiFi_Logo.svg "  Connecting to saved network: $ssid..." -t 2000
+        if nmcli connection up "$conn_name" --timeout 15 >/dev/null 2>&1; then
+            verify_connection "$ssid" 10 && \
+                notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $ssid" -t 3000 || \
+                notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected but no internet: $ssid" -t 3000
         else
-            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Failed to connect to saved network: $conn_name" -t 3000
+            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Failed to connect: $ssid" -t 3000
         fi
         ;;
 
     *)
-        # Regular network - check if it has a saved connection first
-        ssid=$(echo "$choice" | sed 's/^[^ ]*  //')
-        saved_conn=$(nmcli -t -f name connection show 2>/dev/null | grep -i "^$ssid$" | head -1)
-
-        if [[ -n "$saved_conn" ]]; then
-            # Has saved connection - try it first
-            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connecting to saved network: $ssid..." -t 2000
-            if nmcli connection up "$saved_conn" --timeout 15 2>/dev/null; then
-                notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $ssid" -t 3000
-            else
-                # Saved connection failed - ask for password
-                password=$(prompt_password)
-                connect_with_feedback "$ssid" "$password"
-            fi
-        else
-            # New network - ask for password
-            password=$(prompt_password)
-            connect_with_feedback "$ssid" "$password"
-        fi
-        ;;
-
-    "Connected to"*)
-        kitty -e sh -c "nmcli dev wifi show-password; read -p 'Press Return to close...'"
+        ssid=$(echo "$choice" | sed -E 's/^[^[:alnum:]]+\s*//')
+        password=$(prompt_password)
+        connect_with_feedback "$ssid" "$password"
         ;;
 
     "")
