@@ -68,14 +68,13 @@ entry {
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
-    str:                         "";
-    padding:                     12px 24px;
-    border-radius:               25px;
+    str:                         "";
+    padding:                     12px 18px;
+    border-radius:               50%;
     background-color:            #89b4fa;
     text-color:                  @background;
     font:                        "JetBrains Mono Nerd Font 16";
 }
-
 
 /*****----- Listview -----*****/
 listview {
