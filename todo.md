@@ -1,11 +1,11 @@
-- [ ] Fix the theme alternating issues
+- [ ] Fix the theme alternating issues inside of neovim
 - [ ] Fix the markview.nvim indent issues
-- [ ] Fix the twitter markdown issues in markview.nvim
-- [ ] Install the file tree thing from snacks.nvim
-- [ ] Make a good-looking notifications_center for swaync
+- [ ] Fix the twitter black background markdown issues in markview.nvim
+- [x] Install the file tree thing from snacks.nvim
+- [x] Make a good-looking notifications_center for swaync
 - [ ] Fix the bullet point indents in markview.nvim
-- [ ] Learn how to use golf.nvim
-- [ ] Make some rofi menus look not so "Childish"
+- [x] Learn how to use golf.nvim
+- [x] Make some rofi menus look not so "Childish"
 - [ ] Why does volume go above 100 in waybar scroll wheel?
     - [ ] Does doing that make volume 26 sound louder than it is right now?
 - [ ] Make the rofi background image load quicker
@@ -14,22 +14,30 @@
 - [ ] Any way to enable noice.nvim but still have the cmd-height set to 1 and not 0? 
 - [ ] How to use picker.nvim (from snacks.nvim) in the default screen (btw.nvim screen) that appears when I just run `nvim` without any flag?
 - [ ] Any purpose of fff.nvim or telescope now?
-- [ ] Add swaync custom icon inside of eza config
-- [ ] Decide what to put in the middle module of waybar
+- [x] Add swaync custom icon inside of eza config
+- [x] Decide what to put in the middle module of waybar
 - [ ] Is alacritty even needed?
-- [ ] Configure opencode models
-- [ ] Can i create more agents for opencode?
-    - [ ] if yes, then which one should i create
-- [ ] Any way to make notify-send look even cooler?
+- [x] Configure opencode models
+- [x] Can i create more agents for opencode?
+    - [x] if yes, then which one should i create
+- [x] Any way to make notify-send look even cooler?
 - [ ] **UPDATE THE DAMN README**
 - [ ] ssh clone for github?
 - [ ] what does a gh config do?
 - [ ] do i need obsidian-snippets anymore?
 - [ ] Is Wlogout even useful?
-- [ ] Edit the sidekick.nvim config, and make it even more usable
+- [x] Edit the sidekick.nvim config, and make it even more usable
 - [ ] Is this the most efficent workflow?
-- [ ] how to use opencode in a better way
-- [ ] Any way to have a background image/design for the notification daemon?
-- [ ] Can I switch swayosd with the brightness and volume scripts?
-- [ ] Learn use cases of stow and replace the whole `ln -s` section inside of [@.dev.sh](.dev.sh) with it
+- [x] how to use opencode in a better way
+- [x] Any way to have a background image/design for the notification daemon?
+- [x] Can I switch swayosd with the brightness and volume scripts?
+- [x] Learn use cases of stow and replace the whole `ln -s` section inside of [@.dev.sh](.dev.sh) with it
+- [ ] How to Create/add the following hyprland quickshell tools things:
+    - [ ] Volume OSD
+    - [ ] Brightness OSD
+    - [ ] On-Screen Virtual Keyboard
+    - [ ] Bluetooth menu
+    - [ ] Wifi Menu (if exists)
+- [x] What does Sisyphus do?
 
+(:
