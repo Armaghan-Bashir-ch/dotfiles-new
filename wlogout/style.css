@@ -1,70 +1,36 @@
-* {
-  background-image: none;
-  font-size: 12;
-}
-
-@import "/home/armaghan/.config/waybar/themes/Decay-Green.css";
+@import "../waybar/themes/Decay-Green.css";
 
 window {
-  background-color: transparent;
+    font-family: "SF Pro Text", "GeistMono Nerd Font Propo";
+    font-size: 1.2em;
+    color: @main-fg;
+    background-color: alpha(@main-bg, 0.6);
 }
 
 button {
-  color: #ffffff;
-  background-color: @main-bg;
-  outline-style: none;
-  border: 2px;
-  border-width: 500px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 30%;
-  border-radius: 0px;
-  box-shadow: none;
-  text-shadow: none;
-  animation: gradient_f 20s ease-in infinite;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20%;
+    background-color: transparent;
+    animation: gradient_f 20s ease-in-out infinite;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px 2px transparent;
+    border-radius: 36px;
+    margin: 10px
 }
 
 button:focus {
-  background-color: @main-bg;
-  background-size: 30%;
+    box-shadow: none;
+    outline-style: none;
+    background-size: 20%;
 }
 
 button:hover {
-  background-color: @wb-hvr-bg;
-  background-size: 25%;
-  border-radius: 25px;
-  animation: gradient_f 20s ease-in infinite;
-  transition: all 0.3s cubic-bezier(0.55, 0, 0.28, 1.682);
-}
-
-button:hover#lock {
-  border-radius: 25px 0px 0px 25px;
-  margin: 0px;
-}
-
-button:hover#logout {
-  border-radius: 7px 7px 7px 7px;
-  margin: 0px;
-}
-
-button:hover#suspend {
-  border-radius: 7px 7px 7px 7px;
-  margin: 0px;
-}
-
-button:hover#shutdown {
-  border-radius: 7px 7px 7px 7px;
-  margin: 0px;
-}
-
-button:hover#hibernate {
-  border-radius: 7px 7px 7px 7px;
-  margin: 0px;
-}
-
-button:hover#reboot {
-  border-radius: 0px 25px 25px 0px;
-  margin: 0px;
+    background-size: 50%;
+    outline-style: none;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.4);
+    background-color: @main-bg;
+    color: transparent;
 }
 
 #lock {
