@@ -1,4 +1,4 @@
-@import "../waybar/themes/Decay-Green.css";
+@import "../waybar/themes/Catppuccin-Mocha.css";
 
 window {
     font-family: "SF Pro Text", "GeistMono Nerd Font Propo";
@@ -10,23 +10,24 @@ window {
 button {
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 20%;
+    background-size: 30%;
     background-color: transparent;
     animation: gradient_f 20s ease-in-out infinite;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 0 10px 2px transparent;
     border-radius: 36px;
-    margin: 10px
+    margin: 10px;
+    color: @main-fg;
 }
 
 button:focus {
     box-shadow: none;
     outline-style: none;
-    background-size: 20%;
+    background-size: 30%;
 }
 
 button:hover {
-    background-size: 50%;
+    background-size: 60%;
     outline-style: none;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.4);
     background-color: @main-bg;
@@ -39,7 +40,6 @@ button:hover {
     url("/usr/share/wlogout/icons/lock.png"),
     url("/usr/local/share/wlogout/icons/lock.png")
   );
-  border-radius: 15px 0px 0px 15px;
   margin: 0px;
 }
 
@@ -85,6 +85,5 @@ button:hover {
     url("/usr/share/wlogout/icons/reboot.png"),
     url("/usr/local/share/wlogout/icons/reboot.png")
   );
-  border-radius: 0px 15px 15px 0px;
   margin: 0px;
 }
