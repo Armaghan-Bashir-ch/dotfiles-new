@@ -95,8 +95,8 @@ tooltip {
   background: @main-fg;
   color: @main-bg;
   margin-left: 3px;
-  padding-left: 22px;
-  padding-right: 22px;
+  padding-left: 7px;
+  padding-right: 7px;
   margin-right: 3px;
   animation: gradient_f 20s ease-in infinite;
   transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
