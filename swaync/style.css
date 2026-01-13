@@ -19,7 +19,7 @@
 }
 
 .floating-notifications.background .notification-row .notification-background {
-    background: radial-gradient(circle at center, rgba(16, 20, 25, 0.51), rgba(16, 20, 25, 0.51));
+    background: radial-gradient(circle at center, rgba(16, 21, 16, 0.51), rgba(16, 21, 16, 0.51));
     border: 1.5px solid rgba(131, 199, 230, 0.4);
     border-radius: 24px;
     margin: 0 8px 8px 0;
