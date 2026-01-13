@@ -33,7 +33,7 @@
 - [x] Can I switch swayosd with the brightness and volume scripts?
 - [x] Learn use cases of stow and replace the whole `ln -s` section inside of [@.dev.sh](.dev.sh) with it
 - [ ] How to Create/add the following hyprland quickshell tools things:
-    - [ ] Volume OSD
+    - [x] Volume OSD
     - [ ] Brightness OSD
     - [ ] On-Screen Virtual Keyboard
     - [ ] Bluetooth menu
