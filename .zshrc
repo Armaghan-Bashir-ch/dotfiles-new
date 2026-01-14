@@ -64,7 +64,8 @@ SAVEHIST=10000
 
 # Setting up Yazi config to be in the config file, and terminal to be ghostty and editor to be nvim
 
-export GTK_THEME=TokyoNight-Dark-BL
+export GTK_THEME="Graphite"
+export GTK4_THEME="Graphite"
 export TERMINAL=ghostty
 export EDITOR=nvim
 export YAZI_CONFIG_HOME="$HOME/.config/yazi"
