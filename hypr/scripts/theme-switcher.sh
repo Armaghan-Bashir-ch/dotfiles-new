@@ -32,12 +32,7 @@ case "$THEME" in
         WAYBAR_THEME="Catppuccin-Latte"
         ;;
     "Catppuccin-Mocha")
-        LIGHT_WALLPAPERS=("Up-InSky.jpg" "ColorfulRoad-Design.jpg" "StreeView-FromRoofTop.png" "Abandoned-Town.jpg" "DarkWinter-Forest.jpg" "Aesthetic-FuturisticTown.jpg" "Sunset-Evening.png")
-        if [[ " ${LIGHT_WALLPAPERS[@]} " =~ " ${WALLPAPER_NAME} " ]]; then
-            WAYBAR_THEME="Catppuccin-Frappe"
-        else
-            WAYBAR_THEME="Catppuccin-Macchiato"
-        fi
+        WAYBAR_THEME="Catppuccin-Mocha"
         ;;
     "Tokyo-Night")
         if [ "$WALLPAPER_NAME" = "Night-Cafe.jpg" ]; then
