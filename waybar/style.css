@@ -62,7 +62,7 @@
 42. Wall-Dcol
 */
 
-@import "themes/Decay-Green.css";
+@import "themes/Catppuccin-Mocha.css";
 
 window#waybar {
   background: transparent;
