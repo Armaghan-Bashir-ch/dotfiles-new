@@ -16,14 +16,14 @@ configuration {
 window {
     enabled:                     true;
     fullscreen:                  false;
-    width:                       100%;
+    width:                       90%;
     transparency:                "real";
     cursor:                      "default";
     spacing:                     0px;
     padding:                     0px;
     border:                      1px;
     border-radius:               100px;
-    border-color:                transparent;
+    border-color:                @main-fg;
     background-color:            @main-bg;
 }
 mainbox {
