@@ -30,6 +30,8 @@ window {
     padding: 			         24px;
     cursor:                      "default";
     background-color:            @background;
+    border-color:                #BECAD3ff;
+    border:                      1px;
 }
 
 /*****----- Main Box -----*****/
