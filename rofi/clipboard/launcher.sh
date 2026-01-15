@@ -16,22 +16,9 @@ choice=$(echo -e "\t\uf1f8   Wipe Clipboard\n$(cliphist list)" | \
 
 # Handle "Wipe Clipboard"
 if [[ $choice == *"Wipe Clipboard"* ]]; then
-    yes=''
-    no=''
-
-    confirmation=$(echo -e \
-        "<span foreground='#95d3afcc'>$yes</span>\n<span foreground='#ff6b6b'>$no</span>" | \
-        rofi -markup-rows -dmenu \
-        -p 'Confirmation' \
-        -mesg 'Are you Sure?' \
-        -theme "${dir}/confirmation.rasi")
-
-    if [[ $confirmation =~ "$yes" ]]; then
-        cliphist wipe
-        wl-copy -c
-        dunstify -h string:x-dunst-stack-tag:clip_notif -t 4000 -u critical \
-            "Clipboard Manager" "Clipboard has been wiped"
-    fi
+    cliphist wipe
+    wl-copy -c
+        notify-send -i ~/App-Icons/Clipboard.png "Clipboard Manager" "Clipboard has been wiped"
     exit
 
 # Handle selection from history

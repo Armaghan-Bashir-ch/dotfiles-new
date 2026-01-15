@@ -1,19 +1,22 @@
+* {
+    font:                        "JetBrains Mono Nerd Font 14";
+    main-bg:            #111111ff;
+    main-fg:            #BECAD3ff;
+    main-br:            #BECAD3ff;
+    main-ex:            #f5c2e7ff;
+    select-bg:          #BECAD3ff;
+    select-fg:          #1E1E1Eff;
+    separatorcolor:     transparent;
+    border-color:       transparent;
+}
+
 /*****----- Configuration -----*****/
 configuration {
 	show-icons: 		false;
-	case-sensitive: 		false;
 }
 
 /*****----- Global Properties -----*****/
-* {
-    font:                        "JetBrains Mono Nerd Font 14";
-    background:                  #1e1e2e;
-    background-alt:              #313244;
-    foreground:                  #cdd6f4;
-    selected:                    #89b4fa;
-    active:                      #f38ba8;
-    urgent:                      #f38ba8;
-}
+
 
 /*****----- Main Window -----*****/
 window {
@@ -22,12 +25,15 @@ window {
     anchor:                      center;
     fullscreen:                  false;
     width:                       500px;
+    height: 500px;
 
     /* properties for all widgets */
     enabled:                     true;
     border-radius:               20px;
     cursor:                      "default";
-    background-color:            @background;
+    background-color:            @main-bg;
+    border-color:                @main-fg;
+    border:                      1px;
 }
 
 /*****----- Main Box -----*****/
@@ -45,7 +51,7 @@ inputbar {
     spacing:                     0px;
     padding:                     30px 30px 10px 30px;
     background-color:            transparent;
-    text-color:                  @foreground;
+    text-color:                  @main-fg;
     orientation:                 horizontal;
     children:                    [ "textbox-prompt-colon", "entry" ];
 }
@@ -58,11 +64,11 @@ entry {
     padding:                     15px 20px;
     border-radius:               12px;
     margin:                      0px 0px 0px 10px;
-    background-color:            @background-alt;
+    background-color:            #45475A;
     text-color:                  inherit;
     cursor:                      text;
     placeholder:                 "Search";
-    placeholder-color:           #cdd6f4;
+    placeholder-color:           @main-fg;
 }
 
 textbox-prompt-colon {
@@ -71,8 +77,8 @@ textbox-prompt-colon {
     str:                         "";
     padding:                     12px 18px;
     border-radius:               50%;
-    background-color:            #89b4fa;
-    text-color:                  @background;
+    background-color:            @main-fg;
+    text-color:                  @main-bg;
     font:                        "JetBrains Mono Nerd Font 16";
 }
 
@@ -92,8 +98,8 @@ listview {
     spacing:                     5px;
     margin: 			         10px 25px 25px 25px;
     border-radius: 		         15px;
-    background-color:            @background;
-    text-color:                  @foreground;
+    background-color:            @main-bg;
+    text-color:                  @main-fg;
     cursor:                      "default";
 }
 
@@ -104,13 +110,13 @@ element {
     padding:                     18px 20px;
     border-radius:               12px;
     background-color:            #45475a;
-    text-color:                  @foreground;
+    text-color:                  @main-fg;
     cursor:                      pointer;
 }
 
 element.selected {
-    background-color:            @selected;
-    text-color:                  @background;
+    background-color:            @select-bg;
+    text-color:                  @select-fg;
     border-radius:               12px;
 }
 
