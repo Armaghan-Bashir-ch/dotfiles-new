@@ -24,7 +24,7 @@ window {
     padding:                     0px;
     border-radius:               40px;
     border-color: @main-bg;
-border: 2px;
+    border: 1px;
     background-color:            transparent;
 }
 mainbox {
