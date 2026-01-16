@@ -30,7 +30,7 @@ button:focus {
 }
 
 button:hover {
-  background-color: @wb-hvr-bg;
+  background-color: @main-fg;
   background-size: 25%;
   border-radius: 25px;
   animation: gradient_f 20s ease-in infinite;
