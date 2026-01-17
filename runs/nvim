@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo pacman -S stow --needed --noconfirm
+
+cd ~/dotfiles && stow nvim
+
+if ! pacman -Q neovim &> /dev/null; then
+    sudo pacman -S --noconfirm neovim
+fi
+
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+
+if command -v luarocks &> /dev/null; then
+    sudo luarocks install luacheck
+fi

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo pacman -S stow --needed --noconfirm
+
+fc-cache -fv

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+yay -S nmgui-bin --needed --noconfirm
+sudo pacman -S gnome-clocks --needed --noconfirm
+sudo pacman -S gnome-calender --needed --noconfirm
+sudo pacman -S gnome-weather --needed --noconfirm
+sudo pacman -S gnome-calculator --needed --noconfirm
+sudo pacman -S blueberry --needed --noconfirm
+sudo pacman -S yt-dlp --needed --noconfirm
+sudo pacman -s python3 --needed --noconfirm
+sudo pacman -s node --needed --noconfirm
+sudo pacman -s docker --needed --noconfirm
+sudo pacman -s wakatime --needed --noconfirm
+sudo pacman -s figlet figlet-fonts --needed --noconfirm
+sudo pacman -s zip --needed --noconfirm
+
+## There are much more to put here

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo pacman -S stow --needed --noconfirm
+
+cd ~/dotfiles && stow hypr wlogout yazi
+
+pacman_packages=(
+    hyprland hyprlock hypridle xdg-desktop-portal-hyprland swww hyprpicker hyprshot pavucontrol wev rofi-wayland waybar btop swayosd swaync
+)
+
+for pkg in "${pacman_packages[@]}"; do
+    if ! pacman -Q "$pkg" &> /dev/null; then
+        sudo pacman -S --noconfirm "$pkg"
+    fi
+done
+
+aur_packages=(wlogout-git)
+
+for pkg in "${aur_packages[@]}"; do
+    if ! pacman -Q "$pkg" &> /dev/null; then
+        yay -S --noconfirm "$pkg"
+    fi
+done
+
+hyprctl setcursor "Bibata-Modern-Ice" 18
+
+killall swaync; g_messages_debug=none g_log_level=0 swaync >/dev/null 2>&1 & disown

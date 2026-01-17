@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+set -e
+
+LOG_FILE="$HOME/dotfiles/runs/setup.log"
+echo "Starting dotfiles setup" > "$LOG_FILE"
+
+# Install gh if not present
+if ! command -v gh &> /dev/null; then
+    sudo pacman -S git --noconfirm
+    sudo pacman -S github-cli --noconfirm
+fi
+
+# Clone dotfiles repo if not present
+if [ ! -d "$HOME/dotfiles" ]; then
+    gh clone https://github.com/Armaghan-Bashir-ch/dotfiles-new "$HOME/dotfiles"
+fi
+
+# Authenticate with GitHub
+gh auth login
+
+# Function to run a script
+run_script() {
+    local script_name=$1
+    read -p "Run $script_name? (y/N): " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        if ./$script_name >> "$LOG_FILE" 2>&1; then
+            echo "$script_name done"
+        else
+            echo "ERROR: $script_name failed"
+            exit 1
+        fi
+    else
+        echo "Skipped $script_name"
+    fi
+}
+
+cd "$(dirname "$0")"
+
+if [[ $EUID -eq 0 ]]; then
+    echo "ERROR: Do not run as root"
+    exit 1
+fi
+
+# Run scripts
+run_script "arch"
+run_script "terminal"
+run_script "hyprland"
+run_script "nvim"
+run_script "waybar"
+run_script "rofi"
+run_script "opencode"
+run_script "utils"
+
+echo "Setup complete! Check $LOG_FILE for output."

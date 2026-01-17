@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo pacman -S stow --needed --noconfirm
+
+# Symlink terminal configs
+ln -sf ~/dotfiles/.zshrc ~/.zshrc
+ln -sf ~/dotfiles/.pk10k.zsh ~/.pk10k.zsh
+cd ~/dotfiles && stow ghostty alacritty
+
+# Install packages
+packages=(ghostty tmux zsh atuin)
+
+for pkg in "${packages[@]}"; do
+    if ! pacman -Q "$pkg" &> /dev/null; then
+        sudo pacman -S --needed --noconfirm "$pkg"
+    fi
+done
+
+# Clone zsh plugins and themes
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+if [ ! -d "$HOME/powerlevel10k" ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+fi
+
+if [ ! -d "$HOME/.zsh/zsh-autosuggestions" ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+fi
+
+if [ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+fi
+
+if [ ! -d "$HOME/.zsh/fzf-tab" ]; then
+    git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab
+fi
+
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+if [ "$SHELL" != "$(which zsh)" ]; then
+    chsh -s "$(which zsh)"
+fi

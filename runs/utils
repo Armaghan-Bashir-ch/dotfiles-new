@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo pacman -S stow --needed --noconfirm
+
+cd ~/dotfiles && stow btop swayosd lazygit eza
+
+aur_packages=(spotify discord zen-browser-bin obsidian)
+
+for pkg in "${aur_packages[@]}"; do
+    if ! pacman -Q "$pkg" &> /dev/null; then
+        yay -S --noconfirm "$pkg"
+    fi
+done
+
+if [ ! -d "$HOME/backgrounds" ]; then
+    gh clone https://github.com/Armaghan-Bashir-ch/walls ~/backgrounds
+fi
+
+if command -v spicetify &> /dev/null; then
+    spicetify backup apply
+    spicetify config current_theme StarryNight
+    spicetify config color_scheme StarryNight
+    spicetify apply
+fi
+
+if command -v npm &> /dev/null; then
+    npm install -g @google/gemini-cli@0.1.11 @github/copilot@0.0.342 @electron/asar@0.0.0-development opencode-ai@0.13.5 node-gyp@11.4.2 @qwen-code/qwen-code@0.0.7
+fi
+
+notify-send "Setup complete" "Dotfiles have been configured."

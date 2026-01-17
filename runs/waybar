@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo pacman -S stow --needed --noconfirm
+
+cd ~/dotfiles && stow waybar
+
+if ! pacman -Q waybar &> /dev/null; then
+    sudo pacman -S --noconfirm waybar
+fi

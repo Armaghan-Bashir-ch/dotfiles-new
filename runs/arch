@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo pacman -S stow --needed --noconfirm
+
+is_installed() {
+    pacman -Q "$1" &> /dev/null
+}
+
+install_pacman() {
+    local packages=("$@")
+    local to_install=()
+
+    for pkg in "${packages[@]}"; do
+        if ! is_installed "$pkg"; then
+            to_install+=("$pkg")
+        fi
+    done
+
+    if [ ${#to_install[@]} -gt 0 ]; then
+        sudo pacman -S --noconfirm "${to_install[@]}"
+    fi
+}
+
+install_yay() {
+    local packages=("$@")
+    local to_install=()
+
+    for pkg in "${packages[@]}"; do
+        if ! is_installed "$pkg"; then
+            to_install+=("$pkg")
+        fi
+    done
+
+    if [ ${#to_install[@]} -gt 0 ]; then
+        yay -S --noconfirm "${to_install[@]}"
+    fi
+}
+
+if ! command -v yay &> /dev/null; then
+    git clone https://aur.archlinux.org/yay.git /tmp/yay
+    cd /tmp/yay
+    makepkg -si --noconfirm
+    cd -
+    rm -rf /tmp/yay
+fi
+
+pacman_packages=(
+    git curl fd ripgrep zoxide bat eza fzf jq lazygit neofetch wget lua luarocks cmake docker brightnessctl figlet tmux imagemagick wl-clipboard gnome-calendar gnome-calculator networkmanager crontab less rust go python nodejs tldr tty-clock imv lolcat vlc wev wakatime cliphist
+)
+
+install_pacman "${pacman_packages[@]}"
+
+aur_packages=(
+    wakafetch-git github-cli bibata-cursor-themes nerd-fonts-cascadia-code nerd-fonts-jetbrains-mono ttf-font-awesome swayosd spicetify-cli spicetify-themes-git
+)
+
+install_yay "${aur_packages[@]}"
+
+sudo systemctl enable docker
+sudo systemctl enable NetworkManager
+
+sudo pacman -Sc --noconfirm
+yay -Sc --noconfirm
