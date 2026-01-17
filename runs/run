@@ -3,10 +3,16 @@
 cd ~/dotfiles*
 chmod +x runs/*  
 cd runs/
-
-# Running:
-for file in *; do
-    if [[ -f "$file" && -x "$file" ]]; then
-        ./"$file"
-    fi
-done
+# Running in dependency order:
+./setup
+./arch
+./chmod
+./hyprland
+./terminal
+./fonts
+./rofi
+./waybar
+./nvim
+./utils
+./others
+./opencode
