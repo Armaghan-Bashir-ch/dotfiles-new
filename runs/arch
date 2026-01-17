@@ -47,7 +47,7 @@ if ! command -v yay &> /dev/null; then
 fi
 
 pacman_packages=(
-    git curl fd ripgrep zoxide bat eza fzf jq lazygit neofetch wget lua luarocks cmake docker brightnessctl figlet tmux imagemagick wl-clipboard gnome-calendar gnome-calculator networkmanager crontab less rust go python nodejs tldr tty-clock imv lolcat vlc wev wakatime cliphist
+    git curl fd ripgrep zoxide bat eza fzf jq lazygit neofetch wget lua luarocks cmake docker brightnessctl figlet tmux imagemagick wl-clipboard gnome-calendar gnome-calculator networkmanager crontab less rust go python nodejs tldr tty-clock imv lolcat vlc wev wakatime cliphist swayimg rust cargo pip localsend-bin 
 )
 
 install_pacman "${pacman_packages[@]}"

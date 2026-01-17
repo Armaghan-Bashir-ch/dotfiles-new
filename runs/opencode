@@ -7,14 +7,14 @@ sudo pacman -S stow --needed --noconfirm
 # Symlink opencode config
 cd "$HOME/dotfiles"
 stow opencode
-
+ 
 # Install npm and bun
 if ! command -v npm &> /dev/null; then
     sudo pacman -S npm --noconfirm
 fi
 
 if ! command -v bun &> /dev/null; then
-    curl -fsSL https://bun.sh/install | bash
+    sudo npm install -g bun
 fi
 
 # Install oh-my-opencode

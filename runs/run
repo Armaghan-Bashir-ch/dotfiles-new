@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+cd ~/dotfiles*
+chmod +x runs/*  
+cd runs/
+
+# Running:
+for file in *; do
+    if [[ -f "$file" && -x "$file" ]]; then
+        ./"$file"
+    fi
+done

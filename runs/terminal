@@ -4,11 +4,6 @@ set -e
 
 sudo pacman -S stow --needed --noconfirm
 
-# Symlink terminal configs
-ln -sf ~/dotfiles/.zshrc ~/.zshrc
-ln -sf ~/dotfiles/.pk10k.zsh ~/.pk10k.zsh
-cd ~/dotfiles && stow ghostty alacritty
-
 # Install packages
 packages=(ghostty tmux zsh atuin)
 
@@ -17,6 +12,11 @@ for pkg in "${packages[@]}"; do
         sudo pacman -S --needed --noconfirm "$pkg"
     fi
 done
+
+# Symlink terminal configs
+ln -sf ~/dotfiles/.zshrc ~/.zshrc
+ln -sf ~/dotfiles/.pk10k.zsh ~/.pk10k.zsh
+cd ~/dotfiles && stow ghostty alacritty
 
 # Clone zsh plugins and themes
 if [ ! -d "$HOME/.oh-my-zsh" ]; then

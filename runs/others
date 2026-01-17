@@ -1,6 +1,11 @@
 #!/bin/bash
 
 yay -S nmgui-bin --needed --noconfirm
+yay -S chafa --needed --noconfirm
+yay -S cbonsai --needed --noconfirm
+yay -S evince --needed --noconfirm
+yay -s localsend-bin --needed --noconfirm
+yay -s kvnatum-manager --needed --noconfirm
 sudo pacman -S gnome-clocks --needed --noconfirm
 sudo pacman -S gnome-calender --needed --noconfirm
 sudo pacman -S gnome-weather --needed --noconfirm

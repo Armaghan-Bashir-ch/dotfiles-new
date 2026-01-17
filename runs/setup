@@ -43,14 +43,4 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
-# Run scripts
-run_script "arch"
-run_script "terminal"
-run_script "hyprland"
-run_script "nvim"
-run_script "waybar"
-run_script "rofi"
-run_script "opencode"
-run_script "utils"
-
 echo "Setup complete! Check $LOG_FILE for output."

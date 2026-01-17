@@ -1,7 +1,3 @@
 #!/bin/bash
 
-chmod +x ~/dotfiles/hypr/scripts/*
-chmod +x ~/dotfiles/rofi/bluetooth/*
-chmod +x ~/dotfiles/rofi/wifi/*
-chmod +x ~/dotfiles/rofi/clipboard/*
-chmod +x ~/dotfiles/rofi/wallselect/*
+fd ~/dotfiles -type f -exec chmod +x {} \;

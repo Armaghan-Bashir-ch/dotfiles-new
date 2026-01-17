@@ -7,7 +7,7 @@ sudo pacman -S stow --needed --noconfirm
 cd ~/dotfiles && stow hypr wlogout yazi
 
 pacman_packages=(
-    hyprland hyprlock hypridle xdg-desktop-portal-hyprland swww hyprpicker hyprshot pavucontrol wev rofi-wayland waybar btop swayosd swaync
+    hyprland hyprlock hypridle xdg-desktop-portal-hyprland swww hyprpicker hyprshot pavucontrol wev rofi-wayland waybar btop swayosd swaync tldr 
 )
 
 for pkg in "${pacman_packages[@]}"; do

@@ -21,7 +21,7 @@ fi
 if command -v spicetify &> /dev/null; then
     spicetify backup apply
     spicetify config current_theme StarryNight
-    spicetify config color_scheme StarryNight
+    spicetify config color_scheme Forest
     spicetify apply
 fi
 
