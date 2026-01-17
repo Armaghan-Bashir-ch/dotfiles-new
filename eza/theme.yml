@@ -103,6 +103,7 @@ filenames:
   swaync: {icon: {glyph: "󰂞"}}
   bluetooth: {icon: {glyph: ""}}
   styles: {icon: {glyph: ""}}
+  runs: {icon: {glyph: "󱑤"}}
 
 extensions:
   md: {icon: {glyph: "", style: {foreground: Yellow}}, filename: {foreground: Yellow, is_underline: true}}
