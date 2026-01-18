@@ -1205,5 +1205,13 @@ local plugins = {
         "GreenStarMatter/nvim-golf",
         lazy = false,
     },
+    -- Hyprland syntax highlighting
+    {
+        "theRealCarneiro/hyprland-vim-syntax",
+        ft = { "hypr" },
+        config = function()
+            vim.cmd([[autocmd FileType hypr setlocal commentstring=#\ %s]])
+        end,
+    },
 }
 return plugins

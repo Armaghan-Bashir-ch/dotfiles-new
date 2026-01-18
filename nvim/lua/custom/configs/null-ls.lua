@@ -2,24 +2,48 @@ local null_ls = require("null-ls")
 
 local opts = {
     sources = {
+        -- Go
         null_ls.builtins.formatting.gofumpt.with({ temp_dir = "/tmp" }),
         null_ls.builtins.formatting.goimports_reviser.with({ temp_dir = "/tmp" }),
         null_ls.builtins.formatting.golines.with({ temp_dir = "/tmp" }),
+        -- Python
         null_ls.builtins.formatting.black.with({
             filetypes = { "python" },
         }),
         null_ls.builtins.diagnostics.mypy.with({
             filetypes = { "python" },
         }),
+        -- C/C++
         null_ls.builtins.formatting.clang_format,
+        -- Lua
         null_ls.builtins.formatting.stylua,
+        -- SQL
         null_ls.builtins.formatting.sqlfmt,
-        -- WARNING: these donot work for some reason
-        -- null_ls.builtins.diagnostics.marksman,
-        -- null_ls.builtins.diagnostics.checkmake,
-        -- null_ls.builtins.diagnostics.ruff,
-        -- null_ls.builtins.formatting.beautysh,
-        -- null_ls.builtins.diagnostics.eslint,
+        -- JavaScript/TypeScript/HTML/CSS/JSON/Markdown (via prettierd)
+        null_ls.builtins.formatting.prettierd.with({
+            filetypes = {
+                "javascript",
+                "javascriptreact",
+                "typescript",
+                "typescriptreact",
+                "vue",
+                "css",
+                "scss",
+                "less",
+                "html",
+                "json",
+                "jsonc",
+                "markdown",
+                "mdx",
+                "yaml",
+                "xml",
+                "toml",
+            },
+        }),
+        -- Svelte (prettier handles this too)
+        null_ls.builtins.formatting.prettierd.with({
+            filetypes = { "svelte" },
+        }),
     },
     on_attach = function(client, bufnr)
         local filetype = vim.bo[bufnr].filetype
@@ -51,10 +75,7 @@ local opts = {
             group = augroup,
             buffer = bufnr,
             callback = function()
-                local clients = vim.lsp.get_clients({ bufnr = bufnr, method = "textDocument/formatting" })
-                if #clients > 0 then
-                    vim.lsp.buf.format({ bufnr = bufnr, async = false })
-                end
+                vim.lsp.buf.format({ bufnr = bufnr, async = false })
             end,
         })
     end,

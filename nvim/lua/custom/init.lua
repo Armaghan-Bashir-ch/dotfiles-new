@@ -33,6 +33,16 @@ vim.g.maplocalleader = ","
 vim.cmd([[
   autocmd BufRead,BufNewFile *.env* set filetype=sh
 ]])
+
+-- Hyprland filetype detection (for hyprland-vim-syntax plugin)
+vim.filetype.add({
+  pattern = {
+    [".*/hypr/.*%.conf$"] = "hypr",
+    [".*%.hypr$"] = "hypr",
+    [".*hyprland%.conf$"] = "hypr",
+    ["hyprland%.conf"] = "hypr",
+  },
+})
 vim.api.nvim_create_autocmd("VimEnter", {
 	pattern = "*",
 	callback = function()
@@ -57,6 +67,15 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
+
+-- Custom syntax for Hyprland (green $variables)
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "hypr",
+    callback = function()
+        vim.cmd([[syntax match ShellVar '\$[a-zA-Z0-9_]\+' display]])
+        vim.cmd([[highlight link ShellVar Identifier]])
+    end,
+})
 
 -- Remove carriage returns after pasting in normal mode
 vim.api.nvim_create_autocmd("VimEnter", {
