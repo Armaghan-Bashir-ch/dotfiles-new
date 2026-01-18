@@ -7,7 +7,7 @@ local opts = {
 		},
 		completion = {
 			menu = {
-				auto_show = false,
+				auto_show = true,
 			},
 		},
 	},
@@ -49,6 +49,7 @@ local opts = {
 	},
 	keymap = {
 		preset = "super-tab",
+		["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
 		["<A-Space>"] = { "show", "show_documentation", "hide_documentation" },
 		["<CR>"] = { "accept", "fallback" },
 		-- TODO: replace with a loop
