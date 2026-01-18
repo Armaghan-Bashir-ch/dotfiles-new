@@ -561,7 +561,13 @@ local plugins = {
 	{
 		"saghen/blink.cmp",
 		event = "InsertEnter",
-		dependencies = { "rafamadriz/friendly-snippets", "fang2hou/blink-copilot", "archie-judd/blink-cmp-words" },
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			"fang2hou/blink-copilot",
+			"archie-judd/blink-cmp-words",
+			"supermaven-inc/supermaven-nvim",
+			"saghen/blink.compat",
+		},
 		version = "v0.*",
 		opts = require("custom.configs.blink"),
 		opts_extend = { "sources.default" },
@@ -1155,9 +1161,42 @@ local plugins = {
 	},
 	{
 		"supermaven-inc/supermaven-nvim",
+		event = "InsertEnter",
+		cmd = { "SupermavenUseFree", "SupermavenUsePro" },
 		config = function()
-			require("supermaven-nvim").setup({})
+			require("supermaven-nvim").setup({
+				-- Let blink.cmp handle suggestion acceptance
+				keymaps = {
+					accept_suggestion = nil, -- handled by blink.cmp
+					clear_suggestion = "<C-]>", -- keep clear suggestion
+					accept_word = "<C-j>", -- keep word acceptance
+				},
+				-- Disable built-in keymaps to prevent conflicts with blink.cmp
+				disable_keymaps = false,
+				-- Enable inline completion (ghost text) alongside blink.cmp menu
+				disable_inline_completion = false,
+				-- Ignore filetypes where we don't want supermaven suggestions
+				ignore_filetypes = {
+					"bigfile",
+					"snacks_input",
+					"snacks_notif",
+				},
+				-- Optional: customize suggestion appearance
+				color = {
+					suggestion_color = "#ffffff",
+					cterm = 244,
+				},
+				log_level = "info", -- set to "off" to disable logging
+			})
 		end,
+	},
+	{
+		"saghen/blink.compat",
+		opts = {
+			-- Enable nvim-cmp impersonation so supermaven registers its source
+			impersonate_nvim_cmp = true,
+			debug = false,
+		},
 	},
 	{
 

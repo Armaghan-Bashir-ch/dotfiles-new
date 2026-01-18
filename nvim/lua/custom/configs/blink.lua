@@ -102,7 +102,7 @@ local opts = {
 		nerd_font_variant = "mono",
 	},
 	sources = {
-		default = { "copilot", "lsp", "path", "snippets", "buffer" },
+		default = { "supermaven", "copilot", "lsp", "path", "snippets", "buffer" },
 
 		per_filetype = {
 			sql = { "snippets", "dadbod", "buffer" },
@@ -112,6 +112,15 @@ local opts = {
 		},
 		-- add vim-dadbod-completion to your completion providers
 		providers = {
+			-- Use blink.compat for supermaven (bridges nvim-cmp sources to blink.cmp)
+			supermaven = {
+				name = "Supermaven",
+				module = "blink.compat.source",
+				score_offset = 90,
+				opts = {
+					name = "supermaven",
+				},
+			},
 			dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 			copilot = {
 				name = "copilot",
