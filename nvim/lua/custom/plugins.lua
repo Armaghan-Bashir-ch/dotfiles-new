@@ -1154,6 +1154,12 @@ local plugins = {
 		version = "*", -- or branch = "main", to use the latest commit
 	},
 	{
+		"supermaven-inc/supermaven-nvim",
+		config = function()
+			require("supermaven-nvim").setup({})
+		end,
+	},
+	{
 
 		"GreenStarMatter/nvim-golf",
 		lazy = false,
