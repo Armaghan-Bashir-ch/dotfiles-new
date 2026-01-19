@@ -1169,9 +1169,9 @@ local plugins = {
             require("supermaven-nvim").setup({
                 -- Let blink.cmp handle suggestion acceptance
                 keymaps = {
-                    accept_suggestion = nil, -- handled by blink.cmp
-                    clear_suggestion = "<C-]>", -- keep clear suggestion
-                    accept_word = "<C-j>", -- keep word acceptance
+                    accept_suggestion = "<Tab>", -- Supermaven handles Tab directly
+                    clear_suggestion = "<C-]>",
+                    accept_word = "<C-j>",
                 },
                 -- Disable built-in keymaps to prevent conflicts with blink.cmp
                 disable_keymaps = false,

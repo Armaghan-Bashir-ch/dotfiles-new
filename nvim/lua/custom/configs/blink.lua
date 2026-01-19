@@ -40,11 +40,19 @@ local opts = {
 		},
 	},
 	keymap = {
-		preset = "super-tab",
+		preset = "none",
+		-- Supermaven handles Tab via its own keymap, don't add it here
+		-- Ctrl+Y accepts from completion menu
+		["<C-y>"] = {
+			function(cmp)
+				cmp.accept({ select = true })
+			end,
+		},
 		["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
 		["<A-Space>"] = { "show", "show_documentation", "hide_documentation" },
+		["<S-Tab>"] = { "select_prev", "fallback" },
 		["<CR>"] = { "accept", "fallback" },
-		-- TODO: replace with a loop
+		-- Number key shortcuts for menu items
 		["<A-1>"] = {
 			function(cmp)
 				cmp.accept { index = 1 }
