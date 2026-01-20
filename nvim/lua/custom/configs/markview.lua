@@ -110,16 +110,11 @@ local config = {
 
             -- Twitter/X links
             ["x%.com"] = {
-                icon = "X ",
+                icon = "𝕏 ",
                 hl = "MarkviewTwitter",
             },
             ["twitter%.com"] = {
-                icon = "X ",
-                hl = "MarkviewTwitter",
-            },
-            ["twitter%.com"] = {
-                priority = -9999,
-                icon = "X ",
+                icon = "𝕏 ",
                 hl = "MarkviewTwitter",
             },
         },
@@ -140,7 +135,7 @@ vim.api.nvim_set_hl(0, "MarkviewListItemStar", { fg = "#FF9E64" })
 
 -- Custom hyperlink highlights
 vim.api.nvim_set_hl(0, "MarkviewYouTube", { fg = "#FC0033" })
-vim.api.nvim_set_hl(0, "MarkviewTwitter", { fg = "#000000" })
+vim.api.nvim_set_hl(0, "MarkviewTwitter", { fg = "#1DA1F2" })
 
 return config
 
