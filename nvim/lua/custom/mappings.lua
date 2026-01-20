@@ -219,16 +219,7 @@ M.snacks = {
             end,
             "Toggle zoom Zen",
         },
-        ["<C-p>"] = {
-            function()
-                if vim.bo.filetype == "store" or vim.bo.buftype ~= "" then
-                    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-p>", true, false, true), "n", false)
-                else
-                    Snacks.picker.files()
-                end
-            end,
-            "Find Files",
-        },
+        ["<C-p>"] = { function() require("fff").find_files() end, "Open fff.nvim" },
     },
 }
 

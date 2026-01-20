@@ -668,8 +668,7 @@ local plugins = {
 
     {
         "m4xshen/hardtime.nvim",
-        lazy = false,
-        enabled = true,
+        lazy = true,
         dependencies = { "MunifTanjim/nui.nvim" },
         opts = {
             max_count = 20,
