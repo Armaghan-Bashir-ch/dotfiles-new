@@ -1159,31 +1159,17 @@ local plugins = {
     {
         "supermaven-inc/supermaven-nvim",
         event = "InsertEnter",
-        cmd = { "SupermavenUseFree", "SupermavenUsePro" },
+        cmd = {
+            "SupermavenUseFree",
+            "SupermavenUsePro",
+        },
         config = function()
             require("supermaven-nvim").setup({
-                -- Let blink.cmp handle suggestion acceptance
                 keymaps = {
-                    accept_suggestion = "<Tab>", -- Supermaven handles Tab directly
+                    accept_suggestion = "<Tab>",
                     clear_suggestion = "<C-]>",
                     accept_word = "<C-j>",
                 },
-                -- Disable built-in keymaps to prevent conflicts with blink.cmp
-                disable_keymaps = false,
-                -- Enable inline completion (ghost text) alongside blink.cmp menu
-                disable_inline_completion = false,
-                -- Ignore filetypes where we don't want supermaven suggestions
-                ignore_filetypes = {
-                    "bigfile",
-                    "snacks_input",
-                    "snacks_notif",
-                },
-                -- Optional: customize suggestion appearance
-                color = {
-                    suggestion_color = "#ffffff",
-                    cterm = 244,
-                },
-                log_level = "info", -- set to "off" to disable logging
             })
         end,
     },
