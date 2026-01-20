@@ -32,7 +32,14 @@ local ui = {
                     return ""
                 end
             end)()
-            modules[10] = "" -- Hide cursor position
+            modules[10] = (function()
+                local wakatime_time = utils.wakatime_stats or ""
+                if wakatime_time ~= "" then
+                    return "%#St_lspInfo#" .. " " .. wakatime_time .. " "
+                else
+                    return ""
+                end
+            end)()
         end,
     },
     tabufline = {

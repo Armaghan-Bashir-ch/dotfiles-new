@@ -32,7 +32,9 @@ local config = function()
       command = wakatime_cli_path,
       args = { "--today" },
       on_exit = function(j, _)
-        tx(j:result()[1] or "No data")
+        local result = j:result()[1] or "No data"
+        local coding_time = result:match("^(.-),") or result
+        tx(coding_time)
       end,
     })
     if not ok then
