@@ -1,9 +1,9 @@
-- [ ] Fix the theme alternating issues inside of neovim
-- [ ] Fix the markview.nvim indent issues
-- [ ] Fix the twitter black background markdown issues in markview.nvim
+- [x] Fix the theme alternating issues inside of neovim
+- [x] Fix the markview.nvim indent issues
+- [x] Fix the twitter black background markdown issues in markview.nvim
 - [x] Install the file tree thing from snacks.nvim
 - [x] Make a good-looking notifications_center for swaync
-- [ ] Fix the bullet point indents in markview.nvim
+- [x] Fix the bullet point indents in markview.nvim
 - [x] Learn how to use golf.nvim
 - [x] Make some rofi menus look not so "Childish"
 - [ ] Why does volume go above 100 in waybar scroll wheel?
