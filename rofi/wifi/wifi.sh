@@ -5,7 +5,7 @@ set -euo pipefail
 # -------------------------
 # Notify initial check
 # -------------------------
-notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "Checking for Wi-Fi connections..."
+notify-send -e -h string:x-canonical-private-synchronous:wifi_notif -u low -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "Checking for Wi-Fi connections..."
 
 # -------------------------
 # Paths to Rofi themes
@@ -86,18 +86,18 @@ connect_with_feedback() {
     local ssid="$1"
     local password="$2"
 
-    notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connecting to $ssid..." -t 2000
+    notify-send -e -h string:x-canonical-private-synchronous:wifi_notif -u low -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connecting to $ssid..." -t 2000
 
     if nmcli dev wifi connect "$ssid" password "$password" --timeout 30 >/dev/null 2>&1; then
         if verify_connection "$ssid" 15; then
             notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $ssid" -t 3000
             return 0
         else
-            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected but no internet - $ssid" -t 3000
+            notify-send -e -h string:x-canonical-private-synchronous:wifi_notif -u low -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected but no internet - $ssid" -t 3000
             return 1
         fi
     else
-        notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Failed to connect to $ssid" -t 3000
+        notify-send -e -h string:x-canonical-private-synchronous:wifi_notif -u low -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Failed to connect to $ssid" -t 3000
         return 1
     fi
 }
@@ -181,13 +181,13 @@ case "$choice" in
         conn_name=$(echo "$choice" | sed -E 's/^[^[:alnum:]]+\s*//;s/\s*\(Connected\)//')
         ssid=$(nmcli -g 802-11-wireless.ssid connection show "$conn_name" 2>/dev/null)
         [[ -z "$ssid" ]] && ssid="$conn_name"
-        notify-send -i ~/App-Icons/WiFi_Logo.svg "  Connecting to saved network: $ssid..." -t 2000
+        notify-send -e -h string:x-canonical-private-synchronous:wifi_notif -u low -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connecting to saved network: $ssid..." -t 2000
         if nmcli connection up "$conn_name" --timeout 15 >/dev/null 2>&1; then
             verify_connection "$ssid" 10 && \
-                notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $ssid" -t 3000 || \
-                notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected but no internet: $ssid" -t 3000
+                notify-send -e -h string:x-canonical-private-synchronous:wifi_notif -u low -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected to $ssid" -t 3000 || \
+                notify-send -e -h string:x-canonical-private-synchronous:wifi_notif -u low -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Connected but no internet: $ssid" -t 3000
         else
-            notify-send -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Failed to connect: $ssid" -t 3000
+            notify-send -e -h string:x-canonical-private-synchronous:wifi_notif -u low -i ~/App-Icons/WiFi_Logo.svg "WiFi Manager" "  Failed to connect: $ssid" -t 3000
         fi
         ;;
 

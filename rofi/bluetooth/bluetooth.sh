@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Checking Bluetooth devices"
+notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Checking Bluetooth devices"
 
 set -euo pipefail
 
@@ -129,23 +129,23 @@ fi
 case "$choice" in
     "󰂯  Enable Bluetooth")
         bluetoothctl power on
-        notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Bluetooth enabled"
+        notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Bluetooth enabled"
         # Re-run the script to show the main menu
         exec "$0"
         ;;
 
     "󰂲  Disable Bluetooth")
         bluetoothctl power off
-        notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Bluetooth disabled"
+        notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Bluetooth disabled"
         exit 0
         ;;
 
     "󰂰  Scan for devices")
-        notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Scanning for Bluetooth devices..."
+        notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Scanning for Bluetooth devices..."
         bluetoothctl scan on &
         sleep 8
         bluetoothctl scan off
-        notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Scan complete"
+        notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Scan complete"
         # Re-run the script to show new devices
         exec "$0"
         ;;
@@ -162,19 +162,19 @@ case "$choice" in
             if bluetoothctl info "$mac" 2>/dev/null | grep -q "Connected: yes"; then
                 # Disconnect
                 bluetoothctl disconnect "$mac"
-                notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Disconnected from $device_name"
+                notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Disconnected from $device_name"
             else
                 # Try to connect - ensure device is trusted first
-                notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Connecting to $device_name..."
+                notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Connecting to $device_name..."
                 bluetoothctl trust "$mac" 2>/dev/null || true
                 if bluetoothctl connect "$mac"; then
-                    notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Connected to $device_name"
+                    notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Connected to $device_name"
                 else
-                    notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Failed to connect to $device_name"
+                    notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Failed to connect to $device_name"
                 fi
             fi
         else
-            notify-send -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Could not find device: $device_name"
+            notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Could not find device: $device_name"
         fi
         ;;
 
