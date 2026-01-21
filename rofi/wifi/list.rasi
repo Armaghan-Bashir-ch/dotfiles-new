@@ -63,7 +63,7 @@ entry {
     width:                       380px;
     padding:                     15px 20px;
     border-radius:               12px;
-    margin:                      0px 0px 0px 10px;
+    margin:                      0px 0px 0px 15px;
     background-color:            #45475A;
     text-color:                  inherit;
     cursor:                      text;
