@@ -102,9 +102,9 @@ local opts = {
             sql = { "snippets", "dadbod", "buffer" },
             mysql = { "snippets", "dadbod", "buffer" },
             text = { "dictionary" },
-            markdown = { "thesaurus" },
-            codecompanion = { "codecompanion" },
+            markdown = { "lsp", "buffer", "thesaurus" },
         },
+        -- markdown = { "lsp", "buffer", "thesaurus" },
         -- add vim-dadbod-completion to your completion providers
         providers = {
             dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
@@ -127,7 +127,7 @@ local opts = {
                     -- Default pointers define the lexical relations listed under each definition,
                     -- see Pointer Symbols below.
                     -- Default is as below ("antonyms", "similar to" and "also see").
-                    pointer_symbols = { "!", "&", "^" },
+                    definition_pointers = { "!", "&", "^" },
                 },
             },
 
@@ -145,24 +145,12 @@ local opts = {
                     score_offset = 0,
 
                     -- See above
-                    pointer_symbols = { "!", "&", "^" },
+                    definition_pointers = { "!", "&", "^" },
                 },
             },
         },
     },
     signature = { enabled = false },
 }
-
-local has_thesaurus, _ = pcall(require, "blink-cmp-words.thesaurus")
-if not has_thesaurus then
-    opts.sources.providers.thesaurus = nil
-    opts.sources.per_filetype.markdown = { "buffer" }
-end
-
-local has_dictionary, _ = pcall(require, "blink-cmp-words.dictionary")
-if not has_dictionary then
-    opts.sources.providers.dictionary = nil
-    opts.sources.per_filetype.text = { "buffer" }
-end
 
 return opts
