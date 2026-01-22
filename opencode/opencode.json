@@ -21,7 +21,5 @@
     "history_previous": "ctrl+p",
     "history_next": "ctrl+n"
   },
-  "plugin": [
-    "oh-my-opencode"
-  ]
+  "plugin": ["oh-my-opencode", "opencode-wakatime"]
 }
