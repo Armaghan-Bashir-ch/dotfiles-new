@@ -1,5 +1,5 @@
 {
-  "theme": "system",
+  "theme": "cursor",
   "$schema": "https://opencode.ai/config.json",
   "keybinds": {
     "leader": "ctrl+o",
