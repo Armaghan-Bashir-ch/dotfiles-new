@@ -1,4 +1,7 @@
-local opts = {
+ local opts = {
+    fuzzy = {
+        implementation = "prefer_rust_with_warning",
+    },
     cmdline = {
         keymap = {
             preset = "super-tab",
@@ -12,6 +15,9 @@ local opts = {
         },
     },
     completion = {
+        ghost_text = {
+            enabled = true,
+        },
         trigger = {
             -- When true, will show the completion window after typing a trigger character
             show_on_trigger_character = true,
@@ -34,7 +40,7 @@ local opts = {
             scrollbar = false,
             border = "rounded",
             draw = {
-                columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
+                columns = { { "kind_icon", "label", "label_description", gap = 1 } },
             },
         },
         documentation = {
