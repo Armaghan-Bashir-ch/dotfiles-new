@@ -247,12 +247,17 @@ local plugins = {
                 javascriptreact = { "eslint_d" },
                 typescriptreact = { "eslint_d" },
                 svelte = { "eslint_d" },
-                python = { "pylint" },
+                vue = { "eslint_d" },
+                python = { "flake8", "mypy" },
             }
 
             vim.keymap.set("n", "<leader>ln", function()
                 lint.try_lint()
-            end, { desc = "lint file" })
+            end, { desc = "Lint file" })
+
+            vim.keymap.set("n", "<leader>lN", function()
+                lint.try_lint({ ignore_empty = true })
+            end, { desc = "Lint file (ignore empty)" })
         end,
     },
     { "chrisgrieser/nvim-rulebook",               cmd = "Rulebook", keys = load_mappings("rulebook") },
