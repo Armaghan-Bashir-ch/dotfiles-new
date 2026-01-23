@@ -109,7 +109,13 @@ M.snacks = {
 	n = {
 		["<leader>."] = {
 			function()
-				Snacks.scratch({ height = 10 })
+				Snacks.scratch()
+				-- Enable markview rendering for markdown scratch buffer
+				vim.schedule(function()
+					if vim.bo.filetype == "markdown" then
+						require("markview").render(0, { enable = true, hybrid_mode = false })
+					end
+				end)
 			end,
 			"Toggle Scratch Buffer",
 		},

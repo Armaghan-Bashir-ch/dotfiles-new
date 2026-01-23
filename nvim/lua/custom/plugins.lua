@@ -935,8 +935,8 @@ local plugins = {
 				enabled = true,
 				ft = "markdown",
 				win = {
-					height = 10,
-					width = 60,
+					height = 20,
+					width = 80,
 				},
 			},
 			gitbrowse = { enabled = true },
