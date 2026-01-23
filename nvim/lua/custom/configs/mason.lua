@@ -18,6 +18,7 @@ return {
 		"html-lsp",
 		"lemminx",
 		"vue-language-server",
+		"rust-analyzer",
 		"stylua",
 		"black",
 		"isort",
