@@ -508,10 +508,10 @@ local plugins = {
             require("refactoring").setup()
         end,
     },
-    -- typescript-tools conflicts with ts_ls, disabling to avoid LSP conflicts
+    -- typescript-tools enabled, ts_ls disabled to avoid LSP conflicts
     {
         "pmizio/typescript-tools.nvim",
-        enabled = false,
+        enabled = true,
         event = "LspAttach",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -1189,6 +1189,13 @@ local plugins = {
 
         "GreenStarMatter/nvim-golf",
         lazy = false,
+    },
+    {
+        "pmizio/typescript-tools.nvim",
+        enabled = true,
+        lazy = false,
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {},
     },
     -- Hyprland syntax highlighting
     {

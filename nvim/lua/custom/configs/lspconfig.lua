@@ -102,19 +102,9 @@ vim.lsp.config("bashls", {
 vim.lsp.enable("bashls")
 
 vim.lsp.config("pyright", {
-	on_attach = enhance_on_attach,
+	on_attach = on_attach,
 	capabilities = capabilities,
 	filetypes = { "python" },
-	root_dir = util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "pyrightconfig.json", ".git"),
-	settings = {
-		python = {
-			analysis = {
-				autoImportCompletion = true,
-				typeCheckingMode = "basic",
-				diagnosticMode = "workspace",
-			},
-		},
-	},
 })
 vim.lsp.enable("pyright")
 
@@ -158,12 +148,12 @@ vim.lsp.enable("clangd")
 vim.lsp.config("jsonls", {
 	on_attach = enhance_on_attach,
 	capabilities = capabilities,
-		settings = {
-			json = {
-				format = { enable = true },
-				validate = { enable = true },
-			},
+	settings = {
+		json = {
+			format = { enable = true },
+			validate = { enable = true },
 		},
+	},
 })
 vim.lsp.enable("jsonls")
 
@@ -175,7 +165,10 @@ vim.lsp.config("sqls", {
 	settings = {
 		sqls = {
 			databases = {
-				{ driver = "postgresql", dataSourceName = "host=localhost port=5432 user=postgres password= dbname=postgres sslmode=disable" },
+				{
+					driver = "postgresql",
+					dataSourceName = "host=localhost port=5432 user=postgres password= dbname=postgres sslmode=disable",
+				},
 			},
 			diagFlow = true,
 		},
@@ -291,38 +284,39 @@ vim.lsp.config("lemminx", {
 })
 vim.lsp.enable("lemminx")
 
-vim.lsp.config("ts_ls", {
-	on_attach = enhance_on_attach,
-	capabilities = capabilities,
-	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-	root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
-	settings = {
-		typescript = {
-			inlayHints = {
-				includeInlayParameterNameHints = "all",
-				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-				includeInlayFunctionParameterTypeHints = true,
-				includeInlayVariableTypeHints = true,
-				includeInlayPropertyDeclarationTypeHints = true,
-				includeInlayEnumMemberValueHints = true,
-			},
-			format = { enable = true },
-			suggest = {
-				autoImports = true,
-				includeCompletionsForModuleExports = true,
-			},
-		},
-		javascript = {
-			inlayHints = {
-				includeInlayParameterNameHints = "all",
-				includeInlayFunctionParameterTypeHints = true,
-				includeInlayVariableTypeHints = true,
-				includeInlayPropertyDeclarationTypeHints = true,
-			},
-		},
-	},
-})
-vim.lsp.enable("ts_ls")
+-- ts_ls disabled due to conflict with typescript-tools plugin
+-- vim.lsp.config("ts_ls", {
+-- 	on_attach = enhance_on_attach,
+-- 	capabilities = capabilities,
+-- 	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+-- 	root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
+-- 	settings = {
+-- 		typescript = {
+-- 			inlayHints = {
+-- 				includeInlayParameterNameHints = "all",
+-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+-- 				includeInlayFunctionParameterTypeHints = true,
+-- 				includeInlayVariableTypeHints = true,
+-- 				includeInlayPropertyDeclarationTypeHints = true,
+-- 				includeInlayEnumMemberValueHints = true,
+-- 			},
+-- 			format = { enable = true },
+-- 			suggest = {
+-- 				autoImports = true,
+-- 				includeCompletionsForModuleExports = true,
+-- 			},
+-- 		},
+-- 		javascript = {
+-- 			inlayHints = {
+-- 				includeInlayParameterNameHints = "all",
+-- 				includeInlayFunctionParameterTypeHints = true,
+-- 				includeInlayVariableTypeHints = true,
+-- 				includeInlayPropertyDeclarationTypeHints = true,
+-- 			},
+-- 		},
+-- 	},
+-- })
+-- vim.lsp.enable("ts_ls")
 
 vim.diagnostic.config({
 	virtual_text = {
