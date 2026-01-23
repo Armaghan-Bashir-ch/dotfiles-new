@@ -42,6 +42,21 @@ alias fd='fd --hidden --exclude Tokyo-Night-GTK-Theme'
 alias rg='rg --hidden'
 alias update='sudo pacman -Syu'
 
+# Suffix aliases
+
+alias -s md="bat"
+alias -s mov="open"
+alias -s mp4="ffplay"
+alias -s go="$EDITOR"
+alias -s js="$EDITOR"
+alias -s ts="$EDITOR"
+alias -s lua="$EDITOR"
+alias -s rs="$EDITOR"
+alias -s py="$EDITOR"
+alias -s c="$EDITOR"
+alias -s json="jless"
+alias -s yaml="bat -l yaml"
+
 # Making CONTROL+RIGHT/LEFT ARROW keys work in terminal:
 
 bindkey "^[[1;5D" backward-word
