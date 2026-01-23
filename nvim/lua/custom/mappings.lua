@@ -422,29 +422,30 @@ M.general = {
 				Snacks.input({ prompt = "Commit message: " }, function(msg)
 					if msg and msg ~= "" then
 						-- Run as a job for async execution with callback
-						local job_id = vim.fn.jobstart(
-							{ "bash", "-c", "git add . && git commit -m '" .. msg .. "' && git push" },
-							{
-								on_exit = function(_, exit_code, _)
-									if exit_code == 0 then
-										vim.notify(
-											"  Successfully committed and pushed",
-											vim.log.levels.INFO,
-											{ icon = "" }
-										)
-									else
-										vim.notify(
-											"  Commit/push failed (exit code: " .. exit_code .. ")",
-											vim.log.levels.ERROR,
-											{ icon = "" }
-										)
-									end
-								end,
-								stdout_buffered = true,
-								stderr_buffered = true,
-							}
-						)
-						vim.notify("  Committing & pushing: " .. msg, vim.log.levels.INFO, { icon = "" }) -- Changed to notification
+						local job_id =
+							vim.fn.jobstart(
+								{ "bash", "-c", "git add . && git commit -m '" .. msg .. "' && git push" },
+								{
+									on_exit = function(_, exit_code, _)
+										if exit_code == 0 then
+											vim.notify(
+												"  Successfully committed and pushed",
+												vim.log.levels.INFO,
+												{ icon = "" }
+											)
+										else
+											vim.notify(
+												"  Commit/push failed (exit code: " .. exit_code .. ")",
+												vim.log.levels.ERROR,
+												{ icon = "" }
+											)
+										end
+									end,
+									stdout_buffered = true,
+									stderr_buffered = true,
+								}
+							),
+							vim.notify("  Committing & pushing: " .. msg, vim.log.levels.INFO, { icon = "" }) -- Changed to notification
 					else
 						vim.notify("  Commit aborted: No message provided", vim.log.levels.INFO, { icon = "" })
 					end
@@ -455,88 +456,49 @@ M.general = {
 
 		["<leader>anf"] = {
 			function()
-				local has_telescope, pickers = pcall(require, "telescope.pickers")
-				if not has_telescope then
-					vim.notify("  Telescope not found", vim.log.levels.ERROR, { icon = "" })
-					return
-				end
+				Snacks.picker.select({ "File", "Directory" }, { prompt = "Create:", win = { width = 0.25, height = 0.30 } }, function(choice)
+					if not choice then return end
+					Snacks.input({ prompt = choice .. " path: ", insert_mode = true }, function(path)
+						if not path or path == "" then
+							vim.notify("  Aborted: No path provided", vim.log.levels.WARN, { icon = "" })
+							return
+						end
 
-				local finders = require("telescope.finders")
-				local conf = require("telescope.config").values
-				local actions = require("telescope.actions")
-				local action_state = require("telescope.actions.state")
+						local full_path = vim.fn.expand(path)
+						local ok, err
 
-				-- Telescope picker with custom layout
-				pickers
-					.new({
-						layout_strategy = "horizontal",
-						layout_config = {
-							horizontal = {
-								width = 0.35,
-								height = 0.30,
-								preview_width = 0.7,
-							},
-						},
-						prompt_title = "Create:",
-						finder = finders.new_table({ results = { "File", "Directory" } }),
-						sorter = conf.generic_sorter({}),
-						attach_mappings = function(prompt_bufnr, map)
-							actions.select_default:replace(function()
-								local choice = action_state.get_selected_entry().value
-								actions.close(prompt_bufnr)
-
-								-- Snacks input, now starts in insert mode automatically
-								Snacks.input({ prompt = choice .. " path: ", insert_mode = true }, function(path)
-									if not path or path == "" then
-										vim.notify(
-											"  Aborted: No path provided",
-											vim.log.levels.WARN,
-											{ icon = "" }
-										)
-										return
-									end
-
-									local full_path = vim.fn.expand(path)
-									local ok, err
-
-									if choice == "File" then
-										ok, err = pcall(function()
-											-- Create parent directories if needed
-											vim.fn.mkdir(vim.fn.fnamemodify(full_path, ":h"), "p")
-											local f = io.open(full_path, "w")
-											if f then
-												f:close()
-											end
-										end)
-									else -- Directory
-										ok, err = pcall(function()
-											vim.fn.mkdir(full_path, "p")
-										end)
-									end
-
-									if ok then
-										vim.notify(
-											"  Successfully created " .. choice:lower() .. ": " .. full_path,
-											vim.log.levels.INFO,
-											{ icon = "" }
-										)
-									else
-										vim.notify(
-											"  Failed to create " .. choice:lower() .. ": " .. err,
-											vim.log.levels.ERROR,
-											{ icon = "" }
-										)
-									end
-								end)
+						if choice == "File" then
+							ok, err = pcall(function()
+								vim.fn.mkdir(vim.fn.fnamemodify(full_path, ":h"), "p")
+								local f = io.open(full_path, "w")
+								if f then
+									f:close()
+								end
 							end)
-							return true
-						end,
-					})
-					:find()
+						else
+							ok, err = pcall(function()
+								vim.fn.mkdir(full_path, "p")
+							end)
+						end
+
+						if ok then
+							vim.notify(
+								"  Successfully created " .. choice:lower() .. ": " .. full_path,
+								vim.log.levels.INFO,
+								{ icon = "" }
+							)
+						else
+							vim.notify(
+								"  Failed to create " .. choice:lower() .. ": " .. err,
+								vim.log.levels.ERROR,
+								{ icon = "" }
+							)
+						end
+					end)
+				end)
 			end,
 			"Create File/Directory",
 		},
-
 		["<M-q>"] = {
 			"<cmd>!chmod +x %<CR>",
 			"Make file executable",

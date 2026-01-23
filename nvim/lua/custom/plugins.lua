@@ -646,6 +646,10 @@ local plugins = {
 		cmd = "Easypick",
 		config = require("custom.configs.easypick"),
 	},
+	{
+		"santhosh-tekuri/picker.nvim",
+		lazy = false,
+	},
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	{
 		"stevearc/quicker.nvim",
