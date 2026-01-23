@@ -1,30 +1,28 @@
-local opt = vim.opt                                -- Shortcut alias for Neovim's option settings
+local opt = vim.opt -- Shortcut alias for Neovim's option settings
 
-opt.relativenumber = true                          -- Adding Relative Line Numbers to be turned on every single time on starup
-vim.opt.expandtab = true                           -- Convert tabs to spaces
-vim.opt.tabstop = 4                                -- Number of spaces a tab represents
-vim.opt.shiftwidth = 4                             -- Number of spaces for autoindent
-vim.opt.showtabline = 0                            -- Disables file tab names at the top, don't know the right name for it
-vim.opt.wrap = false                               -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
-vim.opt.cursorline = false                         -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
-vim.g.fancyScroll = true                           -- Disabling fancy scroll, fancy scroll is basically replacement of control+d/u but with the mice
-vim.opt.cmdheight = 1                              -- Sets the statusline height to be one line above the bottom, helps with cleaness
+opt.relativenumber = true -- Adding Relative Line Numbers to be turned on every single time on starup
+vim.opt.expandtab = true -- Convert tabs to spaces
+vim.opt.tabstop = 4 -- Number of spaces a tab represents
+vim.opt.shiftwidth = 4 -- Number of spaces for autoindent
+vim.opt.showtabline = 0 -- Disables file tab names at the top, don't know the right name for it
+vim.opt.wrap = false -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
+vim.opt.cursorline = false -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
+vim.g.fancyScroll = true -- Disabling fancy scroll, fancy scroll is basically replacement of control+d/u but with the mice
+vim.opt.cmdheight = 1 -- Sets the statusline height to be one line above the bottom, helps with cleaness
 vim.api.nvim_set_hl(0, "TabLine", { bg = "NONE" }) -- Needed for the lastest --version of nvim (0.11.4)
-vim.opt.ttimeoutlen = 0                            -- Reduce delay for key code sequences
-vim.opt.timeoutlen = 0                             -- Timeout for mappings
-vim.g.nvchad_hot_reload = false                    -- Don't automatically reload the NvChad config. You'll have to restart Neovim to see your changes.
-vim.g.lazyvim_prettier_needs_config = false        -- Run Prettier without requiring a config file
-vim.g.customBigFileOpt = true                      -- Enable custom optimizations for large files
-vim.o.swapfile = false                             -- Disable creation of swap files
-vim.g.disableFormat = false                        -- Keep code formatting enabled
+vim.opt.ttimeoutlen = 0 -- Reduce delay for key code sequences
+vim.opt.timeoutlen = 0 -- Timeout for mappings
+vim.g.nvchad_hot_reload = false -- Don't automatically reload the NvChad config. You'll have to restart Neovim to see your changes.
+vim.g.lazyvim_prettier_needs_config = false -- Run Prettier without requiring a config file
+vim.g.customBigFileOpt = true -- Enable custom optimizations for large files
+vim.o.swapfile = false -- Disable creation of swap files
+vim.g.disableFormat = false -- Keep code formatting enabled
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
-vim.opt.guicursor =
-"i:block"                                                                                              -- Making the cursor appear like a block even when I am in Insert mode, don't like think cursors
-vim.o.sessionoptions =
-"blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"                        -- Define what gets saved/restored in a Vim session
-vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false })                       -- Remove underline/undercurl from the line number of the current cursor line
-vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false })                         -- Remove underline/undercurl from the background of the current cursor line
+vim.opt.guicursor = "i:block" -- Making the cursor appear like a block even when I am in Insert mode, don't like think cursors
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions" -- Define what gets saved/restored in a Vim session
+vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false }) -- Remove underline/undercurl from the line number of the current cursor line
+vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false }) -- Remove underline/undercurl from the background of the current cursor line
 vim.api.nvim_create_augroup("PasteRemoveCarriageReturn", { clear = true })
 vim.g.maplocalleader = ","
 -- opt.foldmethod = "expr"
@@ -36,60 +34,69 @@ vim.cmd([[
   autocmd BufRead,BufNewFile *.env* set filetype=sh
 ]])
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.wrap = true -- enable wrap for this buffer
+		vim.opt_local.linebreak = true -- optional: breaks lines at word boundaries
+		vim.opt_local.breakindent = true -- optional: visually indent wrapped lines
+	end,
+})
+
 vim.api.nvim_create_autocmd("VimEnter", {
-    pattern = "*",
-    callback = function()
-        require("base46").load_all_highlights()
-    end,
+	pattern = "*",
+	callback = function()
+		require("base46").load_all_highlights()
+	end,
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern = "*",
-    callback = function()
-        -- Force tokyonight colors and transparency for floats, telescope, sidebars, and command line
-        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "#c0caf5" })
-        vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", fg = "#3b4261" })
-        vim.api.nvim_set_hl(0, "MsgArea", { bg = "none", fg = "#c0caf5" })
-        vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none", fg = "#c0caf5" })
-        vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none", fg = "#3b4261" })
-        vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none", fg = "#c0caf5" })
-        vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "none", fg = "#c0caf5" })
-        vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
-        vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "none" })
-    end,
+	pattern = "*",
+	callback = function()
+		-- Force tokyonight colors and transparency for floats, telescope, sidebars, and command line
+		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "#c0caf5" })
+		vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", fg = "#3b4261" })
+		vim.api.nvim_set_hl(0, "MsgArea", { bg = "none", fg = "#c0caf5" })
+		vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none", fg = "#c0caf5" })
+		vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none", fg = "#3b4261" })
+		vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none", fg = "#c0caf5" })
+		vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = "none", fg = "#c0caf5" })
+		vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
+		vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "none" })
+	end,
 })
 
 vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
 -- Custom syntax for Hyprland (green $variables)
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "hypr",
-    callback = function()
-        vim.cmd([[syntax match ShellVar '\$[a-zA-Z0-9_]\+' display]])
-        vim.cmd([[highlight link ShellVar Identifier]])
-    end,
+	pattern = "hypr",
+	callback = function()
+		vim.cmd([[syntax match ShellVar '\$[a-zA-Z0-9_]\+' display]])
+		vim.cmd([[highlight link ShellVar Identifier]])
+	end,
 })
 
 -- Remove carriage returns after pasting in normal mode
 vim.api.nvim_create_autocmd("VimEnter", {
-    group = "PasteRemoveCarriageReturn",
-    callback = function()
-        vim.cmd([[
+	group = "PasteRemoveCarriageReturn",
+	callback = function()
+		vim.cmd([[
       nnoremap <silent> P :execute "normal! P" <bar> silent! %s/\r//g<CR>
       nnoremap <silent> p :execute "normal! p" <bar> silent! %s/\r//g<CR>
     ]])
-    end,
+	end,
 })
 
 -- Remove carriage returns after pasting in insert mode
 -- nnoremap <silent> <C-r> :execute "normal! <C-r>" <bar> silent! %s/\r//g<CR>
 vim.api.nvim_create_autocmd("InsertLeave", {
-    group = "PasteRemoveCarriageReturn",
-    callback = function()
-        vim.cmd([[
+	group = "PasteRemoveCarriageReturn",
+	callback = function()
+		vim.cmd([[
       silent! %s/\r//g
     ]])
-    end,
+	end,
 })
 
 -- Define autocmd group
@@ -125,11 +132,11 @@ vim.cmd([[
 local uv = vim.loop
 
 vim.api.nvim_create_autocmd({ "VimEnter", "VimLeave" }, {
-    callback = function()
-        if vim.env.TMUX_PLUGIN_MANAGER_PATH then
-            uv.spawn(vim.env.TMUX_PLUGIN_MANAGER_PATH .. "/tmux-window-name/scripts/rename_session_windows.py", {})
-        end
-    end,
+	callback = function()
+		if vim.env.TMUX_PLUGIN_MANAGER_PATH then
+			uv.spawn(vim.env.TMUX_PLUGIN_MANAGER_PATH .. "/tmux-window-name/scripts/rename_session_windows.py", {})
+		end
+	end,
 })
 
 -- vim.api.nvim_create_autocmd("CmdlineEnter", {
@@ -139,195 +146,195 @@ vim.api.nvim_create_autocmd({ "VimEnter", "VimLeave" }, {
 -- })
 
 function TestLearningLsp()
-    local client = vim.lsp.start_client({
-        name = "learninglsp",
-        cmd = { basePath .. "/main" },
-        on_attach = require("plugins.configs.lspconfig").on_attach,
-    })
+	local client = vim.lsp.start_client({
+		name = "learninglsp",
+		cmd = { basePath .. "/main" },
+		on_attach = require("plugins.configs.lspconfig").on_attach,
+	})
 
-    if not client then
-        vim.notify("Failed to start LSP client: learninglsp", vim.log.levels.ERROR)
-        return
-    end
+	if not client then
+		vim.notify("Failed to start LSP client: learninglsp", vim.log.levels.ERROR)
+		return
+	end
 
-    vim.lsp.buf_attach_client(0, client)
+	vim.lsp.buf_attach_client(0, client)
 
-    vim.notify("LSP client 'learninglsp' successfully started and attached!", vim.log.levels.INFO)
+	vim.notify("LSP client 'learninglsp' successfully started and attached!", vim.log.levels.INFO)
 end
 
 vim.api.nvim_create_user_command(
-    "TestLearningLsp", -- The command name
-    function()
-        TestLearningLsp()
-    end,
-    { desc = "Test the custom LSP client: learninglsp" } -- Optional description
+	"TestLearningLsp", -- The command name
+	function()
+		TestLearningLsp()
+	end,
+	{ desc = "Test the custom LSP client: learninglsp" } -- Optional description
 )
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "hyprlang",
-    callback = function()
-        vim.schedule(function()
-            pcall(vim.cmd, "TSBufDisable highlight")
-        end)
-    end,
+	pattern = "hyprlang",
+	callback = function()
+		vim.schedule(function()
+			pcall(vim.cmd, "TSBufDisable highlight")
+		end)
+	end,
 })
 
 local eslint_active = false
 
 vim.api.nvim_create_user_command("ToggleESLint", function()
-    eslint_active = not eslint_active
-    if eslint_active then
-        vim.lsp.start_client({ name = "eslint" })
-        print("ESLint enabled")
-    else
-        vim.lsp.stop_client(vim.lsp.get_active_clients({ name = "eslint" })[1].id)
-        print("ESLint disabled")
-    end
+	eslint_active = not eslint_active
+	if eslint_active then
+		vim.lsp.start_client({ name = "eslint" })
+		print("ESLint enabled")
+	else
+		vim.lsp.stop_client(vim.lsp.get_active_clients({ name = "eslint" })[1].id)
+		print("ESLint disabled")
+	end
 end, {})
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*",
-    callback = function()
-        local filetypes = { "sql", "mysql", "psql" }
-        if vim.tbl_contains(filetypes, vim.bo.filetype) then
-            vim.bo.commentstring = "-- %s"
-        end
-    end,
+	pattern = "*",
+	callback = function()
+		local filetypes = { "sql", "mysql", "psql" }
+		if vim.tbl_contains(filetypes, vim.bo.filetype) then
+			vim.bo.commentstring = "-- %s"
+		end
+	end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "nvcheatsheet", "neo-tree", "dbui", "dbee" },
-    callback = function()
-        require("ufo").detach()
-        vim.opt_local.foldenable = false
-    end,
+	pattern = { "nvcheatsheet", "neo-tree", "dbui", "dbee" },
+	callback = function()
+		require("ufo").detach()
+		vim.opt_local.foldenable = false
+	end,
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = "*",
-    callback = function()
-        local bufname = vim.api.nvim_buf_get_name(0)
-        if bufname:match("env") then
-            vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = 0 }))
-        end
-    end,
+	pattern = "*",
+	callback = function()
+		local bufname = vim.api.nvim_buf_get_name(0)
+		if bufname:match("env") then
+			vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = 0 }))
+		end
+	end,
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = "*",
-    callback = function()
-        vim.opt.laststatus = 2 -- always show statusline when opening files
-    end,
+	pattern = "*",
+	callback = function()
+		vim.opt.laststatus = 2 -- always show statusline when opening files
+	end,
 })
 
 vim.keymap.set("n", "<leader>y", "<cmd>Telescope yank_history<CR>", { desc = "Yank history" })
 
 vim.api.nvim_create_autocmd("BufReadPre", {
-    pattern = "*",
-    desc = "Disable features on big files",
-    callback = function(args)
-        local bufnr = args.buf
-        local size = vim.fn.getfsize(vim.fn.expand("%"))
-        local max_filesize = 500 * 1024
+	pattern = "*",
+	desc = "Disable features on big files",
+	callback = function(args)
+		local bufnr = args.buf
+		local size = vim.fn.getfsize(vim.fn.expand("%"))
+		local max_filesize = 500 * 1024
 
-        if size < max_filesize or not vim.g.customBigFileOpt then
-            return
-        end
+		if size < max_filesize or not vim.g.customBigFileOpt then
+			return
+		end
 
-        vim.b[bufnr].bigfile_disable = true
+		vim.b[bufnr].bigfile_disable = true
 
-        -- Set up Treesitter module disable (safely, in case treesitter isn't loaded yet)
-        local ok, configs = pcall(require, "nvim-treesitter.configs")
-        if ok then
-            local module = configs.get_module("indent")
-            if module then
-                module.disable = function(lang, bufnr)
-                    return vim.b[bufnr].bigfile_disable == true
-                end
-            end
-        end
+		-- Set up Treesitter module disable (safely, in case treesitter isn't loaded yet)
+		local ok, configs = pcall(require, "nvim-treesitter.configs")
+		if ok then
+			local module = configs.get_module("indent")
+			if module then
+				module.disable = function(lang, bufnr)
+					return vim.b[bufnr].bigfile_disable == true
+				end
+			end
+		end
 
-        -- Disable autoindent
-        vim.bo.indentexpr = ""
-        vim.bo.autoindent = false
-        vim.bo.smartindent = false
-        -- Disable folding
-        vim.opt_local.foldmethod = "manual"
-        vim.opt_local.foldexpr = "0"
-        -- Disable statuscolumn
-        vim.opt_local.statuscolumn = ""
-        -- Disable search highlight
-        vim.opt_local.hlsearch = false
-        -- Disable line wrapping
-        -- Disable cursorline
-        vim.opt_local.cursorline = false
-        -- Disable swapfile
-        vim.opt_local.swapfile = false
-        -- Disable spell checking
-        vim.opt_local.spell = false
-    end,
+		-- Disable autoindent
+		vim.bo.indentexpr = ""
+		vim.bo.autoindent = false
+		vim.bo.smartindent = false
+		-- Disable folding
+		vim.opt_local.foldmethod = "manual"
+		vim.opt_local.foldexpr = "0"
+		-- Disable statuscolumn
+		vim.opt_local.statuscolumn = ""
+		-- Disable search highlight
+		vim.opt_local.hlsearch = false
+		-- Disable line wrapping
+		-- Disable cursorline
+		vim.opt_local.cursorline = false
+		-- Disable swapfile
+		vim.opt_local.swapfile = false
+		-- Disable spell checking
+		vim.opt_local.spell = false
+	end,
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-    callback = function(ev)
-        for _, client in pairs((vim.lsp.get_clients({}))) do
-            if client.name == "tailwindcss" then
-                client.server_capabilities.completionProvider.triggerCharacters =
-                { '"', "'", "`", ".", "(", "[", "!", "/", ":" }
-            end
-        end
-    end,
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(ev)
+		for _, client in pairs((vim.lsp.get_clients({}))) do
+			if client.name == "tailwindcss" then
+				client.server_capabilities.completionProvider.triggerCharacters =
+					{ '"', "'", "`", ".", "(", "[", "!", "/", ":" }
+			end
+		end
+	end,
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {
-    pattern = "*",
-    callback = function()
-        if vim.fn.argc() == 0 or (vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv()[0]) == 1) then
-            vim.cmd("silent! %bwipeout")
-            vim.cmd("enew")
-            vim.opt.laststatus = 0 -- hide statusline on blank startup
-        end
-    end,
+	pattern = "*",
+	callback = function()
+		if vim.fn.argc() == 0 or (vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv()[0]) == 1) then
+			vim.cmd("silent! %bwipeout")
+			vim.cmd("enew")
+			vim.opt.laststatus = 0 -- hide statusline on blank startup
+		end
+	end,
 })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
-    callback = function()
-        if vim.bo.filetype == "" then
-            vim.cmd("filetype detect")
-        end
-    end,
+	callback = function()
+		if vim.bo.filetype == "" then
+			vim.cmd("filetype detect")
+		end
+	end,
 })
 
 vim.diagnostic.config({
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = "E",
-            [vim.diagnostic.severity.WARN] = "W",
-            [vim.diagnostic.severity.INFO] = "I",
-            [vim.diagnostic.severity.HINT] = "H",
-        },
-    },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "E",
+			[vim.diagnostic.severity.WARN] = "W",
+			[vim.diagnostic.severity.INFO] = "I",
+			[vim.diagnostic.severity.HINT] = "H",
+		},
+	},
 })
 
 -- Position LSP hover window at the top (above cursor)
 vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
-    config = config or {}
-    config.focus_id = ctx.method
-    if not (result and result.contents) then
-        return
-    end
-    local markdown_lines = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
-    markdown_lines = vim.lsp.util.trim_empty_lines(markdown_lines)
-    if vim.tbl_isempty(markdown_lines) then
-        return
-    end
-    return vim.lsp.util.open_floating_preview(markdown_lines, "markdown", {
-        border = "rounded",
-        max_width = 80,
-        max_height = 20,
-        relative = "cursor",
-        row = -10, -- position above cursor
-        col = 0,
-    })
+	config = config or {}
+	config.focus_id = ctx.method
+	if not (result and result.contents) then
+		return
+	end
+	local markdown_lines = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
+	markdown_lines = vim.lsp.util.trim_empty_lines(markdown_lines)
+	if vim.tbl_isempty(markdown_lines) then
+		return
+	end
+	return vim.lsp.util.open_floating_preview(markdown_lines, "markdown", {
+		border = "rounded",
+		max_width = 80,
+		max_height = 20,
+		relative = "cursor",
+		row = -10, -- position above cursor
+		col = 0,
+	})
 end
