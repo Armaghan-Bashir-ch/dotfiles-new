@@ -343,37 +343,37 @@ vim.keymap.set("n", "<C-m>", "<C-v>", { desc = "Enter visual block mode" })
 -- Makes it so going half buffer down or up, centers the cursor on the screen
 
 M.markdown = {
-    plugin = false,
-    n = {
-        ["<leader>sf"] = {
-            function()
-                local buf = vim.api.nvim_get_current_buf()
+	plugin = false,
+	n = {
+		["<leader>sf"] = {
+			function()
+				local buf = vim.api.nvim_get_current_buf()
 
-                if vim.bo.filetype ~= "markdown" then
-                    Snacks.notifier.notify("  This command only works in Markdown files!", vim.log.levels.ERROR)
-                    return
-                end
+				if vim.bo.filetype ~= "markdown" then
+					Snacks.notifier.notify("  This command only works in Markdown files!", vim.log.levels.ERROR)
+					return
+				end
 
-                if not vim.wo.spell then
-                    vim.wo.spell = true
-                end
+				if not vim.wo.spell then
+					vim.wo.spell = true
+				end
 
-                vim.b.supermaven_disabled = true
+				vim.b.supermaven_disabled = true
 
-                local clients = vim.lsp.get_active_clients()
-                for _, client in ipairs(clients) do
-                    if client.name == "markdown_oxide" then
-                        vim.lsp.buf_detach_client(buf, client.id)
-                    end
-                end
+				local clients = vim.lsp.get_active_clients()
+				for _, client in ipairs(clients) do
+					if client.name == "markdown_oxide" then
+						vim.lsp.buf_detach_client(buf, client.id)
+					end
+				end
 
-                vim.b.markview_disable = false
+				vim.b.markview_disable = false
 
-                Snacks.notifier.notify("  Markdown writing mode activated!", vim.log.levels.INFO)
-            end,
-            "Setup markdown writing mode (spell, LSP, plugins)",
-        },
-    },
+				Snacks.notifier.notify("  Markdown writing mode activated!", vim.log.levels.INFO)
+			end,
+			"Setup markdown writing mode (spell, LSP, plugins)",
+		},
+	},
 }
 
 M.general = {
@@ -451,6 +451,90 @@ M.general = {
 				end)
 			end,
 			"Git commit & push",
+		},
+
+		["<leader>anf"] = {
+			function()
+				local has_telescope, pickers = pcall(require, "telescope.pickers")
+				if not has_telescope then
+					vim.notify("  Telescope not found", vim.log.levels.ERROR, { icon = "" })
+					return
+				end
+
+				local finders = require("telescope.finders")
+				local conf = require("telescope.config").values
+				local actions = require("telescope.actions")
+				local action_state = require("telescope.actions.state")
+
+				-- Telescope picker with custom layout
+				pickers
+					.new({
+						layout_strategy = "horizontal",
+						layout_config = {
+							horizontal = {
+								width = 0.35,
+								height = 0.30,
+								preview_width = 0.7,
+							},
+						},
+						prompt_title = "Create:",
+						finder = finders.new_table({ results = { "File", "Directory" } }),
+						sorter = conf.generic_sorter({}),
+						attach_mappings = function(prompt_bufnr, map)
+							actions.select_default:replace(function()
+								local choice = action_state.get_selected_entry().value
+								actions.close(prompt_bufnr)
+
+								-- Snacks input, now starts in insert mode automatically
+								Snacks.input({ prompt = choice .. " path: ", insert_mode = true }, function(path)
+									if not path or path == "" then
+										vim.notify(
+											"  Aborted: No path provided",
+											vim.log.levels.WARN,
+											{ icon = "" }
+										)
+										return
+									end
+
+									local full_path = vim.fn.expand(path)
+									local ok, err
+
+									if choice == "File" then
+										ok, err = pcall(function()
+											-- Create parent directories if needed
+											vim.fn.mkdir(vim.fn.fnamemodify(full_path, ":h"), "p")
+											local f = io.open(full_path, "w")
+											if f then
+												f:close()
+											end
+										end)
+									else -- Directory
+										ok, err = pcall(function()
+											vim.fn.mkdir(full_path, "p")
+										end)
+									end
+
+									if ok then
+										vim.notify(
+											"  Successfully created " .. choice:lower() .. ": " .. full_path,
+											vim.log.levels.INFO,
+											{ icon = "" }
+										)
+									else
+										vim.notify(
+											"  Failed to create " .. choice:lower() .. ": " .. err,
+											vim.log.levels.ERROR,
+											{ icon = "" }
+										)
+									end
+								end)
+							end)
+							return true
+						end,
+					})
+					:find()
+			end,
+			"Create File/Directory",
 		},
 
 		["<M-q>"] = {

@@ -4,6 +4,7 @@ opt.relativenumber = true -- Adding Relative Line Numbers to be turned on every 
 vim.opt.expandtab = true -- Convert tabs to spaces
 vim.opt.tabstop = 4 -- Number of spaces a tab represents
 vim.opt.shiftwidth = 4 -- Number of spaces for autoindent
+vim.opt.softtabstop = 4 -- Number of spaces for <Tab> and <BS> keys
 vim.opt.showtabline = 0 -- Disables file tab names at the top, don't know the right name for it
 vim.opt.wrap = false -- Sets the wrap to be false, still deciding on whether to leave it enabled or not
 vim.opt.cursorline = false -- Disables the annoying highlight line on the current line that I am on, helps me with keeping my focus
