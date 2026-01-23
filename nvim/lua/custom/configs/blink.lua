@@ -108,7 +108,7 @@
             sql = { "snippets", "dadbod", "buffer" },
             mysql = { "snippets", "dadbod", "buffer" },
             text = { "dictionary" },
-            markdown = { "lsp", "buffer", "thesaurus" },
+            markdown = { "thesaurus" },
         },
         -- markdown = { "lsp", "buffer", "thesaurus" },
         -- add vim-dadbod-completion to your completion providers
