@@ -90,14 +90,10 @@ vim.lsp.config("markdown_oxide", {
 vim.lsp.enable("markdown_oxide")
 
 vim.lsp.config("bashls", {
-	on_attach = enhance_on_attach,
-	capabilities = capabilities,
-	filetypes = { "sh", "bash", ".zshrc", ".bashrc" },
-	settings = {
-		bashIde = {
-			globPattern = "*@(.sh|.bash|.zsh|.bashrc|.zshrc)",
-		},
-	},
+  on_attach = enhance_on_attach,
+  capabilities = capabilities,
+  cmd = { 'bash-language-server', 'start' },
+  filetypes = { 'bash', 'sh' }
 })
 vim.lsp.enable("bashls")
 
