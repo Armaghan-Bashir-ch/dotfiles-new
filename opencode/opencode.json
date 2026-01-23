@@ -1,5 +1,5 @@
 {
-  "theme": "cursor",
+  "theme": "lucent-orng",
   "$schema": "https://opencode.ai/config.json",
   "keybinds": {
     "leader": "ctrl+o",
