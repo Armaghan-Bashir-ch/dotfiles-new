@@ -468,8 +468,11 @@ M.general = {
 						local ok, err
 
 						if choice == "File" then
+							local dir = vim.fn.fnamemodify(full_path, ":h")
 							ok, err = pcall(function()
-								vim.fn.mkdir(vim.fn.fnamemodify(full_path, ":h"), "p")
+								if dir ~= "" then
+									vim.fn.mkdir(dir, "p")
+								end
 								local f = io.open(full_path, "w")
 								if f then
 									f:close()
