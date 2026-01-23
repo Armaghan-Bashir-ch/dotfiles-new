@@ -222,4 +222,8 @@ push(){
     git commit -m "$*"
     git push
 }
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^e' edit-command-line
+
 nitch
