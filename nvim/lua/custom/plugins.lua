@@ -1224,6 +1224,20 @@ local plugins = {
 			}
 		end,
 	},
+
+	{
+		dir = vim.fn.expand("~/dev/Projects/notes.nvim"),
+		name = "notes.nvim",
+		lazy = false, -- IMPORTANT: load immediately
+		dependencies = {
+			"folke/snacks.nvim",
+			"markview.nvim",
+			"picker.nvim",
+		},
+		config = function()
+			require("notes").setup()
+		end,
+	},
 	-- Hyprland syntax highlighting
 	{
 		"theRealCarneiro/hyprland-vim-syntax",
