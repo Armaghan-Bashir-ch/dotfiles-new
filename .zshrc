@@ -241,4 +241,8 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+{
+    source /opt/google-cloud-cli/path.zsh.inc
+} &>/dev/null
+
 nitch
