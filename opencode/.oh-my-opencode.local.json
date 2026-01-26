@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "session-notification": {
+      "force_enable": false
+    }
+  }
+}
