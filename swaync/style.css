@@ -2,168 +2,263 @@
 @import "center_control.css";
 
 * {
-    color: @wb-act-bg;
-    all: unset;
-    font-size: 12px;
-    font-family: "Inter", sans-serif;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: @wb-act-bg;
+  all: unset;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .notification-row {
-    outline: none;
-    margin: 0;
-    padding: 0;
+  outline: none;
+  margin: 0;
+  padding: 0;
 }
 
 .floating-notifications.background .notification-row .notification-background {
-    background: radial-gradient(circle at center, rgba(16, 21, 16, 0.51), rgba(16, 21, 16, 0.51));
-    border: 1.5px solid rgba(131, 199, 230, 0.4);
-    border-radius: 24px;
-    margin: 0 8px 8px 0;
-    padding: 0;
-    overflow: visible;
-    animation: slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    position: relative;
+  background: radial-gradient(
+    circle at center,
+    rgba(17, 17, 17, 0.51),
+    rgba(16, 21, 16, 0.51)
+  );
+  border: 1.5px solid rgba(131, 199, 230, 0.4);
+  border-radius: 24px;
+  margin: 0 8px 8px 0;
+  padding: 0;
+  overflow: visible;
+  animation: slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification {
-    padding: 6px;
-    border-radius: 23px;
-    border: none;
-    background: transparent;
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification {
+  padding: 6px;
+  border-radius: 23px;
+  border: none;
+  background: transparent;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification.critical {
-    border: none;
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification.critical {
+  border: none;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification.critical .notification-content {
-    border-left: 3px solid @wb-act-bg;
-    padding-left: 8px;
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification.critical
+  .notification-content {
+  border-left: 3px solid @wb-act-bg;
+  padding-left: 8px;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification .notification-content {
-    margin: 8px 16px;
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content {
+  margin: 8px 16px;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * {
-    min-height: 3.6em;
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > * {
+  min-height: 3.6em;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action {
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(131, 199, 230, 0.08), rgba(147, 206, 233, 0.04));
-    margin: 6px;
-    border: 1px solid rgba(131, 199, 230, 0.25);
-    will-change: transform;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action {
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(131, 199, 230, 0.08),
+    rgba(147, 206, 233, 0.04)
+  );
+  margin: 6px;
+  border: 1px solid rgba(131, 199, 230, 0.25);
+  will-change: transform;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s;
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover::before {
-    left: 100%;
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:hover::before {
+  left: 100%;
 }
 
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
-    background: linear-gradient(135deg, rgba(131, 199, 230, 0.25), rgba(147, 206, 233, 0.15));
-    border: 1px solid rgba(131, 199, 230, 0.4);
-    transform: translateY(-1px);
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(131, 199, 230, 0.25),
+    rgba(147, 206, 233, 0.15)
+  );
+  border: 1px solid rgba(131, 199, 230, 0.4);
+  transform: translateY(-1px);
 }
 
-.floating-notifications.background .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
-    background: linear-gradient(135deg, rgba(147, 206, 233, 0.4), rgba(147, 206, 233, 0.2));
-    color: @main-bg;
-    transform: translateY(0);
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:active {
+  background: linear-gradient(
+    135deg,
+    rgba(147, 206, 233, 0.4),
+    rgba(147, 206, 233, 0.2)
+  );
+  color: @main-bg;
+  transform: translateY(0);
 }
 
 .image {
-    margin: 12px 16px 12px 4px;
-    border-radius: 8px;
-    overflow: hidden;
+  margin: 12px 16px 12px 4px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .summary {
-    font-weight: 700;
-    font-size: 1.35rem;
-    margin-top: 8px;
-    margin-bottom: 6px;
-    letter-spacing: 0.2px;
-    line-height: 1.4;
-    color: #ffffff;
+  font-weight: 700;
+  font-size: 1.35rem;
+  margin-top: 8px;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+  line-height: 1.4;
+  color: #ffffff;
 }
 
 .body {
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-    line-height: 1.6;
-    word-wrap: break-word;
-    color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+  word-wrap: break-word;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .notification[data-app-name="Discord"] .body img {
-    margin-right: 12px;
-    border-radius: 4px;
+  margin-right: 12px;
+  border-radius: 4px;
 }
 
-.floating-notifications.background .notification-row .notification-background .close-button {
-    margin: 12px 14px;
-    padding: 3px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(16, 20, 25, 0.8), rgba(16, 20, 25, 0.6));
-    border: 1px solid rgba(131, 199, 230, 0.3);
-    will-change: transform;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button {
+  margin: 12px 14px;
+  padding: 3px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(16, 20, 25, 0.8),
+    rgba(16, 20, 25, 0.6)
+  );
+  border: 1px solid rgba(131, 199, 230, 0.3);
+  will-change: transform;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
-.floating-notifications.background .notification-row .notification-background .close-button:hover {
-    background: linear-gradient(135deg, rgba(131, 199, 230, 0.2), rgba(147, 206, 233, 0.1));
-    border: 1px solid rgba(131, 199, 230, 0.5);
-    transform: scale(1.1) rotate(90deg);
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(131, 199, 230, 0.2),
+    rgba(147, 206, 233, 0.1)
+  );
+  border: 1px solid rgba(131, 199, 230, 0.5);
+  transform: scale(1.1) rotate(90deg);
 }
 
-.floating-notifications.background .notification-row .notification-background .close-button:active {
-    background: linear-gradient(135deg, rgba(147, 206, 233, 0.3), rgba(147, 206, 233, 0.15));
-    color: @main-bg;
-    transform: scale(1.05) rotate(180deg);
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button:active {
+  background: linear-gradient(
+    135deg,
+    rgba(147, 206, 233, 0.3),
+    rgba(147, 206, 233, 0.15)
+  );
+  color: @main-bg;
+  transform: scale(1.05) rotate(180deg);
 }
 
 .notification.critical progress {
-    background: linear-gradient(90deg, @wb-act-bg, rgba(147, 206, 233, 0.8));
-    border-radius: 2px;
-    height: 4px;
+  background: linear-gradient(90deg, @wb-act-bg, rgba(147, 206, 233, 0.8));
+  border-radius: 2px;
+  height: 4px;
 }
 
 .notification.low progress,
 .notification.normal progress {
-    background: linear-gradient(90deg, @wb-act-bg, rgba(131, 199, 230, 0.6));
-    border-radius: 2px;
-    height: 4px;
+  background: linear-gradient(90deg, @wb-act-bg, rgba(131, 199, 230, 0.6));
+  border-radius: 2px;
+  height: 4px;
 }
 
 /* Control center notification borders */
 .control-center .notification-row .notification {
-    background: linear-gradient(145deg, rgba(16, 20, 25, 0.9), rgba(16, 20, 25, 0.7));
-    border: 1px solid rgba(131, 199, 230, 0.2);
-    border-radius: 12px;
-    margin: 4px 8px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(
+    145deg,
+    rgba(16, 20, 25, 0.9),
+    rgba(16, 20, 25, 0.7)
+  );
+  border: 1px solid rgba(131, 199, 230, 0.2);
+  border-radius: 12px;
+  margin: 4px 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /*
@@ -175,18 +270,22 @@
 */
 
 .control-center .notification-row .notification.critical {
-    background: linear-gradient(145deg, rgba(31, 35, 40, 0.95), rgba(16, 20, 25, 0.85));
-    border: 2px solid @wb-act-bg;
-    border-radius: 12px;
+  background: linear-gradient(
+    145deg,
+    rgba(31, 35, 40, 0.95),
+    rgba(16, 20, 25, 0.85)
+  );
+  border: 2px solid @wb-act-bg;
+  border-radius: 12px;
 }
 
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-    }
+  from {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
