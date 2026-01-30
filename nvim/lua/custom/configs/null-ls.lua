@@ -46,7 +46,7 @@ local opts = {
 	},
 	on_attach = function(client, bufnr)
 		local filetype = vim.bo[bufnr].filetype
-		local disabled_filetypes = { "sql", "tsx", "markdown", "marksman" }
+		local disabled_filetypes = { "sql", "tsx", "markdown", "marksman", "json", "jsonc" }
 		local is_disabled_filetype = vim.tbl_contains(disabled_filetypes, filetype)
 		local line_count = vim.api.nvim_buf_line_count(bufnr)
 		local block_large_file_format = vim.g.customBigFileOpt and line_count > 3500
