@@ -1,7 +1,11 @@
 #!/bin/bash
 count=$(swaync-client -c)
-if [ "$count" -eq 0 ]; then
-    echo "󰂛"
+dnd=$(swaync-client -D)
+
+if [ "$dnd" = "true" ]; then
+    echo ""
+elif [ "$count" -eq 0 ]; then
+    echo ""
 else
-    echo " $count"
+    echo "<span foreground='red'><sup></sup></span>"
 fi
