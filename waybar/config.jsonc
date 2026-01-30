@@ -64,6 +64,11 @@
         "on-click": "swaync-client -t",
     },
 
+    "custom/cava": {
+        "exec": "~/.config/hypr/scripts/cava-animation.sh",
+        "format": "{}"
+    },
+
     "custom/player": {
         "exec": "playerctl --player=spotify metadata --format '{{title}} - {{artist}}' || echo 'No music playing'",
         "interval": 2,
