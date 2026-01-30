@@ -73,6 +73,7 @@ tooltip {
   color: @main-fg;
   border-radius: 5px;
   border-width: 0px;
+  border: 0.5px solid @main-fg;
   box-shadow: none;
 }
 
