@@ -1280,13 +1280,6 @@ local plugins = {
 			max_length_insert_mode = 1,
 		},
 	},
-	-- Hyprland syntax highlighting
-	{
-		"theRealCarneiro/hyprland-vim-syntax",
-		ft = { "hypr" },
-		config = function()
-			vim.cmd([[autocmd FileType hypr setlocal commentstring=#\ %s]])
-		end,
-	},
 }
+
 return plugins
