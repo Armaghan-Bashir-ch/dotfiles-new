@@ -11,7 +11,7 @@ window {
 
 button {
   color: #ffffff;
-  background-color: @main-bg;
+  background-color: transparent;
   outline-style: none;
   border: 2px;
   border-width: 500px;
@@ -25,7 +25,7 @@ button {
 }
 
 button:focus {
-  background-color: @main-bg;
+  background-color: transparent;
   background-size: 30%;
 }
 
