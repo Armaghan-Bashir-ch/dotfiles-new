@@ -1,11 +1,16 @@
 #!/bin/bash
-count=$(swaync-client -c)
-dnd=$(swaync-client -D)
+count=$(swaync-client -c 2>/dev/null || echo "0")
+dnd=$(swaync-client -D 2>/dev/null || echo "false")
 
 if [ "$dnd" = "true" ]; then
-    echo ""
+    icon=""
+    tooltip="Do Not Disturb is ON"
 elif [ "$count" -eq 0 ]; then
-    echo ""
+    icon=""
+    tooltip="No notifications"
 else
-    echo "<span foreground='red'><sup></sup></span>"
+    icon="<span foreground='red'><sup></sup></span>"
+    tooltip="You have $count notification$([ "$count" -ne 1 ] && echo "s")"
 fi
+
+echo "{\"text\": \"$icon\", \"tooltip\": \"$tooltip\"}"

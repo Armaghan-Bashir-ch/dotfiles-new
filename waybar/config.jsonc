@@ -57,11 +57,13 @@
     },
 
     "custom/swaync": {
-        "exec": "~/.config/hypr/scripts/swaync-count.sh",
+        "exec": "/home/armaghan/.config/hypr/scripts/swaync-count.sh",
         "interval": 1,
+        "return-type": "json",
+        "format": "{}",
         "separate-outputs": true,
         "max-length": 1000,
-        "on-click": "swaync-client -t",
+        "on-click": "swaync-client -t"
     },
 
     "custom/cava": {
