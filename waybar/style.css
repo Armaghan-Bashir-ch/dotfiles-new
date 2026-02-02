@@ -14,54 +14,6 @@
   min-height: 10px;
 }
 
-/* CHOSING THEMES */
-
-/* Thems to choose from
-   
-1. Aura-Dark
-2. Aura-Light
-3. Aura-Midnight
-4. Aura-Moon
-5. Catppuccin-Frappe
-6. Catppuccin-Latte
-7. Catppuccin-Macchiato
-8. Catppuccin-Mocha
-9. Cyberpunk-Edge
-10. Decay-Green
-11. Dracula
-12. Edge-Runner
-13. EverForest
-14. Frosted-Glass
-15. Graphite-Mono
-16. Gruvbox-Dark
-17. Gruvbox-Light
-18. Gruvbox-Retro
-19. Kanagawa
-20. Material-Sakura
-21. Monokai
-22. Night-Owl
-23. Nord-Dark
-24. Nord-Frost
-25. Nordic-Blue
-26. Nord-Light
-27. OneDark
-28. OneLight
-29. Paper-Dark
-30. Paper-Light
-31. Rose-Pine
-32. Rose-Pine-Dawn
-33. Rose-Pine-Moon
-34. Solarized-Dark
-35. Solarized-Light
-36. Synth-Wave
-37. Tokyo-Day
-38. Tokyo-Future
-39. Tokyo-Moon
-40. Tokyo-Night
-41. Tokyo-Storm
-42. Wall-Dcol
-*/
-
 @import "themes/Catppuccin-Mocha.css";
 
 window#waybar {
