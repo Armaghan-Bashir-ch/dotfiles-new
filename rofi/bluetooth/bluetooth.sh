@@ -2,7 +2,8 @@
 
 notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Checking Bluetooth devices"
 
-set -euo pipefail
+# Don't exit on errors - we want to handle bluetooth failures gracefully
+set +e
 
 # -------------------------
 # Paths to Rofi themes
@@ -41,7 +42,21 @@ list_bluetooth_menu() {
 # -------------------------
 # Check Bluetooth status
 # -------------------------
-bluetooth_status=$(bluetoothctl show | grep "Powered:" | awk '{print $2}')
+bluetooth_status="no"
+
+# Check if bluetoothctl is available
+if command -v bluetoothctl &>/dev/null; then
+    # Try to get bluetooth status, handle cases where controller is off
+    status_output=$(bluetoothctl show 2>/dev/null)
+    
+    if [[ -n "$status_output" ]]; then
+        # Extract Powered status
+        powered=$(echo "$status_output" | grep "Powered:" | awk '{print $2}')
+        if [[ "$powered" == "yes" ]]; then
+            bluetooth_status="yes"
+        fi
+    fi
+fi
 
 # -------------------------
 # Get device arrays
@@ -128,9 +143,47 @@ fi
 # -------------------------
 case "$choice" in
     "󰂯  Enable Bluetooth")
-        bluetoothctl power on
-        notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Bluetooth enabled"
-        # Re-run the script to show the main menu
+        notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Enabling Bluetooth..."
+        
+        # Unblock bluetooth via rfkill if blocked
+        rfkill unblock bluetooth 2>/dev/null || true
+        
+        # Start bluetooth service if not running
+        if ! systemctl is-active --quiet bluetooth 2>/dev/null; then
+            systemctl start bluetooth 2>/dev/null
+            sleep 3
+        fi
+        
+        # Wait longer for controller to be available
+        sleep 2
+        
+        # Check controller availability and power on
+        controller_ready=false
+        for i in {1..15}; do
+            if bluetoothctl list &>/dev/null; then
+                controller_ready=true
+                break
+            fi
+            sleep 1
+        done
+        
+        if [[ "$controller_ready" == true ]]; then
+            # Power on the controller
+            bluetoothctl power on &>/dev/null
+            sleep 2
+            
+            # Verify it's actually powered on
+            verify_status=$(bluetoothctl show 2>/dev/null | grep "Powered:" | awk '{print $2}')
+            if [[ "$verify_status" == "yes" ]]; then
+                notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Bluetooth enabled successfully"
+                sleep 1
+                exec "$0"
+            fi
+        fi
+        
+        # If we get here, something went wrong
+        notify-send -e -h string:x-canonical-private-synchronous:bluetooth_notif -u low -i ~/App-Icons/Bluetooth.png "Bluetooth Manager" "Still enabling... checking again"
+        sleep 2
         exec "$0"
         ;;
 
