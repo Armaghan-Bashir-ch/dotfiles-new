@@ -1242,7 +1242,7 @@ local plugins = {
 	{
 		"sphamba/smear-cursor.nvim",
 		enabled = vim.g.smear_cursor,
-		lazy = true,
+		lazy = false,
 		opts = {
 			smear_between_buffers = true,
 			smear_between_neighbor_lines = true,
