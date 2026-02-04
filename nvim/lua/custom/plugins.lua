@@ -958,6 +958,11 @@ local plugins = {
 					debug = " ",
 					trace = " ",
 				},
+				notification = {
+					wo = {
+						winblend = 20, -- 0=opaque, 100=fully transparent
+					},
+				},
 			},
 			scroll = {
 				enabled = false,

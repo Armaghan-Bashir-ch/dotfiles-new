@@ -20,7 +20,7 @@ vim.o.swapfile = false -- Disable creation of swap files
 vim.g.disableFormat = false -- Keep code formatting enabled
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
-vim.opt.guicursor = "i:block" -- Making the cursor appear like a block even when I am in Insert mode, don't like think cursors
+vim.opt.guicursor = "i:block" -- Making the cursor appear like a block even when I am in Insert mode
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions" -- Define what gets saved/restored in a Vim session
 vim.api.nvim_set_hl(0, "CursorLineNr", { underline = false, undercurl = false }) -- Remove underline/undercurl from the line number of the current cursor line
 vim.api.nvim_set_hl(0, "CursorLine", { underline = false, undercurl = false }) -- Remove underline/undercurl from the background of the current cursor line
