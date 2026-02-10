@@ -101,6 +101,20 @@ vim.lsp.config("pyright", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	filetypes = { "python" },
+	settings = {
+		python = {
+			analysis = {
+				-- Enable auto-import completions with documentation
+				autoImportCompletions = true,
+				-- Use type stubs for better completion documentation
+				useLibraryCodeForTypes = true,
+				-- Enable diagnostic mode (off, basic, standard)
+				diagnosticMode = "workspace",
+				-- Type checking level (off, basic, standard, basic)
+				typeCheckingMode = "basic",
+			},
+		},
+	},
 })
 vim.lsp.enable("pyright")
 

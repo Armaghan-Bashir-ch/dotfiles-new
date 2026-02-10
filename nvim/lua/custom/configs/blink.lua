@@ -5,6 +5,7 @@
     cmdline = {
         keymap = {
             preset = "super-tab",
+            ["<A-Space>"] = { "show", "fallback" },
             ["<Tab>"] = { "show", "select_next", "fallback" },
             ["<S-Tab>"] = { "select_prev", "fallback" },
         },
@@ -50,6 +51,7 @@
     },
     keymap = {
         preset = "super-tab",
+        ["<A-Space>"] = { "show", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
         -- TODO: replace with a loop
         ["<A-1>"] = {
