@@ -1245,6 +1245,20 @@ local plugins = {
 	},
 
 	{
+		"JellyApple102/flote.nvim",
+		lazy = false,
+		config = function()
+			require("flote").setup({
+				q_to_quit = true,
+				window_style = "minimal",
+				window_border = "solid",
+				window_title = true,
+				notes_dir = vim.fn.stdpath("cache") .. "/flote",
+			})
+		end,
+	},
+
+	{
 		"sphamba/smear-cursor.nvim",
 		enabled = vim.g.smear_cursor,
 		lazy = false,
