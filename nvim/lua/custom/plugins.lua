@@ -1259,6 +1259,13 @@ local plugins = {
 	},
 
 	{
+		"aikhe/wrapped.nvim",
+		dependencies = { "nvzone/volt" },
+		cmd = { "NvimWrapped" },
+		opts = {},
+	},
+
+	{
 		"sphamba/smear-cursor.nvim",
 		enabled = vim.g.smear_cursor,
 		lazy = false,
