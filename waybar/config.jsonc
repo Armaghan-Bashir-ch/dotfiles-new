@@ -43,7 +43,7 @@
     },
 
     "clock": {
-        "format": "  {:%I:%M %p - %d %a}",
+        "format": "󰶞  {:%I:%M %p - %d %a}",
         "tooltip-format": "<tt><big>{calendar}</big></tt>",
         "calendar": {
             "mode": "month",
