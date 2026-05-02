@@ -16,7 +16,7 @@ source ~/.pk10k.zsh
 
 #  ALIASES:
 
-alias cls='clear'
+alias cls='clear;clear'
 alias nitch='/home/armaghan/nitch/./nitch'
 alias lgit='lazygit'
 alias status='git status -u'
