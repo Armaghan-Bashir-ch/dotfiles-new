@@ -223,6 +223,13 @@ rgf() {
   fi
 }
 
+export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
+
+if [ ! -S "$SSH_AUTH_SOCK" ]; then
+    rm -f "$SSH_AUTH_SOCK"
+    ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+fi
+
 # Bind Ctrl+G to rgf
 zle -N rgf
 bindkey '^G' rgf
