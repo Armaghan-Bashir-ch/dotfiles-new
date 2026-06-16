@@ -4,10 +4,6 @@ configuration {
     show-icons:                  true;
     drun-display-format:         "{name}";
     font:                        "JetBrainsMono Nerd Font 10";
-    kb-row-up:       "k";
-    kb-row-down:     "j";
-    kb-row-left:     "h";
-    kb-row-right:    "l";
 }
 
 @theme "/home/armaghan/.config/rofi/themes/Catppuccin-Mocha.rasi"
