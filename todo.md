@@ -6,25 +6,25 @@
 - [x] Fix the bullet point indents in markview.nvim
 - [x] Learn how to use golf.nvim
 - [x] Make some rofi menus look not so "Childish"
-- [ ] Why does volume go above 100 in waybar scroll wheel?
-    - [ ] Does doing that make volume 26 sound louder than it is right now?
+- [x] Why does volume go above 100 in waybar scroll wheel?
+    - [x] Does doing that make volume 26 sound louder than it is right now?
 - [ ] Make the rofi background image load quicker
 - [ ] Make a gtk.css theme thing work for ghostty
-    - [ ] Are the notifications inside of ghostty changeable when it comes to design .
+    - [ ] Are the notifications inside of ghostty changeable when it comes to desigb>
 - [ ] Any way to enable noice.nvim but still have the cmd-height set to 1 and not 0? 
-- [ ] How to use picker.nvim (from snacks.nvim) in the default screen (btw.nvim screen) that appears when I just run `nvim` without any flag?
-- [ ] Any purpose of fff.nvim or telescope now?
+- [x] How to use picker.nvim (from snacks.nvim) in the default screen (btw.nvim screen) that appears when I just run `nvim` without any flag?
+- [x] Any purpose of fff.nvim or telescope now?
 - [x] Add swaync custom icon inside of eza config
 - [x] Decide what to put in the middle module of waybar
-- [ ] Is alacritty even needed?
+- [x] Is alacritty even needed?
 - [x] Configure opencode models
 - [x] Can i create more agents for opencode?
     - [x] if yes, then which one should i create
 - [x] Any way to make notify-send look even cooler?
 - [ ] **UPDATE THE DAMN README**
-- [ ] ssh clone for github?
-- [ ] what does a gh config do?
-- [ ] do i need obsidian-snippets anymore?
+- [x] ssh clone for github?
+- [x] what does a gh config do?
+- [ ] do I need obsidian-snippets anymore?
 - [ ] Is Wlogout even useful?
 - [x] Edit the sidekick.nvim config, and make it even more usable
 - [ ] Is this the most efficent workflow?
@@ -39,5 +39,3 @@
     - [ ] Bluetooth menu
     - [ ] Wifi Menu (if exists)
 - [x] What does Sisyphus do?
-
---- testing
