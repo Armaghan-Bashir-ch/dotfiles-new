@@ -25,7 +25,6 @@ return function()
 
     -- Load Telescope extensions
     telescope.load_extension("undo")
-    telescope.load_extension("refactoring")
     telescope.load_extension("yank_history")
     telescope.load_extension("fzf")
     telescope.load_extension("textcase")
