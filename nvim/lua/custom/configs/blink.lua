@@ -5,9 +5,9 @@ local opts = {
 	cmdline = {
 		keymap = {
 			preset = "super-tab",
-			["<A-Space>"] = { "show", "fallback" },
-			["<Tab>"] = { "show", "select_next", "fallback" },
-			["<S-Tab>"] = { "select_prev", "fallback" },
+		["<A-Tab>"] = { "show", "fallback" },
+		["<Tab>"] = { "show", "select_next", "fallback" },
+		["<S-Tab>"] = { "select_prev", "fallback" },
 		},
 		completion = {
 			menu = {
@@ -46,7 +46,7 @@ local opts = {
 	},
 	keymap = {
 		preset = "super-tab",
-		["<A-Space>"] = { "show", "fallback" },
+		["<A-Tab>"] = { "show", "fallback" },
 		["<CR>"] = { "accept", "fallback" },
 		["<A-1>"] = {
 			function(cmp)
