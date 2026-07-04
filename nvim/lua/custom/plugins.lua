@@ -602,14 +602,15 @@ local plugins = {
             require("code-refactor").setup({})
         end,
     },
-    {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        lazy = true,
-        dependencies = "nvim-treesitter/nvim-treesitter",
-        config = function()
-            require("custom.configs.textobjects")()
-        end,
-    },
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		lazy = true,
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("custom.configs.textobjects")()
+		end,
+	},
     {
         "kevinhwang91/nvim-ufo",
         requires = "kevinhwang91/promise-async",
@@ -1161,11 +1162,11 @@ local plugins = {
         },
         config = function()
             require("supermaven-nvim").setup({
-                keymaps = {
-                    accept_suggestion = "<Tab>",
-                    clear_suggestion = "<C-]>",
-                    accept_word = "<C-j>",
-                },
+				keymaps = {
+					accept_suggestion = "<A-Tab>",
+					clear_suggestion = "<C-]>",
+					accept_word = "<C-j>",
+				},
             })
         end,
     },
