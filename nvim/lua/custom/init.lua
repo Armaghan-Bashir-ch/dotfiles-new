@@ -147,9 +147,10 @@ vim.api.nvim_create_autocmd({ "VimEnter", "VimLeave" }, {
 -- })
 
 function TestLearningLsp()
+	local base_path = vim.fn.stdpath("data") .. "/lsp/learninglsp"
 	local client = vim.lsp.start_client({
 		name = "learninglsp",
-		cmd = { basePath .. "/main" },
+		cmd = { base_path .. "/main" },
 		on_attach = require("plugins.configs.lspconfig").on_attach,
 	})
 
@@ -307,16 +308,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	end,
 })
 
-vim.diagnostic.config({
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = "E",
-			[vim.diagnostic.severity.WARN] = "W",
-			[vim.diagnostic.severity.INFO] = "I",
-			[vim.diagnostic.severity.HINT] = "H",
-		},
-	},
-})
 
 -- Position LSP hover window at the top (above cursor)
 vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)

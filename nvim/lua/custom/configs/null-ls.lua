@@ -17,31 +17,6 @@ local opts = {
 
 		null_ls.builtins.formatting.sqlfmt,
 
-		null_ls.builtins.formatting.prettierd.with({
-			filetypes = {
-				"javascript",
-				"javascriptreact",
-				"typescript",
-				"typescriptreact",
-				"vue",
-				"css",
-				"scss",
-				"less",
-				"html",
-				"json",
-				"jsonc",
-				"markdown",
-				"mdx",
-				"yaml",
-				"xml",
-				"toml",
-			},
-		}),
-
-		null_ls.builtins.formatting.prettierd.with({
-			filetypes = { "svelte" },
-		}),
-
 		null_ls.builtins.formatting.shfmt,
 	},
 	on_attach = function(client, bufnr)

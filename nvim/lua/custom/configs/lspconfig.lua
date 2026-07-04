@@ -53,6 +53,10 @@ local function enhance_on_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>dD", function()
 		require("telescope.builtin").diagnostics()
 	end, { buffer = bufnr, desc = "Workspace diagnostics" })
+
+	if client.supports_method("textDocument/inlayHint") then
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	end
 end
 
 vim.lsp.config("gopls", {
@@ -98,20 +102,18 @@ vim.lsp.config("bashls", {
 vim.lsp.enable("bashls")
 
 vim.lsp.config("pyright", {
-	on_attach = on_attach,
+	on_attach = enhance_on_attach,
 	capabilities = capabilities,
 	filetypes = { "python" },
 	settings = {
 		python = {
 			analysis = {
-				-- Enable auto-import completions with documentation
 				autoImportCompletions = true,
-				-- Use type stubs for better completion documentation
 				useLibraryCodeForTypes = true,
-				-- Enable diagnostic mode (off, basic, standard)
 				diagnosticMode = "workspace",
-				-- Type checking level (off, basic, standard, basic)
 				typeCheckingMode = "basic",
+				inlayHintsVariableTypes = true,
+				inlayHintsFunctionReturnTypes = true,
 			},
 		},
 	},
@@ -135,23 +137,18 @@ vim.lsp.config("emmet_language_server", {
 vim.lsp.enable("emmet_language_server")
 
 vim.lsp.config("clangd", {
-	on_attach = function(client, bufnr)
-		client.server_capabilities.signatureHelpProvider = false
-		enhance_on_attach(client, bufnr)
-	end,
+	on_attach = enhance_on_attach,
 	capabilities = capabilities,
-	cmd = { "clangd" },
-	filetypes = { "c", "cpp", "objc", "objcpp", "h", "hpp" },
-	root_dir = util.root_pattern("compile_commands.json", "CMakeLists.txt", ".git"),
-	settings = {
-		clangd = {
-			arguments = {
-				"--background-index",
-				"--clang-tidy",
-				"--header-insertion=iwyu",
-			},
-		},
+	cmd = {
+		"clangd",
+		"--background-index",
+		"--clang-tidy",
+		"--header-insertion=iwyu",
+		"--completion-style=bundled",
+		"--pch-storage=memory",
 	},
+	filetypes = { "c", "cpp", "objc", "objcpp" },
+	root_dir = util.root_pattern("compile_commands.json", "CMakeLists.txt", ".git"),
 })
 vim.lsp.enable("clangd")
 
@@ -258,6 +255,32 @@ vim.lsp.config("asm_lsp", {
 })
 vim.lsp.enable("asm_lsp")
 
+vim.lsp.config("lua_ls", {
+	on_attach = enhance_on_attach,
+	capabilities = capabilities,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				library = {
+					[vim.fn.expand "$VIMRUNTIME/lua"] = true,
+					[vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+					[vim.fn.stdpath "data" .. "/lazy/ui/nvchad_types"] = true,
+					[vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
+				},
+				maxPreload = 100000,
+				preloadFileSize = 10000,
+			},
+			completion = {
+				callSnippet = "Replace",
+			},
+		},
+	},
+})
+vim.lsp.enable("lua_ls")
+
 vim.lsp.config("html", {
 	on_attach = enhance_on_attach,
 	capabilities = capabilities,
@@ -352,6 +375,9 @@ vim.diagnostic.config({
 	underline = true,
 	update_in_insert = false,
 	severity_sort = true,
+	virtual_lines = {
+		only_current_line = true,
+	},
 	float = {
 		focusable = false,
 		style = "minimal",

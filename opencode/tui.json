@@ -20,5 +20,8 @@
     "messages_half_page_up": "alt+k",
     "history_previous": "ctrl+p",
     "history_next": "ctrl+n"
-  }
+  },
+  "plugin": [
+    "oh-my-openagent"
+  ]
 }

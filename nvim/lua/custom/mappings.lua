@@ -563,11 +563,6 @@ M.general = {
 			"Add // @ts-ignore above the current line",
 		},
 		["<leader>tsn"] = { "ggO// @ts-nocheck<Esc>", "Add ts-nocheck at the top of the file" },
-		["<leader>ca"] = { "<cmd>lua vim.lsp.buf.code_action()<CR>" },
-		["<leader>ra"] = {
-			"<cmd>lua require('nvchad.renamer').open()<CR>",
-			"LSP rename",
-		},
 		["<leader>esf"] = { "<cmd> EslintFixAll <CR>" },
 		["<leader>ld"] = {
 			"<cmd>LspStop<CR>",
@@ -590,8 +585,6 @@ M.general = {
 			"<cmd>TSToolsAddMissingImports<CR>",
 			"Add Missing Imports",
 		},
-		["[d"] = { "<cmd>lua vim.diagnostic.goto_prev()<CR>" },
-		["]d"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>" },
 		["<leader>ts"] = { "<cmd>set spell!<CR>", "Toggle spell check" },
 
 		-- telescope remaps
@@ -876,18 +869,6 @@ M.general = {
 		["<leader>cc"] = { "<cmd>vsplit | term crush<CR>", "Open Crush" },
 
 		-- LSP navigation mappings
-		["gd"] = {
-			function()
-				vim.lsp.buf.definition()
-			end,
-			"LSP definition",
-		},
-		["K"] = {
-			function()
-				vim.lsp.buf.hover()
-			end,
-			"LSP hover",
-		},
 		["<leader>vws"] = {
 			function()
 				vim.lsp.buf.workspace_symbol()
@@ -917,18 +898,6 @@ M.general = {
 				vim.lsp.buf.rename()
 			end,
 			"LSP rename",
-		},
-		["[d"] = {
-			function()
-				vim.diagnostic.goto_next()
-			end,
-			"Goto next diagnostic",
-		},
-		["]d"] = {
-			function()
-				vim.diagnostic.goto_prev()
-			end,
-			"Goto prev diagnostic",
 		},
 	},
 

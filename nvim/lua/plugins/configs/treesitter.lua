@@ -1,41 +1,34 @@
-local options = {
+	local options = {
 	ensure_installed = {
-		-- Neovim-related
 		"lua",
 		"vim",
 		"vimdoc",
-
-		-- Web development
 		"html",
 		"css",
 		"tsx",
 		"json",
+		"json5",
+		"jsonc",
 		"javascript",
 		"typescript",
-
-		-- Backend & Systems languages
 		"go",
 		"gomod",
 		"gowork",
 		"gosum",
 		"python",
+		"rust",
 		"c",
 		"cpp",
-
-		-- Build systems & Config
 		"make",
 		"cmake",
 		"yaml",
 		"toml",
-
-		-- Other useful parsers
 		"markdown",
 		"markdown_inline",
+		"sql",
 		"regex",
 		"bash",
 		"dockerfile",
-
-		-- Hyprland configs
 		"hyprlang",
 	},
 

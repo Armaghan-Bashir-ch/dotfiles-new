@@ -80,7 +80,7 @@ return {
         },
     },
     focus = "input",
-    show_delay = 5000,
+    show_delay = 100,
     limit_live = 10000,
     layout = {
         cycle = true,
