@@ -44,7 +44,7 @@ local plugins = {
         enabled = true,
         -- or if using mini.icons/mini.nvim
         -- dependencies = { "nvim-mini/mini.icons" },
-        opts = { ui_select = true },
+        opts = { ui_select = {} },
     },
 
     {
