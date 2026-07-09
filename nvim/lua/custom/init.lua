@@ -287,3 +287,17 @@ vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
         col = 0,
     })
 end
+
+-- Disable inlay hints immediately on startup
+if vim.lsp.inlay_hint then
+    vim.lsp.inlay_hint.enable(false)
+end
+
+-- Safe guard fallback: turns them off the exact millisecond any LSP attaches
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        if vim.lsp.inlay_hint then
+            vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
+        end
+    end,
+})
