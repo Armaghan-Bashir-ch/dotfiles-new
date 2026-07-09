@@ -360,10 +360,11 @@ vim.diagnostic.config({
         spacing = 4,
         source = "if_many",
         format = function(diagnostic)
+            local msg = diagnostic.message:gsub("\n", " ")
             if diagnostic.code then
-                return diagnostic.message .. " [" .. tostring(diagnostic.code) .. "]"
+                return msg .. " [" .. tostring(diagnostic.code) .. "]"
             end
-            return diagnostic.message
+            return msg
         end,
     },
     signs = {
@@ -378,9 +379,6 @@ vim.diagnostic.config({
     underline = true,
     update_in_insert = false,
     severity_sort = true,
-    virtual_lines = {
-        only_current_line = true,
-    },
     float = {
         focusable = false,
         style = "minimal",
