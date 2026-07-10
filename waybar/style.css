@@ -14,7 +14,7 @@
   min-height: 10px;
 }
 
-@import "themes/Decay-Green.css";
+@import "themes/Catppuccin-Mocha.css";
 
 window#waybar {
   background: transparent;

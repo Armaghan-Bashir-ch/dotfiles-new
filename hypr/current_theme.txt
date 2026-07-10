@@ -1,1 +1,1 @@
-Decay-Green
+Catppuccin-Mocha
