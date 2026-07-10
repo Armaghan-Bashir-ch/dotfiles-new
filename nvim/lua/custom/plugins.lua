@@ -1390,8 +1390,33 @@ local plugins = {
             -- Initialize noice with your options
             require("noice").setup(opts)
 
-            -- Force cmdheight back to 1 after noice overwrites it
-            vim.opt.cmdheight = 1
+            -- Force cmdheight back to 1 after noice overwrites it.
+            -- Uses VimEnter + OptionSet for a permanent shield.
+            local force_ch = vim.api.nvim_create_augroup("force_cmdheight", { clear = true })
+
+            -- (1) One-shot at the tail of startup, safely past Noice's ui_attach
+            vim.api.nvim_create_autocmd("VimEnter", {
+                group = force_ch,
+                once = true,
+                desc = "Force cmdheight=1 after Noice UI attachment",
+                callback = function()
+                    vim.schedule(function()
+                        vim.opt.cmdheight = 1
+                    end)
+                end,
+            })
+
+            -- (2) Live shield — intercept any runtime attempt to drop cmdheight below 1
+            vim.api.nvim_create_autocmd("OptionSet", {
+                group = force_ch,
+                pattern = "cmdheight",
+                desc = "Block Noice from lowering cmdheight at runtime",
+                callback = function()
+                    if vim.opt.cmdheight:get() < 1 then
+                        vim.opt.cmdheight = 1
+                    end
+                end,
+            })
         end,
     },
 
