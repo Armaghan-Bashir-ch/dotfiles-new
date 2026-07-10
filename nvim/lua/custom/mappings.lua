@@ -695,6 +695,7 @@ M.general = {
         ["<leader>sy"] = { "<cmd> syntax <CR>", "Check Syntax" },
         ["<leader>tt"] = { "<cmd> TimersNew <CR>", "Create new Timer menu" },
         ["<leader>tD"] = { "<cmd> TimersDashboard <CR>", "Open Timers.nvim plugin dashboard menu" },
+        ["<leader>gD"] = { "<cmd> Dashboard <CR>", "Open git commits dashboard menu" },
         ["<leader>st"] = { "<cmd> Store <CR>", "Open Store.Nvim" },
         ["<leader>gdc"] = { "<cmd> DiffviewClose <CR>", "Close git diff" },
         ["<leader>gdo"] = { "<cmd> DiffviewOpen <CR>", "Toggle files git diff" },

@@ -1250,7 +1250,23 @@ local plugins = {
         },
         opts = function()
             local git_dashboard = require("git-dashboard-nvim").setup({})
-
+            local ascii_heatmap = require("git-dashboard-nvim").setup({
+                colors = {
+                    days_and_months_labels = "#8FBCBB",
+                    empty_square_highlight = "#3B4252",
+                    filled_square_highlights = {
+                        "#88C0D0",
+                        "#88C0D0",
+                        "#88C0D0",
+                        "#88C0D0",
+                        "#88C0D0",
+                        "#88C0D0",
+                        "#88C0D0",
+                    },
+                    branch_highlight = "#88C0D0",
+                    dashboard_title = "#88C0D0",
+                },
+            })
             local opts = {
                 theme = "doom",
                 config = {
