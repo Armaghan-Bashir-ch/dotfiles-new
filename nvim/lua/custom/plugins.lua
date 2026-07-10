@@ -1046,8 +1046,6 @@ local plugins = {
         end,
     },
 
-    -- This is a cool nvim banner for the default screen
-
     {
         "rmagatti/auto-session",
         lazy = false,
