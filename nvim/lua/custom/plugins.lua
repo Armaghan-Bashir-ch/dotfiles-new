@@ -332,7 +332,6 @@ local plugins = {
                     backend = "tmux",
                     enabled = true,
                 },
-                picker = "fzf-lua",
                 tools = {
                     opencode = {
                         cmd = { "bash", "-c", "opencode" },
@@ -428,13 +427,6 @@ local plugins = {
                 desc = "Sidekick Select Prompt",
             },
             -- Example of a keybinding to open Claude directly
-            {
-                "<leader>ac",
-                function()
-                    require("sidekick.cli").toggle({ name = "claude", focus = true })
-                end,
-                desc = "Sidekick Toggle Claude",
-            },
             {
                 "<leader>o",
                 function()
@@ -1380,6 +1372,26 @@ local plugins = {
             vim.keymap.set("n", "<leader>9s", function()
                 _99.search()
             end)
+        end,
+    },
+
+    -- lazy.nvim
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add any options here
+        },
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+        config = function(_, opts)
+            -- Initialize noice with your options
+            require("noice").setup(opts)
+
+            -- Force cmdheight back to 1 after noice overwrites it
+            vim.opt.cmdheight = 1
         end,
     },
 
