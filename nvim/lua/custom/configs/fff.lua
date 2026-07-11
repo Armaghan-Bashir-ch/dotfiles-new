@@ -1,16 +1,16 @@
 local config = {
     base_path = vim.fn.getcwd(),
-    prompt = "  ",
-    title = "FFFiles",
-    max_results = 150,
+    prompt = "  ",
+    title = "Find Files",
+    max_results = 100,
     max_threads = 4,
     lazy_sync = true, -- set to false if you want file indexing to start on open
     layout = {
-        height = 0.7,
-        width = 0.85,
+        height = 0.75,
+        width = 0.75,
         prompt_position = "bottom", -- or 'top'
-        preview_position = "left", -- or 'left', 'right', 'top', 'bottom'
-        preview_size = 0.55,
+        preview_position = "right", -- or 'left', 'right', 'top', 'bottom'
+        preview_size = 0.75,
     },
     preview = {
         enabled = true,
@@ -18,7 +18,7 @@ local config = {
         chunk_size = 8192,      -- Bytes per chunk for dynamic loading (8kb - fits ~100-200 lines)
         binary_file_threshold = 1024, -- amount of bytes to scan for binary content (set 0 to disable)
         imagemagick_info_format_str = "%m: %wx%h, %[colorspace], %q-bit",
-        line_numbers = false,
+        line_numbers = true,
         wrap_lines = false,
         show_file_info = true,
         filetypes = {
@@ -65,6 +65,6 @@ local config = {
     },
 }
 
-vim.api.nvim_set_hl(0, "FFFCursor", { fg = "#000000", bg = "NONE" })
+vim.api.nvim_set_hl(0, "FFFCursor", { fg = "#80a8fd", bg = "NONE" })
 
 return config

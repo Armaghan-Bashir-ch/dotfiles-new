@@ -1,14 +1,13 @@
 return function()
     local telescope = require("telescope")
-    local themes = require("telescope.themes")
 
     telescope.setup({
         defaults = {
             layout_config = {
                 horizontal = {
-                    width = 0.95,
-                    height = 0.99,
-                    preview_width = 0.7,
+                    width = 0.75,
+                    height = 0.75,
+                    preview_width = 0.75,
                 },
             },
             preview = {
@@ -17,9 +16,6 @@ return function()
         },
         extensions = {
             undo = {},
-            ["ui-select"] = themes.get_dropdown({
-                previewer = false,
-            }),
         },
     })
 
