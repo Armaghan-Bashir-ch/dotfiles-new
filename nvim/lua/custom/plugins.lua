@@ -1379,22 +1379,57 @@ local plugins = {
     {
         "folke/noice.nvim",
         event = "VeryLazy",
-        opts = {
-            -- add any options here
-        },
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
         },
+        -- Everything passed to require("noice").setup(opts) goes inside here!
+        opts = {
+            -- Intercept and completely skip the rapid visual command flashes
+            routes = {
+                {
+                    filter = {
+                        event = "cmdline",
+                        any = {
+                            { find = "'<,'>m" }, -- Matches the visual range move command block
+                            { find = "'<,'>" }, -- Matches raw visual range markers
+                        },
+                    },
+                    opts = { skip = true }, -- Hides it entirely from your monitor
+                },
+            },
+            cmdline = {
+                format = {
+                    cmdline = { pattern = "^:", icon = "❯", lang = "vim" },
+                    search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+                    search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+                    filter = { pattern = "^:%s*!", icon = " ", lang = "bash" },
+                    lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
+                    help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+                    calculator = { pattern = "^=", icon = "", lang = "vimnormal" },
+                    input = { view = "cmdline_input", icon = "   " },
+                },
+            },
+            views = {
+                cmdline_popup = {
+                    size = {
+                        width = 45, -- Controls your prompt's width here
+                        height = "auto",
+                    },
+                    position = {
+                        row = 3, -- Pinned just a couple of lines below the very top
+                        col = "50%",
+                    },
+                },
+            },
+        },
         config = function(_, opts)
-            -- Initialize noice with your options
+            -- This properly applies all the nested configurations from the 'opts' block above
             require("noice").setup(opts)
 
             -- Force cmdheight back to 1 after noice overwrites it.
-            -- Uses VimEnter + OptionSet for a permanent shield.
             local force_ch = vim.api.nvim_create_augroup("force_cmdheight", { clear = true })
 
-            -- (1) One-shot at the tail of startup, safely past Noice's ui_attach
             vim.api.nvim_create_autocmd("VimEnter", {
                 group = force_ch,
                 once = true,
@@ -1406,7 +1441,6 @@ local plugins = {
                 end,
             })
 
-            -- (2) Live shield — intercept any runtime attempt to drop cmdheight below 1
             vim.api.nvim_create_autocmd("OptionSet", {
                 group = force_ch,
                 pattern = "cmdheight",
