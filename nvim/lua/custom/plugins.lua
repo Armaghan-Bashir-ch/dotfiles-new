@@ -1395,7 +1395,7 @@ local plugins = {
                     lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
                     help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
                     calculator = { pattern = "^=", icon = "", lang = "vimnormal" },
-                    input = { view = "cmdline_input", icon = "   " },
+                    input = { view = "cmdline_input", icon = " " },
                 },
             },
             views = {
