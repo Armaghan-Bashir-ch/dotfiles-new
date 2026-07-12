@@ -1429,13 +1429,15 @@ local plugins = {
 
             -- Make :! (shell commands) use red instead of the default blue
             vim.api.nvim_set_hl(0, "NoiceCmdlineIconFilter", {
-                link = "DiagnosticSignError",
+                fg = "#f7768e",
             })
+
             vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderFilter", {
-                link = "DiagnosticSignError",
+                fg = "#f7768e",
             })
+
             vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitleFilter", {
-                link = "DiagnosticSignError",
+                fg = "#f7768e",
             })
 
             -- Force cmdheight back to 1 after noice overwrites it.
