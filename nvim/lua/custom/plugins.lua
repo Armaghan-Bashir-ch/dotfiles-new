@@ -1424,8 +1424,19 @@ local plugins = {
             },
         },
         config = function(_, opts)
-            -- This properly applies all the nested configurations from the 'opts' block above
+            -- Apply Noice configuration
             require("noice").setup(opts)
+
+            -- Make :! (shell commands) use red instead of the default blue
+            vim.api.nvim_set_hl(0, "NoiceCmdlineIconFilter", {
+                link = "DiagnosticSignError",
+            })
+            vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderFilter", {
+                link = "DiagnosticSignError",
+            })
+            vim.api.nvim_set_hl(0, "NoiceCmdlinePopupTitleFilter", {
+                link = "DiagnosticSignError",
+            })
 
             -- Force cmdheight back to 1 after noice overwrites it.
             local force_ch = vim.api.nvim_create_augroup("force_cmdheight", { clear = true })
