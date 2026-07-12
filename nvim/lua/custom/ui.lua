@@ -3,7 +3,7 @@ local ui = {
     transparency = true, -- Disable transparency to see bg colors
     statusline = {
         theme = "default",
-        separator_style = "block",
+        separator_style = "round",
         overriden_modules = function(modules)
             -- Available highlight groups (from statusline/default.lua):
             -- %#St_NormalMode# - Blue background (mode colors)
