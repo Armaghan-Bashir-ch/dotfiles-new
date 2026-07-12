@@ -1386,18 +1386,6 @@ local plugins = {
         -- Everything passed to require("noice").setup(opts) goes inside here!
         opts = {
             -- Intercept and completely skip the rapid visual command flashes
-            routes = {
-                {
-                    filter = {
-                        event = "cmdline",
-                        any = {
-                            { find = "'<,'>m" }, -- Matches the visual range move command block
-                            { find = "'<,'>" }, -- Matches raw visual range markers
-                        },
-                    },
-                    opts = { skip = true }, -- Hides it entirely from your monitor
-                },
-            },
             cmdline = {
                 format = {
                     cmdline = { pattern = "^:", icon = "❯", lang = "vim" },
