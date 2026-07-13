@@ -146,10 +146,8 @@
         "format-wifi": "󰤨  {essid}",
         "format-ethernet": "󰈀 Wired",
         "tooltip-format": "羽 {frequency}GHz  {bandwidthUpBytes}  {bandwidthDownBytes}",
-        "format-linked": "󱘖 {ifname} (No IP)",
-        "format-disconnected": "󰤠  Disconnected",
-        "format-alt": "󰤨  {signalStrength}%",
-        "interval": 5
+        "interval": 5,
+        "on-click": "/bin/bash -c '/usr/bin/qs -p /home/armaghan/.config/quickshell-network >/tmp/qs.log 2>&1'"
     },
 
     "wlr/taskbar": {
@@ -172,12 +170,12 @@
 
     "bluetooth": {
         "format": "",
-        "format-disabled": "", 
+        "format-disabled": "", 
         "format-connected": " {num_connections}",
         "tooltip-format": " {device_alias}",
         "tooltip-format-connected": "{device_enumerate}",
         "tooltip-format-enumerate-connected": " {device_alias}",
-        "on-click": "/home/armaghan/dotfiles/rofi/bluetooth/bluetooth.sh"
+        "on-click": "/bin/bash -c '/usr/bin/qs -p /home/armaghan/.config/quickshell-bluetooth'"
     },
 
     "pulseaudio": {
