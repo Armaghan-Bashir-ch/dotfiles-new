@@ -935,7 +935,7 @@ local plugins = {
                 enabled = true,
                 timeout = 2500,
                 style = "compact",
-                width = { min = 30 },
+                width = { min = 10 },
                 height = { min = 1, max = 10 },
                 icons = {
                     error = "󰅚 ",
