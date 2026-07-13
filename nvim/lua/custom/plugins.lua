@@ -1468,7 +1468,7 @@ local plugins = {
             smear_vertically = true,
             smear_diagonally = true,
 
-            smear_to_cmd = true,
+            smear_to_cmd = false,
             smear_insert_mode = true,
             smear_replace_mode = false,
             smear_terminal_mode = false,
