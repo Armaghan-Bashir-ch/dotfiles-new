@@ -35,6 +35,6 @@ PanelWindow {
         id: panel
         anchors.fill: parent
 
-        onCloseRequested: root.shouldShow = false
+        onCloseRequested: Qt.quit()
     }
 }
