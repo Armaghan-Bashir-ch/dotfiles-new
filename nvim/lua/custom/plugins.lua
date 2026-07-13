@@ -562,6 +562,8 @@ local plugins = {
     },
     {
         "saghen/blink.cmp",
+        enabled = true,
+        lazy = false,
         event = "InsertEnter",
         dependencies = {
             "rafamadriz/friendly-snippets",
