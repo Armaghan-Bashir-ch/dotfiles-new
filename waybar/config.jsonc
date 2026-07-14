@@ -63,7 +63,7 @@
         "format": "{}",
         "separate-outputs": true,
         "max-length": 1000,
-        "on-click": "/bin/bash -c 'killall qs >/dev/null 2>&1; sleep 0.5; /usr/bin/qs -p /home/armaghan/.config/quickshell-controlcenter >/tmp/cc.log 2>&1 &'"
+        "on-click": "swaync-client -t"
     },
 
     "custom/controlpanel": {
