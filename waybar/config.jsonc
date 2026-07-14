@@ -17,7 +17,7 @@
 
 	"modules-left": ["custom/padd","custom/l_end","battery","backlight","pulseaudio","custom/r_end","custom/l_end","bluetooth","network","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","custom/cava","custom/r_end","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd","custom/l_end","custom/swaync","custom/performance","custom/r_end","custom/l_end","cpu","memory","custom/tempinfo","custom/r_end","custom/padd"],
+	"modules-right": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd","custom/l_end","custom/swaync","custom/controlpanel","custom/r_end","custom/l_end","cpu","memory","custom/tempinfo","custom/r_end","custom/padd"],
 
 //  INFO: To add a module to waybar, add its name to the "modules-left/modules-right/modules-center" //
   
@@ -63,7 +63,16 @@
         "format": "{}",
         "separate-outputs": true,
         "max-length": 1000,
-        "on-click": "swaync-client -t"
+        "on-click": "/bin/bash -c 'killall qs >/dev/null 2>&1; sleep 0.5; /usr/bin/qs -p /home/armaghan/.config/quickshell-controlcenter >/tmp/cc.log 2>&1 &'"
+    },
+
+    "custom/controlpanel": {
+        "interval": 1,
+        "return-type": "json",
+        "format": "󰧹",
+        "separate-outputs": true,
+        "max-length": 1000,
+        "on-click": "/bin/bash -c 'killall qs >/dev/null 2>&1; sleep 0.5; /usr/bin/qs -p /home/armaghan/.config/quickshell-controlcenter >/tmp/cc.log 2>&1 &'"
     },
 
     "custom/cava": {
