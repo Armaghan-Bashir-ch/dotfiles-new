@@ -41,8 +41,10 @@ FocusScope {
 
     Rectangle {
         anchors.fill: parent
-        radius: 24
+        radius: 26
         color: cSurface
+        border.width: 1
+        border.color: "#5B6473"
 
         ColumnLayout {
             id: contentColumn
