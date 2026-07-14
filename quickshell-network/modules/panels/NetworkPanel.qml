@@ -25,6 +25,28 @@ FocusScope {
     readonly property color cOnSurface: pywal.foreground
     readonly property color cOnSurfaceVariant: pywal.onSurfaceMuted
 
+    HoverHandler {
+        id: hoverHandler
+    }
+
+    Timer {
+        id: closeTimer
+        interval: 600
+        onTriggered: if (!hoverHandler.hovered) root.shouldShow = false
+    }
+
+
+    Connections {
+        target: hoverHandler
+
+        function onHoveredChanged() {
+            if (hoverHandler.hovered)
+            closeTimer.stop()
+            else if (root.shouldShow)
+            closeTimer.restart()
+        }
+    }
+
     Process {
         id: settingsProcess
         command: ["nm-connection-editor"]
