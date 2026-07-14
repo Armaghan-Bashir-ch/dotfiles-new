@@ -155,6 +155,7 @@
         "format-wifi": "󰤨  {essid}",
         "format-ethernet": "󰈀 Wired",
         "tooltip-format": "羽 {frequency}GHz  {bandwidthUpBytes}  {bandwidthDownBytes}",
+        "format-disconnected": "󰤠  Disconnected",
         "interval": 5,
         "on-click": "/bin/bash -c 'killall qs >/dev/null 2>&1; sleep 0.5; /usr/bin/qs -p /home/armaghan/.config/quickshell-network >/tmp/qs.log 2>&1 &'"
     },
