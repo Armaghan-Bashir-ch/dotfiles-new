@@ -2,6 +2,7 @@ pragma Singleton
 
 import Quickshell
 import Quickshell.Bluetooth
+import Quickshell.Io
 import QtQuick
 
 Singleton {
@@ -15,12 +16,42 @@ Singleton {
     readonly property int connectedCount: connectedDevices.length
 
     function togglePower() {
-        if (adapter)
-            adapter.enabled = !adapter.enabled
+        const isOn = adapter?.enabled ?? false
+        if (isOn) {
+            toggleProc.command = ["quickshell-bt", "off"]
+        } else {
+            toggleProc.command = ["quickshell-bt", "on"]
+        }
+        toggleProc.running = true
     }
 
     function setDiscovering(enabled: bool) {
         if (adapter)
             adapter.discovering = enabled
+    }
+
+    Process {
+        id: toggleProc
+        command: []
+        onExited: {
+            // After the script runs, poll until Quickshell's adapter state syncs
+            syncTimer.start()
+        }
+    }
+
+    // Poll adapter state after toggle — Quickshell may need time to pick
+    // up the adapter from BlueZ after rfkill unblock
+    Timer {
+        id: syncTimer
+        interval: 600
+        repeat: false
+        onTriggered: {
+            // Force binding re-evaluation
+            var _ = Bluetooth.defaultAdapter
+            // If rfkill was unblocked and adapter now visible, ensure it's powered on
+            if (adapter && !adapter.enabled) {
+                adapter.enabled = true
+            }
+        }
     }
 }

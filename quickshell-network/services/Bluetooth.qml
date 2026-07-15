@@ -2,6 +2,7 @@ pragma Singleton
 
 import Quickshell
 import Quickshell.Bluetooth
+import Quickshell.Io
 import QtQuick
 
 Singleton {
@@ -15,12 +16,37 @@ Singleton {
     readonly property int connectedCount: connectedDevices.length
 
     function togglePower() {
-        if (adapter)
-            adapter.enabled = !adapter.enabled
+        const isOn = adapter?.enabled ?? false
+        if (isOn) {
+            toggleProc.command = ["quickshell-bt", "off"]
+        } else {
+            toggleProc.command = ["quickshell-bt", "on"]
+        }
+        toggleProc.running = true
     }
 
     function setDiscovering(enabled: bool) {
         if (adapter)
             adapter.discovering = enabled
+    }
+
+    Process {
+        id: toggleProc
+        command: []
+        onExited: {
+            syncTimer.start()
+        }
+    }
+
+    Timer {
+        id: syncTimer
+        interval: 600
+        repeat: false
+        onTriggered: {
+            var _ = Bluetooth.defaultAdapter
+            if (adapter && !adapter.enabled) {
+                adapter.enabled = true
+            }
+        }
     }
 }

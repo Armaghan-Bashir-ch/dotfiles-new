@@ -51,7 +51,7 @@ FocusScope {
 
     Process {
         id: settingsProcess
-        command: ["blueman-manager"]
+        command: ["blueberry"]
         onStarted: popupPanel.closeRequested()
     }
 
@@ -133,7 +133,7 @@ FocusScope {
                     MouseArea {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: if (adapter) adapter.enabled = !adapter.enabled
+                        onClicked: QsServices.Bluetooth.togglePower()
                     }
                 }
             }

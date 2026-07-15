@@ -19,7 +19,7 @@ Item {
     Process { id: logoutProc; command: ["hyprctl", "dispatch", "exit"] }
     Process { id: sleepProc; command: ["systemctl", "suspend"] }
     Process { id: wifiSettingsProc; command: ["nm-connection-editor"] }
-    Process { id: bluetoothSettingsProc; command: ["blueman-manager"] }
+    Process { id: bluetoothSettingsProc; command: ["blueberry"] }
     
     // DND state (simple toggle for now)
     property bool dndEnabled: false
