@@ -19,7 +19,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: 28
-        color: root.cSurfaceContainer
+        color: "transparent"
 
         RowLayout {
             anchors.fill: parent

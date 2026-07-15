@@ -24,10 +24,11 @@ PanelWindow {
     implicitWidth: panel.implicitWidth
     implicitHeight: panel.implicitHeight
 
-    color: "transparent"
+    color: Qt.rgba(0.17, 0.17, 0.19, 0.35)
 
     visible: shouldShow
 
+    WlrLayershell.namespace: "quickshell:network"
     WlrLayershell.keyboardFocus:
         shouldShow ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 

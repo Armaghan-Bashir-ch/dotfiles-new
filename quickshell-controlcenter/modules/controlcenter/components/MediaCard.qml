@@ -28,7 +28,7 @@ Item {
         id: bg
         anchors.fill: parent
         radius: 28
-        color: pywal ? pywal.surfaceContainerHigh : "#1a1a1a"
+        color: "transparent"
         clip: true
 
         RowLayout {

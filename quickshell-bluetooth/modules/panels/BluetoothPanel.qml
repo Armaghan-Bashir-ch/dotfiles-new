@@ -64,7 +64,7 @@ FocusScope {
     Rectangle {
         anchors.fill: parent
         radius: 26
-        color: cSurface
+        color: Qt.rgba(cSurface.r, cSurface.g, cSurface.b, 0.3)
         border.width: 1
         border.color: "#5B6473"
 
@@ -142,7 +142,7 @@ FocusScope {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 36
                 radius: 12
-                color: scanArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : scanArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : cSurfaceContainer
+                color: scanArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : scanArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : "transparent"
                 Behavior on color { ColorAnimation { duration: 150 } }
                 scale: scanArea.pressed ? 0.97 : 1.0
                 Behavior on scale { NumberAnimation { duration: 100; easing.bezierCurve: Material3Anim.springGentle } }
@@ -186,7 +186,7 @@ FocusScope {
                 Layout.fillWidth: true
                 Layout.preferredHeight: Math.min(deviceList.contentHeight + 8, 260)
                 radius: 16
-                color: cSurfaceContainerHigh
+                color: "transparent"
                 clip: true
 
                 ListView {

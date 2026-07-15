@@ -64,7 +64,7 @@ FocusScope {
     Rectangle {
         anchors.fill: parent
         radius: 26
-        color: cSurface
+        color: Qt.rgba(cSurface.r, cSurface.g, cSurface.b, 0.3)
         border.width: 1
         border.color: "#5B6473"
 
@@ -83,7 +83,7 @@ FocusScope {
                     width: 36
                     height: 36
                     radius: 12
-                    color: Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.15)
+                    color: "transparent"
 
                     Text {
                         anchors.centerIn: parent
@@ -136,12 +136,12 @@ FocusScope {
                 }
             }
 
-            // Scan button
+                // Scan button
             Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 36
                 radius: 12
-                color: scanArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : scanArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : cSurfaceContainer
+                color: scanArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : scanArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : "transparent"
                 Behavior on color { ColorAnimation { duration: 150 } }
                 scale: scanArea.pressed ? 0.97 : 1.0
                 Behavior on scale { NumberAnimation { duration: 100; easing.bezierCurve: Material3Anim.springGentle } }
@@ -186,7 +186,7 @@ FocusScope {
                 Layout.fillWidth: true
                 Layout.preferredHeight: Math.min(networkList.contentHeight + 8, 280)
                 radius: 16
-                color: cSurfaceContainerHigh
+                color: "transparent"
                 clip: true
 
                 ListView {
@@ -409,7 +409,7 @@ FocusScope {
 
         Rectangle {
             anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.5)
+            color: Qt.rgba(0, 0, 0, 0.4)
             radius: 24
             MouseArea { anchors.fill: parent; onClicked: passwordDialog.close() }
         }
@@ -420,7 +420,7 @@ FocusScope {
             width: 300
             height: dialogColumn.implicitHeight + 40
             radius: 24
-            color: cSurface
+            color: "transparent"
             scale: 0.9
 
             ColumnLayout {
@@ -448,8 +448,8 @@ FocusScope {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 40
                     radius: 12
-                    color: cSurfaceContainer
-                    border.color: passwordInput.activeFocus ? cPrimary : "transparent"
+                    color: "transparent"
+                    border.color: passwordInput.activeFocus ? cPrimary : Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.2)
                     border.width: 1
 
                     QQC.TextField {
@@ -504,7 +504,7 @@ FocusScope {
 
                     Rectangle {
                         width: 80; height: 32; radius: 16
-                        color: passwordInput.text.length > 0 ? cPrimary : Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.4)
+                        color: passwordInput.text.length > 0 ? Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.35) : Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.15)
 
                         Text {
                             anchors.centerIn: parent

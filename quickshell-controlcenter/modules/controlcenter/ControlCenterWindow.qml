@@ -34,9 +34,10 @@ PanelWindow {
     
     implicitWidth: 440
     implicitHeight: Math.min(780, screen.height - 40)
-    color: "transparent"
+    color: Qt.rgba(0.17, 0.17, 0.19, 0.35)
     visible: shouldShow || panelContent.opacity > 0
 
+    WlrLayershell.namespace: "quickshell:controlcenter"
     WlrLayershell.keyboardFocus: shouldShow ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
     Process { id: settingsProcess; command: ["nm-connection-editor"] }
@@ -87,7 +88,7 @@ PanelWindow {
             id: panel
             anchors.fill: parent
             radius: 28
-            color: root.cSurface
+            color: Qt.rgba(root.cSurface.r, root.cSurface.g, root.cSurface.b, 0.3)
             border.width: 1
             border.color: "#5B6473"
             clip: true
