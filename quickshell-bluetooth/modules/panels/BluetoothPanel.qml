@@ -64,9 +64,10 @@ FocusScope {
     Rectangle {
         anchors.fill: parent
         radius: 26
-        color: Qt.rgba(cSurface.r, cSurface.g, cSurface.b, 0.3)
+        color: Qt.rgba(cSurface.r, cSurface.g, cSurface.b, 0.55)
         border.width: 1
         border.color: "#5B6473"
+        clip: true
 
         ColumnLayout {
             id: contentColumn

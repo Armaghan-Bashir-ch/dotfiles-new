@@ -24,7 +24,7 @@ PanelWindow {
     implicitWidth: panel.implicitWidth
     implicitHeight: panel.implicitHeight
 
-    color: Qt.rgba(0.17, 0.17, 0.19, 0.35)
+    color: "transparent"
 
     visible: shouldShow
 
