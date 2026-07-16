@@ -200,6 +200,7 @@ FocusScope {
                 radius: 16
                 color: "transparent"
                 clip: true
+                visible: sortedNetworks.length > 0
 
                 ListView {
                     id: networkList

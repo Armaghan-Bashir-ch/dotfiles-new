@@ -175,6 +175,7 @@ FocusScope {
                 radius: 16
                 color: cSurfaceContainerHigh
                 clip: true
+                visible: devices.length > 0
 
                 ListView {
                     id: deviceList
