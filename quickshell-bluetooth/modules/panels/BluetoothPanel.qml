@@ -55,7 +55,7 @@ FocusScope {
         onStarted: popupPanel.closeRequested()
     }
 
-    implicitWidth: 320
+    implicitWidth: 340
     implicitHeight: contentColumn.implicitHeight + 32
     focus: true
 
@@ -129,56 +129,66 @@ FocusScope {
                         color: "#ffffff"
                         Behavior on x { NumberAnimation { duration: 150; easing.type: Easing.OutCubic } }
                     }
-
                     MouseArea {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onClicked: QsServices.Bluetooth.togglePower()
                     }
                 }
-            }
-
-            // Scan button
-            Rectangle {
-                Layout.fillWidth: true
-                Layout.preferredHeight: 36
-                radius: 12
-                color: scanArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : scanArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : "transparent"
-                Behavior on color { ColorAnimation { duration: 150 } }
-                scale: scanArea.pressed ? 0.97 : 1.0
-                Behavior on scale { NumberAnimation { duration: 100; easing.bezierCurve: Material3Anim.springGentle } }
 
                 RowLayout {
-                    anchors.centerIn: parent
-                    spacing: 8
+                    spacing: 4
 
-                    Text {
-                        text: adapter?.discovering ? "󰑐" : "󰑓"
-                        font.family: "Material Design Icons"
-                        font.pixelSize: 16
-                        color: adapter?.discovering ? cPrimary : cOnSurface
+                    // Scan button
+                    Rectangle {
+                        width: 36; height: 36; radius: 12
+                        color: scanBtn.pressed ? Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.35) : scanBtn.containsMouse ? Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.25) : Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.15)
+                        Behavior on color { ColorAnimation { duration: 150 } }
 
-                        RotationAnimation on rotation {
-                            running: adapter?.discovering ?? false
-                            from: 0; to: 360; duration: 1000; loops: Animation.Infinite
+                        Text {
+                            anchors.centerIn: parent
+                            text: adapter?.discovering ? "󰑐" : "󰑓"
+                            font.family: "Material Design Icons"
+                            font.pixelSize: 18
+                            color: adapter?.discovering ? cPrimary : cOnSurfaceVariant
+
+                            RotationAnimation on rotation {
+                                running: adapter?.discovering ?? false
+                                from: 0; to: 360; duration: 1000; loops: Animation.Infinite
+                            }
+                        }
+
+                        MouseArea {
+                            id: scanBtn
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: if (adapter) adapter.discovering = !adapter.discovering
                         }
                     }
 
-                    Text {
-                        text: adapter?.discovering ? "Scanning..." : "Scan for devices"
-                        font.family: "Inter"
-                        font.pixelSize: 12
-                        font.weight: Font.Medium
-                        color: cOnSurface
-                    }
-                }
+                    // Settings button
+                    Rectangle {
+                        width: 36; height: 36; radius: 12
+                        color: settingsBtn.pressed ? Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.35) : settingsBtn.containsMouse ? Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.25) : Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.15)
+                        Behavior on color { ColorAnimation { duration: 150 } }
 
-                MouseArea {
-                    id: scanArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: if (adapter) adapter.discovering = !adapter.discovering
+                        Text {
+                            anchors.centerIn: parent
+                            text: "󰒓"
+                            font.family: "Material Design Icons"
+                            font.pixelSize: 18
+                            color: cOnSurfaceVariant
+                        }
+
+                        MouseArea {
+                            id: settingsBtn
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: settingsProcess.running = true
+                        }
+                    }
                 }
             }
 
@@ -322,43 +332,7 @@ FocusScope {
                 }
             }
 
-            // Settings button
-            Rectangle {
-                Layout.fillWidth: true
-                Layout.preferredHeight: 36
-                radius: 12
-                color: settingsArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : settingsArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : "transparent"
-                Behavior on color { ColorAnimation { duration: 150 } }
-                scale: settingsArea.pressed ? 0.97 : 1.0
-                Behavior on scale { NumberAnimation { duration: 100; easing.bezierCurve: Material3Anim.springGentle } }
 
-                RowLayout {
-                    anchors.centerIn: parent
-                    spacing: 6
-
-                    Text {
-                        text: "󰒓"
-                        font.family: "Material Design Icons"
-                        font.pixelSize: 14
-                        color: cOnSurfaceVariant
-                    }
-
-                    Text {
-                        text: "Bluetooth Settings"
-                        font.family: "Inter"
-                        font.pixelSize: 12
-                        color: cOnSurfaceVariant
-                    }
-                }
-
-                MouseArea {
-                    id: settingsArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: settingsProcess.running = true
-                }
-            }
         }
     }
 }
