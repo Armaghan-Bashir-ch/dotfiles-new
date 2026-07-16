@@ -164,6 +164,7 @@ FocusScope {
                 radius: 16
                 color: cSurfaceContainerHigh
                 clip: true
+                visible: sortedNetworks.length > 0
 
                 ListView {
                     id: networkList

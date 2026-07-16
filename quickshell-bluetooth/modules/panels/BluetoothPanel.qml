@@ -189,6 +189,7 @@ FocusScope {
                 radius: 16
                 color: "transparent"
                 clip: true
+                visible: devices.length > 0
 
                 ListView {
                     id: deviceList
