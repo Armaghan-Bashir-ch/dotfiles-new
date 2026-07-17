@@ -118,7 +118,7 @@ FocusScope {
                 // M3 Toggle
                 Rectangle {
                     width: 44; height: 24; radius: 12
-                    color: network.wifiEnabled ? "#becad3" : Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.15)
+                    color: network.wifiEnabled ? "#82b7b0" : Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.15)
                     Behavior on color { ColorAnimation { duration: 150 } }
 
                     Rectangle {

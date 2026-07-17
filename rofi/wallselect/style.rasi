@@ -6,7 +6,7 @@ configuration {
     font:                        "JetBrainsMono Nerd Font 10";
 }
 
-@theme "/home/armaghan/.config/rofi/themes/Catppuccin-Mocha.rasi"
+@theme "/home/armaghan/.config/rofi/themes/Decay-Green.rasi"
 
 // Main //
 window {
