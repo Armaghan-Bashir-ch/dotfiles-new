@@ -88,7 +88,7 @@ PanelWindow {
             id: panel
             anchors.fill: parent
             radius: 28
-            color: Qt.rgba(root.cSurface.r, root.cSurface.g, root.cSurface.b, 0.55)
+            color: Qt.rgba(root.cSurface.r, root.cSurface.g, root.cSurface.b, 0.2)
             border.width: 1
             border.color: "#5B6473"
             clip: true

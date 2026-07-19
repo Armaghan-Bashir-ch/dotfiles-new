@@ -79,7 +79,7 @@ PanelWindow {
         id: container
         anchors.fill: parent
         radius: 28
-        color: Qt.rgba(pywal.surfaceContainerHighest.r, pywal.surfaceContainerHighest.g, pywal.surfaceContainerHighest.b, 0.55)
+        color: Qt.rgba(pywal.surfaceContainerHighest.r, pywal.surfaceContainerHighest.g, pywal.surfaceContainerHighest.b, 0.2)
         border.width: 1
         border.color: "#5B6473"
         clip: true
