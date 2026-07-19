@@ -34,7 +34,7 @@ PanelWindow {
     
     implicitWidth: 440
     implicitHeight: Math.min(780, screen.height - 40)
-    color: Qt.rgba(0.17, 0.17, 0.19, 0.35)
+    color: "transparent"
     visible: shouldShow || panelContent.opacity > 0
 
     WlrLayershell.namespace: "quickshell:controlcenter"
@@ -88,7 +88,7 @@ PanelWindow {
             id: panel
             anchors.fill: parent
             radius: 28
-            color: Qt.rgba(root.cSurface.r, root.cSurface.g, root.cSurface.b, 0.3)
+            color: Qt.rgba(root.cSurface.r, root.cSurface.g, root.cSurface.b, 0.55)
             border.width: 1
             border.color: "#5B6473"
             clip: true

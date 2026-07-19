@@ -37,7 +37,7 @@ PanelWindow {
     implicitHeight: 64
     color: "transparent"
 
-    mask: Region { item: container }
+    WlrLayershell.namespace: "quickshell:osd"
 
     Timer {
         id: hideTimer
@@ -79,9 +79,10 @@ PanelWindow {
         id: container
         anchors.fill: parent
         radius: 28
-        color: pywal.surfaceContainerHighest
-        border.width: 2
-        border.color: pywal.outlineVariant
+        color: Qt.rgba(pywal.surfaceContainerHighest.r, pywal.surfaceContainerHighest.g, pywal.surfaceContainerHighest.b, 0.55)
+        border.width: 1
+        border.color: "#5B6473"
+        clip: true
 
         opacity: root.showing ? 1.0 : 0.0
         scale: root.showing ? 1.0 : 0.94
