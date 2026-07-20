@@ -151,11 +151,11 @@ PanelWindow {
             }
 
             Text {
-                text: root.currentVolume + "%"
-                color: pywal.foreground
+                text: root.currentMuted ? "Muted" : root.currentVolume + "%"
+                color: root.currentMuted ? Qt.rgba(pywal.foreground.r, pywal.foreground.g, pywal.foreground.b, 0.5) : pywal.foreground
                 font.family: "Inter"
                 font.pixelSize: 14
-                font.weight: Font.DemiBold
+                font.weight: root.currentMuted ? Font.Medium : Font.DemiBold
                 Layout.preferredWidth: 42
                 horizontalAlignment: Text.AlignRight
             }
