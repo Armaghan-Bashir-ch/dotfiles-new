@@ -15,6 +15,8 @@ PanelWindow {
     required property var pywal
     property bool showing: false
     
+    property var sibling: null
+
     // Brightness reading
     property int currentBrightness: 50
     property int prevBrightness: -1
@@ -65,6 +67,7 @@ PanelWindow {
     }
     
     function show() {
+        if (sibling) sibling.showing = false
         showing = true
         hideTimer.restart()
     }

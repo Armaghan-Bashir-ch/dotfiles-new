@@ -14,6 +14,7 @@ PanelWindow {
     required property var pywal
     property bool showing: false
 
+    property var sibling: null
     readonly property var audio: QsServices.Audio
     property int currentVolume: 0
     property bool currentMuted: false
@@ -71,6 +72,7 @@ PanelWindow {
     }
 
     function show() {
+        if (sibling) sibling.showing = false
         showing = true
         hideTimer.restart()
     }
