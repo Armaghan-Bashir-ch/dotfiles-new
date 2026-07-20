@@ -216,7 +216,7 @@ FocusScope {
                         width: networkList.width
                         height: 52
                         radius: 12
-                        color: isActive ? Qt.rgba(cActive.r, cActive.g, cActive.b, 0.15) : itemArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : itemArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : "transparent"
+                        color: isActive ? Qt.rgba(cActive.r, cActive.g, cActive.b, 0.2) : itemArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : itemArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : "transparent"
                         Behavior on color { ColorAnimation { duration: 150 } }
 
                         required property var modelData
@@ -230,7 +230,7 @@ FocusScope {
                             radius: 1.5
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.left: parent.left
-                            anchors.leftMargin: 4
+                            anchors.leftMargin: 1
                             color: cActive
                         }
 
