@@ -91,7 +91,7 @@ Item {
             Rectangle {
                 id: playBtn
                 Layout.preferredWidth: 56; Layout.preferredHeight: 56; radius: 28
-                color: root.pywal.primary
+                color: "#82b7b0"
 
                 scale: playMouse.pressed ? 0.90 : 1.0
                 transformOrigin: Item.Center
@@ -125,7 +125,7 @@ Item {
             Rectangle {
                 width: parent.width * (root.length > 0 ? Math.min(root.position / root.length, 1.0) : 0)
                 height: parent.height
-                color: root.pywal.primary
+                color: "#82b7b0"
 
                 Behavior on width { NumberAnimation { duration: 500; easing.bezierCurve: Material3Anim.standard } }
             }

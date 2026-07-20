@@ -57,6 +57,7 @@ PanelWindow {
     readonly property color cSecondary: pywal.secondary
     readonly property color cOnSurface: pywal.foreground
     readonly property color cOnSurfaceVariant: pywal.onSurfaceMuted
+    readonly property color cActive: "#82b7b0"
 
     FocusScope {
         id: panelContent
@@ -148,25 +149,25 @@ PanelWindow {
                             rowSpacing: 12
                             columnSpacing: 12
 
-                            QuickToggle { Layout.fillWidth: true; icon: "󰖩"; label: "Wi-Fi"; subLabel: root.network.connected ? root.network.ssid : "Off"; active: root.network.wifiEnabled; activeColor: root.cPrimary; onClicked: root.network.toggleWifi() }
-                            QuickToggle { Layout.fillWidth: true; icon: "󰂯"; label: "Bluetooth"; subLabel: root.bluetooth.powered ? "On" : "Off"; active: root.bluetooth.powered; activeColor: root.cPrimary; onClicked: root.bluetooth.togglePower() }
+                            QuickToggle { Layout.fillWidth: true; icon: "󰖩"; label: "Wi-Fi"; subLabel: root.network.connected ? root.network.ssid : "Off"; active: root.network.wifiEnabled; activeColor: root.cActive; onClicked: root.network.toggleWifi() }
+                            QuickToggle { Layout.fillWidth: true; icon: "󰂯"; label: "Bluetooth"; subLabel: root.bluetooth.powered ? "On" : "Off"; active: root.bluetooth.powered; activeColor: root.cActive; onClicked: root.bluetooth.togglePower() }
                             QuickToggle {
                                 Layout.fillWidth: true
                                 icon: "󰔎"
                                 label: "Do Not Disturb"
                                 subLabel: root.notifs.dnd ? "On" : "Off"
                                 active: root.notifs.dnd
-                                activeColor: pywal.warning
+                                activeColor: root.cActive
 
                                 onClicked: {
                                     Quickshell.execDetached(["swaync-client", "-d"])
                                     root.notifs.dnd = !root.notifs.dnd
                                 }
                             }
-                            QuickToggle { Layout.fillWidth: true; icon: root.screenshot.isRecording ? "󰛿" : "󰻃"; label: root.screenshot.isRecording ? "Stop Recording" : "Record Screen"; subLabel: root.screenshot.isRecording ? "Recording in progress" : "Start wf-recorder"; active: root.screenshot.isRecording; activeColor: pywal.error; onClicked: { if (root.screenshot.isRecording) root.screenshot.stopRecording(); else root.screenshot.startRecording() } }
-                            QuickToggle { Layout.fillWidth: true; icon: "󰅶"; label: "Caffeine"; subLabel: root.idleInhibitor.inhibited ? "Active" : "Off"; active: root.idleInhibitor.inhibited; activeColor: pywal.info; onClicked: root.idleInhibitor.inhibited = !root.idleInhibitor.inhibited }
-                            QuickToggle { Layout.fillWidth: true; icon: "󰄉"; label: "Focus Mode"; subLabel: root.settings.focusModeEnabled ? `${root.settings.focusModeMinutesLeft} min remaining` : "25 min timer"; active: root.settings.focusModeEnabled; activeColor: pywal.info; onClicked: { root.settings.focusModeEnabled = !root.settings.focusModeEnabled; if (root.settings.focusModeEnabled) { root.settings.focusModeMinutesLeft = 25; root.notifs.dnd = true } } }
-                            QuickToggle { Layout.fillWidth: true; Layout.columnSpan: 2; icon: "󰹑"; label: "Screenshot"; subLabel: "Capture Screen"; active: false; activeColor: root.cSecondary; onClicked: root.screenshot.takeScreenshot("screen") }
+                            QuickToggle { Layout.fillWidth: true; icon: root.screenshot.isRecording ? "󰛿" : "󰻃"; label: root.screenshot.isRecording ? "Stop Recording" : "Record Screen"; subLabel: root.screenshot.isRecording ? "Recording in progress" : "Start wf-recorder"; active: root.screenshot.isRecording; activeColor: root.cActive; onClicked: { if (root.screenshot.isRecording) root.screenshot.stopRecording(); else root.screenshot.startRecording() } }
+                            QuickToggle { Layout.fillWidth: true; icon: "󰅶"; label: "Caffeine"; subLabel: root.idleInhibitor.inhibited ? "Active" : "Off"; active: root.idleInhibitor.inhibited; activeColor: root.cActive; onClicked: root.idleInhibitor.inhibited = !root.idleInhibitor.inhibited }
+                            QuickToggle { Layout.fillWidth: true; icon: "󰄉"; label: "Focus Mode"; subLabel: root.settings.focusModeEnabled ? `${root.settings.focusModeMinutesLeft} min remaining` : "25 min timer"; active: root.settings.focusModeEnabled; activeColor: root.cActive; onClicked: { root.settings.focusModeEnabled = !root.settings.focusModeEnabled; if (root.settings.focusModeEnabled) { root.settings.focusModeMinutesLeft = 25; root.notifs.dnd = true } } }
+                            QuickToggle { Layout.fillWidth: true; Layout.columnSpan: 2; icon: "󰹑"; label: "Screenshot"; subLabel: "Capture Screen"; active: false; activeColor: root.cActive; onClicked: root.screenshot.takeScreenshot("screen") }
                         }
 
                         // Sliders Container

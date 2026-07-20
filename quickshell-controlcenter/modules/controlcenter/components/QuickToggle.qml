@@ -10,7 +10,7 @@ Item {
     property string label: ""
     property string subLabel: ""
     property bool active: false
-    property color activeColor: "#a6e3a1"
+    property color activeColor: "#82b7b0"
     property color textColor: "#e6e6e6"
     signal clicked()
 

@@ -13,7 +13,7 @@ Item {
 
     readonly property color cSurface: pywal ? pywal.surfaceContainer : "#1a1a1a"
     readonly property color cOnSurface: pywal ? pywal.foreground : "#dddddd"
-    readonly property color cPrimary: pywal ? pywal.warning : "#cc9966"
+    readonly property color cPrimary: "#82b7b0"
 
     Layout.fillWidth: true
     Layout.preferredHeight: 64
