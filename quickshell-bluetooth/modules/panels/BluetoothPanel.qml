@@ -251,7 +251,7 @@ FocusScope {
                                 }
                                 font.family: "Material Design Icons"
                                 font.pixelSize: 18
-                                color: isConnected ? cPrimary : cOnSurface
+                                color: isConnected ? cActive : cOnSurface
                             }
 
                             ColumnLayout {
@@ -262,8 +262,8 @@ FocusScope {
                                     text: deviceItem.modelData.name
                                     font.family: "Inter"
                                     font.pixelSize: 12
-                                    font.weight: Font.Medium
-                                    color: cOnSurface
+                                    font.weight: isConnected ? Font.Bold : Font.Medium
+                                    color: isConnected ? cActive : cOnSurface
                                     elide: Text.ElideRight
                                     Layout.fillWidth: true
                                 }
@@ -277,7 +277,7 @@ FocusScope {
                                     }
                                     font.family: "Inter"
                                     font.pixelSize: 10
-                                    color: isConnected ? cPrimary : cOnSurfaceVariant
+                                    color: isConnected ? cActive : cOnSurfaceVariant
                                 }
                             }
 
@@ -293,7 +293,7 @@ FocusScope {
                                     text: isConnected ? "󰌊" : "󰌘"
                                     font.family: "Material Design Icons"
                                     font.pixelSize: 14
-                                    color: isConnected ? cPrimary : cOnSurfaceVariant
+                                    color: isConnected ? cActive : cOnSurfaceVariant
                                 }
 
                                 MouseArea {

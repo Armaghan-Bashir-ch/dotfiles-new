@@ -250,7 +250,7 @@ FocusScope {
                                 }
                                 font.family: "Material Design Icons"
                                 font.pixelSize: 18
-                                color: isActive ? cPrimary : cOnSurface
+                                color: isActive ? cActive : cOnSurface
                             }
 
                             ColumnLayout {
@@ -263,8 +263,8 @@ FocusScope {
                                         text: networkItem.modelData.ssid
                                         font.family: "Inter"
                                         font.pixelSize: 12
-                                        font.weight: Font.Medium
-                                        color: cOnSurface
+                                        font.weight: isActive ? Font.Bold : Font.Medium
+                                        color: isActive ? cActive : cOnSurface
                                         elide: Text.ElideRight
                                         Layout.fillWidth: true
                                     }
@@ -273,7 +273,7 @@ FocusScope {
                                         text: "󰌾"
                                         font.family: "Material Design Icons"
                                         font.pixelSize: 10
-                                        color: cOnSurfaceVariant
+                                        color: isActive ? cActive : cOnSurfaceVariant
                                     }
                                 }
 
@@ -281,7 +281,7 @@ FocusScope {
                                     text: isActive ? "Connected" : `${networkItem.modelData.strength}%`
                                     font.family: "Inter"
                                     font.pixelSize: 10
-                                    color: isActive ? cPrimary : cOnSurfaceVariant
+                                    color: isActive ? cActive : cOnSurfaceVariant
                                 }
                             }
 
@@ -297,7 +297,7 @@ FocusScope {
                                     text: isActive ? "󰌊" : "󰌘"
                                     font.family: "Material Design Icons"
                                     font.pixelSize: 14
-                                    color: isActive ? cPrimary : cOnSurfaceVariant
+                                    color: isActive ? cActive : cOnSurfaceVariant
                                 }
 
                                 MouseArea {
