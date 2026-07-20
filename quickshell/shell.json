@@ -8,8 +8,8 @@
     "screenshotsDir": "~/Pictures/Screenshots"
   },
   "osd": {
-    "volumeTimeoutMs": 2000,
-    "brightnessTimeoutMs": 2000
+    "volumeTimeoutMs": 1500,
+    "brightnessTimeoutMs": 1500
   },
   "notifications": {
     "popupWidth": 340,

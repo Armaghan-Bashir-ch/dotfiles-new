@@ -5,7 +5,6 @@ import QtQuick.Layouts
 import QtQuick.Effects
 import "../../services" as QsServices
 import "../../config" as QsConfig
-import "../../components/effects"
 
 PanelWindow {
     id: root
@@ -85,24 +84,6 @@ PanelWindow {
         border.width: 1
         border.color: "#5B6473"
         clip: true
-
-        opacity: root.showing ? 1.0 : 0.0
-        scale: root.showing ? 1.0 : 0.94
-        transformOrigin: Item.Center
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: Material3Anim.short4
-                easing.bezierCurve: root.showing ? Material3Anim.emphasizedDecelerate : Material3Anim.emphasizedAccelerate
-            }
-        }
-
-        Behavior on scale {
-            NumberAnimation {
-                duration: Material3Anim.short4
-                easing.bezierCurve: root.showing ? Material3Anim.emphasizedDecelerate : Material3Anim.emphasizedAccelerate
-            }
-        }
 
         RowLayout {
             anchors.fill: parent
