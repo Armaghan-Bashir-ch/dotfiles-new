@@ -26,6 +26,7 @@ FocusScope {
     readonly property color cPrimary: pywal.primary
     readonly property color cOnSurface: pywal.foreground
     readonly property color cOnSurfaceVariant: pywal.onSurfaceMuted
+    readonly property color cActive: "#82b7b0"
 
     HoverHandler {
         id: hoverHandler
@@ -214,11 +215,23 @@ FocusScope {
                         width: deviceList.width
                         height: 52
                         radius: 12
-                        color: itemArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : itemArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : "transparent"
+                        color: isConnected ? Qt.rgba(cActive.r, cActive.g, cActive.b, 0.2) : itemArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : itemArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : "transparent"
                         Behavior on color { ColorAnimation { duration: 150 } }
 
                         required property var modelData
                         property bool isConnected: modelData.connected
+
+                        // Connected accent bar
+                        Rectangle {
+                            visible: isConnected
+                            width: 3
+                            height: 20
+                            radius: 1.5
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: 1
+                            color: cActive
+                        }
 
                         RowLayout {
                             anchors.fill: parent
