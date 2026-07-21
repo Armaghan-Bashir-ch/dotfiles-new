@@ -1,4 +1,4 @@
-@import "/home/armaghan/.config/rofi/themes/Catppuccin-Mocha.rasi"
+@import "/home/armaghan/.config/rofi/themes/Decay-Green.rasi"
 
 /*****----- Configuration -----*****/
 configuration {
@@ -57,11 +57,11 @@ entry {
     width:                       505px;
     padding:                     14px 18px 15px 18px;
     border-radius:               10px;
-    background-color:            rgba(30, 30, 46, 0.5);
+    background-color:            @select-fg;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "Search clipboard History...";
-    placeholder-color:           rgba(136, 136, 136, 0.7);
+    placeholder:                 "";
+    placeholder-color:           @main-fg;
 }
 
 textbox-prompt-colon {
@@ -71,7 +71,7 @@ textbox-prompt-colon {
     str:                         "";
     padding:                     12px 16px 12px 16px;
     border-radius:               8px;
-    background-color:            @main-br;
+    background-color:            @select-bg;
     text-color:                  @select-fg;
 }
 
@@ -104,7 +104,7 @@ element {
     border-radius:               12px;
     border:                      1px;
     border-color:                rgba(152, 211, 238, 0.5);
-    background-color:            rgba(30, 30, 46, 0.8);
+    background-color:            @main-bg;
     text-color:                  @main-fg;
     cursor:                      pointer;
 }
