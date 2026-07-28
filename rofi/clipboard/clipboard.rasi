@@ -60,7 +60,7 @@ entry {
     background-color:            @select-fg;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "";
+    placeholder:                 "Search history";
     placeholder-color:           @main-fg;
 }
 

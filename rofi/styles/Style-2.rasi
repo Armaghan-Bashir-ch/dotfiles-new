@@ -45,7 +45,6 @@ inputbar {
     padding:                     80px;
     children:                    [ "entry" ];
     background-color:            transparent;
-    background-image: url("/home/armaghan/backgrounds/Decay-Green/Lego-Setup.png", width);
 }
 
 entry {
