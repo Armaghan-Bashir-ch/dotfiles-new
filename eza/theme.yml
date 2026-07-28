@@ -2,7 +2,7 @@ filekinds:
   normal:
     foreground: 14
   directory:
-    foreground: '#03edf9'
+    foreground: '#80a8fd'
   symlink:
     foreground: Cyan
   executable:
