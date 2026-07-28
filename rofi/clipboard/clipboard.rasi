@@ -113,6 +113,16 @@ element.selected  {
     text-color:                  #ffffff;
     border-color:                @select-bg;
 }
+element urgent {
+    background-color:            #aa2222;
+    text-color:                  #ffffff;
+    border-color:                #cc3333;
+}
+element selected.urgent {
+    background-color:            #aa2222;
+    text-color:                  #ffffff;
+    border-color:                #aa2222;
+}
 element-icon {
     size:                         24px;
     background-color:             transparent;

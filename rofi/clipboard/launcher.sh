@@ -10,7 +10,7 @@ dir="$HOME/.config/rofi/clipboard"
 
 # Main clipboard menu
 choice=$(echo -e "\t\uf1f8   Wipe Clipboard\n$(cliphist list)" | \
-    rofi -markup-rows -dmenu \
+    rofi -markup-rows -dmenu -u 0 \
     -display-columns 2 \
     -theme "${dir}/clipboard.rasi")
 
