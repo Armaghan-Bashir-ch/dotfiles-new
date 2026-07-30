@@ -246,4 +246,7 @@ bindkey '^e' edit-command-line
     source /opt/google-cloud-cli/path.zsh.inc
 } &>/dev/null
 
+# Force emacs (default) key bindings to override any plugin-enabling vi mode
+bindkey -e
+
 nitch
