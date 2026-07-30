@@ -93,6 +93,21 @@ export PATH="$HOME/.cargo/bin:$PATH"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
 source ~/.zsh/plugins/pwp/pwp.plugin.zsh
+# Switch back to emacs keymap to override any vi mode set by plugins
+bindkey -e
+
+# Re-apply custom bindings that bindkey -e resets to defaults
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+bindkey '^[^I' autosuggest-accept
+bindkey '^H' backward-kill-word
+
+# Prevent accidental Escape+letter meta sequences from doing anything
+# (Escape alone followed by a letter will no longer act as a meta prefix)
+bindkey '^[b' undefined-key
+bindkey '^[f' undefined-key
+bindkey '^[d' undefined-key
+
 echo -ne '\e[1 q'
 
 # Syntax highlighting with custom colors:
@@ -245,8 +260,5 @@ bindkey '^e' edit-command-line
 {
     source /opt/google-cloud-cli/path.zsh.inc
 } &>/dev/null
-
-# Force emacs (default) key bindings to override any plugin-enabling vi mode
-bindkey -e
 
 nitch
