@@ -32,12 +32,11 @@
 - [x] Any way to have a background image/design for the notification daemon?
 - [x] Can I switch swayosd with the brightness and volume scripts?
 - [x] Learn use cases of stow and replace the whole `ln -s` section inside of [@.dev.sh](.dev.sh) with it
-- [ ] How to Create/add the following hyprland quickshell tools things:
+- [x] How to Create/add the following hyprland quickshell tools things:
     - [x] Volume OSD
-    - [ ] Brightness OSD
+    - [x] Brightness OSD
     - [ ] On-Screen Virtual Keyboard
-    - [ ] Bluetooth menu
-    - [ ] Wifi Menu (if exists)
+    - [x] Bluetooth menu
+    - [x] Wifi Menu (if exists)
+    - [x] Controlcenter
 - [x] What does Sisyphus do?
-
-testing
