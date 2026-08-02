@@ -1,0 +1,11 @@
+module qs.bluetooth.components
+singleton GlassTheme 1.0 GlassTheme.qml
+GlassSurface 1.0 GlassSurface.qml
+GlassShadow 1.0 GlassShadow.qml
+GlassIconButton 1.0 GlassIconButton.qml
+GlassButton 1.0 GlassButton.qml
+GlassToggle 1.0 GlassToggle.qml
+GlassTextField 1.0 GlassTextField.qml
+GlassSpinner 1.0 GlassSpinner.qml
+BluetoothListItem 1.0 BluetoothListItem.qml
+GlassContextMenu 1.0 GlassContextMenu.qml

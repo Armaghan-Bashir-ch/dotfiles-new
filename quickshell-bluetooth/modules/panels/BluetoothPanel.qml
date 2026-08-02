@@ -1,10 +1,28 @@
+// BluetoothPanel.qml - Bluetooth menu, Liquid Glass edition.
+//
+// Pure presentation-layer redesign. Every piece of Bluetooth behavior is
+// preserved bit-for-bit from the original:
+//   - device sort (connected first, then bonded, then by name)
+//   - connect/disconnect flow (writes device.connected)
+//   - adapter power toggle + discovering/scan toggle
+//   - blueberry settings launch
+//   - hover-out close timer
+//   - Escape / settings-button close
+//   - empty states (no devices / adapter disabled)
+//
+// New (UI-only, mirrors the network menu):
+//   - frosted glass surface (Hyprland compositor blur behind the window)
+//   - search filter for devices
+//   - right-click context menu (Connect / Disconnect / Rescan)
+//   - glass toggle / icon buttons / list rows with connected-state surface
+
 import Quickshell
 import QtQuick 6.10
 import QtQuick.Layouts 6.10
-import Quickshell
 import Quickshell.Bluetooth
 import Quickshell.Io
 import "../../services" as QsServices
+import "../../components"
 
 FocusScope {
     id: popupPanel
@@ -14,20 +32,27 @@ FocusScope {
 
     readonly property var adapter: Bluetooth.defaultAdapter
     readonly property var pywal: QsServices.Pywal
-    readonly property var devices: [...Bluetooth.devices.values].sort((a, b) => {
+    property string searchText: ""
+
+    // Preserved ordering: connected first, then bonded, then alphabetically.
+    readonly property var sortedDevices: [...Bluetooth.devices.values].sort((a, b) => {
         if (a.connected !== b.connected) return b.connected - a.connected
         if (a.bonded !== b.bonded) return b.bonded - a.bonded
         return a.name.localeCompare(b.name)
     })
 
-    readonly property color cSurface: pywal.surface
-    readonly property color cSurfaceContainer: pywal.surfaceContainer
-    readonly property color cSurfaceContainerHigh: pywal.surfaceContainerHigh
+    readonly property var visibleDevices: searchText.length === 0
+        ? sortedDevices
+        : sortedDevices.filter(d => d.name.toLowerCase().includes(searchText.toLowerCase()))
+
+    // === Colors =============================================================
     readonly property color cPrimary: pywal.primary
     readonly property color cOnSurface: pywal.foreground
     readonly property color cOnSurfaceVariant: pywal.onSurfaceMuted
+    // Connected-state accent (kept identical to the original menu).
     readonly property color cActive: "#82b7b0"
 
+    // === Hover-out close (preserved) ========================================
     HoverHandler {
         id: hoverHandler
     }
@@ -35,18 +60,17 @@ FocusScope {
     Timer {
         id: closeTimer
         interval: 600
-        onTriggered: if (!hoverHandler.hovered) root.shouldShow = false
+        onTriggered: if (!hoverHandler.hovered) popupPanel.shouldShow = false
     }
-
 
     Connections {
         target: hoverHandler
 
         function onHoveredChanged() {
             if (hoverHandler.hovered)
-            closeTimer.stop()
-            else if (root.shouldShow)
-            closeTimer.restart()
+                closeTimer.stop()
+            else if (popupPanel.shouldShow)
+                closeTimer.restart()
         }
     }
 
@@ -56,41 +80,62 @@ FocusScope {
         onStarted: popupPanel.closeRequested()
     }
 
-    implicitWidth: 340
-    implicitHeight: contentColumn.implicitHeight + 32
+    implicitWidth: 352
+    implicitHeight: contentColumn.implicitHeight + 30
     focus: true
 
-    Keys.onEscapePressed: closeRequested()
+    Keys.onEscapePressed: {
+        if (contextMenu.visible) {
+            contextMenu.hide()
+        } else if (searchField.text.length > 0) {
+            searchField.text = ""
+            popupPanel.searchText = ""
+        } else {
+            closeRequested()
+        }
+    }
 
-    Rectangle {
+    // === Shared connect logic (identical to the original) ===================
+    function toggleDevice(device): void {
+        device.connected = !device.connected
+    }
+
+    // ========================================================================
+    // MAIN GLASS SURFACE
+    // ========================================================================
+    GlassSurface {
+        id: glassPanel
         anchors.fill: parent
-        radius: 26
-        color: Qt.rgba(cSurface.r, cSurface.g, cSurface.b, 0.2)
-        border.width: 1
-        border.color: "#5B6473"
-        clip: true
+        radius: GlassTheme.radiusPanel
+        fillColor: pywal.background
+        fillOpacity: GlassTheme.glassFillOpacity
+        shadowDepth: GlassTheme.shadowDepth
 
         ColumnLayout {
             id: contentColumn
             anchors.fill: parent
             anchors.margins: 16
-            spacing: 12
+            spacing: 14
 
-            // Header
+            // ---- Header -----------------------------------------------------
             RowLayout {
                 Layout.fillWidth: true
-                spacing: 12
+                spacing: 10
 
+                // Header icon chip (static)
                 Rectangle {
-                    width: 36
-                    height: 36
+                    Layout.alignment: Qt.AlignVCenter
+                    width: 40
+                    height: 40
                     radius: 12
-                    color: Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.15)
+                    color: Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.16)
+                    border.width: 1
+                    border.color: Qt.rgba(1, 1, 1, GlassTheme.borderStandard)
 
                     Text {
                         anchors.centerIn: parent
                         text: "󰂯"
-                        font.family: "Material Design Icons"
+                        font.family: GlassTheme.iconFont
                         font.pixelSize: 18
                         color: cPrimary
                     }
@@ -98,254 +143,237 @@ FocusScope {
 
                 ColumnLayout {
                     Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignVCenter
                     spacing: 2
 
                     Text {
                         text: "Bluetooth"
-                        font.family: "Inter"
-                        font.pixelSize: 15
-                        font.weight: Font.Bold
+                        font.family: GlassTheme.fontFamily
+                        font.pixelSize: 14
+                        font.weight: Font.DemiBold
                         color: cOnSurface
                     }
 
                     Text {
-                        property var connected: devices.filter(d => d.connected)
+                        property var connected: sortedDevices.filter(d => d.connected)
                         text: connected.length > 0 ? connected[0].name : "No device connected"
-                        font.family: "Inter"
+                        font.family: GlassTheme.fontFamily
                         font.pixelSize: 11
                         color: cOnSurfaceVariant
+                        elide: Text.ElideRight
+                        Layout.fillWidth: true
                     }
                 }
 
-                // M3 Toggle
-                Rectangle {
-                    width: 44; height: 24; radius: 12
-                    color: adapter?.enabled ? "#82b7b0" : Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.15)
-                    Behavior on color { ColorAnimation { duration: 150 } }
+                GlassToggle {
+                    Layout.alignment: Qt.AlignVCenter
+                    checked: popupPanel.adapter?.enabled ?? false
+                    accentColor: cActive
+                    onToggled: QsServices.Bluetooth.togglePower()
+                }
 
-                    Rectangle {
-                        width: 18; height: 18; radius: 9
-                        anchors.verticalCenter: parent.verticalCenter
-                        x: adapter?.enabled ? parent.width - width - 3 : 3
-                        color: "#ffffff"
-                        Behavior on x { NumberAnimation { duration: 150; easing.type: Easing.OutCubic } }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: QsServices.Bluetooth.togglePower()
+                GlassIconButton {
+                    Layout.alignment: Qt.AlignVCenter
+                    size: 36
+                    icon: "󰑓"
+                    spinning: popupPanel.adapter?.discovering ?? false
+                    iconColor: cOnSurface
+                    baseColor: Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.12)
+                    enabled: popupPanel.adapter?.enabled ?? false
+                    onClicked: {
+                        if (popupPanel.adapter)
+                            popupPanel.adapter.discovering = !popupPanel.adapter.discovering
                     }
                 }
 
-                RowLayout {
-                    spacing: 4
+                GlassIconButton {
+                    Layout.alignment: Qt.AlignVCenter
+                    size: 36
+                    icon: "󰒓"
+                    iconColor: cOnSurface
+                    baseColor: Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.12)
+                    onClicked: settingsProcess.running = true
+                }
+            }
 
-                    // Scan button
-                    Rectangle {
-                        width: 36; height: 36; radius: 12
-                        color: scanBtn.pressed ? Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.35) : scanBtn.containsMouse ? Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.25) : Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.15)
-                        Behavior on color { ColorAnimation { duration: 150 } }
+            // ---- Search field ------------------------------------------------
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 10
 
-                        Text {
-                            anchors.centerIn: parent
-                            text: adapter?.discovering ? "󰑐" : "󰑓"
-                            font.family: "Material Design Icons"
-                            font.pixelSize: 18
-                            color: adapter?.discovering ? cPrimary : cOnSurfaceVariant
+                GlassTextField {
+                    id: searchField
+                    Layout.fillWidth: true
+                    leadingIcon: "󰇟"
+                    placeholderText: "Search devices"
+                    textColor: cOnSurface
+                    accentColor: cPrimary
+                    onTextEdited: text => popupPanel.searchText = text
+                }
 
-                            RotationAnimation on rotation {
-                                running: adapter?.discovering ?? false
-                                from: 0; to: 360; duration: 1000; loops: Animation.Infinite
-                            }
-                        }
-
-                        MouseArea {
-                            id: scanBtn
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: if (adapter) adapter.discovering = !adapter.discovering
-                        }
-                    }
-
-                    // Settings button
-                    Rectangle {
-                        width: 36; height: 36; radius: 12
-                        color: settingsBtn.pressed ? Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.35) : settingsBtn.containsMouse ? Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.25) : Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.15)
-                        Behavior on color { ColorAnimation { duration: 150 } }
-
-                        Text {
-                            anchors.centerIn: parent
-                            text: "󰒓"
-                            font.family: "Material Design Icons"
-                            font.pixelSize: 18
-                            color: cOnSurfaceVariant
-                        }
-
-                        MouseArea {
-                            id: settingsBtn
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: settingsProcess.running = true
-                        }
+                GlassIconButton {
+                    Layout.alignment: Qt.AlignVCenter
+                    visible: searchField.text.length > 0
+                    size: 36
+                    icon: "󰅖"
+                    iconColor: cOnSurfaceVariant
+                    onClicked: {
+                        searchField.text = ""
+                        popupPanel.searchText = ""
+                        searchField.forceFocus()
                     }
                 }
             }
 
-            // Device List
+            // ---- Device list ------------------------------------------------
+            // A whisper of a recessed surface: the list sits in a subtle well
+            // on the glass, giving the floating rows somewhere to live.
             Rectangle {
                 Layout.fillWidth: true
-                Layout.preferredHeight: Math.min(deviceList.contentHeight + 8, 260)
-                radius: 16
-                color: "transparent"
+                Layout.preferredHeight: visibleDevices.length > 0
+                    ? Math.min(deviceList.contentHeight + 8, 280)
+                    : 140
+                radius: GlassTheme.radiusItem
+                color: Qt.rgba(1, 1, 1, 0.02)
+                border.width: 1
+                border.color: Qt.rgba(1, 1, 1, GlassTheme.borderSubtle)
                 clip: true
-                visible: devices.length > 0
 
                 ListView {
                     id: deviceList
                     anchors.fill: parent
                     anchors.margins: 4
-                    spacing: 2
-                    model: devices
+                    spacing: 4
+                    model: visibleDevices
                     clip: true
 
-                    delegate: Rectangle {
-                        id: deviceItem
+                    // New rows (search filtering) fade in gently instead of
+                    // snapping into place.
+                    add: Transition {
+                        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: GlassTheme.durNormal; easing.type: GlassTheme.easeStandard }
+                    }
+
+                    delegate: BluetoothListItem {
+                        id: listItem
                         width: deviceList.width
-                        height: 52
-                        radius: 12
-                        color: isConnected ? Qt.rgba(cActive.r, cActive.g, cActive.b, 0.2) : itemArea.pressed ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.12) : itemArea.containsMouse ? Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.08) : "transparent"
-                        Behavior on color { ColorAnimation { duration: 150 } }
+                        // This Quickshell/Qt build does NOT expose the `model` /
+                        // `modelData` context properties to custom-component
+                        // delegates (only `index`). Reach the element through the
+                        // ListView's own model property instead.
+                        modelData: deviceList.model[index]
+                        textColor: cOnSurface
+                        textMutedColor: cOnSurfaceVariant
+                        accentColor: cActive
 
-                        required property var modelData
-                        property bool isConnected: modelData.connected
-
-                        // Connected accent bar
-                        Rectangle {
-                            visible: isConnected
-                            width: 3
-                            height: 20
-                            radius: 1.5
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.leftMargin: 1
-                            color: cActive
+                        onActionClicked: {
+                            if (listItem.isConnected)
+                                listItem.modelData.connected = false
+                            else
+                                listItem.modelData.connected = true
                         }
 
-                        RowLayout {
-                            anchors.fill: parent
-                            anchors.leftMargin: 12
-                            anchors.rightMargin: 12
-                            spacing: 10
-
-                            Text {
-                                text: {
-                                    const icon = deviceItem.modelData.icon || ""
-                                    if (icon.includes("audio")) return "󰋋"
-                                    if (icon.includes("phone")) return "󰄜"
-                                    if (icon.includes("computer")) return "󰌢"
-                                    if (icon.includes("mouse")) return "󰍽"
-                                    if (icon.includes("keyboard")) return "󰌌"
-                                    return "󰂯"
-                                }
-                                font.family: "Material Design Icons"
-                                font.pixelSize: 18
-                                color: isConnected ? cActive : cOnSurface
-                            }
-
-                            ColumnLayout {
-                                Layout.fillWidth: true
-                                spacing: 2
-
-                                Text {
-                                    text: deviceItem.modelData.name
-                                    font.family: "Inter"
-                                    font.pixelSize: 12
-                                    font.weight: isConnected ? Font.Bold : Font.Medium
-                                    color: isConnected ? cActive : cOnSurface
-                                    elide: Text.ElideRight
-                                    Layout.fillWidth: true
-                                }
-
-                                Text {
-                                    text: {
-                                        if (deviceItem.modelData.state === BluetoothDeviceState.Connecting) return "Connecting..."
-                                        if (isConnected) return "Connected"
-                                        if (deviceItem.modelData.bonded) return "Paired"
-                                        return "Available"
-                                    }
-                                    font.family: "Inter"
-                                    font.pixelSize: 10
-                                    color: isConnected ? cActive : cOnSurfaceVariant
-                                }
-                            }
-
-                            Rectangle {
-                                width: 28; height: 28; radius: 14
-                                color: actionArea.pressed ? Qt.rgba(cPrimary.r, cPrimary.g, cPrimary.b, 0.15) : "transparent"
-                                Behavior on color { ColorAnimation { duration: 100 } }
-                                scale: actionArea.pressed ? 0.9 : 1.0
-                                Behavior on scale { NumberAnimation { duration: 100; easing.bezierCurve: Material3Anim.springGentle } }
-
-                                Text {
-                                    anchors.centerIn: parent
-                                    text: isConnected ? "󰌊" : "󰌘"
-                                    font.family: "Material Design Icons"
-                                    font.pixelSize: 14
-                                    color: isConnected ? cActive : cOnSurfaceVariant
-                                }
-
-                                MouseArea {
-                                    id: actionArea
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    cursorShape: Qt.PointingHandCursor
-                                    onClicked: {
-                                        if (isConnected) {
-                                            deviceItem.modelData.connected = false
-                                        } else {
-                                            deviceItem.modelData.connected = true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        MouseArea {
-                            id: itemArea
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            z: -1
+                        onContextMenuRequested: (mx, my) => {
+                            const pos = listItem.mapToItem(popupPanel, mx, my)
+                            contextMenu.show(pos.x, pos.y, listItem.modelData)
                         }
                     }
                 }
 
-                // Empty state
+                // ---- Empty state -------------------------------------------
                 ColumnLayout {
                     anchors.centerIn: parent
-                    visible: devices.length === 0
-                    spacing: 6
+                    visible: visibleDevices.length === 0
+                    spacing: 8
 
-                    Text {
+                    Rectangle {
                         Layout.alignment: Qt.AlignHCenter
-                        text: "󰂲"
-                        font.family: "Material Design Icons"
-                        font.pixelSize: 32
-                        color: Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.2)
+                        width: 56
+                        height: 56
+                        radius: 18
+                        color: Qt.rgba(1, 1, 1, 0.04)
+                        border.width: 1
+                        border.color: Qt.rgba(1, 1, 1, 0.07)
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "󰂲"
+                            font.family: GlassTheme.iconFont
+                            font.pixelSize: 26
+                            color: Qt.rgba(cOnSurface.r, cOnSurface.g, cOnSurface.b, 0.28)
+                        }
                     }
 
                     Text {
                         Layout.alignment: Qt.AlignHCenter
-                        text: adapter?.enabled ? "No devices found" : "Bluetooth disabled"
-                        font.family: "Inter"
+                        text: {
+                            if (searchText.length > 0) return "No matching devices"
+                            if (!(popupPanel.adapter?.enabled ?? false)) return "Bluetooth disabled"
+                            return "No devices found"
+                        }
+                        font.family: GlassTheme.fontFamily
                         font.pixelSize: 12
                         color: cOnSurfaceVariant
                     }
                 }
             }
+        }
+    }
 
+    // ========================================================================
+    // CONTEXT MENU
+    // ========================================================================
+    Item {
+        id: contextMenuHost
+        anchors.fill: parent
+        visible: false
+        z: 150
 
+        // Transparent scrim - click anywhere to dismiss.
+        MouseArea {
+            anchors.fill: parent
+            onClicked: contextMenu.hide()
+        }
+
+        GlassContextMenu {
+            id: contextMenu
+
+            property var targetDevice: null
+
+            textColor: cOnSurface
+            x: 0
+            y: 0
+            visible: false
+
+            function show(mx, my, device): void {
+                targetDevice = device
+                const items = []
+                if (device.connected)
+                    items.push({ label: "Disconnect", icon: "󰌊" })
+                else
+                    items.push({ label: "Connect", icon: "󰌘" })
+                items.push({ label: "Rescan Devices", icon: "󰑓" })
+                model = items
+
+                x = Math.min(Math.max(6, mx), popupPanel.width - implicitWidth - 6)
+                y = Math.min(Math.max(6, my), popupPanel.height - implicitHeight - 6)
+                contextMenuHost.visible = true
+                visible = true
+            }
+
+            function hide(): void {
+                visible = false
+                contextMenuHost.visible = false
+            }
+
+            onItemSelected: index => {
+                const device = contextMenu.targetDevice
+                if (index === 0) {
+                    device.connected = !device.connected
+                } else if (popupPanel.adapter) {
+                    popupPanel.adapter.discovering = !popupPanel.adapter.discovering
+                }
+                contextMenu.hide()
+            }
         }
     }
 }
