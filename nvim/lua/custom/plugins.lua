@@ -183,15 +183,6 @@ local plugins = {
         keys = load_mappings("text_case"),
     },
     {
-        "echasnovski/mini.ai",
-        enabled = false,
-        event = "VeryLazy",
-        version = "*",
-        config = function()
-            require("mini.ai").setup()
-        end,
-    },
-    {
         "echasnovski/mini.operators",
         event = "VeryLazy",
         version = "*",
@@ -287,15 +278,6 @@ local plugins = {
         end,
     },
 
-    --INFO: This makes allows you to use a ".md" file as a proper note taking app inside of obsidian, with callouts, etc..
-
-    {
-        "folke/trouble.nvim",
-        enabled = false,
-        opts = {},
-        cmd = "Trouble",
-        keys = require("custom.configs.trouble"),
-    },
     {
         "olrtg/nvim-emmet",
         event = "LspAttach",
@@ -663,18 +645,6 @@ local plugins = {
     },
 
     {
-        "m4xshen/hardtime.nvim",
-        lazy = true,
-        dependencies = { "MunifTanjim/nui.nvim" },
-        opts = {
-            max_count = 20,
-            notification = false,
-        },
-    },
-
-    --NOTE: Enable this when you get use to vim motions, never before
-
-    {
         "Wansmer/treesj",
         lazy = true,
         cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
@@ -1007,7 +977,7 @@ local plugins = {
         cmd = "RipSubstitute",
         opts = {
             popupWin = {
-                position = "top", ---@type "top"|"bottom"
+                position = "bottom", ---@type "top"|"bottom"
                 hideSearchReplaceLabels = false,
             },
         },

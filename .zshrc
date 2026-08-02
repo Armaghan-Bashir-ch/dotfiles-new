@@ -1,10 +1,3 @@
-# ███████╗███████╗██╗  ██╗███████╗██╗     ██╗     
-# ╚══███╔╝██╔════╝██║  ██║██╔════╝██║     ██║     
-#   ███╔╝ ███████╗███████║█████╗  ██║     ██║     
-#  ███╔╝  ╚════██║██╔══██║██╔══╝  ██║     ██║     
-# ███████╗███████║██║  ██║███████╗███████╗███████╗
-# ╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
-
 #  NOTE:  Setting up Powerlevel10k to be the main prompt, and load up instantly when starting a new terminal/tmux session:
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
