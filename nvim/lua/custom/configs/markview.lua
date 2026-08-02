@@ -138,7 +138,14 @@ vim.api.nvim_set_hl(0, "MarkviewYouTube", { fg = "#FC0033" })
 vim.api.nvim_set_hl(0, "MarkviewTwitter", { fg = "#1DA1F2" })
 
 -- Bold and italic text highlights (treesitter syntax groups)
-vim.api.nvim_set_hl(0, "@markup.strong.markdown_inline", { fg = "#80a8fd", bold = true })     -- Coral red
-vim.api.nvim_set_hl(0, "@markup.emphasis.markdown_inline", { fg = "#3498DB", italic = true }) -- Blue
+vim.api.nvim_set_hl(0, "@markup.strong.markdown_inline", {
+    fg = "#89B4FA",
+    bold = true,
+})
+
+vim.api.nvim_set_hl(0, "@markup.italic.markdown_inline", {
+    fg = "#74C7EC",
+    italic = true,
+})
 
 return config
