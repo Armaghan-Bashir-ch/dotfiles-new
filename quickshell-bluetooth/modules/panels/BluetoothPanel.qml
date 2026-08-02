@@ -59,8 +59,8 @@ FocusScope {
 
     Timer {
         id: closeTimer
-        interval: 600
-        onTriggered: if (!hoverHandler.hovered) popupPanel.shouldShow = false
+        interval: 100
+        onTriggered: if (!hoverHandler.hovered) popupPanel.closeRequested()
     }
 
     Connections {
@@ -69,7 +69,7 @@ FocusScope {
         function onHoveredChanged() {
             if (hoverHandler.hovered)
                 closeTimer.stop()
-            else if (popupPanel.shouldShow)
+            else
                 closeTimer.restart()
         }
     }
