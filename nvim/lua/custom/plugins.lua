@@ -1120,6 +1120,7 @@ local plugins = {
     {
         "supermaven-inc/supermaven-nvim",
         event = "InsertEnter",
+        enabled = false,
         cmd = {
             "SupermavenUseFree",
             "SupermavenUsePro",
