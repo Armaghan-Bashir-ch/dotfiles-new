@@ -3,5 +3,4 @@
 !.env.example
 node_modules
 .omo
-opencode-guide.md
 todo.md
