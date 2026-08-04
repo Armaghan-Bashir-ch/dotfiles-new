@@ -18,9 +18,6 @@ filenames:
   hyprpaper.conf: {icon: {glyph: ""}}
   hypridle.conf: {icon: {glyph: ""}}
   hyprsunset.conf: {icon: {glyph: ""}}
-  dunst: {icon: {glyph: ""}}
-  dunstrc: {icon: {glyph: ""}}
-  dunst.conf: {icon: {glyph: ""}}
   ghostty/config: {icon: {glyph: "󰊠"}}
   ghostty: {icon: {glyph: "󰊠"}}
   ghostty-git: {icon: {glyph: "󰊠"}}
@@ -32,6 +29,7 @@ filenames:
   paru: {icon: {glyph: ""}}
   yay: {icon: {glyph: ""}}
   peru: {icon: {glyph: ""}}
+  .bun: {icon: {glyph: ""}}
   zsh: {icon: {glyph: ""}}
   .zsh: {icon: {glyph: ""}}
   .zshrc: {icon: {glyph: ""}}
@@ -40,6 +38,7 @@ filenames:
   backgrounds: {icon: {glyph: ""}}
   wallselect: {icon: {glyph: ""}}
   wifi: {icon: {glyph: "󰤨"}}
+  quickshell-network: {icon: {glyph: "󰤨"}}
   COMMIT_EDITMSG: {icon: {glyph: ""}}
   hooks: {icon: {glyph: "󰛢"}}
   objects: {icon: {glyph: "󰆦"}}
@@ -50,8 +49,6 @@ filenames:
   .themes: {icon: {glyph: "󰖔"}}
   launcher: {icon: {glyph: ""}}
   clipboard: {icon: {glyph: ""}}
-  powermenu: {icon: {glyph: "⏻"}}
-  shortcuts: {icon: {glyph: "󰌌"}}
   books: {icon: {glyph: ""}}
   app-icons: {icon: {glyph: ""}}
   bin: {icon: {glyph: ""}}
@@ -75,11 +72,7 @@ filenames:
   scripts: {icon: {glyph: "󰨊"}}
   .ssh: {icon: {glyph: ""}}
   ssh-keys: {icon: {glyph: ""}}
-  spicetify-themes: {icon: {glyph: ""}}
   spotify: {icon: {glyph: ""}}
-  QWEN: {icon: {glyph: ""}}
-  .qwen: {icon: {glyph: ""}}
-  qwen: {icon: {glyph: ""}}
   todo.md: {icon: {glyph: ""}}
   TODO.md: {icon: {glyph: ""}}
   .wakatime: {icon: {glyph: ""}}
@@ -88,13 +81,9 @@ filenames:
   lazygit: {icon: {glyph: ""}}
   .n8n: {icon: {glyph: ""}}
   usr: {icon: {glyph: ""}}
-  lsd: {icon: {glyph: ""}}
-  .crush: {icon: {glyph: ""}}
-  crush: {icon: {glyph: ""}}
   opencode: {icon: {glyph: ""}}
   btop: {icon: {glyph: ""}}
   wakafetch: {icon: {glyph: ""}}
-  swayosd: {icon: {glyph: ""}}
   movies: {icon: {glyph: ""}}
   others: {icon: {glyph: ""}}
   yazi: {icon: {glyph: "󱧶"}}
@@ -102,6 +91,7 @@ filenames:
   eza: {icon: {glyph: ""}}
   swaync: {icon: {glyph: "󰂞"}}
   bluetooth: {icon: {glyph: ""}}
+  quickshell-bluetooth: {icon: {glyph: ""}}
   styles: {icon: {glyph: ""}}
   runs: {icon: {glyph: "󱑤"}}
 
