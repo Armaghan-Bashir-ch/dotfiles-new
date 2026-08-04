@@ -1,7 +1,6 @@
-*.env
-bun.lock
-oh-my-opencode.json
-package.json
+.env
+.env.*
+!.env.example
 node_modules
 .omo
 opencode-guide.md
