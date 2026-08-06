@@ -39,7 +39,7 @@ PanelWindow {
 
     WlrLayershell.keyboardFocus: shouldShow ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
-    Process { id: settingsProcess; command: ["nm-connection-editor"] }
+    Process { id: settingsProcess; command: ["nmgui"] }
     Process { id: lockProcess; command: ["loginctl", "lock-session"] }
     Process { id: powerProcess; command: ["wlogout"] }
     Process {

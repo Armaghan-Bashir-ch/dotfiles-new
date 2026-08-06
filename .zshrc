@@ -31,7 +31,7 @@ alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
-alias fd='fd --hidden --exclude Tokyo-Night-GTK-Theme'
+alias fd='fd --hidden --exclude Tokyo-Night-GTK-Theme opencode'
 alias rg='rg --hidden'
 alias update='sudo pacman -Syu'
 
@@ -162,16 +162,6 @@ fzf_file_widget() {
 zle -N fzf_file_widget
 bindkey '^F' fzf_file_widget
 
-
-# ## OPENCODE
-#
-# opencode_widget() {
-#   opencode
-#   zle reset-prompt
-# }
-# zle -N opencode_widget
-# bindkey '^O' opencode_widget
-
 # Zoxide menu
 
 eval "$(zoxide init zsh)"
@@ -219,8 +209,6 @@ zff_widget() {
   zff
   zle reset-prompt
 }
-
-
 
 # Ripgrep + FZF function
 rgf() {

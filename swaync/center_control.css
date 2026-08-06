@@ -1,6 +1,6 @@
-@import "./themes/Catppuccin-Mocha.css";
+@import "./themes/Decay-Green.css";
 
-@define-color wb-act-bg #4a7a8c;
+@define-color wb-act-bg #82b7b0;
 
 * {
   color: @main-fg;
@@ -30,7 +30,11 @@
 }
 
 .control-center .notification-row .notification-background {
-  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.09), rgba(0, 0, 0, 0.01));
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0.09),
+    rgba(0, 0, 0, 0.01)
+  );
   backdrop-filter: blur(40px) saturate(180%);
   -webkit-backdrop-filter: blur(40px) saturate(180%);
   border: 1px solid rgba(131, 199, 230, 0.4);
@@ -48,11 +52,18 @@
   background: transparent;
 }
 
-.control-center .notification-row .notification-background .notification.critical {
+.control-center
+  .notification-row
+  .notification-background
+  .notification.critical {
   border: none;
 }
 
-.control-center .notification-row .notification-background .notification.critical .notification-content {
+.control-center
+  .notification-row
+  .notification-background
+  .notification.critical
+  .notification-content {
   border-left: 3px solid @wb-act-bg;
   padding-left: 8px;
 }
@@ -63,24 +74,44 @@
   transform: none !important;
 }
 
-.control-center .notification-row .notification-background .notification.critical {
+.control-center
+  .notification-row
+  .notification-background
+  .notification.critical {
   color: @wb-act-bg;
 }
 
-
-
-.control-center .notification-row .notification-background .notification .notification-content {
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content {
   margin: 8px 16px;
   text-align: left;
 }
 
-.control-center .notification-row .notification-background .notification > *:last-child > * {
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > * {
   min-height: 3.6em;
 }
 
-.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action {
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action {
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(131, 199, 230, 0.08), rgba(147, 206, 233, 0.04));
+  background: linear-gradient(
+    135deg,
+    rgba(131, 199, 230, 0.08),
+    rgba(147, 206, 233, 0.04)
+  );
   margin: 6px;
   border: 1px solid rgba(131, 199, 230, 0.25);
   will-change: transform;
@@ -89,29 +120,66 @@
   overflow: hidden;
 }
 
-.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action::before {
-  content: '';
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action::before {
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
   transition: left 0.5s;
 }
 
-.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover::before {
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:hover::before {
   left: 100%;
 }
 
-.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:hover {
-  background: linear-gradient(135deg, rgba(131, 199, 230, 0.25), rgba(147, 206, 233, 0.15));
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(131, 199, 230, 0.25),
+    rgba(147, 206, 233, 0.15)
+  );
   border: 1px solid rgba(131, 199, 230, 0.4);
   transform: translateY(-1px);
 }
 
-.control-center .notification-row .notification-background .notification > *:last-child > * .notification-action:active {
-  background: linear-gradient(135deg, rgba(147, 206, 233, 0.4), rgba(147, 206, 233, 0.2));
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:active {
+  background: linear-gradient(
+    135deg,
+    rgba(147, 206, 233, 0.4),
+    rgba(147, 206, 233, 0.2)
+  );
   color: @main-bg;
   transform: translateY(0);
 }
@@ -120,7 +188,11 @@
   margin: 10px 263px;
   padding: 3px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(16, 20, 25, 0.8), rgba(16, 20, 25, 0.6));
+  background: linear-gradient(
+    135deg,
+    rgba(16, 20, 25, 0.8),
+    rgba(16, 20, 25, 0.6)
+  );
   border: 1px solid rgba(131, 199, 230, 0.3);
   will-change: transform;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -128,13 +200,24 @@
 }
 
 .control-center .notification-row .notification-background .close-button:hover {
-  background: linear-gradient(135deg, rgba(131, 199, 230, 0.2), rgba(147, 206, 233, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(131, 199, 230, 0.2),
+    rgba(147, 206, 233, 0.1)
+  );
   border: 1px solid rgba(131, 199, 230, 0.5);
   transform: scale(1.1) rotate(90deg);
 }
 
-.control-center .notification-row .notification-background .close-button:active {
-  background: linear-gradient(135deg, rgba(147, 206, 233, 0.3), rgba(147, 206, 233, 0.15));
+.control-center
+  .notification-row
+  .notification-background
+  .close-button:active {
+  background: linear-gradient(
+    135deg,
+    rgba(147, 206, 233, 0.3),
+    rgba(147, 206, 233, 0.15)
+  );
   color: @main-bg;
   transform: scale(1.05) rotate(180deg);
 }
@@ -146,7 +229,7 @@ trough {
 }
 
 progressbar {
-  background-color: rgba(255,255,255,.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Notifications expanded-group */
@@ -181,14 +264,14 @@ progressbar {
 
 /* WIDGETS --------------------------------------------------------------------------- */
 
-  /* Notification clear button */
+/* Notification clear button */
 .widget-title {
   font-size: 1.8em;
   font-weight: 600;
   color: @main-fg;
   margin: 20px 6px 16px 6px;
   text-align: center;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .widget-title button {
@@ -196,7 +279,7 @@ progressbar {
   border: 1px solid rgba(74, 122, 140, 0.3);
   border-radius: 8px;
   padding: 6px 18px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .widget-title button:hover {
@@ -209,11 +292,15 @@ progressbar {
   background-color: @wb-act-bg;
 }
 
-  /* Do not disturb */
+/* Do not disturb */
 .widget-dnd {
   margin: 10px 0 18px 0;
   padding: 14px;
-  background: linear-gradient(145deg, rgba(16, 20, 25, 0.2), rgba(10, 14, 17, 0.2));
+  background: linear-gradient(
+    145deg,
+    rgba(16, 20, 25, 0.2),
+    rgba(10, 14, 17, 0.2)
+  );
   border-radius: 12px;
   border: 0.5px solid rgba(74, 122, 140, 0.8);
 }
@@ -243,7 +330,7 @@ progressbar {
   border-radius: 6px;
 }
 
-  /* Buttons menu */
+/* Buttons menu */
 .widget-buttons-grid {
   font-size: x-large;
   padding: 10px 4px;
@@ -251,41 +338,41 @@ progressbar {
   border-radius: 14px;
   background: linear-gradient(145deg, @main-bg, #0a0e11);
   border: 1px solid rgba(74, 122, 140, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
-.widget-buttons-grid>flowbox>flowboxchild>button {
+.widget-buttons-grid > flowbox > flowboxchild > button {
   margin: 6px 12px;
   padding: 8px 14px;
   background: linear-gradient(145deg, @main-bg, #0a0e11);
   border: 1px solid rgba(74, 122, 140, 0.2);
   border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
   background: linear-gradient(145deg, @wb-act-bg, #2e4f5a);
   border: 1px solid rgba(74, 122, 140, 0.4);
   box-shadow: 0 2px 6px rgba(74, 122, 140, 0.2);
 }
 
-  /* Music player */
+/* Music player */
 .widget-mpris {
-    background: linear-gradient(145deg, @main-bg, #0a0e11);
-    border: 1px solid rgba(74, 122, 140, 0.3);
-    border-radius: 18px;
-    color: @main-fg;
-    margin: 22px 8px;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  background: linear-gradient(145deg, @main-bg, #0a0e11);
+  border: 1px solid rgba(74, 122, 140, 0.3);
+  border-radius: 18px;
+  color: @main-fg;
+  margin: 22px 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
-  /* NOTE: Background need *opacity 1* otherwise will turn into the album art blurred  */
+/* NOTE: Background need *opacity 1* otherwise will turn into the album art blurred  */
 .widget-mpris-player {
-    background: linear-gradient(145deg, @main-bg, #0a0e11);
-    border-radius: 20px;
-    padding: 8px 16px;
-    margin: 8px;
-    border: 1px solid rgba(74, 122, 140, 0.2);
+  background: linear-gradient(145deg, @main-bg, #0a0e11);
+  border-radius: 20px;
+  padding: 8px 16px;
+  margin: 8px;
+  border: 1px solid rgba(74, 122, 140, 0.2);
 }
 
 .widget-mpris > box > button {
@@ -331,13 +418,13 @@ progressbar {
 }
 
 .widget-mpris-title {
-    font-weight: 700;
-    font-size: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .widget-mpris-subtitle {
-    font-weight: 500;
-    font-size: 0.8rem;
+  font-weight: 500;
+  font-size: 0.8rem;
 }
 
 /* Volume */

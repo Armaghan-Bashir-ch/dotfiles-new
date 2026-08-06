@@ -40,12 +40,12 @@ PanelWindow {
     WlrLayershell.namespace: "quickshell:controlcenter"
     WlrLayershell.keyboardFocus: shouldShow ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
-    Process { id: settingsProcess; command: ["nm-connection-editor"] }
+    Process { id: settingsProcess; command: ["nmgui"] }
     Process { id: lockProcess; command: ["loginctl", "lock-session"] }
     Process { id: powerProcess; command: ["wlogout"] }
     Process {
         id: screenshotsProcess
-        command: ["xdg-open", root.screenshot.screenshotsDir]
+        command: ["xdg", root.screenshot.screenshotsDir]
         onStarted: root.shouldShow = false
     }
 

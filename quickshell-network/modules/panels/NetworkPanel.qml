@@ -72,7 +72,7 @@ FocusScope {
 
     Process {
         id: settingsProcess
-        command: ["nm-connection-editor"]
+        command: ["nmgui"]
         onStarted: popupPanel.closeRequested()
     }
 
