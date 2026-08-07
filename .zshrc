@@ -242,4 +242,14 @@ bindkey '^e' edit-command-line
     source /opt/google-cloud-cli/path.zsh.inc
 } &>/dev/null
 
+# Encrypted file aliases
+
+cred-encrypt() {
+    age -p -o credentials.md.age credentials.md
+}
+
+cred-decrypt() {
+    age -d -o credentials.md credentials.md.age
+}
+
 nitch
