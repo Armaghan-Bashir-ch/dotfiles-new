@@ -28,6 +28,10 @@ PanelWindow {
 
     property bool shouldShow: true
 
+    // Opening the panel counts as reading its notifications, so the bell's
+    // unread dot clears once the user has looked at the list.
+    onShouldShowChanged: if (shouldShow) root.notifs.markAllRead()
+
     screen: Quickshell.screens[0]
     anchors { top: true; right: true }
     margins { right: 12; top: 12 }
@@ -159,10 +163,7 @@ PanelWindow {
                                 active: root.notifs.dnd
                                 activeColor: root.cActive
 
-                                onClicked: {
-                                    Quickshell.execDetached(["swaync-client", "-d"])
-                                    root.notifs.dnd = !root.notifs.dnd
-                                }
+                                onClicked: root.notifs.toggleDnd()
                             }
                             QuickToggle { Layout.fillWidth: true; icon: root.screenshot.isRecording ? "󰛿" : "󰻃"; label: root.screenshot.isRecording ? "Stop Recording" : "Record Screen"; subLabel: root.screenshot.isRecording ? "Recording in progress" : "Start wf-recorder"; active: root.screenshot.isRecording; activeColor: root.cActive; onClicked: { if (root.screenshot.isRecording) root.screenshot.stopRecording(); else root.screenshot.startRecording() } }
                             QuickToggle { Layout.fillWidth: true; icon: "󰅶"; label: "Caffeine"; subLabel: root.idleInhibitor.inhibited ? "Active" : "Off"; active: root.idleInhibitor.inhibited; activeColor: root.cActive; onClicked: root.idleInhibitor.inhibited = !root.idleInhibitor.inhibited }
@@ -182,6 +183,7 @@ PanelWindow {
 
                         SystemStats { Layout.fillWidth: true; systemUsage: root.systemUsage; pywal: root.pywal }
                         MediaCard { Layout.fillWidth: true; mpris: root.mpris; pywal: root.pywal }
+                        NotificationList { Layout.fillWidth: true; notifs: root.notifs; pywal: root.pywal }
 
                         Item { Layout.preferredHeight: 4 }
                     }

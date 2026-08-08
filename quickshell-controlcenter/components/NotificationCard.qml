@@ -37,6 +37,8 @@ Item {
         return "image://icon/" + icon
     }
 
+    readonly property bool hasAppIcon: notification?.appIcon && notification.appIcon.length > 0
+
     implicitHeight: contentLayout.implicitHeight
 
     ColumnLayout {
@@ -62,9 +64,10 @@ Item {
                                urgencyColor(notification?.urgency ?? 1).b, 0.12)
 
                 Image {
+                    id: notifIcon
                     anchors.centerIn: parent
                     width: 20; height: 20
-                    visible: notification?.appIcon && notification.appIcon.length > 0
+                    visible: root.hasAppIcon && notifIcon.status !== Image.Error
                     source: root.iconSource(notification?.appIcon ?? "")
                     fillMode: Image.PreserveAspectFit
                     smooth: true; cache: true; asynchronous: true
@@ -72,7 +75,7 @@ Item {
 
                 Text {
                     anchors.centerIn: parent
-                    visible: !notification?.appIcon || notification.appIcon.length === 0
+                    visible: !root.hasAppIcon || notifIcon.status === Image.Error
                     text: "󰂚"
                     font.family: "Material Design Icons"
                     font.pixelSize: 18
