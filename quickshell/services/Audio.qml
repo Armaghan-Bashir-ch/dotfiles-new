@@ -18,14 +18,14 @@ Singleton {
     readonly property int sourcePercentage: Math.round(sourceVolume * 100)
 
     Timer {
-        interval: 50
+        interval: 1000
         running: true
         repeat: true
         onTriggered: {
             if (!getSink.running)
-                getSink.running = true
+            getSink.running = true
             if (!getSource.running)
-                getSource.running = true
+            getSource.running = true
         }
     }
 
