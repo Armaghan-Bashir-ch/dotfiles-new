@@ -183,8 +183,7 @@
     "pulseaudio": {
         "format": "{icon} {volume}",
         "format-muted": "󰟎 ",
-        "on-click": "pavucontrol -t 3",
-        "on-click-middle": "~/.config/hypr/scripts/volumecontrol.sh -o m",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
         "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
         "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%",
         "tooltip-format": "Scroll to change volume ±2% {icon}  {desc}",
