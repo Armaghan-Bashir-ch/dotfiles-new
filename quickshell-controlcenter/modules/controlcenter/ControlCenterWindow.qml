@@ -18,7 +18,6 @@ PanelWindow {
     readonly property var bluetooth: QsServices.Bluetooth
     readonly property var audio: QsServices.Audio
     readonly property var brightness: QsServices.Brightness
-    readonly property var mpris: QsServices.Players
     readonly property var notifs: QsServices.Notifs
     readonly property var systemUsage: QsServices.SystemUsage
     readonly property var idleInhibitor: QsServices.IdleInhibitor
@@ -200,7 +199,6 @@ PanelWindow {
                         }
 
                         SystemStats { Layout.fillWidth: true; systemUsage: root.systemUsage; pywal: root.pywal }
-                        MediaCard { Layout.fillWidth: true; mpris: root.mpris; pywal: root.pywal }
                         NotificationList { Layout.fillWidth: true; notifs: root.notifs; pywal: root.pywal }
 
                         Item { Layout.preferredHeight: 4 }

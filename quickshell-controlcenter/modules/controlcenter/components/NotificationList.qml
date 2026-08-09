@@ -37,7 +37,7 @@ Item {
         id: container
         anchors.fill: parent
         radius: 28
-        // Transparent like MediaCard/SystemStats so the section blends into the
+        // Transparent like SystemStats so the section blends into the
         // frosted-glass panel instead of reading as a solid slab.
         color: "transparent"
 
