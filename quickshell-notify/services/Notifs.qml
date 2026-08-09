@@ -240,6 +240,25 @@ Singleton {
         property string appIcon: ""
         property string image: ""
         property int urgency: NotificationUrgency.Normal
+
+        // Normalize the daemon's image URL into something Image.source can
+        // load. Quickshell wraps an absolute `image-path` hint (notify-send
+        // -i /path/to.png) as `image://icon//path/to.png`, but its icon image
+        // provider only resolves theme-icon names - an absolute path in the
+        // name slot makes it return the pink/black "missing icon" checkerboard
+        // instead of the file. Unwrap it back to a plain path so the file is
+        // loaded directly (this is also what the control center receives via
+        // the serialized state). Theme-icon URLs and raw image-data handles
+        // pass through untouched.
+        function normalizeImage(src) {
+            if (!src) return ""
+            const prefix = "image://icon/"
+            if (src.startsWith(prefix)) {
+                const rest = src.slice(prefix.length)
+                if (rest.startsWith("/")) return rest
+            }
+            return src
+        }
         // Use a JS array so `.length`/indexing and helpers work reliably.
         property var actions: []
 
@@ -281,7 +300,7 @@ Singleton {
             }
 
             function onImageChanged() {
-                notifWrapper.image = notifWrapper.notification.image;
+                notifWrapper.image = notifWrapper.normalizeImage(notifWrapper.notification.image);
             }
 
             function onUrgencyChanged() {
@@ -325,7 +344,7 @@ Singleton {
             body = notification.body
             appName = notification.appName
             appIcon = notification.appIcon
-            image = notification.image
+            image = normalizeImage(notification.image)
             urgency = notification.urgency
             actions = root._actionsToArray(notification.actions)
             read = timestamp.getTime() <= root.lastReadAt

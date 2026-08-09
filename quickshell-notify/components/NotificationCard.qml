@@ -25,6 +25,30 @@ Item {
 
     property var pywal: null
 
+    // Image preview sizing: scale the image down (never up past its own
+    // resolution) so it always fits inside the popup while keeping its aspect
+    // ratio. The preview box then hugs the image exactly - no letterboxing,
+    // no background panel behind it.
+    readonly property int imagePreviewMaxHeight: 150
+    readonly property int imagePreviewMinHeight: 48
+
+    function previewSize(maxWidth, sourceSize) {
+        if (!sourceSize || sourceSize.width <= 0 || sourceSize.height <= 0)
+            return Qt.size(root.imagePreviewMinHeight, root.imagePreviewMinHeight)
+        const scale = Math.min(maxWidth > 0 ? maxWidth / sourceSize.width : 1,
+                               root.imagePreviewMaxHeight / sourceSize.height,
+                               1)
+        let width = sourceSize.width * scale
+        let height = sourceSize.height * scale
+        // Keep tiny images readable (a slight upscale is fine here).
+        if (height < root.imagePreviewMinHeight) {
+            height = root.imagePreviewMinHeight
+            width = height * (sourceSize.width / sourceSize.height)
+            if (maxWidth > 0 && width > maxWidth) width = maxWidth
+        }
+        return Qt.size(Math.max(1, width), Math.max(1, height))
+    }
+
     function urgencyColor(urgency) {
         if (urgency === 2) return errorColor
         if (urgency === 0) return Qt.rgba(onSurfaceColor.r, onSurfaceColor.g, onSurfaceColor.b, 0.5)
@@ -33,6 +57,17 @@ Item {
 
     function iconSource(icon) {
         if (!icon) return ""
+        // Quickshell wraps absolute `image-path` hints as image://icon//abs/path,
+        // but its icon provider only resolves theme-icon names - an absolute path
+        // in the name slot renders as a pink/black missing-icon checkerboard.
+        // Unwrap to a plain path so the file loads directly.
+        if (icon.startsWith("image://icon/")) {
+            const rest = icon.slice("image://icon/".length)
+            if (rest.startsWith("/")) return rest
+            return icon
+        }
+        // Already a provider URL (theme icon or raw image-data handle).
+        if (icon.startsWith("image://")) return icon
         if (icon.startsWith("/") || icon.startsWith("file://")) return icon
         return "image://icon/" + icon
     }
@@ -182,20 +217,29 @@ Item {
         }
 
         // --- Image preview ---
+        // Centered box that hugs the image's fitted size, transparent (no
+        // glassy panel), with the corners rounded via clip.
         Rectangle {
-            Layout.fillWidth: true
-            Layout.preferredHeight: 80
+            id: imagePreview
+            readonly property size previewBox: root.previewSize(contentLayout.width, previewImage.sourceSize)
+            Layout.alignment: Qt.AlignHCenter
+            Layout.preferredWidth: imagePreview.previewBox.width
+            Layout.preferredHeight: imagePreview.previewBox.height
             radius: 10
             clip: true
             visible: notification?.image && notification.image.length > 0
-            color: surfaceContainerHighColor
+            color: "transparent"
 
             Image {
+                id: previewImage
                 anchors.fill: parent
                 anchors.margins: 1
                 source: root.iconSource(notification?.image ?? "")
-                fillMode: Image.PreserveAspectCrop
+                fillMode: Image.PreserveAspectFit
                 smooth: true; cache: true; asynchronous: true
+                // Cap the decode size so giant screenshots don't blow up memory
+                // or force the icon provider to render at useless resolution.
+                sourceSize: Qt.size(640, 640)
             }
         }
 
