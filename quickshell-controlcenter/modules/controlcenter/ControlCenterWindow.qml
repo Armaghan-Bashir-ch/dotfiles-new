@@ -26,11 +26,29 @@ PanelWindow {
     readonly property var settings: QsServices.Settings
     readonly property var screenshot: QsServices.Screenshot
 
-    property bool shouldShow: true
+    property bool shouldShow: false
 
     // Opening the panel counts as reading its notifications, so the bell's
-    // unread dot clears once the user has looked at the list.
-    onShouldShowChanged: if (shouldShow) root.notifs.markAllRead()
+    // unread dot clears once the user has looked at the list. Also keep the
+    // notify daemon informed of our open state so it suppresses popup toasts
+    // while the list shows them live.
+    onShouldShowChanged: {
+        if (shouldShow) {
+            root.notifs.markAllRead()
+            root.notifs.setPanelOpen(true)
+        } else {
+            root.notifs.setPanelOpen(false)
+            // Ephemeral process: quit after the close animation finishes so
+            // waybar/notify can relaunch a fresh instance next time.
+            quitTimer.restart()
+        }
+    }
+
+    Timer {
+        id: quitTimer
+        interval: 400  // let the close animation + panelOpen IPC flush
+        onTriggered: Qt.quit()
+    }
 
     screen: Quickshell.screens[0]
     anchors { top: true; right: true }
@@ -167,7 +185,7 @@ PanelWindow {
                             }
                             QuickToggle { Layout.fillWidth: true; icon: root.screenshot.isRecording ? "󰛿" : "󰻃"; label: root.screenshot.isRecording ? "Stop Recording" : "Record Screen"; subLabel: root.screenshot.isRecording ? "Recording in progress" : "Start wf-recorder"; active: root.screenshot.isRecording; activeColor: root.cActive; onClicked: { if (root.screenshot.isRecording) root.screenshot.stopRecording(); else root.screenshot.startRecording() } }
                             QuickToggle { Layout.fillWidth: true; icon: "󰅶"; label: "Caffeine"; subLabel: root.idleInhibitor.inhibited ? "Active" : "Off"; active: root.idleInhibitor.inhibited; activeColor: root.cActive; onClicked: root.idleInhibitor.inhibited = !root.idleInhibitor.inhibited }
-                            QuickToggle { Layout.fillWidth: true; icon: "󰄉"; label: "Focus Mode"; subLabel: root.settings.focusModeEnabled ? `${root.settings.focusModeMinutesLeft} min remaining` : "25 min timer"; active: root.settings.focusModeEnabled; activeColor: root.cActive; onClicked: { root.settings.focusModeEnabled = !root.settings.focusModeEnabled; if (root.settings.focusModeEnabled) { root.settings.focusModeMinutesLeft = 25; root.notifs.dnd = true } } }
+                            QuickToggle { Layout.fillWidth: true; icon: "󰄉"; label: "Focus Mode"; subLabel: root.settings.focusModeEnabled ? `${root.settings.focusModeMinutesLeft} min remaining` : "25 min timer"; active: root.settings.focusModeEnabled; activeColor: root.cActive; onClicked: { root.settings.focusModeEnabled = !root.settings.focusModeEnabled; if (root.settings.focusModeEnabled) { root.settings.focusModeMinutesLeft = 25; root.notifs.setDnd(true) } } }
                             QuickToggle { Layout.fillWidth: true; Layout.columnSpan: 2; icon: "󰹑"; label: "Screenshot"; subLabel: "Capture Screen"; active: false; activeColor: root.cActive; onClicked: root.screenshot.takeScreenshot("screen") }
                         }
 

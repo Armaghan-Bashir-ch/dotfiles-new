@@ -3,8 +3,8 @@ import QtQuick.Layouts 6.10
 import QtQuick.Controls 6.10
 import Quickshell
 import Quickshell.Wayland
-import "../../../components"
-import "../../../config" as QsConfig
+import "../../components"
+import "../../config" as QsConfig
 
 // Notification popup toasts: shown by the notification daemon (this config)
 // whenever a notification arrives, using the exact same NotificationCard UI

@@ -2,20 +2,33 @@ pragma Singleton
 
 import QtQuick 6.10
 import Quickshell
-import Quickshell.Services.Notifications
+import Quickshell.Io
 import "." as QsServices
 
+// Thin IPC client mirroring the notification authority living in the
+// standalone quickshell-notify daemon. This Control Center process no longer
+// owns org.freedesktop.Notifications; instead it:
+//
+//   1. Watches ~/.cache/quickshell-notify-state.json (written atomically by
+//      the daemon on every change) via FileView + watchChanges, and rebuilds
+//      its notification list from that snapshot - the serialized form of the
+//      authoritative state, not a second copy.
+//   2. Forwards every mutation (dismiss, action, DND, clear) to the daemon
+//      via `qs ipc -p ~/.config/quickshell-notify call notifs <fn> ...`.
+//
+// Fully event-driven: the FileView fires on file change (no polling), and
+// IPC calls happen only on explicit user action.
 Singleton {
     id: root
 
-    // Use a JS array so Array helpers (filter/slice/etc) work reliably.
+    // Keep the exact API surface the Control Center UI consumes, so
+    // NotificationList/NotificationCard/GamingMode need no changes beyond the
+    // dnd write path (see setDnd below).
     property var notifications: []
     readonly property var activeNotifications: notifications.filter(n => !!n && !n.closed)
-    
-    // Maximum notifications to keep in memory (lowercase to comply with QML naming rules)
+
     readonly property int maxNotifications: 100
-    
-    // Show all notifications from past 24 hours (including closed ones) - for notification center
+
     readonly property var recentNotifications: notifications.filter(n => {
         if (!n || !n.timestamp)
             return false
@@ -24,8 +37,7 @@ Singleton {
     }).sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
     readonly property var unreadNotifications: recentNotifications.filter(n => !n.read)
     readonly property int unreadCount: unreadNotifications.length
-    
-    // Group notifications by app for better UX
+
     readonly property var groupedNotifications: {
         const groups = {}
         const active = activeNotifications
@@ -39,8 +51,7 @@ Singleton {
         }
         return groups
     }
-    
-    // Get notification counts per app
+
     readonly property var notificationCounts: {
         const counts = {}
         const grouped = groupedNotifications
@@ -49,235 +60,161 @@ Singleton {
         }
         return counts
     }
-    
+
     property bool dnd: false
     property double lastReadAt: 0
 
-    PersistentProperties {
-        id: persist
-        property alias dnd: root.dnd
-        property alias lastReadAt: root.lastReadAt
-        reloadableId: "notifications-state"
+    readonly property string daemonPath: {
+        const home = Quickshell.env("HOME")
+        return `${home}/.config/quickshell-notify`
     }
-    
-    // Cleanup timer to prevent memory leaks
-    Timer {
-        interval: 3600000  // Clean up every hour
-        repeat: true
-        running: true
-        triggeredOnStart: false
-        
-        onTriggered: {
-            const oneDayAgo = new Date().getTime() - (24 * 60 * 60 * 1000)
-            const oldCount = root.notifications.length
-            root.notifications = root.notifications.filter(n => n && n.timestamp && n.timestamp.getTime() > oneDayAgo)
-            const cleaned = oldCount - root.notifications.length
-            if (cleaned > 0) {
-                QsServices.Logger.debug("Notifs", `Cleaned up ${cleaned} old notifications`)
-            }
+
+    readonly property string statePath: {
+        const home = Quickshell.env("HOME")
+        return `${home}/.cache/quickshell-notify-state.json`
+    }
+
+    // True while applying a state-file snapshot, so writes from the daemon
+    // don't loop back into IPC calls.
+    property bool _applyingState: false
+
+    onDndChanged: {
+        if (root._applyingState)
+            return
+        // Any `notifs.dnd = x` write (Focus/Gaming Mode) must reach the daemon.
+        root._ipc("setDnd", root.dnd ? "true" : "false")
+    }
+
+    // State snapshot from the daemon, watched for changes. Written by the
+    // daemon's FileView (atomicWrites) on every mutation.
+    FileView {
+        id: stateFile
+        path: root.statePath
+        watchChanges: true
+
+        onLoaded: root._applyState(text())
+        onFileChanged: reload()
+        onLoadFailed: err => {
+            // File simply doesn't exist yet (daemon not started / no
+            // notifications). Keep the empty list; the watch stays armed.
+            if (err !== FileViewError.FileNotFound)
+                QsServices.Logger.warn("Notifs", `State file error: ${FileViewError.toString(err)}`)
         }
     }
-    
-    // Add notification from external NotificationServer
-    function addNotification(notif) {
-        // Check DND mode
-        if (dnd && notif.urgency !== NotificationUrgency.Critical) {
-            QsServices.Logger.debug("Notifs", `DND active - suppressing: ${notif.summary}`)
-            return;
-        }
 
-        QsServices.Logger.debug("Notifs", `Adding notification: ${notif.summary}`)
-        
-        const notifWrapper = notifComponent.createObject(root, {
-            notification: notif
-        })
+    // Forward a mutation to the notification daemon.
+    function _ipc(...args) {
+        ipcProcess.exec(["qs", "ipc", "-p", root.daemonPath, "call", "notifs", ...args])
+    }
 
-        if (!notifWrapper) {
-            QsServices.Logger.error("Notifs", "Failed to create notification wrapper")
+    Process {
+        id: ipcProcess
+    }
+
+    // Rebuild the notification list from the daemon's serialized state.
+    function _applyState(raw) {
+        if (!raw || raw.length === 0) {
+            root.notifications = []
+            root.dnd = false
             return
         }
-        
-        // Cap maximum notifications to prevent memory leaks
-        var capped = [notifWrapper, ...root.notifications]
-        var dropped = capped.slice(root.maxNotifications)
-        for (var i = 0; i < dropped.length; i++) {
-            if (dropped[i]) dropped[i].destroy()
+
+        let parsed
+        try {
+            parsed = JSON.parse(raw)
+        } catch (e) {
+            QsServices.Logger.error("Notifs", `Failed to parse state file: ${e?.message ?? e}`)
+            return
         }
-        root.notifications = capped.slice(0, root.maxNotifications)
-        QsServices.Logger.debug("Notifs", `Total notifications: ${root.notifications.length}`)
-        QsServices.Logger.debug("Notifs", `Queued: ${notifWrapper.appName ?? ""} ${notifWrapper.summary ?? ""}`)
+
+        root._applyingState = true
+        root.dnd = parsed.dnd === true
+
+        const rebuilt = []
+        const list = parsed.notifications ?? []
+        for (let i = 0; i < list.length; i++) {
+            const s = list[i]
+            if (!s)
+                continue
+            const n = {
+                notifId: s.id ?? "",
+                summary: s.summary ?? "",
+                body: s.body ?? "",
+                appName: s.appName ?? "",
+                appIcon: s.appIcon ?? "",
+                image: s.image ?? "",
+                urgency: s.urgency ?? 1,
+                timestamp: new Date(s.timestamp ?? Date.now()),
+                read: s.read === true,
+                closed: s.closed === true,
+                hasAnimated: false,
+                // Rebuilt actions: only identifier/text survive serialization;
+                // invoking routes through IPC back to the daemon.
+                actions: (s.actions ?? []).map(a => ({
+                    identifier: a.identifier,
+                    text: a.text,
+                    invoke: () => root._invokeAction(s.id ?? "", a.identifier)
+                })),
+                timeString: root._timeString(new Date(s.timestamp ?? Date.now())),
+                close: () => root._close(s.id ?? ""),
+                invokeAction: (actionId) => root._invokeAction(s.id ?? "", actionId)
+            }
+            rebuilt.push(n)
+        }
+
+        root.notifications = rebuilt
+        root._applyingState = false
+    }
+
+    // Relative time label, mirroring the daemon's wrapper.
+    function _timeString(timestamp) {
+        const diff = new Date().getTime() - timestamp.getTime()
+        const minutes = Math.floor(diff / 60000)
+        const hours = Math.floor(minutes / 60)
+        const days = Math.floor(hours / 24)
+        if (days > 0) return days + "d ago"
+        if (hours > 0) return hours + "h ago"
+        if (minutes > 0) return minutes + "m ago"
+        return "Just now"
+    }
+
+    function _close(id) {
+        root._ipc("closeById", id)
+    }
+
+    function _invokeAction(id, actionId) {
+        root._ipc("invokeActionById", id, actionId)
     }
 
     function markAllRead() {
-        const stamp = Date.now()
-        lastReadAt = stamp
-        notifications.forEach(notification => {
-            if (notification)
-                notification.read = true
-        })
+        root._ipc("markAllRead")
     }
 
-    function _actionsToArray(actionList) {
-        const out = []
-        if (!actionList)
-            return out
-
-        const len = actionList.length ?? 0
-        for (let i = 0; i < len; i++) {
-            const a = actionList[i]
-            if (!a)
-                continue
-            out.push({
-                identifier: a.identifier,
-                text: a.text,
-                invoke: () => a.invoke()
-            })
-        }
-        return out
-    }
-    
-    // Toggle DND mode
     function toggleDnd() {
-        dnd = !dnd;
-        QsServices.Logger.info("Notifs", `DND mode: ${dnd ? "enabled" : "disabled"}`)
+        root._ipc("toggleDnd")
     }
-    
-    // Clear all notifications
+
+    // Set DND explicitly (Focus Mode / Gaming Mode).
+    function setDnd(value) {
+        root._ipc("setDnd", value ? "true" : "false")
+    }
+
+    // Push our open/closed state so the daemon suppresses popup toasts while
+    // the list shows the notification live.
+    function setPanelOpen(open) {
+        root._ipc("setPanelOpen", open ? "true" : "false")
+    }
+
     function clearAll() {
-        notifications.forEach(n => n.close());
-        markAllRead()
-        QsServices.Logger.info("Notifs", "All notifications cleared")
+        root._ipc("clearAll")
     }
-    
-    // Clear notifications from specific app
+
     function clearApp(appName) {
-        notifications.filter(n => n.appName === appName).forEach(n => n.close());
-        QsServices.Logger.info("Notifs", `Cleared notifications from: ${appName}`)
+        root._ipc("clearApp", appName)
     }
 
-    // Notification wrapper component
-    component Notif: QtObject {
-        id: notifWrapper
-        
-        property var notification
-        property date timestamp: new Date()
-        property bool closed: false
-        property bool hasAnimated: false  // Track if popup animation has played
-        property bool read: false
-        
-        // Notification properties
-        property string notifId: ""
-        property string summary: ""
-        property string body: ""
-        property string appName: ""
-        property string appIcon: ""
-        property string image: ""
-        property int urgency: NotificationUrgency.Normal
-        // Use a JS array so `.length`/indexing and helpers work reliably.
-        property var actions: []
-        
-        // Time formatting
-        readonly property string timeString: {
-            const diff = new Date().getTime() - timestamp.getTime();
-            const minutes = Math.floor(diff / 60000);
-            const hours = Math.floor(minutes / 60);
-            const days = Math.floor(hours / 24);
-            
-            if (days > 0) return days + "d ago";
-            if (hours > 0) return hours + "h ago";
-            if (minutes > 0) return minutes + "m ago";
-            return "Just now";
-        }
-        
-        // Connections to notification object
-        readonly property Connections conn: Connections {
-            target: notifWrapper.notification
-            
-            function onClosed() {
-                notifWrapper.close();
-            }
-            
-            function onSummaryChanged() {
-                notifWrapper.summary = notifWrapper.notification.summary;
-            }
-            
-            function onBodyChanged() {
-                notifWrapper.body = notifWrapper.notification.body;
-            }
-            
-            function onAppNameChanged() {
-                notifWrapper.appName = notifWrapper.notification.appName;
-            }
-            
-            function onAppIconChanged() {
-                notifWrapper.appIcon = notifWrapper.notification.appIcon;
-            }
-            
-            function onImageChanged() {
-                notifWrapper.image = notifWrapper.notification.image;
-            }
-            
-            function onUrgencyChanged() {
-                notifWrapper.urgency = notifWrapper.notification.urgency;
-            }
-            
-            function onActionsChanged() {
-                notifWrapper.actions = root._actionsToArray(notifWrapper.notification.actions)
-            }
-        }
-        
-        function close() {
-            if (closed) return;
-            
-            // Mark as closed but keep in history for notification center
-            closed = true;
-            
-            // Only dismiss from the notification daemon, don't remove from list
-            if (notification) {
-                notification.dismiss();
-            }
-
-            QsServices.Logger.debug("Notifs", `Notification closed (kept in history): ${summary}`)
-        }
-        
-        function invokeAction(actionId) {
-            const action = actions.find(a => a.identifier === actionId);
-            if (action && action.invoke) {
-                action.invoke();
-            }
-        }
-        
-        Component.onCompleted: {
-            if (!notification)
-                return;
-            
-            notifId = `${notification.id}`
-            summary = notification.summary
-            body = notification.body
-            appName = notification.appName
-            appIcon = notification.appIcon
-            image = notification.image
-            urgency = notification.urgency
-            actions = root._actionsToArray(notification.actions)
-            read = timestamp.getTime() <= root.lastReadAt
-        }
-    }
-    
-    Component {
-        id: notifComponent
-        
-        Notif {}
-    }
-    
-    // Delete a specific notification (permanently remove from history)
     function deleteNotification(notif) {
-        if (root.notifications.includes(notif)) {
-            root.notifications = root.notifications.filter(n => n !== notif);
-            if (notif.notification) {
-                notif.notification.dismiss();
-            }
-            notif.destroy();
-            QsServices.Logger.debug("Notifs", "Notification permanently deleted")
-        }
+        if (notif?.notifId)
+            root._ipc("closeById", notif.notifId)
     }
 }

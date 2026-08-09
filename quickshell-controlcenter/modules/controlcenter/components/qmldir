@@ -5,4 +5,3 @@ BrightnessSlider 1.0 BrightnessSlider.qml
 SystemStats 1.0 SystemStats.qml
 MediaCard 1.0 MediaCard.qml
 NotificationList 1.0 NotificationList.qml
-NotificationPopup 1.0 NotificationPopup.qml

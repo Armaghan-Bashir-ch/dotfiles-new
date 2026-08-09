@@ -28,8 +28,8 @@ Singleton {
             // Enable performance mode
             setCpuGovernor(performanceGovernor)
             
-            // Enable DND
-            notifs.dnd = true
+            // Enable DND (routed to the notify daemon via IPC)
+            notifs.setDnd(true)
             
             // Boost brightness (optional - can be customized)
             if (brightness.brightness < 0.8) {
@@ -43,7 +43,7 @@ Singleton {
             
             // Restore DND only if user hasn't manually changed it
             if (notifs.dnd === true)
-                notifs.dnd = dndEnabled
+                notifs.setDnd(dndEnabled)
             
             // Restore brightness only if gaming mode set it
             if (didSetBrightness)

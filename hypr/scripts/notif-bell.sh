@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Quickshell notification bell - replaces swaync-count.sh.
-# Reads unread count + DND state from the quickshell-controlcenter IPC handler.
+# Reads unread count + DND state from the quickshell-notify daemon IPC handler.
 
-CC_PATH="/home/armaghan/.config/quickshell-controlcenter"
+NOTIFY_PATH="/home/armaghan/.config/quickshell-notify"
 
-count=$(qs ipc -p "$CC_PATH" prop get controlcenter unreadCount 2>/dev/null)
-dnd=$(qs ipc -p "$CC_PATH" prop get controlcenter dnd 2>/dev/null)
+count=$(qs ipc -p "$NOTIFY_PATH" prop get notifs unreadCount 2>/dev/null)
+dnd=$(qs ipc -p "$NOTIFY_PATH" prop get notifs dnd 2>/dev/null)
 
 # QuickShell can print "No running instances..." to stdout.
 # Only accept the values we actually expect.
