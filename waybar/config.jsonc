@@ -139,7 +139,7 @@
         "tooltip-format": "羽 {frequency}GHz  {bandwidthUpBytes}  {bandwidthDownBytes}",
         "format-disconnected": "󰤠  Disconnected",
         "interval": 5,
-        "on-click": "/bin/bash -c 'pkill -f \"quickshell-networ[k]\"; killall -q nmcli; sleep 0.5; exec /usr/bin/qs -p /home/armaghan/.config/quickshell-network >/tmp/qs.log 2>&1 &'"
+        "on-click": "/bin/bash -c 'pkill -f \"^/usr/bin/qs -p /home/armaghan/\\.config/quickshell-network\"; killall -q nmcli; sleep 0.5; exec /usr/bin/qs -p /home/armaghan/.config/quickshell-network >/tmp/qs.log 2>&1 &'"
     },
 
     "wlr/taskbar": {
@@ -167,7 +167,7 @@
         "tooltip-format": " {device_alias}",
         "tooltip-format-connected": "{device_enumerate}",
         "tooltip-format-enumerate-connected": " {device_alias}",
-        "on-click": "/bin/bash -c 'pkill -f \"quickshell-bluetoot[h]\" >/dev/null 2>&1; sleep 0.5; /usr/bin/qs -p /home/armaghan/.config/quickshell-bluetooth >/tmp/qs.log 2>&1 &'"
+        "on-click": "/bin/bash -c 'pkill -f \"^/usr/bin/qs -p /home/armaghan/\\.config/quickshell-bluetooth\" >/dev/null 2>&1; sleep 0.5; /usr/bin/qs -p /home/armaghan/.config/quickshell-bluetooth >/tmp/qs.log 2>&1 &'"
     },
 
     "pulseaudio": {
