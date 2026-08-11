@@ -101,7 +101,7 @@ Item {
                 Image {
                     id: notifIcon
                     anchors.centerIn: parent
-                    width: 20; height: 20
+                    width: 20; height: 15
                     visible: root.hasAppIcon && notifIcon.status !== Image.Error
                     source: root.iconSource(notification?.appIcon ?? "")
                     fillMode: Image.PreserveAspectFit
