@@ -153,7 +153,7 @@ zstyle ':fzf-tab:*' accept-line enter
 
 fzf_file_widget() {
   local dirs=$(zoxide query --list 2>/dev/null | awk '{print $2}' | grep -E '^(/home/armaghan/\.config|/home/armaghan/dotfiles)' | head -20)
-  local files=$(fd --hidden --type f . $dirs ~/.config ~/dotfiles 2>/dev/null | fzf --multi --bind 'enter:accept' --height 50% --info=inline --cycle --preview 'bat --style=numbers --color=always {} || cat {}')
+  local files=$(command fd --hidden --type f . $dirs ~/.config ~/dotfiles 2>/dev/null | sort -u | fzf --multi --bind 'enter:accept' --height 50% --info=inline --cycle --preview 'bat --style=numbers --color=always {} || cat {}')
   if [[ -n $files ]]; then
     vim $files
   fi
