@@ -424,7 +424,7 @@ Rectangle {
                       action: "open" },
                     { label: "Copy path", glyph: "\u{F018F}", // content-copy
                       action: "copy" },
-                    { label: "Delete", glyph: "\u{F0199}", // delete
+                    { label: "Delete", glyph: "\u{F01B4}", // delete
                       action: "delete" }
                 ]
 
