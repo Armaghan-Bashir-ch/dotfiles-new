@@ -430,9 +430,9 @@ Rectangle {
 
                 delegate: Rectangle {
                     required property var modelData
-                    width: chipRow.implicitWidth + 14
-                    height: 20
-                    radius: 6
+                    width: chipRow.implicitWidth + 16
+                    height: 26
+                    radius: 8
                     color: chipMouse.containsMouse
                         ? Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.18)
                         : Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.10)
@@ -443,13 +443,13 @@ Rectangle {
                     Row {
                         id: chipRow
                         anchors.centerIn: parent
-                        spacing: 5
+                        spacing: 6
 
                         Text {
                             anchors.verticalCenter: parent.verticalCenter
                             text: modelData.glyph
                             font.family: root.materialIconFont
-                            font.pixelSize: 11
+                            font.pixelSize: 13
                             color: root.accentColor
                         }
 
@@ -457,9 +457,9 @@ Rectangle {
                             anchors.verticalCenter: parent.verticalCenter
                             text: modelData.label
                             font.family: root.fontFamily
-                            font.pixelSize: 10
-                            font.weight: Font.Medium
-                            font.letterSpacing: 0.2
+                            font.pixelSize: 13
+                            font.weight: Font.Bold
+                            font.letterSpacing: 0.3
                             color: root.accentColor
                         }
                     }
