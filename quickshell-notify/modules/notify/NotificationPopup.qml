@@ -64,7 +64,7 @@ PanelWindow {
     property var popups: []
     property var _lastPopped: null
 
-    readonly property int normalTimeout: 5000
+    readonly property int normalTimeout: 2500
     readonly property int criticalTimeout: 9000
 
     screen: Quickshell.screens[0]

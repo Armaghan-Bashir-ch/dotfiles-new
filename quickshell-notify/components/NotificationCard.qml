@@ -1,5 +1,6 @@
 import QtQuick 6.10
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Io
 import "../services" as QsServices
 import "../config" as QsConfig
@@ -153,9 +154,9 @@ Item {
         ? (notification?.appIcon ?? "")
         : (notification?.image ?? "")
 
-    // Contextual actions spawn their own processes (Open / Copy path).
+    // Contextual actions spawn their own processes (Open / Delete).
     Process { id: openProc }
-    Process { id: copyPathProc }
+    Process { id: deleteProc }
 
     ColumnLayout {
         id: contentLayout
@@ -419,16 +420,18 @@ Rectangle {
             Repeater {
                 model: [
                     { label: "Open", glyph: "\u{F03CC}", // open-in-new
-                      exec: () => root.openProc.exec(["xdg-open", root.screenshotPath]) },
+                      action: "open" },
                     { label: "Copy path", glyph: "\u{F018F}", // content-copy
-                      exec: () => root.copyPathProc.exec(["wl-copy", root.screenshotPath]) }
+                      action: "copy" },
+                    { label: "Delete Screenshot", glyph: "\u{F0199}", // delete
+                      action: "delete" }
                 ]
 
                 delegate: Rectangle {
                     required property var modelData
-                    width: chipLabel.implicitWidth + 22
+                    width: chipRow.implicitWidth + 24
                     height: 28
-                    radius: 14
+                    radius: 8
                     color: chipMouse.containsMouse
                         ? Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.18)
                         : Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.10)
@@ -437,6 +440,7 @@ Rectangle {
                     Behavior on scale { NumberAnimation { duration: 100; easing.type: Easing.OutCubic } }
 
                     Row {
+                        id: chipRow
                         anchors.centerIn: parent
                         spacing: 6
 
@@ -449,7 +453,6 @@ Rectangle {
                         }
 
                         Text {
-                            id: chipLabel
                             anchors.verticalCenter: parent.verticalCenter
                             text: modelData.label
                             font.family: root.fontFamily
@@ -466,8 +469,33 @@ Rectangle {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            if (modelData.exec)
-                                modelData.exec()
+                            if (modelData.action === "copy") {
+                                // Native clipboard singleton - writes the
+                                // screenshot path directly (wl-copy daemonizes
+                                // a child that Process.exec reaps, so nothing
+                                // lands in the clipboard).
+                                Quickshell.clipboardText = root.screenshotPath
+                            } else if (modelData.action === "open") {
+                                // Launched through bash so the `&` detaches it:
+                                // imv keeps running after the card (and its
+                                // Process) is destroyed. Same pattern the
+                                // control center uses (shell.qml). Bare-id
+                                // Process access - root.PROC is undefined in
+                                // the delegate scope.
+                                openProc.exec(["/bin/bash", "-c",
+                                    `imv "${root.screenshotPath}" >/dev/null 2>&1 &`])
+                            } else if (modelData.action === "delete") {
+                                // Delete the screenshot file from disk. Runs
+                                // backgrounded like imv above: close() destroys
+                                // this card immediately, and Process's
+                                // destructor kills its child - a foreground rm
+                                // would die before it finishes. Detached bash
+                                // exits instantly, rm survives as an orphan.
+                                deleteProc.exec(["/bin/bash", "-c",
+                                    `rm -f -- "${root.screenshotPath}" >/dev/null 2>&1 &`])
+                            }
+                            // Clicking any smart action closes the notification.
+                            root.notification.close()
                         }
                     }
                 }
