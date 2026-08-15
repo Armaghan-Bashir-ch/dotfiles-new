@@ -95,6 +95,7 @@ Singleton {
                 appIcon: n.appIcon,
                 image: n.image,
                 urgency: n.urgency,
+                category: n.category,
                 timestamp: n.timestamp.getTime(),
                 read: n.read,
                 closed: n.closed,
@@ -240,6 +241,8 @@ Singleton {
         property string appIcon: ""
         property string image: ""
         property int urgency: NotificationUrgency.Normal
+        property string desktopEntry: ""
+        property var hints: ({})
 
         // Normalize the daemon's image URL into something Image.source can
         // load. Quickshell wraps an absolute `image-path` hint (notify-send
@@ -261,6 +264,45 @@ Singleton {
         }
         // Use a JS array so `.length`/indexing and helpers work reliably.
         property var actions: []
+
+        // ── Semantic classification ──────────────────────────────────────────
+        // Derived from the raw notification metadata by NotificationClassifier
+        // so the UI never has to re-derive (or hardcode) category checks.
+        readonly property string category: QsServices.NotificationClassifier.classify(
+            notifWrapper.appName, notifWrapper.desktopEntry, notifWrapper.summary,
+            notifWrapper.body, notifWrapper.appIcon, notifWrapper.image, notifWrapper.hints)
+
+        // Accent color per category. System purple and download amber are
+        // deliberate brand accents; screenshot uses a fixed success green so
+        // "a capture was saved" reads green even when the pywal theme's color2
+        // (Pywal.success) is not green (current theme maps color2 to gray).
+        readonly property color accentColor: {
+            switch (notifWrapper.category) {
+            case "success":    return QsServices.Pywal.success
+            case "screenshot": return "#37B679"
+            case "system":     return "#a78bfa"
+            case "download":   return "#fbbf24"
+            default:
+                return notifWrapper.urgency === NotificationUrgency.Critical
+                    ? QsServices.Pywal.error : QsServices.Pywal.primary
+            }
+        }
+
+        readonly property string screenshotPath: notifWrapper.category === "screenshot"
+            ? QsServices.NotificationClassifier.extractScreenshotPath(notifWrapper.appIcon, notifWrapper.image, notifWrapper.body)
+            : ""
+        readonly property string screenshotDirLabel: notifWrapper.screenshotPath
+            ? QsServices.NotificationClassifier.formatDirLabel(notifWrapper.screenshotPath)
+            : ""
+
+        readonly property int downloadProgress: notifWrapper.category === "download"
+            ? QsServices.NotificationClassifier.extractProgress(notifWrapper.hints)
+            : -1
+        readonly property bool downloadComplete: notifWrapper.category === "download"
+            && (notifWrapper.downloadProgress === 100
+                || /complete|done|finished|saved/i.test(`${notifWrapper.summary} ${notifWrapper.body}`))
+        readonly property bool hasPreviewImage: notifWrapper.screenshotPath.length > 0
+            || (notifWrapper.image && notifWrapper.image.length > 0)
 
         // Time formatting
         readonly property string timeString: {
@@ -296,11 +338,19 @@ Singleton {
             }
 
             function onAppIconChanged() {
-                notifWrapper.appIcon = notifWrapper.notification.appIcon;
+                notifWrapper.appIcon = notifWrapper.normalizeImage(notifWrapper.notification.appIcon);
             }
 
             function onImageChanged() {
                 notifWrapper.image = notifWrapper.normalizeImage(notifWrapper.notification.image);
+            }
+
+            function onDesktopEntryChanged() {
+                notifWrapper.desktopEntry = notifWrapper.notification.desktopEntry;
+            }
+
+            function onHintsChanged() {
+                notifWrapper.hints = notifWrapper.notification.hints ?? {};
             }
 
             function onUrgencyChanged() {
@@ -343,9 +393,11 @@ Singleton {
             summary = notification.summary
             body = notification.body
             appName = notification.appName
-            appIcon = notification.appIcon
+            appIcon = normalizeImage(notification.appIcon)
             image = normalizeImage(notification.image)
             urgency = notification.urgency
+            desktopEntry = notification.desktopEntry ?? ""
+            hints = notification.hints ?? {}
             actions = root._actionsToArray(notification.actions)
             read = timestamp.getTime() <= root.lastReadAt
         }

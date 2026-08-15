@@ -2,3 +2,4 @@ module qs.services
 singleton Pywal Pywal.qml
 singleton Notifs Notifs.qml
 singleton Logger Logger.qml
+singleton NotificationClassifier NotificationClassifier.qml

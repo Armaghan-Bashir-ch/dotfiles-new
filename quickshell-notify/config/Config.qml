@@ -23,7 +23,13 @@ Singleton {
 
     readonly property var appearance: ({
         fontFamily: data.appearance?.fontFamily ?? "Inter",
-        materialIconFont: data.appearance?.materialIconFont ?? "Material Design Icons"
+        // The installed MDI font registers its family as "Material Design Icons
+        // Desktop"; the bare "Material Design Icons" name matches nothing and
+        // silently falls back, so icon codepoints render as garbage glyphs.
+        materialIconFont: data.appearance?.materialIconFont ?? "Material Design Icons Desktop",
+        // Nerd Font for app-name glyph overrides (e.g. Hyprland's nf glyph),
+        // which do not exist in Material Design Icons.
+        nerdFontFamily: "CaskaydiaCove Nerd Font"
     })
 
     readonly property var paths: ({

@@ -133,12 +133,39 @@ PanelWindow {
                 // ControlCenterWindow.qml): dark pywal surface at 0.2 alpha,
                 // which sits above hyprland's `blur on, ignore_alpha 0.15`
                 // layerrule so the blur actually kicks in and it reads glassy.
+                // The border is tinted with the notification's category accent
+                // (green success / purple system / amber download) so the
+                // accent reads through without flooding the surface.
                 color: popupMouse.containsMouse
                     ? Qt.rgba(root.cSurface.r, root.cSurface.g, root.cSurface.b, 0.25)
                     : Qt.rgba(root.cSurface.r, root.cSurface.g, root.cSurface.b, 0.2)
                 border.width: 1
-                border.color: "#16332f"
+                border.color: {
+                    const accent = modelData?.accentColor ?? root.cPrimary
+                    const a = popupMouse.containsMouse ? 0.32 : 0.20
+                    return Qt.rgba(accent.r, accent.g, accent.b, a)
+                }
                 Behavior on color { ColorAnimation { duration: 150 } }
+                Behavior on border.color { ColorAnimation { duration: 150 } }
+
+                // Subtle top accent line - a faint indicator, not a fill.
+                Rectangle {
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        topMargin: 1
+                        leftMargin: 24
+                        rightMargin: 24
+                    }
+                    height: 2
+                    radius: 1
+                    visible: modelData?.category && modelData.category !== "default"
+                    color: {
+                        const accent = modelData?.accentColor ?? root.cPrimary
+                        return Qt.rgba(accent.r, accent.g, accent.b, 0.45)
+                    }
+                }
 
                 // Entrance animation
                 scale: 0.94

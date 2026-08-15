@@ -39,6 +39,7 @@ ShellRoot {
     NotificationPopup {
         notifs: root.notifs
         panelOpen: root.notifs.panelOpen
+        pywal: QsServices.Pywal
         // Direct function reference (NOT a closure): the popup invokes this
         // via `root.openControlCenter()` from its own file scope, and an
         // arrow-function closure stored in a property var loses its id scope

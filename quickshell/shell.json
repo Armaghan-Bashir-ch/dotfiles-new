@@ -1,7 +1,7 @@
 {
   "appearance": {
     "fontFamily": "Inter",
-    "materialIconFont": "Material Design Icons"
+    "materialIconFont": "Material Design Icons Desktop"
   },
   "paths": {
     "pywalColors": "~/.cache/wal/colors.json",
