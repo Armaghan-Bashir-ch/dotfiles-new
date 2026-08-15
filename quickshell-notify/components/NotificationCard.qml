@@ -363,7 +363,7 @@ Item {
                 Layout.alignment: Qt.AlignVCenter
                 text: "\u{F05E0}" // check-circle
                 font.family: root.materialIconFont
-                font.pixelSize: 13
+                font.pixelSize: 15
                 color: root.accentColor
             }
 
@@ -372,9 +372,10 @@ Item {
                 Layout.alignment: Qt.AlignVCenter
                 text: `Saved to ${root.screenshotDirLabel}`
                 font.family: root.fontFamily
-                font.pixelSize: 11
-                font.weight: Font.Medium
-                color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.9)
+                font.pixelSize: 13
+                font.weight: Font.Bold
+                font.letterSpacing: 0.4
+                color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.95)
                 elide: Text.ElideRight
                 wrapMode: Text.NoWrap
             }
@@ -423,15 +424,15 @@ Rectangle {
                       action: "open" },
                     { label: "Copy path", glyph: "\u{F018F}", // content-copy
                       action: "copy" },
-                    { label: "Delete Screenshot", glyph: "\u{F0199}", // delete
+                    { label: "Delete", glyph: "\u{F0199}", // delete
                       action: "delete" }
                 ]
 
                 delegate: Rectangle {
                     required property var modelData
-                    width: chipRow.implicitWidth + 24
-                    height: 28
-                    radius: 8
+                    width: chipRow.implicitWidth + 14
+                    height: 20
+                    radius: 6
                     color: chipMouse.containsMouse
                         ? Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.18)
                         : Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.10)
@@ -442,13 +443,13 @@ Rectangle {
                     Row {
                         id: chipRow
                         anchors.centerIn: parent
-                        spacing: 6
+                        spacing: 5
 
                         Text {
                             anchors.verticalCenter: parent.verticalCenter
                             text: modelData.glyph
                             font.family: root.materialIconFont
-                            font.pixelSize: 12
+                            font.pixelSize: 11
                             color: root.accentColor
                         }
 
@@ -456,9 +457,9 @@ Rectangle {
                             anchors.verticalCenter: parent.verticalCenter
                             text: modelData.label
                             font.family: root.fontFamily
-                            font.pixelSize: 11
+                            font.pixelSize: 10
                             font.weight: Font.Medium
-                            font.letterSpacing: 0.3
+                            font.letterSpacing: 0.2
                             color: root.accentColor
                         }
                     }
