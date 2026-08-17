@@ -142,11 +142,26 @@ PanelWindow {
                 border.width: 1
                 border.color: {
                     const accent = modelData?.accentColor ?? root.cPrimary
-                    const a = popupMouse.containsMouse ? 0.32 : 0.20
+                    const a = popupMouse.containsMouse ? 0.40 : 0.28
                     return Qt.rgba(accent.r, accent.g, accent.b, a)
                 }
                 Behavior on color { ColorAnimation { duration: 150 } }
                 Behavior on border.color { ColorAnimation { duration: 150 } }
+
+                // Experimental accent wash: faint category-accent tint over
+                // the glass on EVERY card (blue default, green screenshot,
+                // purple system, amber download, red critical) so the whole
+                // stack carries its color, not just the thin border. Sits
+                // behind the card content - popupContent is the last child
+                // and paints above it.
+                Rectangle {
+                    anchors.fill: parent
+                    radius: parent.radius
+                    color: {
+                        const accent = modelData?.accentColor ?? root.cPrimary
+                        return Qt.rgba(accent.r, accent.g, accent.b, 0.05)
+                    }
+                }
 
                 // Subtle top accent line - a faint indicator, not a fill.
                 Rectangle {

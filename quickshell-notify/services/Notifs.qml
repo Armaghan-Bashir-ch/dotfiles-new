@@ -281,22 +281,27 @@ Singleton {
         }
 
         // Accent color per category. System purple and download amber are
-        // deliberate brand accents; screenshot uses a fixed success green so
-        // "a capture was saved" reads green even when the pywal theme's color2
-        // (Pywal.success) is not green (current theme maps color2 to gray).
-        // Critical uses a fixed red for the same reason - urgency-critical
-        // must read as a warning regardless of the pywal theme.
+        // deliberate brand accents. Screenshot and success share a fixed
+        // green because the pywal theme's color2 (Pywal.success) maps to
+        // gray in the current theme - completed actions must read green
+        // regardless of the theme. Critical uses a fixed red for the same
+        // reason - urgency-critical must read as a warning regardless of
+        // the pywal theme.
         // Default uses a fixed soft blue (Catppuccin Blue) because the current
         // theme's primary is gray - neutral notifications keep a calm, themed
         // accent without competing with the semantic categories.
+        // Low urgency stays quiet with a muted gray-blue so the popup stack
+        // reads Normal (blue) > Low (grey) > Critical (red) at a glance.
         readonly property color accentColor: {
             switch (notifWrapper.category) {
-            case "success":    return QsServices.Pywal.success
+            case "success":    return "#37B679"
             case "screenshot": return "#37B679"
             case "system":     return "#a78bfa"
             case "download":   return "#fbbf24"
             case "critical":   return "#ef4444"
-            default:           return "#7aa2f7"
+            default:
+                return notifWrapper.urgency === NotificationUrgency.Low
+                    ? "#8a93a3" : "#7aa2f7"
             }
         }
 
