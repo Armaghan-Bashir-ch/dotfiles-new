@@ -280,23 +280,21 @@ Singleton {
             return base
         }
 
-        // Accent color per category. System purple and download amber are
-        // deliberate brand accents. Screenshot and success share a fixed
+        // Accent color per category. Download amber is a deliberate brand accent.
+        // Screenshot and success share a fixed
         // green because the pywal theme's color2 (Pywal.success) maps to
         // gray in the current theme - completed actions must read green
         // regardless of the theme. Critical uses a fixed red for the same
         // reason - urgency-critical must read as a warning regardless of
         // the pywal theme.
-        // Default uses a fixed soft blue (Catppuccin Blue) because the current
-        // theme's primary is gray - neutral notifications keep a calm, themed
-        // accent without competing with the semantic categories.
-        // Low urgency stays quiet with a muted gray-blue so the popup stack
-        // reads Normal (blue) > Low (grey) > Critical (red) at a glance.
+        // System uses silver so OS-level notifications read neutral-metallic,
+        // clearly brighter than the muted low-urgency grey and distinct
+        // from the blue defaults.
         readonly property color accentColor: {
             switch (notifWrapper.category) {
             case "success":    return "#37B679"
             case "screenshot": return "#37B679"
-            case "system":     return "#a78bfa"
+            case "system":     return "#22d3ee"
             case "download":   return "#fbbf24"
             case "critical":   return "#ef4444"
             default:
