@@ -286,6 +286,9 @@ Singleton {
         // (Pywal.success) is not green (current theme maps color2 to gray).
         // Critical uses a fixed red for the same reason - urgency-critical
         // must read as a warning regardless of the pywal theme.
+        // Default uses a fixed soft blue (Catppuccin Blue) because the current
+        // theme's primary is gray - neutral notifications keep a calm, themed
+        // accent without competing with the semantic categories.
         readonly property color accentColor: {
             switch (notifWrapper.category) {
             case "success":    return QsServices.Pywal.success
@@ -293,7 +296,7 @@ Singleton {
             case "system":     return "#a78bfa"
             case "download":   return "#fbbf24"
             case "critical":   return "#ef4444"
-            default:           return QsServices.Pywal.primary
+            default:           return "#7aa2f7"
             }
         }
 

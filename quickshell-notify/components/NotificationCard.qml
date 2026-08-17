@@ -221,7 +221,11 @@ Item {
                 Text {
                     anchors.centerIn: parent
                     visible: root.category === "default" && (!root.hasSuppliedIcon || notifIcon.status === Image.Error)
-                    text: "\u{F009A}" // bell-outline
+                    // U+F009C = bell-outline. U+F009A ("bell") is the FILLED
+                    // variant and renders visibly heavier than the outline
+                    // glyphs used by the other categories - the outline keeps
+                    // the default icon optically the same size as those.
+                    text: "\u{F009C}" // bell-outline
                     font.family: root.materialIconFont
                     font.pixelSize: 18
                     color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.8)
