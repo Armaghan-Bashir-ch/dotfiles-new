@@ -286,10 +286,12 @@ Singleton {
         // gray in the current theme - completed actions must read green
         // regardless of the theme. Critical uses a fixed red for the same
         // reason - urgency-critical must read as a warning regardless of
-        // the pywal theme.
-        // System uses silver so OS-level notifications read neutral-metallic,
-        // clearly brighter than the muted low-urgency grey and distinct
-        // from the blue defaults.
+        // the pywal theme. System uses cyan - the canonical "OS/tech" hue,
+        // clearly distinct from the green/amber/red semantics.
+        // Default uses a warm silver so neutral notifications stay quiet
+        // against the dark glass - the semantic categories carry the color.
+        // Low urgency goes a step dimmer (muted grey-blue) so the stack
+        // still reads Low < Normal < Critical.
         readonly property color accentColor: {
             switch (notifWrapper.category) {
             case "success":    return "#37B679"
@@ -299,7 +301,7 @@ Singleton {
             case "critical":   return "#ef4444"
             default:
                 return notifWrapper.urgency === NotificationUrgency.Low
-                    ? "#8a93a3" : "#7aa2f7"
+                    ? "#8a93a3" : "#9a9898"
             }
         }
 
