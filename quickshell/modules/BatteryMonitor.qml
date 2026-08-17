@@ -24,7 +24,9 @@ Scope {
 
     function _notify(title: string, body: string): void {
         // Use notify-send if present; otherwise just log.
-        notifyProc.exec(["notify-send", title, body])
+        // Critical urgency so the daemon renders the red warning popup
+        // (see quickshell-notify critical category).
+        notifyProc.exec(["notify-send", "-u", "critical", title, body])
     }
 
     Process {

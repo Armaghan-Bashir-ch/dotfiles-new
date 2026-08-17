@@ -268,23 +268,32 @@ Singleton {
         // ── Semantic classification ──────────────────────────────────────────
         // Derived from the raw notification metadata by NotificationClassifier
         // so the UI never has to re-derive (or hardcode) category checks.
-        readonly property string category: QsServices.NotificationClassifier.classify(
-            notifWrapper.appName, notifWrapper.desktopEntry, notifWrapper.summary,
-            notifWrapper.body, notifWrapper.appIcon, notifWrapper.image, notifWrapper.hints)
+        // Urgency-critical notifications that don't match any semantic category
+        // are promoted to "critical" so the popup renders the red warning
+        // treatment (red accent + alert glyph) instead of the plain default.
+        readonly property string category: {
+            const base = QsServices.NotificationClassifier.classify(
+                notifWrapper.appName, notifWrapper.desktopEntry, notifWrapper.summary,
+                notifWrapper.body, notifWrapper.appIcon, notifWrapper.image, notifWrapper.hints)
+            if (base === "default" && notifWrapper.urgency === NotificationUrgency.Critical)
+                return "critical"
+            return base
+        }
 
         // Accent color per category. System purple and download amber are
         // deliberate brand accents; screenshot uses a fixed success green so
         // "a capture was saved" reads green even when the pywal theme's color2
         // (Pywal.success) is not green (current theme maps color2 to gray).
+        // Critical uses a fixed red for the same reason - urgency-critical
+        // must read as a warning regardless of the pywal theme.
         readonly property color accentColor: {
             switch (notifWrapper.category) {
             case "success":    return QsServices.Pywal.success
             case "screenshot": return "#37B679"
             case "system":     return "#a78bfa"
             case "download":   return "#fbbf24"
-            default:
-                return notifWrapper.urgency === NotificationUrgency.Critical
-                    ? QsServices.Pywal.error : QsServices.Pywal.primary
+            case "critical":   return "#ef4444"
+            default:           return QsServices.Pywal.primary
             }
         }
 

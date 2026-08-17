@@ -16,6 +16,7 @@ import "../config" as QsConfig
 //   system     -> purple accent, system icon, Hyprland brand logo on the right
 //   download   -> amber accent, download icon, progress/completion indicator
 //   success    -> green accent for completed actions
+//   critical   -> red accent with alert glyph (urgency-critical notifications)
 //   default    -> normal appearance, app icon, no contextual chrome
 //
 // Every type shares the same corner radius, glass background, header
@@ -98,6 +99,7 @@ Item {
         case "success":    return "\u{F05E1}" // check-circle-outline
         case "system":     return "\u{F009A}" // bell-outline
         case "download":   return "\u{F01DA}" // download
+        case "critical":   return "\u{F0026}" // alert (warning triangle)
         default:           return ""
         }
     }
