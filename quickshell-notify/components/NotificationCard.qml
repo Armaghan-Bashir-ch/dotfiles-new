@@ -313,7 +313,7 @@ Item {
                 radius: 13
                 visible: showCloseButton
                 color: closeMouse.containsMouse
-                    ? Qt.rgba(errorColor.r, errorColor.g, errorColor.b, 0.12)
+                    ? root.accentTint(0.12)
                     : "transparent"
                 Behavior on color { ColorAnimation { duration: 120 } }
 
@@ -322,7 +322,7 @@ Item {
                     text: "\u{F0156}" // close
                     font.family: root.materialIconFont
                     font.pixelSize: 13
-                    color: closeMouse.containsMouse ? errorColor : Qt.rgba(onSurfaceColor.r, onSurfaceColor.g, onSurfaceColor.b, 0.45)
+                    color: closeMouse.containsMouse ? root.accentColor : Qt.rgba(onSurfaceColor.r, onSurfaceColor.g, onSurfaceColor.b, 0.45)
                     Behavior on color { ColorAnimation { duration: 120 } }
                 }
 
