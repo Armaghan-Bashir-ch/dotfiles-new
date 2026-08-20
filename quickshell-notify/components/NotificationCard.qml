@@ -354,8 +354,6 @@ Item {
             color: onSurfaceVariantColor
             wrapMode: Text.WordWrap
             maximumLineCount: 3
-            elide: Text.ElideRight
-            lineHeight: 1.4
             visible: showBody && text.length > 0 && !root.isScreenshot
         }
 
