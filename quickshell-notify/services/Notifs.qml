@@ -298,7 +298,7 @@ Singleton {
             case "screenshot": return "#37B679"
             case "system":     return "#22d3ee"
             case "download":   return "#fbbf24"
-            case "critical":   return "#ef4444"
+            case "critical":   return "#f00000"
             default:
                 return notifWrapper.urgency === NotificationUrgency.Low
                     ? "#8a93a3" : "#9a9898"
