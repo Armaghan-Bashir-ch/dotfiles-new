@@ -69,6 +69,8 @@ PanelWindow {
         command: ["xdg", root.screenshot.screenshotsDir]
         onStarted: root.shouldShow = false
     }
+    Process { id: nightlightProc; command: ["sh", "-c", "G_MESSAGES_DEBUG=none G_LOG_LEVEL=0 hyprsunset >/dev/null 2>&1 &"] }
+    Process { id: nightlightKill; command: ["killall", "hyprsunset"] }
 
     // M3 Solid Color Tokens
     readonly property color cSurface: pywal.surface
@@ -184,7 +186,22 @@ PanelWindow {
                             }
                             QuickToggle { Layout.fillWidth: true; icon: root.screenshot.isRecording ? "󰛿" : "󰻃"; label: root.screenshot.isRecording ? "Stop Recording" : "Record Screen"; subLabel: root.screenshot.isRecording ? "Recording in progress" : "Start wf-recorder"; active: root.screenshot.isRecording; activeColor: root.cActive; onClicked: { if (root.screenshot.isRecording) root.screenshot.stopRecording(); else root.screenshot.startRecording() } }
                             QuickToggle { Layout.fillWidth: true; icon: "󰅶"; label: "Caffeine"; subLabel: root.idleInhibitor.inhibited ? "Active" : "Off"; active: root.idleInhibitor.inhibited; activeColor: root.cActive; onClicked: root.idleInhibitor.inhibited = !root.idleInhibitor.inhibited }
-                            QuickToggle { Layout.fillWidth: true; icon: "󰄉"; label: "Focus Mode"; subLabel: root.settings.focusModeEnabled ? `${root.settings.focusModeMinutesLeft} min remaining` : "25 min timer"; active: root.settings.focusModeEnabled; activeColor: root.cActive; onClicked: { root.settings.focusModeEnabled = !root.settings.focusModeEnabled; if (root.settings.focusModeEnabled) { root.settings.focusModeMinutesLeft = 25; root.notifs.setDnd(true) } } }
+                            QuickToggle {
+                                Layout.fillWidth: true
+                                icon: "󰖨"
+                                label: "Nightlight"
+                                subLabel: root.settings.nightlightEnabled ? "On" : "Off"
+                                active: root.settings.nightlightEnabled
+                                activeColor: root.cActive
+                                onClicked: {
+                                    root.settings.nightlightEnabled = !root.settings.nightlightEnabled
+                                    if (root.settings.nightlightEnabled) {
+                                        nightlightProc.running = true
+                                    } else {
+                                        nightlightKill.running = true
+                                    }
+                                }
+                            }
                             QuickToggle { Layout.fillWidth: true; Layout.columnSpan: 2; icon: "󰹑"; label: "Screenshot"; subLabel: "Capture Screen"; active: false; activeColor: root.cActive; onClicked: root.screenshot.takeScreenshot("screen") }
                         }
 

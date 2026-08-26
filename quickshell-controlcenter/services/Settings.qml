@@ -11,8 +11,7 @@ Singleton {
     
     property bool dndEnabled: false
     property bool caffeineEnabled: false
-    property bool focusModeEnabled: false
-    property int focusModeMinutesLeft: 0
+    property bool nightlightEnabled: false
     
     readonly property string configPath: `${Quickshell.env("HOME")}/.config/quickshell/settings.json`
     
@@ -43,8 +42,7 @@ Singleton {
                     const settings = JSON.parse(text)
                     root.dndEnabled = settings.dndEnabled ?? false
                     root.caffeineEnabled = settings.caffeineEnabled ?? false
-                    root.focusModeEnabled = settings.focusModeEnabled ?? false
-                    root.focusModeMinutesLeft = settings.focusModeMinutesLeft ?? 0
+                    root.nightlightEnabled = settings.nightlightEnabled ?? false
                 } catch(e) {
                     QsServices.Logger.warn("Settings", `Failed to load: ${e?.message ?? e}`)
                 }
@@ -62,8 +60,7 @@ Singleton {
         const settings = {
             dndEnabled: root.dndEnabled,
             caffeineEnabled: root.caffeineEnabled,
-            focusModeEnabled: root.focusModeEnabled,
-            focusModeMinutesLeft: root.focusModeMinutesLeft
+            nightlightEnabled: root.nightlightEnabled
         }
         
         const json = JSON.stringify(settings, null, 2)
@@ -83,6 +80,5 @@ Singleton {
     
     onDndEnabledChanged: saveSettings()
     onCaffeineEnabledChanged: saveSettings()
-    onFocusModeEnabledChanged: saveSettings()
-    onFocusModeMinutesLeftChanged: saveSettings()
+    onNightlightEnabledChanged: saveSettings()
 }
