@@ -198,6 +198,8 @@ fzf-history-widget() {
     zle reset-prompt
 }
 
+unsetopt BANG_HIST
+
 bindkey '^R' fzf-history-widget
 
 cdi_widget() {
