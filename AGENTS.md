@@ -36,7 +36,6 @@
 | `gh`      | Greping text from terminal  |
 | `fd`      | For finding files or dirs    |
 | `zoxide`    | For travelling through locations      |
-| `atuin`     | Command History   |
 | `notify-send` | Sending Notifications for testing       |
 | `git diff`          | Finding difference to commit the push with context, if asked to  |
 | `hyprctl`           | For finding hyprland stuff       |
