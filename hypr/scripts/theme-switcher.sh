@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # Theme switcher script for waybar and rofi based on wallpaper directory
-# Run after setting wallpaper via swww
+# Run after setting wallpaper via awww
 
 # Read current theme
 CURRENT_THEME=$(cat ~/.config/hypr/current_theme.txt 2>/dev/null || echo "")
 
-# Get current wallpaper path
-WALLPAPER_PATH=$(swww query | grep -oP 'image: \K.*')
+# Get current wallpaper path (awww is the active daemon; keep swww as fallback)
+WALLPAPER_PATH=$(awww query 2>/dev/null | grep -oP 'image: \K.*')
+[ -z "$WALLPAPER_PATH" ] && WALLPAPER_PATH=$(swww query 2>/dev/null | grep -oP 'image: \K.*')
 
 if [ -z "$WALLPAPER_PATH" ]; then
     notify-send "Theme Switcher" "No wallpaper set, using default theme"

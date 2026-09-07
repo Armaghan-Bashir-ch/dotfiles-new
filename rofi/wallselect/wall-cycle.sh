@@ -5,7 +5,7 @@ WALLPAPERS=$(find ~/backgrounds -type f \( -iname "*.png" -o -iname "*.jpg" -o -
 
 for SELECTED in $WALLPAPERS; do
     if [ -n "$SELECTED" ]; then
-        swww img "$SELECTED" \
+        awww img "$SELECTED" \
             --transition-type grow \
             --transition-duration 0.5 \
             --transition-fps 60
