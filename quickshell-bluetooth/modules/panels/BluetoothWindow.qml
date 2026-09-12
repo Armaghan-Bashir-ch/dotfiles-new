@@ -61,14 +61,25 @@ PanelWindow {
         closeAnim.start()
     }
 
-    // Entrance animation whenever the panel becomes visible.
+    // Entrance animation whenever the panel becomes visible; on close the
+    // process is ephemeral like all other one-shot menus (controlcenter) -
+    // quit after the close animation finishes so waybar relaunches a fresh
+    // instance next time.
     onShouldShowChanged: {
         if (root.shouldShow) {
             root._closing = false
             panel.opacity = 0
             panel.scale = 0.94
             openAnim.start()
+        } else {
+            quitTimer.restart()
         }
+    }
+
+    Timer {
+        id: quitTimer
+        interval: 400  // let the close animation flush
+        onTriggered: Qt.quit()
     }
 
     // Play the entrance animation once after the first frame so the layer
