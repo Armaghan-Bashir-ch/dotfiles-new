@@ -36,7 +36,7 @@ FocusScope {
     readonly property color cOnSurface: pywal.foreground
     readonly property color cOnSurfaceVariant: pywal.onSurfaceMuted
     // Connected-state accent (kept identical to the original menu).
-    readonly property color cActive: "#82b7b0"
+    readonly property color cActive: "#becad3"
 
     // === Networks (preserved ordering: active first, then by strength) ======
     readonly property var sortedNetworks: [...network.networks].sort((a, b) => {

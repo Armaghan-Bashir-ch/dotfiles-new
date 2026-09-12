@@ -50,7 +50,7 @@ FocusScope {
     readonly property color cOnSurface: pywal.foreground
     readonly property color cOnSurfaceVariant: pywal.onSurfaceMuted
     // Connected-state accent (kept identical to the original menu).
-    readonly property color cActive: "#82b7b0"
+    readonly property color cActive: "#becad3"
 
     // === Hover-out close (preserved) ========================================
     HoverHandler {

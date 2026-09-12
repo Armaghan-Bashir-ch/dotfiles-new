@@ -19,7 +19,7 @@ Item {
     // Color tokens matching the Control Center's M3 pywal palette
     readonly property color cOnSurface: pywal ? pywal.foreground : "#e6e6e6"
     readonly property color cOnSurfaceVariant: pywal ? pywal.onSurfaceMuted : "#999999"
-    readonly property color cPrimary: pywal ? pywal.primary : "#82b7b0"
+    readonly property color cPrimary: pywal ? pywal.primary : "#becad3"
     readonly property color cError: pywal ? pywal.error : "#DE1222"
     readonly property color cSurfaceContainerHigh: pywal ? pywal.surfaceContainerHigh : "#1a1a1a"
 

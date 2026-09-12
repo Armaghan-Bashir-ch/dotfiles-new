@@ -80,7 +80,7 @@ PanelWindow {
     readonly property color cSecondary: pywal.secondary
     readonly property color cOnSurface: pywal.foreground
     readonly property color cOnSurfaceVariant: pywal.onSurfaceMuted
-    readonly property color cActive: "#82b7b0"
+    readonly property color cActive: "#becad3"
 
     FocusScope {
         id: panelContent

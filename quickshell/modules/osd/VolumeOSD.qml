@@ -107,7 +107,7 @@ PanelWindow {
                     width: parent.width * (root.currentVolume / 100)
                     height: parent.height
                     radius: 5
-                    color: root.currentMuted ? "#547977" : "#82b7b0"
+                    color: root.currentMuted ? "#547977" : "#becad3"
 
                     Behavior on width {
                         NumberAnimation {
@@ -127,7 +127,7 @@ PanelWindow {
                     radius: 6
                     x: Math.max(0, Math.min(parent.width - width, parent.width * (root.currentVolume / 100) - width / 2))
                     y: (parent.height - height) / 2
-                    color: root.currentMuted ? "#547977" : "#82b7b0"
+                    color: root.currentMuted ? "#547977" : "#becad3"
                     border.width: 2
                     border.color: pywal.surfaceContainerHighest
                 }
