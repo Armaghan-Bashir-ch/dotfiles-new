@@ -993,6 +993,9 @@ M.general = {
             "LSP signature help",
         },
         ["<C-BS>"] = { "<C-w>", "Delete previous word" },
+
+        ["<C-b>"] = { "****<Left><Left>", "Insert bold markers (**) with caret inside" },
+        ["<C-i>"] = { "__<Left>", "Insert italic markers (__) with caret inside" },
     },
 }
 
