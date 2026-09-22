@@ -61,11 +61,13 @@ Item {
     // frames this card at that width (min 280 / max 400). Vertical breathing
     // room comes from the glass frame around the card, so any padding here
     // would double it.
-    // Image preview area: a fixed-height, full-width box. The image covers
-    // the whole box (object-fit: cover), so the source image's resolution or
-    // aspect ratio never decides the displayed size and never leaves empty
-    // space around the image.
-    readonly property int imagePreviewHeight: 150
+    // Image slot: a fixed portrait box, identical for every notification.
+    // The image is fitted INSIDE it (object-fit: contain) - the whole source
+    // stays visible, its aspect ratio is preserved, and neither the source
+    // resolution nor its shape can change the displayed dimensions or crop
+    // content away.
+    readonly property int imageSlotWidth: 100
+    readonly property int imageSlotHeight: 140
 
     implicitHeight: contentLayout.implicitHeight
 
@@ -386,32 +388,40 @@ Item {
         }
 
         // --- Image preview ---
-        // Full-width, fixed-height box that the image covers completely
-        // (object-fit: cover) with overflow cropped via clip. Transparent (no
-        // glassy panel), corners rounded via radius. Screenshots render the
-        // actual saved file; other notifications render their image hint.
-        // The preview NEVER affects the card's width or height - it always
-        // occupies exactly this fixed area.
-Rectangle {
-                id: imagePreview
-                Layout.fillWidth: true
-                Layout.preferredHeight: root.imagePreviewHeight
-                radius: 10
-                clip: true
-                // Suppressed for system notifications that supply their own
-                // icon/image: the logo is shown once in the icon slot, never
-                // blown up full-width again (notify-send -i Hyprland_logo.png).
-                visible: root.hasPreviewImage && !(root.isSystem && root.hasSuppliedIcon)
-                color: "transparent"
+        // A fixed portrait slot that is the SAME size for every notification.
+        // The image is fitted inside the slot (object-fit: contain): the entire
+        // source image is always visible, its aspect ratio is preserved, it is
+        // scaled cleanly to fit, and it is centered - never stretched, never
+        // squashed, never cropped, never zoomed so part of it disappears. The
+        // slot dimensions never vary with the source image's resolution or
+        // aspect ratio, so the card layout stays stable across notifications.
+        // Screenshots render the actual saved file; other notifications render
+        // their image hint.
+        Rectangle {
+            id: imagePreview
+            Layout.preferredWidth: root.imageSlotWidth
+            Layout.preferredHeight: root.imageSlotHeight
+            Layout.alignment: Qt.AlignHCenter
+            radius: 10
+            clip: true
+            // Suppressed for system notifications that supply their own
+            // icon/image: the logo is shown once in the icon slot, never
+            // blown up full-width again (notify-send -i Hyprland_logo.png).
+            visible: root.hasPreviewImage && !(root.isSystem && root.hasSuppliedIcon)
+            color: "transparent"
 
             Image {
                 id: previewImage
                 anchors.fill: parent
                 source: root.iconSource(root.isScreenshot && root.screenshotPath ? root.screenshotPath : (notification?.image ?? ""))
-                fillMode: Image.PreserveAspectCrop
+                // Fit the whole image inside the fixed slot (contain), centered.
+                fillMode: Image.PreserveAspectFit
+                horizontalAlignment: Image.AlignHCenter
+                verticalAlignment: Image.AlignVCenter
                 smooth: true; cache: true; asynchronous: true
-                // Cap the decode size so giant screenshots don't blow up memory
-                // or force the icon provider to render at useless resolution.
+                // Decode ceiling, not a downsampler: sources smaller than this
+                // are never scaled down, and the display slot is ~140px at most,
+                // so a 640px decode ceiling keeps every rendered image sharp.
                 sourceSize: Qt.size(640, 640)
             }
         }
