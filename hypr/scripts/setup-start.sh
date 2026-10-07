@@ -34,7 +34,7 @@ place_app() {
         command -v "$1" >/dev/null || { log "Missing application: $1"; return 1; }
         log "Launching $class for workspace $workspace"
         # Do not let long-lived application processes retain the setup lock.
-        "$@" 9>&- </dev/null &
+        "$@" >/dev/null 2>&1 9>&- </dev/null &
         [[ $class == spotify ]] && spotify_fresh=1
         for ((attempt=0; attempt<40; attempt++)); do
             windows=$(addresses "$class") || return 1
@@ -96,33 +96,33 @@ setup_tmux() {
             run tmux kill-session -t "=$session" || return 1
         fi
     done <<< "$sessions"
-    # Override the repository's base-index=1 and renumbering during normalization.
-    run tmux set-option -t Workflow base-index 0 || return 1
-    run tmux set-option -t Workflow renumber-windows off || return 1
+    # Match the repository layout: first window (ov) is index 1, second (cli) is index 2.
+    run tmux set-option -t Workflow base-index 1 || return 1
+    run tmux set-option -t Workflow renumber-windows on || return 1
     windows=$(tmux list-windows -t Workflow -F '#{window_index} #{window_name}') || return 1
     read -r first_index name <<< "$windows"
-    if [[ $first_index != 0 ]]; then
-        run tmux move-window -s "Workflow:$first_index" -t Workflow:0 || return 1
+    if [[ $first_index != 1 ]]; then
+        run tmux move-window -k -s "Workflow:$first_index" -t Workflow:1 || return 1
     fi
-    run tmux rename-window -t Workflow:0 ov || return 1
+    run tmux rename-window -t Workflow:1 ov || return 1
     windows=$(tmux list-windows -t Workflow -F '#{window_index} #{window_name}') || return 1
     while read -r index name; do
-        if [[ $index != 0 && $name == cli ]]; then cli_index=$index; break; fi
+        if [[ $index != 1 && $name == cli ]]; then cli_index=$index; break; fi
     done <<< "$windows"
     if [[ -z $cli_index ]]; then
-        run tmux new-window -d -a -t Workflow:0 -n cli || return 1
-    elif [[ $cli_index != 1 ]]; then
-        run tmux move-window -k -s "Workflow:$cli_index" -t Workflow:1 || return 1
+        run tmux new-window -d -a -t Workflow:1 -n cli || return 1
+    elif [[ $cli_index != 2 ]]; then
+        run tmux move-window -k -s "Workflow:$cli_index" -t Workflow:2 || return 1
     fi
     windows=$(tmux list-windows -t Workflow -F '#{window_index} #{window_name}') || return 1
     while read -r index name; do
-        if [[ $index != 0 && $index != 1 ]]; then
+        if [[ $index != 1 && $index != 2 ]]; then
             log "Removing extra tmux window: $index $name"
             run tmux kill-window -t "Workflow:$index" || return 1
         fi
     done <<< "$windows"
-    run tmux set-window-option -t Workflow:0 automatic-rename off || return 1
     run tmux set-window-option -t Workflow:1 automatic-rename off || return 1
+    run tmux set-window-option -t Workflow:2 automatic-rename off || return 1
     if command -v zoxide >/dev/null; then
         run zoxide add "$HOME/dotfiles" || return 1
         if [[ -d $HOME/dotfiles/nvim/lua/custom ]]; then
@@ -152,13 +152,13 @@ setup_tmux() {
         run tmux send-keys -t "$pane" -l cls || return 1
         run tmux send-keys -t "$pane" Enter || return 1
     done
-    run tmux select-window -t Workflow:0 || return 1
+    run tmux select-window -t Workflow:1 || return 1
     sessions=$(tmux list-sessions -F '#{session_name}') || return 1
     windows=$(tmux list-windows -t Workflow -F '#{window_index} #{window_name}') || return 1
-    if [[ $sessions != Workflow || $windows != $'0 ov\n1 cli' ]]; then
+    if [[ $sessions != Workflow || $windows != $'1 ov\n2 cli' ]]; then
         log "tmux verification failed: sessions=$sessions; windows=$windows"; return 1
     fi
-    log 'tmux verified: exactly Workflow with 0 ov and 1 cli'
+    log 'tmux verified: exactly Workflow with 1 ov and 2 cli'
 }
 
 log 'Phase 2: normalize tmux'
@@ -169,24 +169,111 @@ cdp_eval() {
     local request response
     request=$(jq -cn --arg expression "$1" \
         '{id:1,method:"Runtime.evaluate",params:{expression:$expression,returnByValue:true,userGesture:true}}') || return 1
-    response=$(printf '%s\n' "$request" | timeout 4 websocat -t -1 -n \
-        --origin http://127.0.0.1:9222 "$cdp_url") || { log 'CDP transport failed'; return 1; }
+    if command -v websocat >/dev/null; then
+        response=$(printf '%s\n' "$request" | timeout 4 websocat -t -1 -n \
+            --origin http://127.0.0.1:9222 "$cdp_url") || { log 'CDP transport failed (websocat)'; return 1; }
+    else
+        response=$(cdp_eval_py "$request") || { log 'CDP transport failed (python)'; return 1; }
+    fi
     if ! jq -e '.id == 1 and (.error == null) and (.result.exceptionDetails == null)' <<< "$response" >/dev/null; then
         log "CDP evaluation failed: $response"; return 1
     fi
     jq -er '.result.result.value' <<< "$response"
 }
 
+# Pure-stdlib WebSocket client so the CDP transport never needs websocat.
+cdp_eval_py() {
+    python3 - "$cdp_url" "$1" <<'PYEOF'
+import base64, secrets, socket, struct, sys
+
+url, request = sys.argv[1], sys.argv[2]
+rest = url[len("ws://"):]
+host_port, _, path = rest.partition("/")
+host, _, port = host_port.partition(":")
+port = int(port or 80)
+path = "/" + path
+
+def read_exact(n):
+    buf = b""
+    while len(buf) < n:
+        part = sock.recv(n - len(buf))
+        if not part:
+            sys.exit(1)
+        buf += part
+    return buf
+
+key = base64.b64encode(secrets.token_bytes(16)).decode()
+req = (
+    "GET %s HTTP/1.1\r\n"
+    "Host: %s:%d\r\n"
+    "Upgrade: websocket\r\n"
+    "Connection: Upgrade\r\n"
+    "Sec-WebSocket-Key: %s\r\n"
+    "Sec-WebSocket-Version: 13\r\n"
+    "Origin: http://127.0.0.1:9222\r\n\r\n"
+) % (path, host, port, key)
+
+sock = socket.create_connection((host, port), timeout=4)
+sock.sendall(req.encode())
+header = b""
+while b"\r\n\r\n" not in header:
+    chunk = sock.recv(4096)
+    if not chunk:
+        sys.exit(1)
+    header += chunk
+if b" 101 " not in header.split(b"\r\n", 1)[0]:
+    sys.exit(1)
+
+payload = request.encode()
+mask = secrets.token_bytes(4)
+if len(payload) < 126:
+    head = bytes([0x81, 0x80 | len(payload)])
+elif len(payload) < 65536:
+    head = bytes([0x81, 0x80 | 126]) + struct.pack(">H", len(payload))
+else:
+    head = bytes([0x81, 0x80 | 127]) + struct.pack(">Q", len(payload))
+masked = bytes(b ^ mask[i % 4] for i, b in enumerate(payload))
+sock.sendall(head + mask + masked)
+
+data = b""
+while True:
+    h = read_exact(2)
+    fin = h[0] & 0x80
+    opcode = h[0] & 0x0F
+    masked = h[1] & 0x80
+    length = h[1] & 0x7F
+    if length == 126:
+        length = struct.unpack(">H", read_exact(2))[0]
+    elif length == 127:
+        length = struct.unpack(">Q", read_exact(8))[0]
+    m = read_exact(4) if masked else b""
+    chunk = read_exact(length)
+    if masked:
+        chunk = bytes(b ^ m[i % 4] for i, b in enumerate(chunk))
+    if opcode == 8:
+        sys.exit(1)
+    if opcode == 1 or opcode == 0:
+        data += chunk
+    if fin:
+        break
+print(data.decode(errors="replace"))
+PYEOF
+}
+
 setup_lyrics() {
     local dependency targets candidate state cdp_url='' expression deadline windows address
     # Only newly launched Spotify is automated; a later run never toggles its view.
     [[ $spotify_fresh == 1 ]] || { log 'Spotify was already running; no CDP attachment attempted'; return 1; }
-    for dependency in curl websocat timeout; do
+    for dependency in curl timeout; do
         command -v "$dependency" >/dev/null || {
-            log "Missing $dependency for CDP; package command: pacman -S curl websocat coreutils"
+            log "Missing $dependency for CDP; install curl and coreutils"
             return 1
         }
     done
+    if ! command -v websocat >/dev/null && ! command -v python3 >/dev/null; then
+        log 'Missing websocat or python3 for the CDP transport; install either package'
+        return 1
+    fi
     deadline=$((SECONDS + 20))
     while ((SECONDS < deadline)); do
         if targets=$(curl --noproxy '*' -fsS --max-time 1 http://127.0.0.1:9222/json 2>/dev/null); then
