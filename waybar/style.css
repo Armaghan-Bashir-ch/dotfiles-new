@@ -154,6 +154,13 @@ tooltip {
   transition: all 0.3s ease;
 }
 
+/* middle module icons - larger than the rest of the bar */
+#custom-playpause,
+#custom-seekback,
+#custom-seekfwd {
+  font-size: 16px;
+}
+
 #custom-seekback:hover,
 #custom-seekfwd:hover {
   background: @wb-hvr-bg;
