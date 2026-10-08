@@ -8,7 +8,7 @@
     "gtk-layer-shell": true,
 
 	"modules-left": ["custom/padd","custom/l_end","battery","backlight","pulseaudio","custom/r_end","custom/l_end","bluetooth","network","custom/r_end","custom/l_end","hyprland/workspaces","custom/r_end","custom/padd"],
-	"modules-center": ["custom/padd","custom/l_end","custom/playpause","custom/r_end","custom/padd"],
+	"modules-center": ["custom/padd","custom/l_end","custom/seekback","custom/playpause","custom/seekfwd","custom/r_end","custom/padd"],
 	"modules-right": ["custom/padd","custom/l_end","clock","custom/r_end","custom/padd","custom/l_end","custom/notifs","custom/r_end","custom/l_end","cpu","memory","custom/tempinfo","custom/r_end","custom/padd"],
 
 //  INFO: To add a module to waybar, add its name to the "modules-left/modules-right/modules-center" //
@@ -58,12 +58,36 @@
         "on-click": "qs ipc -p /home/armaghan/.config/quickshell-controlcenter call controlcenter open 2>/dev/null || (qs -n -p /home/armaghan/.config/quickshell-controlcenter >/dev/null 2>&1 & for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do sleep 0.1; qs ipc -p /home/armaghan/.config/quickshell-controlcenter call controlcenter open 2>/dev/null && break; done)"
     },
 
+    "custom/seekback": {
+        "exec": "/home/armaghan/.config/hypr/scripts/music.sh visible",
+        "return-type": "text",
+        "interval": 1,
+        "format": "󰒮",
+        "tooltip": "Seek back 10s",
+        "on-click": "/home/armaghan/.config/hypr/scripts/music.sh seekback",
+        "on-click-right": "/home/armaghan/.config/hypr/scripts/music.sh prev",
+        "on-click-middle": "/home/armaghan/.config/hypr/scripts/music.sh prev",
+        "on-scroll-up": "/home/armaghan/.config/hypr/scripts/music.sh prev",
+        "on-scroll-down": "/home/armaghan/.config/hypr/scripts/music.sh seekback"
+    },
+
     "custom/playpause": {
-        "exec": "/home/armaghan/.config/hypr/scripts/music-toggle.sh",
+        "exec": "/home/armaghan/.config/hypr/scripts/music.sh playpause_json",
         "return-type": "json",
         "interval": 1,
         "format": "{}",
         "on-click": "playerctl --player=spotify play-pause 2>/dev/null || playerctl play-pause 2>/dev/null"
+    },
+
+    "custom/seekfwd": {
+        "exec": "/home/armaghan/.config/hypr/scripts/music.sh visible",
+        "return-type": "text",
+        "interval": 1,
+        "format": "󰒭",
+        "tooltip": "Seek forward 10s",
+        "on-click": "/home/armaghan/.config/hypr/scripts/music.sh seekfwd",
+        "on-click-right": "/home/armaghan/.config/hypr/scripts/music.sh next",
+        "on-click-middle": "/home/armaghan/.config/hypr/scripts/music.sh next"
     },
 
     "custom/player": {
