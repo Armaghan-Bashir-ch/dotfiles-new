@@ -12,6 +12,21 @@ case "$1" in
             echo '{"text": "󰐊", "tooltip": "No music playing"}'
         fi
         ;;
+    seekback_json)
+        # only show the button while music is actually playing
+        if [ "$status" = "Playing" ]; then
+            echo '{"text": "󰒮", "class": "on"}'
+        else
+            echo '{"text": "", "class": "off"}'
+        fi
+        ;;
+    seekfwd_json)
+        if [ "$status" = "Playing" ]; then
+            echo '{"text": "󰒭", "class": "on"}'
+        else
+            echo '{"text": "", "class": "off"}'
+        fi
+        ;;
     seekback)
         playerctl --player=spotify position 10- 2>/dev/null || playerctl position 10- 2>/dev/null
         ;;
@@ -23,19 +38,5 @@ case "$1" in
         ;;
     prev)
         playerctl --player=spotify previous 2>/dev/null || playerctl previous 2>/dev/null
-        ;;
-    visible)
-        if [ "$status" = "Playing" ]; then
-            echo "1"
-        else
-            echo "0"
-        fi
-        ;;
-    *)
-        if [ "$status" = "Playing" ] || [ "$status" = "Paused" ]; then
-            echo "playing"
-        else
-            echo "stopped"
-        fi
         ;;
 esac

@@ -59,10 +59,10 @@
     },
 
     "custom/seekback": {
-        "exec": "/home/armaghan/.config/hypr/scripts/music.sh visible",
-        "return-type": "text",
+        "exec": "/home/armaghan/.config/hypr/scripts/music.sh seekback_json",
+        "return-type": "json",
         "interval": 1,
-        "format": "󰒮",
+        "format": "{}",
         "tooltip": "Seek back 10s",
         "on-click": "/home/armaghan/.config/hypr/scripts/music.sh seekback",
         "on-click-right": "/home/armaghan/.config/hypr/scripts/music.sh prev",
@@ -80,10 +80,10 @@
     },
 
     "custom/seekfwd": {
-        "exec": "/home/armaghan/.config/hypr/scripts/music.sh visible",
-        "return-type": "text",
+        "exec": "/home/armaghan/.config/hypr/scripts/music.sh seekfwd_json",
+        "return-type": "json",
         "interval": 1,
-        "format": "󰒭",
+        "format": "{}",
         "tooltip": "Seek forward 10s",
         "on-click": "/home/armaghan/.config/hypr/scripts/music.sh seekfwd",
         "on-click-right": "/home/armaghan/.config/hypr/scripts/music.sh next",

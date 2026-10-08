@@ -118,6 +118,8 @@ tooltip {
 #custom-cava,
 #custom-notifs,
 #custom-playpause,
+#custom-seekback,
+#custom-seekfwd,
 #workspaces,
 #custom-disk,
 #custom-l_end,
@@ -136,6 +138,24 @@ tooltip {
 
 #idle_inhibitor {
   padding-right: 2px;
+}
+
+/* seek buttons only exist while music is playing */
+#custom-seekback.off,
+#custom-seekfwd.off {
+  display: none;
+}
+
+#custom-seekback,
+#custom-seekfwd {
+  transition: all 0.3s ease;
+}
+
+#custom-seekback:hover,
+#custom-seekfwd:hover {
+  background: @wb-hvr-bg;
+  color: @wb-hvr-fg;
+  border-radius: 9px;
 }
 
 #workspaces,
