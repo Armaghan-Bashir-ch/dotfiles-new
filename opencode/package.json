@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "@opencode-ai/plugin": "1.15.13"
+    "@opencode-ai/plugin": "1.15.13",
+    "oh-my-openagent": "^5.1.45"
+  },
+  "allowScripts": {
+    "oh-my-openagent@5.1.45": true
   }
 }
