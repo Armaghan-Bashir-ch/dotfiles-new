@@ -6,5 +6,9 @@
   "basedpyright": {
     "decision": "declined",
     "decidedAt": "2026-10-01T09:41:04.829Z"
+  },
+  "yaml-ls": {
+    "decision": "declined",
+    "decidedAt": "2026-10-22T09:52:43.758Z"
   }
 }
