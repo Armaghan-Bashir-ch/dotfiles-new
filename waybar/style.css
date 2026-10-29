@@ -84,7 +84,7 @@ tooltip {
 }
 
 #taskbar button:hover {
-  background: @wb-hvr-bg;
+  background: @main-fg;
   color: @wb-hvr-color;
   padding-left: 3px;
   padding-right: 3px;
@@ -163,7 +163,7 @@ tooltip {
 
 #custom-seekback:hover,
 #custom-seekfwd:hover {
-  background: @wb-hvr-bg;
+  background: @main-fg;
   color: @wb-hvr-fg;
   border-radius: 9px;
 }
