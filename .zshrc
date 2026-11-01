@@ -240,6 +240,30 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+# T3 Code Nightly
+t3start() {
+    mkdir -p "$HOME/.local/state"
+
+    nohup env T3CODE_HOME="$HOME/.t3" "$HOME/.local/bin/t3" \
+        >/dev/null 2>&1 </dev/null &
+
+    echo $! > "$HOME/.local/state/t3code-nightly.pid"
+    disown
+    echo "T3 Nightly started."
+}
+
+t3stop() {
+    local pidfile="$HOME/.local/state/t3code-nightly.pid"
+
+    if [[ -f "$pidfile" ]]; then
+        kill "$(cat "$pidfile")" 2>/dev/null
+        rm -f "$pidfile"
+        echo "T3 Nightly stopped."
+    else
+        echo "T3 Nightly PID file not found."
+    fi
+}
+
 # Encrypted file aliases
 
 cred-encrypt() {
