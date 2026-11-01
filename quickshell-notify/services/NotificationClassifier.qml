@@ -80,7 +80,12 @@ Singleton {
         if ((appIcon ?? "").toLowerCase().includes("hyprland"))
             return "system"
 
-        // 3. Downloads — known download-capable apps, or download wording with
+        // 3. T3code/OpenCode completion — these notifications arrive through
+        // Zen, which is also a download-capable app, so classify them first.
+        if (root._matchesTaskCompletionWording(summaryText, bodyText))
+            return "success"
+
+        // 4. Downloads — known download-capable apps, or download wording with
         //    file-info in the body, or an explicit progress hint.
         const isDownloadApp = root.downloadApps.includes(app) || root.downloadApps.includes(entry)
         const hasProgress = root.extractProgress(hints) >= 0
@@ -89,7 +94,7 @@ Singleton {
         if (root._matchesDownloadWording(summaryText, bodyText) && root._looksLikeFileInfo(bodyText))
             return "download"
 
-        // 4. Success — completed/positive actions (green).
+        // 5. Success — completed/positive actions (green).
         if (root._matchesSuccessWording(text))
             return "success"
 
@@ -152,6 +157,10 @@ Singleton {
 
     function _matchesDownloadWording(summary, body) {
         return /download|downloaded|downloading|downloads|progress/i.test(`${summary} ${body}`)
+    }
+
+    function _matchesTaskCompletionWording(summary, body) {
+        return /(?:thread|task|message|conversation)\s+(?:complete|completed|done|finished)/i.test(`${summary} ${body}`)
     }
 
     function _matchesSuccessWording(text) {
