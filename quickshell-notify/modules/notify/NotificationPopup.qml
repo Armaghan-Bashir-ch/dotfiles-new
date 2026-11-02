@@ -124,6 +124,7 @@ PanelWindow {
 
             delegate: Rectangle {
                 required property var modelData
+                readonly property bool isT3Code: modelData?.category === "t3code"
 
                 Layout.preferredWidth: root.cardWidth(modelData)
                 Layout.alignment: Qt.AlignRight
@@ -149,11 +150,9 @@ PanelWindow {
                 Behavior on border.color { ColorAnimation { duration: 150 } }
 
                 // Experimental accent wash: faint category-accent tint over
-                // the glass on EVERY card (blue default, green screenshot,
-                // purple system, amber download, red critical) so the whole
-                // stack carries its color, not just the thin border. Sits
-                // behind the card content - popupContent is the last child
-                // and paints above it.
+                // the glass (including T3 blue) so the whole stack carries
+                // its color, not just the thin border. Sits behind the card
+                // content - popupContent is the last child and paints above it.
                 Rectangle {
                     anchors.fill: parent
                     radius: parent.radius
@@ -231,11 +230,12 @@ PanelWindow {
                     showBody: true
                     showAppIcon: true
 
-                    primaryColor: root.cPrimary
-                    onSurfaceColor: root.cOnSurface
-                    onSurfaceVariantColor: root.cOnSurfaceVariant
+                    primaryColor: isT3Code ? "#366ffb" : root.cPrimary
+                    onSurfaceColor: isT3Code ? "#f5f5f5" : root.cOnSurface
+                    onSurfaceVariantColor: isT3Code ? "#818181" : root.cOnSurfaceVariant
                     errorColor: root.cError
-                    surfaceContainerHighColor: Qt.rgba(root.cOnSurface.r, root.cOnSurface.g, root.cOnSurface.b, 0.08)
+                    surfaceContainerHighColor: isT3Code ? "#141414"
+                        : Qt.rgba(root.cOnSurface.r, root.cOnSurface.g, root.cOnSurface.b, 0.08)
                 }
             }
         }

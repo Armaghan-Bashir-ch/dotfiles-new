@@ -112,6 +112,52 @@ Singleton {
 
     // Add notification from NotificationServer
     function addNotification(notif) {
+        // Drop internal T3/OpenCode reminder events. The desired ready-for-input
+        // event does not contain these internal-run markers and remains visible.
+        const body = notif.body ?? ""
+        const isT3Code = QsServices.NotificationClassifier.isT3Code(
+                notif.appName, notif.desktopEntry, notif.summary, body)
+        const isZen = /^(?:zen|zen-browser)$/i.test(
+                (notif.appName ?? "").trim())
+            || /^(?:zen|zen-browser)$/i.test(
+                (notif.desktopEntry ?? "").trim())
+        if (isT3Code
+            && /<system-reminder>|\[BACKGROUND TASK|User:\s*systemd\b|systemd\s+(?:run|reminder)\b|ALL SIBLING BACKGROUND TASKS COMPLETE/i.test(body)) {
+            QsServices.Logger.debug("Notifs", `Suppressing T3/OpenCode reminder: ${notif.summary}`)
+            return
+        }
+
+        if ((isT3Code || isZen)
+            && QsServices.NotificationClassifier._matchesTaskCompletionWording(
+                notif.summary, body)) {
+            QsServices.Logger.debug("Notifs", `Suppressing thread completion: ${notif.summary}`)
+            return
+        }
+
+        // T3 emits a fresh ready-for-input event for each turn. Replace the
+        // previous one so the notification center never accumulates stale T3
+        // cards beneath the current prompt-completion notification.
+        if (isT3Code) {
+            const previousT3 = root.notifications.filter(n => {
+                if (!n) return false
+                if (n.category === "t3code") return true
+                const oldIsZen = /^(?:zen|zen-browser)$/i.test((n.appName ?? "").trim())
+                    || /^(?:zen|zen-browser)$/i.test((n.desktopEntry ?? "").trim())
+                return oldIsZen
+                    && QsServices.NotificationClassifier._matchesTaskCompletionWording(
+                        n.summary, n.body)
+            })
+            if (previousT3.length > 0) {
+                root.notifications = root.notifications.filter(n => !previousT3.includes(n))
+                previousT3.forEach(n => {
+                    if (n.notification) n.notification.dismiss()
+                    n.destroy()
+                })
+                root.persist()
+                QsServices.Logger.debug("Notifs", `Replaced ${previousT3.length} previous T3 notification(s)`)
+            }
+        }
+
         // Check DND mode
         if (dnd && notif.urgency !== NotificationUrgency.Critical) {
             QsServices.Logger.debug("Notifs", `DND active - suppressing: ${notif.summary}`)
@@ -297,6 +343,7 @@ Singleton {
             case "success":    return "#37B679"
             case "screenshot": return "#37B679"
             case "system":     return "#22d3ee"
+            case "t3code":     return "#366ffb"
             case "download":   return "#fbbf24"
             case "critical":   return "#f00000"
             default:

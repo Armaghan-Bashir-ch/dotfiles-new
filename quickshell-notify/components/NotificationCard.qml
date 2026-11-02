@@ -8,12 +8,13 @@ import "../config" as QsConfig
 // Notification card used by the popup toasts (quickshell-notify daemon).
 //
 // The card is fully category-driven. NotificationClassifier (see services/)
-// tags each notification as screenshot / system / download / success / default,
+// tags each notification as screenshot / system / t3code / download / success / default,
 // and this component renders the matching contextual chrome on top of the
 // shared glass base:
 //
 //   screenshot -> green accent, "✓ Saved to <dir>", image preview, Open/Copy path
 //   system     -> purple accent, system icon, Hyprland brand logo on the right
+//   t3code     -> blue accent, robot icon, T3 dark surfaces
 //   download   -> amber accent, download icon, progress/completion indicator
 //   success    -> green accent for completed actions
 //   critical   -> red accent with alert glyph (urgency-critical notifications)
@@ -77,6 +78,7 @@ Item {
 
     readonly property bool isScreenshot: root.category === "screenshot"
     readonly property bool isSystem: root.category === "system"
+    readonly property bool isT3Code: root.category === "t3code"
     readonly property bool isDownload: root.category === "download"
 
     readonly property string screenshotPath: notification?.screenshotPath ?? ""
@@ -100,6 +102,7 @@ Item {
         case "screenshot": return "\u{F02F9}" // image-multiple
         case "success":    return "\u{F05E1}" // check-circle-outline
         case "system":     return "\u{F009A}" // bell-outline
+        case "t3code":     return "\u{F06A9}" // robot
         case "download":   return "\u{F01DA}" // download
         case "critical":   return "\u{F0026}" // alert (warning triangle)
         default:           return ""
@@ -184,7 +187,7 @@ Item {
                 Layout.alignment: Qt.AlignTop
                 radius: 12
                 visible: showAppIcon
-                color: root.accentTint(0.12)
+                color: root.isT3Code ? "#141414" : root.accentTint(0.12)
                 border.width: 1
                 border.color: root.accentTint(0.22)
 
@@ -319,7 +322,7 @@ Item {
                 radius: 13
                 visible: showCloseButton
                 color: closeMouse.containsMouse
-                    ? root.accentTint(0.12)
+                    ? (root.isT3Code ? "#191919" : root.accentTint(0.12))
                     : "transparent"
                 Behavior on color { ColorAnimation { duration: 120 } }
 
@@ -408,7 +411,7 @@ Item {
             // icon/image: the logo is shown once in the icon slot, never
             // blown up full-width again (notify-send -i Hyprland_logo.png).
             visible: root.hasPreviewImage && !(root.isSystem && root.hasSuppliedIcon)
-            color: "transparent"
+            color: root.isT3Code ? "#0a0a0a" : "transparent"
 
             Image {
                 id: previewImage

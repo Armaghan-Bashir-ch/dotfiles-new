@@ -10,5 +10,9 @@
   "yaml-ls": {
     "decision": "declined",
     "decidedAt": "2026-10-22T09:52:43.758Z"
+  },
+  "biome": {
+    "decision": "declined",
+    "decidedAt": "2026-11-02T11:25:03.584Z"
   }
 }

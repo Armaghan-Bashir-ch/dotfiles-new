@@ -11,6 +11,7 @@ import Quickshell
 //
 //   screenshot  -> green success treatment, image preview, Open / Copy path
 //   system      -> purple Hyprland/system treatment, brand logo on the right
+//   t3code      -> T3 dark surfaces, blue accent, robot icon
 //   download    -> amber download treatment, progress / completion indicator
 //   success     -> green success treatment for completed actions
 //   default     -> normal appearance, no contextual chrome
@@ -80,8 +81,11 @@ Singleton {
         if ((appIcon ?? "").toLowerCase().includes("hyprland"))
             return "system"
 
-        // 3. T3code/OpenCode completion — these notifications arrive through
-        // Zen, which is also a download-capable app, so classify them first.
+        // 3. T3/OpenCode messages can arrive through a download-capable browser.
+        if (root.isT3Code(app, entry, summaryText, bodyText))
+            return "t3code"
+
+        // Task completion takes precedence over generic download wording.
         if (root._matchesTaskCompletionWording(summaryText, bodyText))
             return "success"
 
@@ -99,6 +103,16 @@ Singleton {
             return "success"
 
         return "default"
+    }
+
+    // Match the sender or explicit product wording, not generic agent messages.
+    function isT3Code(appName, desktopEntry, summary, body) {
+        const identity = /\b(?:opencode|t3[\s-]*code)\b/i
+        return identity.test(appName ?? "")
+            || identity.test(desktopEntry ?? "")
+            || /^t3$/i.test((appName ?? "").trim())
+            || /^t3$/i.test((desktopEntry ?? "").trim())
+            || identity.test(`${summary ?? ""} ${body ?? ""}`)
     }
 
     // True when the string refers to a real local image file (an absolute path,
