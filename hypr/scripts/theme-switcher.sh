@@ -102,45 +102,6 @@ else
     WLOGOUT_STYLE="$HOME/.config/wlogout/style.css"
     sed -i "s|@import \"/home/armaghan/.config/waybar/themes/.*\.css\";|@import \"/home/armaghan/.config/waybar/themes/$WAYBAR_THEME.css\";|" "$WLOGOUT_STYLE"
 
-    # Update rofi styles that import themes
-    ROFI_STYLES=(
-        "$HOME/.config/rofi/launcher/style.rasi"
-        "$HOME/.config/rofi/wallselect/style.rasi"
-    )
-
-    THEME_PATH="$HOME/.config/rofi/themes/$THEME.rasi"
-
-    for STYLE in "${ROFI_STYLES[@]}"; do
-        if [ -f "$STYLE" ]; then
-            sed -i "s|@import \".*themes/.*\.rasi\"|@import \"$THEME_PATH\"|g; s|@theme \".*themes/.*\.rasi\"|@theme \"$THEME_PATH\"|g" "$STYLE"
-        fi
-    done
-
-    # Always use Style-2 for launcher
-    LAUNCHER_STYLE_FILE="$HOME/.config/rofi/launcher/style.rasi"
-
-    if [ -f "$LAUNCHER_STYLE_FILE" ]; then
-        STYLE_FILE="Style-2.rasi"
-        sed -i "s|@import \"styles/.*\.rasi\"|@import \"styles/$STYLE_FILE\"|" "$LAUNCHER_STYLE_FILE"
-    fi
-
-    # Update rofi launcher background-image to current wallpaper in both styles
-    ROFI_STYLES_UPDATE=(
-        "$HOME/.config/rofi/styles/Style-1.rasi"
-        "$HOME/.config/rofi/styles/Style-2.rasi"
-    )
-
-    if [ -n "$WALLPAPER_PATH" ]; then
-        ESCAPED_PATH=$(printf '%s\n' "$WALLPAPER_PATH" | sed 's/[[\.*^$()+?{|]/\\&/g')
-
-        for STYLE_FILE in "${ROFI_STYLES_UPDATE[@]}"; do
-            if [ -f "$STYLE_FILE" ]; then
-                sed -i "s|url(\"[^\"]*\", height)|url(\"$ESCAPED_PATH\", height)|g" "$STYLE_FILE"
-                sed -i "s|url(\"[^\"]*\", width)|url(\"$ESCAPED_PATH\", width)|g" "$STYLE_FILE"
-            fi
-        done
-    fi
-
     # Update ghostty config
     GHOSTTY_CONFIG="$HOME/.config/ghostty/config"
     sed -i "s|^theme = .*|theme = $GHOSTTY_THEME|" "$GHOSTTY_CONFIG"
