@@ -1,0 +1,4 @@
+module qs.powerprofile.components
+singleton GlassTheme 1.0 GlassTheme.qml
+GlassSurface 1.0 GlassSurface.qml
+GlassShadow 1.0 GlassShadow.qml

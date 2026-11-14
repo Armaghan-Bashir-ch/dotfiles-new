@@ -1,0 +1,3 @@
+module qs.powerprofile.services
+singleton PowerProfiles PowerProfiles.qml
+singleton Pywal Pywal.qml

@@ -3,8 +3,8 @@
 current=$(powerprofilesctl get 2>/dev/null | tr -d '\n')
 
 if [[ -z "$current" ]]; then
-    printf '{"text": "?", "tooltip": "Power Profile: unknown"}'
-    exit 1
+    printf '{"text": "󱄇", "tooltip": "Power Profile: unavailable"}'
+    exit 0
 fi
 
 case $current in
