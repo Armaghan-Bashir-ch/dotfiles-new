@@ -90,7 +90,7 @@ Item {
         anchors.margins: -3
         radius: GlassTheme.radiusItem + 3
         color: Qt.rgba(0, 0, 0, 0.10)
-        opacity: root.isConnected ? 1.0 : (mouseArea.containsMouse ? 0.8 : 0.0)
+        opacity: root.isConnected ? 0.0 : (mouseArea.containsMouse ? 0.8 : 0.0)
         Behavior on opacity {
             NumberAnimation { duration: GlassTheme.durHover; easing.type: GlassTheme.easeStandard }
         }
@@ -101,29 +101,26 @@ Item {
         id: activeGlow
         anchors.fill: parent
         radius: GlassTheme.radiusItem
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.22) }
-            GradientStop { position: 0.45; color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.13) }
-            GradientStop { position: 1.0; color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.09) }
-        }
-        border.width: 1
-        border.color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.38)
+        color: root.isConnected
+            ? Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.14)
+            : "transparent"
+        border.width: 0
         opacity: root.isConnected ? 1.0 : 0.0
         Behavior on opacity {
             NumberAnimation { duration: GlassTheme.durNormal; easing.type: GlassTheme.easeStandard }
         }
 
-        // Bottom internal reflection: a whisper of light caught by the lower
-        // edge of the selected row, matching the panel's glass material.
-        Rectangle {
-            anchors.fill: parent
-            radius: GlassTheme.radiusItem
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "transparent" }
-                GradientStop { position: 0.82; color: "transparent" }
-                GradientStop { position: 1.0; color: Qt.rgba(1, 1, 1, 0.05) }
-            }
-        }
+    }
+
+    Rectangle {
+        visible: root.isConnected
+        width: 3
+        height: 20
+        radius: 1.5
+        anchors.left: parent.left
+        anchors.leftMargin: 1
+        anchors.verticalCenter: parent.verticalCenter
+        color: root.accentColor
     }
 
     // --- Row background (hover / press overlay) -----------------------------
@@ -156,7 +153,7 @@ Item {
             GradientStop { position: 0.5; color: Qt.rgba(1, 1, 1, 0.09) }
             GradientStop { position: 1.0; color: Qt.rgba(1, 1, 1, 0) }
         }
-        opacity: root.isConnected ? 1.0 : 0.0
+        opacity: 0.0
         Behavior on opacity {
             NumberAnimation { duration: GlassTheme.durNormal; easing.type: GlassTheme.easeStandard }
         }
@@ -247,7 +244,7 @@ Item {
         // Crossfades between the connect affordance and the "Connected" pill
         // whenever the row's connected state changes; the width breathes with it.
         Item {
-            Layout.preferredWidth: root.isConnected ? 98 : 30
+            Layout.preferredWidth: 30
             Layout.preferredHeight: 30
 
             Behavior on Layout.preferredWidth {
@@ -262,14 +259,8 @@ Item {
                 opacity: root.isConnected ? 1.0 : 0.0
                 scale: root.isConnected ? 1.0 : 0.92
 
-                // Accent glass base (brighter at the top, like the row).
-                gradient: Gradient {
-                    GradientStop { position: 0.0; color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.24) }
-                    GradientStop { position: 0.45; color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.14) }
-                    GradientStop { position: 1.0; color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.10) }
-                }
-                border.width: 1
-                border.color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.42)
+                color: "transparent"
+                border.width: 0
 
                 // Hover -> disconnect affordance (red glass, fades in).
                 Rectangle {
@@ -300,42 +291,15 @@ Item {
                     }
                 }
 
-                // Inner top catch-light.
-                Rectangle {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.leftMargin: 8
-                    anchors.rightMargin: 8
-                    anchors.topMargin: 1
-                    height: 1
-                    gradient: Gradient {
-                        GradientStop { position: 0.0; color: Qt.rgba(1, 1, 1, 0) }
-                        GradientStop { position: 0.5; color: Qt.rgba(1, 1, 1, 0.10) }
-                        GradientStop { position: 1.0; color: Qt.rgba(1, 1, 1, 0) }
-                    }
-                }
-
                 RowLayout {
                     anchors.centerIn: parent
-                    spacing: 6
+                    spacing: 0
 
                     Text {
-                        text: "󰁔"
+                        text: "󰌊"
                         font.family: GlassTheme.iconFont
-                        font.pixelSize: 11
-                        color: mouseArea.containsMouse ? Qt.rgba(1, 0.62, 0.62, 1) : root.accentColor
-                        Behavior on color {
-                            ColorAnimation { duration: GlassTheme.durFast; easing.type: GlassTheme.easeStandard }
-                        }
-                    }
-
-                    Text {
-                        text: "Connected"
-                        font.family: GlassTheme.fontFamily
-                        font.pixelSize: 11
-                        font.weight: Font.DemiBold
-                        color: mouseArea.containsMouse ? Qt.rgba(1, 0.66, 0.66, 1) : root.accentColor
+                        font.pixelSize: 14
+                        color: mouseArea.containsMouse ? root.interactiveColor : root.accentColor
                         Behavior on color {
                             ColorAnimation { duration: GlassTheme.durFast; easing.type: GlassTheme.easeStandard }
                         }

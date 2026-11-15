@@ -32,6 +32,7 @@ FocusScope {
     property string searchText: ""
 
     // === Colors =============================================================
+    readonly property color cSurface: pywal.surface
     readonly property color cPrimary: pywal.primary
     readonly property color cOnSurface: pywal.foreground
     readonly property color cOnSurfaceVariant: pywal.onSurfaceMuted
@@ -107,13 +108,14 @@ FocusScope {
     // ========================================================================
     // MAIN GLASS SURFACE
     // ========================================================================
-    GlassSurface {
-        id: glassPanel
+    Rectangle {
+        id: panelSurface
         anchors.fill: parent
-        radius: GlassTheme.radiusPanel
-        fillColor: pywal.background
-        fillOpacity: GlassTheme.glassFillOpacity
-        shadowDepth: GlassTheme.shadowDepth
+        radius: 28
+        color: Qt.rgba(cSurface.r, cSurface.g, cSurface.b, 0.2)
+        border.width: 1
+        border.color: Qt.rgba(0.42, 0.52, 0.71, 0.67)
+        clip: true
 
         ColumnLayout {
             id: contentColumn
@@ -206,6 +208,7 @@ FocusScope {
                     Layout.fillWidth: true
                     leadingIcon: "󰇟"
                     placeholderText: "Search networks"
+                    flatStyle: true
                     textColor: cOnSurface
                     accentColor: cPrimary
                     onTextEdited: text => popupPanel.searchText = text

@@ -161,6 +161,19 @@ tooltip {
   font-size: 16px;
 }
 
+#custom-performance {
+  border-radius: 9px;
+  padding-left: 8px;
+  padding-right: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-radius 0.2s ease;
+}
+
+#custom-performance:hover {
+  background: @main-fg;
+  color: @wb-hvr-fg;
+  border-radius: 9px;
+}
+
 #custom-seekback:hover,
 #custom-seekfwd:hover {
   background: @main-fg;

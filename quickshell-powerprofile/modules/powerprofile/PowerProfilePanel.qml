@@ -18,6 +18,7 @@ FocusScope {
     implicitHeight: contentLayout.implicitHeight + 32
     focus: true
 
+    readonly property color cSurface: root.pywal ? root.pywal.surface : "#14141a"
     readonly property color cPrimary: root.pywal ? root.pywal.primary : "#CE6649"
     readonly property color cOnSurface: root.pywal ? root.pywal.foreground : "#e5e8eb"
     readonly property color cOnSurfaceVariant: root.pywal ? root.pywal.onSurfaceMuted : "#9a9a9a"
@@ -25,13 +26,14 @@ FocusScope {
 
     Keys.onEscapePressed: root.closeRequested()
 
-    GlassSurface {
-        id: glassPanel
+    Rectangle {
+        id: panelSurface
         anchors.fill: parent
-        radius: GlassTheme.radiusPanel
-        fillColor: root.pywal ? root.pywal.background : "#070605"
-        fillOpacity: GlassTheme.glassFillOpacity
-        shadowDepth: GlassTheme.shadowDepth
+        radius: 28
+        color: Qt.rgba(root.cSurface.r, root.cSurface.g, root.cSurface.b, 0.2)
+        border.width: 1
+        border.color: Qt.rgba(0.42, 0.52, 0.71, 0.67)
+        clip: true
 
         ColumnLayout {
             id: contentLayout
@@ -61,7 +63,6 @@ FocusScope {
                 }
 
                 ColumnLayout {
-                    Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
                     spacing: 2
 
@@ -85,6 +86,65 @@ FocusScope {
                     }
                 }
 
+                Item {
+                    Layout.fillWidth: true
+                }
+
+                Item {
+                    Layout.alignment: Qt.AlignVCenter
+                    Layout.preferredWidth: 74
+                    Layout.preferredHeight: 30
+                    scale: offMouse.pressed ? 0.96 : 1.0
+
+                    Behavior on scale {
+                        NumberAnimation { duration: GlassTheme.durFast; easing.type: GlassTheme.easeSpring }
+                    }
+
+                    Rectangle {
+                        anchors.fill: parent
+                        radius: height / 2
+                        color: offMouse.pressed
+                            ? Qt.rgba(root.cError.r, root.cError.g, root.cError.b, 0.28)
+                            : offMouse.containsMouse
+                                ? Qt.rgba(root.cError.r, root.cError.g, root.cError.b, 0.18)
+                                : Qt.rgba(0, 0, 0, 0.42)
+                        border.width: 1
+                        border.color: offMouse.containsMouse
+                            ? Qt.rgba(root.cError.r, root.cError.g, root.cError.b, 0.62)
+                            : Qt.rgba(root.cError.r, root.cError.g, root.cError.b, 0.34)
+
+                        Behavior on color {
+                            ColorAnimation { duration: GlassTheme.durFast; easing.type: GlassTheme.easeStandard }
+                        }
+
+                        Behavior on border.color {
+                            ColorAnimation { duration: GlassTheme.durFast; easing.type: GlassTheme.easeStandard }
+                        }
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Off"
+                            font.family: root.fontFamily
+                            font.pixelSize: 11
+                            font.weight: Font.Medium
+                            font.letterSpacing: 0.2
+                            color: offMouse.containsMouse ? root.cError : root.cOnSurfaceVariant
+
+                            Behavior on color {
+                                ColorAnimation { duration: GlassTheme.durFast; easing.type: GlassTheme.easeStandard }
+                            }
+                        }
+
+                        MouseArea {
+                            id: offMouse
+                            anchors.fill: parent
+                            enabled: !root.service.busy
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: root.service.stopDaemon()
+                        }
+                    }
+                }
             }
 
             GridLayout {
@@ -103,7 +163,7 @@ FocusScope {
                         readonly property bool interactive: root.service.available && !root.service.busy
 
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 72
+                        Layout.preferredHeight: 64
                         opacity: interactive ? 1 : 0.72
 
                         Rectangle {
@@ -111,7 +171,7 @@ FocusScope {
                             anchors.fill: parent
                             radius: GlassTheme.radiusItem
                             color: selected
-                                ? "transparent"
+                                ? Qt.rgba(root.cPrimary.r, root.cPrimary.g, root.cPrimary.b, 0.14)
                                 : Qt.rgba(1, 1, 1,
                                     profileMouse.pressed ? GlassTheme.overlayPressed
                                         : profileMouse.containsMouse ? GlassTheme.overlayHover : 0.07)
@@ -120,26 +180,14 @@ FocusScope {
                                 profileMouse.containsMouse ? GlassTheme.borderHover : GlassTheme.borderStandard)
 
                             Rectangle {
-                                anchors.fill: parent
-                                radius: GlassTheme.radiusItem
+                                anchors.left: parent.left
+                                anchors.leftMargin: 1
+                                anchors.verticalCenter: parent.verticalCenter
+                                width: 3
+                                height: 20
+                                radius: 1.5
                                 visible: selected
-                                gradient: Gradient {
-                                    GradientStop { position: 0.0; color: Qt.rgba(root.cPrimary.r, root.cPrimary.g, root.cPrimary.b, 0.22) }
-                                    GradientStop { position: 0.45; color: Qt.rgba(root.cPrimary.r, root.cPrimary.g, root.cPrimary.b, 0.13) }
-                                    GradientStop { position: 1.0; color: Qt.rgba(root.cPrimary.r, root.cPrimary.g, root.cPrimary.b, 0.09) }
-                                }
-                                border.width: 1
-                                border.color: Qt.rgba(root.cPrimary.r, root.cPrimary.g, root.cPrimary.b, 0.38)
-
-                                Rectangle {
-                                    anchors.fill: parent
-                                    radius: GlassTheme.radiusItem
-                                    gradient: Gradient {
-                                        GradientStop { position: 0.0; color: "transparent" }
-                                        GradientStop { position: 0.82; color: "transparent" }
-                                        GradientStop { position: 1.0; color: Qt.rgba(1, 1, 1, 0.05) }
-                                    }
-                                }
+                                color: root.cPrimary
                             }
 
                             Column {
@@ -192,44 +240,6 @@ FocusScope {
                 elide: Text.ElideRight
             }
 
-            Item {
-                Layout.fillWidth: true
-                Layout.preferredHeight: 36
-
-                Rectangle {
-                    anchors.fill: parent
-                    radius: GlassTheme.radiusControl
-                    color: offMouse.pressed
-                        ? Qt.rgba(root.cError.r, root.cError.g, root.cError.b, 0.62)
-                        : offMouse.containsMouse
-                            ? Qt.rgba(root.cError.r, root.cError.g, root.cError.b, 0.54)
-                            : Qt.rgba(root.cError.r, root.cError.g, root.cError.b, 0.46)
-                    border.width: 1
-                    border.color: Qt.rgba(1, 1, 1, 0.28)
-
-                    Row {
-                        anchors.centerIn: parent
-                        spacing: 0
-
-                        Text {
-                            text: "Off"
-                            font.family: root.fontFamily
-                            font.pixelSize: 11
-                            font.weight: Font.DemiBold
-                            color: "#ffffff"
-                        }
-                    }
-
-                    MouseArea {
-                        id: offMouse
-                        anchors.fill: parent
-                        enabled: !root.service.busy
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: root.service.stopDaemon()
-                    }
-                }
-            }
         }
     }
 }

@@ -20,6 +20,7 @@ Item {
     property bool password: false
     property bool readOnly: false
     property bool enabled: true
+    property bool flatStyle: false
     property color textColor: "white"
     property color accentColor: Qt.rgba(0.51, 0.72, 0.69, 1)
 
@@ -37,9 +38,9 @@ Item {
     Rectangle {
         anchors.fill: parent
         anchors.margins: -1
-        radius: GlassTheme.radiusControl + 1
+        radius: root.flatStyle ? 12 : GlassTheme.radiusControl + 1
         color: Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.22)
-        opacity: field.activeFocus ? 1.0 : 0.0
+        opacity: root.flatStyle ? 0.0 : field.activeFocus ? 1.0 : 0.0
         Behavior on opacity {
             NumberAnimation { duration: GlassTheme.durNormal; easing.type: GlassTheme.easeStandard }
         }
@@ -49,12 +50,18 @@ Item {
     Rectangle {
         id: bg
         anchors.fill: parent
-        radius: GlassTheme.radiusControl
-        color: Qt.rgba(1, 1, 1, field.activeFocus ? 0.12 : field.hovered ? 0.06 : 0.03)
+        radius: root.flatStyle ? 12 : GlassTheme.radiusControl
+        color: root.flatStyle
+            ? Qt.rgba(root.textColor.r, root.textColor.g, root.textColor.b, field.activeFocus ? 0.08 : 0.04)
+            : Qt.rgba(1, 1, 1, field.activeFocus ? 0.12 : field.hovered ? 0.06 : 0.03)
         border.width: 1
-        border.color: field.activeFocus
-            ? Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.65)
-            : Qt.rgba(1, 1, 1, field.hovered ? GlassTheme.borderHover : GlassTheme.borderStandard)
+        border.color: root.flatStyle
+            ? field.activeFocus
+                ? Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.55)
+                : "#5B6473"
+            : field.activeFocus
+                ? Qt.rgba(root.accentColor.r, root.accentColor.g, root.accentColor.b, 0.65)
+                : Qt.rgba(1, 1, 1, field.hovered ? GlassTheme.borderHover : GlassTheme.borderStandard)
 
         // Slower than the default hover speed so focusing feels considered.
         Behavior on color {
@@ -67,7 +74,8 @@ Item {
         // Faint top-down light falloff, matching the panel's glass sheen.
         Rectangle {
             anchors.fill: parent
-            radius: GlassTheme.radiusControl
+            radius: root.flatStyle ? 12 : GlassTheme.radiusControl
+            visible: !root.flatStyle
             gradient: Gradient {
                 GradientStop { position: 0.0; color: Qt.rgba(1, 1, 1, 0.055) }
                 GradientStop { position: 0.45; color: Qt.rgba(1, 1, 1, 0.02) }
@@ -83,6 +91,7 @@ Item {
             anchors.leftMargin: 10
             anchors.rightMargin: 10
             height: 1
+            visible: !root.flatStyle
             gradient: Gradient {
                 GradientStop { position: 0.0; color: Qt.rgba(1, 1, 1, 0) }
                 GradientStop { position: 0.5; color: Qt.rgba(1, 1, 1, 0.10) }
