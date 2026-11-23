@@ -39,7 +39,7 @@ cyan = '#0db9d7'
 white = '#acb0d0'
 
 [colors.selection]
-background = '#7aa2f7'
+background = '#1c1f33'
 
 [colors.cursor]
 background = '#59C2FF'

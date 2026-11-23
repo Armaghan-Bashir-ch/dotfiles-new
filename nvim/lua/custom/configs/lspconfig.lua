@@ -264,7 +264,7 @@ vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
             diagnostics = {
-                globals = { "vim" },
+                globals = { "vim", "hl" },
             },
             workspace = {
                 library = {
@@ -272,6 +272,7 @@ vim.lsp.config("lua_ls", {
                     [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
                     [vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types"] = true,
                     [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
+                    ["/usr/share/hypr/stubs"] = true,
                 },
                 maxPreload = 100000,
                 preloadFileSize = 10000,

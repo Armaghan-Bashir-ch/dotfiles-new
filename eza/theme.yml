@@ -89,9 +89,10 @@ filenames:
   yazi: {icon: {glyph: "󱧶"}}
   nvim: {icon: {glyph: ""}}
   eza: {icon: {glyph: ""}}
-  swaync: {icon: {glyph: "󰂞"}}
   bluetooth: {icon: {glyph: ""}}
   quickshell-bluetooth: {icon: {glyph: ""}}
+  quickshell-powerprofile: {icon: {glyph: "󰠠"}}
+  quickshell-notify: {icon: {glyph: "󰂞"}}
   styles: {icon: {glyph: ""}}
   runs: {icon: {glyph: "󱑤"}}
 
