@@ -18,7 +18,7 @@ local systeminfo = "ghostty -e btop"
 local reload = "hyprctl reload"
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("G_MESSAGES_DEBUG=none G_LOG_LEVEL=0 exec quickshell >/dev/null 2>&1")
+        hl.exec_cmd("G_MESSAGES_DEBUG=none G_LOG_LEVEL=0 exec qs -n -p ~/.config/quickshell-osd >/dev/null 2>&1")
     hl.exec_cmd("G_MESSAGES_DEBUG=none G_LOG_LEVEL=0 exec qs -n -p ~/.config/quickshell-notify >/dev/null 2>&1")
     hl.exec_cmd("G_MESSAGES_DEBUG=none G_LOG_LEVEL=0 hypridle >/dev/null 2>&1")
     hl.exec_cmd("G_MESSAGES_DEBUG=none G_LOG_LEVEL=0 hyprsunset >/dev/null 2>&1")

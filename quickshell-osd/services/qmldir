@@ -1,0 +1,5 @@
+module qs.services
+singleton Pywal Pywal.qml
+singleton Brightness Brightness.qml
+singleton Audio Audio.qml
+singleton Logger Logger.qml
