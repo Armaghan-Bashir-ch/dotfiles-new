@@ -38,7 +38,7 @@ filenames:
   backgrounds: {icon: {glyph: ""}}
   wallselect: {icon: {glyph: ""}}
   wifi: {icon: {glyph: "󰤨"}}
-  quickshell-network: {icon: {glyph: "󰤨"}}
+  quickshell-network: {icon: {glyph: "󰤥"}}
   COMMIT_EDITMSG: {icon: {glyph: ""}}
   hooks: {icon: {glyph: "󰛢"}}
   objects: {icon: {glyph: "󰆦"}}
@@ -55,6 +55,7 @@ filenames:
   go: {icon: {glyph: ""}}
   downloads: {icon: {glyph: ""}}
   .local: {icon: {glyph: ""}}
+  .omo: {icon: {glyph: ""}}
   waybar: {icon: {glyph: "󰕰"}}
   obsidian-snippets: {icon: {glyph: "󱓧"}}
   rofi: {icon: {glyph: ""}}
@@ -91,8 +92,10 @@ filenames:
   eza: {icon: {glyph: ""}}
   bluetooth: {icon: {glyph: ""}}
   quickshell-bluetooth: {icon: {glyph: ""}}
+  quickshell-controlcenter: {icon: {glyph: "󰌏"}}
+  quickshell-osd: {icon: {glyph: ""}}
   quickshell-powerprofile: {icon: {glyph: "󰠠"}}
-  quickshell-notify: {icon: {glyph: "󰂞"}}
+  quickshell-notify: {icon: {glyph: "󰎟"}}
   styles: {icon: {glyph: ""}}
   runs: {icon: {glyph: "󱑤"}}
 
